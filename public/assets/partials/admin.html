@@ -1,0 +1,88 @@
+<h1> Admin Panel </h1>
+<legend>add flower</legend>
+<hr>
+  <ul ng-if='errors.length > 0'>
+    <li ng-repeat='error in errors'>{{error}}</li>
+  </ul>
+
+    <label>Name: <input type="text" ng-model='flowerInfo.name'></label><br>
+    <label>thc: <input type="number" ng-model='flowerInfo.thc'></label><br>
+    <label>description: <textarea ng-model='flowerInfo.description'></textarea></label><br>
+    <label>One Gram:  <input type="text" ng-model='flowerInfo.one_gram'></label><br>
+    <label>Two Grams: <input type="text" ng-model='flowerInfo.two_gram'></label><br>
+    <label>Eigth: <input type="text" ng-model='flowerInfo.eigth'></label><br>
+    <label>Quarter: <input type="text" ng-model='flowerInfo.quarter'></label><br>
+    <label>Half: <input type="text" ng-model='flowerInfo.half'></label><br>
+    <label>Ounce: <input type="text" ng-model='flowerInfo.ounce'></label><br>
+    <button ng-click='addFlower()'>add flower</button>
+  </form><br>
+  <legend> add county </legend>
+  <form>
+    <label> County name: <input type="text" ng-model='countyInfo.name'></label><br>
+    <button ng-click='addCounty()'>add County </button>
+  </form>
+  <legend> add city</legend>
+  <form>
+    <label> County name:
+      <select ng-model="county._id">
+        <option ng-repeat="county in counties" value="{{county._id}}" ng-model="county._id">
+          {{county.name}}
+        </option>
+      </select>
+      <label> City Name: <input type="text" ng-model="newCity.name"></label><br>
+    <button ng-click='addCity(newCity, county._id)'>add City </button>
+  </form>
+<div id="county-info">
+  <p ng-repeat="county in counties">
+    <span id="county-id">{{county._id}}<span>
+    <span id="county-name"> {{county.name}}<span>
+  </p>
+</div> <br>
+
+<legend>create new delivery service</legend><br>
+<hr>
+  <ul ng-if='errors.length > 0'>
+    <li ng-repeat='error in errors'>{{error}}</li>
+  </ul>
+  <form>
+    <label>Name: <input type="text" ng-model='formData.name'></label><br>
+    <label>phone: <input type="text" ng-model='formData.phone'></label><br>
+    <label>bio: <textarea ng-model='formData.bio'></textarea></label><br>
+    <label> city:
+    <select ng-model="city._id">
+      <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
+        {{city.name}}
+      </option>
+    </select>
+  </label>
+    <label>street adress: <textarea ng-model='formData.address'></textarea></label><br>
+    <label> Latitude: <input type="text" ng-model="formData.latitude" readonly=""></label><br>
+    <label> Longitude: <input type="text" ng-model="formData.longitude"readonly=""></label><br>
+    <label>email: <input type="text" ng-model='formData.email'></label><br>
+    <label>password: <input type="password" ng-model='formData.password'></label><br>
+    <label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
+    <button ng-click='addDelivery()'>Register</button>
+</form>
+<h1> Add picture </h1>
+<hr>
+<div ng-controller="ArticlesController">
+<form>
+<label> title: </label>  <input type="text" ng-model="title">
+<label> content: </label>  <input type="text" ng-model="content">
+  <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+      Select File</button>
+  <br><br>
+  File:
+</form>
+  <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+      <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+      </span>
+  </div>
+  </div>
+    <hr>
+    <h1> all images uploaded to databse </h1>
+    <img ng-src="data:image/jpeg;base64,{{article.image}}" id="photo-id" width="200" height="200"/>
+<a href="#!articles"><button>Add Picture</button></a>
