@@ -21,10 +21,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			});
 		}
-		this.show = function(id, callback){
+		this.show = function(callback){
 			$http.get('/show/'+id, id).then(function(returned_data){
+				console.log(returned_data.data)
 				callback(returned_data.data);
-			})
+			});
 		}
 		this.getFlowers = function(callback){
 			$http.get('/flowers').then(function(returned_data){

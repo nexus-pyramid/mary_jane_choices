@@ -15,10 +15,9 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
       $scope.cities = data;
     })
   }getCities();
-  deliveryFactory.show($routeParams._id, function(delivery){
-    console.log(delivery);
-    console.log($scope.delivery);
-    $scope.delivery = delivery;
+  deliveryFactory.show($routeParams._id, function(data){
+    console.log(data);
+    $scope.delivery = data;
   });
   $scope.show = function(){
     deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){

@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice,  deliveryFactory, UserFactory, $location, $routeParams){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation,   deliveryFactory, UserFactory, $location, $routeParams){
   // $scope.formData = {};
   var coords = {};
   var lat = 0;
@@ -104,26 +104,22 @@ $scope.createDelivery = function() {
   				$location.url('/success');
   			}
   		});
-  	}
+  }
     deliveryFactory.show($routeParams._id, function(delivery){
       console.log(delivery);
       console.log($scope.delivery);
       $scope.delivery = delivery;
     });
-
-
     $scope.show = function(delivery){
-      deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+      deliveryFactory.show($scope.delivery_id, $scope.delivery, function(data){
         console.log(data + " helloooooo");
         if(data['errors']){
 				$scope.errors.push(data['errors']);
 				} else{
-          // $scope.delivery = data;
           console.log(data);
-          console.log($scope.delivery);
-					$location.url('/show/'+ _id);
+					$location.url('/show/');
 				}
-      })
+      });
     }
     $(function(){
       $('#register-delivery').hide();

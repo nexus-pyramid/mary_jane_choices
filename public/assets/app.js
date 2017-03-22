@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload']);
+var app = angular.module("app", ['ngRoute',  'addCtrl',  'ngFileUpload']);
 app.config(['$routeProvider', '$locationProvider',
 function ($routeProvider, $locationProvider) {
   $routeProvider
