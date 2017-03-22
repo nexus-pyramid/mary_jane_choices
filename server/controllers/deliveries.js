@@ -56,27 +56,29 @@ function deliveriesController(){
 	}
 	this.index  = function(req, res){
 		Delivery.find({}).exec(function(err, data){
-			console.log('getting all deliveries')
+			// console.log('getting all deliveries')
 			if(err){
 				console.log(err);
 				res.send(200);
 			} else {
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		})
 	}
 	this.show = function(req, res){
+		console.log('ayeeenlk');
+		console.log('in the show delivery function');
 		Delivery.findOne({_id: req.params.id}, function(err, data){
 			if(err){
 				console.log(err);
-				res.sendStatus(400);
+				res.send(400);
 			} else {
-				console.log("this is the service");
+				console.log("this is the delivery service");
 				console.log(data);
 				res.json(data);
 			}
-		})
+		});
 	}
 	this.addFlower = function(req,res){
 		console.log('in the add Flower function');

@@ -3,10 +3,7 @@ var mongoose = require('mongoose');
 var ArticleSchema = new Schema({
   title: String,
   content: String,
-  image: {
-    tupe: String,
-    default: ''
-  },
+  image:  String,
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now}
 

@@ -1,19 +1,10 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice,  deliveryFactory, UserFactory, $location){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice,  deliveryFactory, UserFactory, $location, $routeParams){
   // $scope.formData = {};
   var coords = {};
   var lat = 0;
   var long = 0;
   $scope.errors = [];
-  // $scope.formData.latitude = 40.500;
-  // $scope.formData.longitude = -98.350;
-  // var formData =  {
-  // 	name: $scope.formData.name,
-  // 	phone: $scope.formData.phone,
-  // 	bio: $scope.formData.bio,
-  // 	email: $scope.formData.emal,
-  // 	location: [$scope.formData.longitude, $scope.formData.latitude],
-  // }
   function getCities(){
     deliveryFactory.getCities(function(data){
       $scope.cities = data;
@@ -28,18 +19,18 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice,  de
     })
   }getDeliveries();
   $scope.login = function(){
-  deliveryFactory.login($scope.delivery_serviceInfo, function(data){
-    console.log("in the loginmethod")
-    $scope.errors = [];
-    if(data['errors']){
-    $scope.errors.push(data['errors']);
-    }
-    else {
+    deliveryFactory.login($scope.delivery_serviceInfo, function(data){
+      console.log("in the loginmethod")
+      $scope.errors = [];
+      if(data['errors']){
+        $scope.errors.push(data['errors']);
+      }
+      else {
        $scope.loginfo = '';
-      $location.url('/success');
-    }
-  });
-}
+       $location.url('/success');
+     }
+   });
+ }
 $scope.createDelivery = function() {
 
   var deliveryData =  {
@@ -114,6 +105,26 @@ $scope.createDelivery = function() {
   			}
   		});
   	}
+    deliveryFactory.show($routeParams._id, function(delivery){
+      console.log(delivery);
+      console.log($scope.delivery);
+      $scope.delivery = delivery;
+    });
+
+
+    $scope.show = function(delivery){
+      deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+        console.log(data + " helloooooo");
+        if(data['errors']){
+				$scope.errors.push(data['errors']);
+				} else{
+          // $scope.delivery = data;
+          console.log(data);
+          console.log($scope.delivery);
+					$location.url('/show/'+ _id);
+				}
+      })
+    }
     $(function(){
       $('#register-delivery').hide();
       $('#register-user').hide();

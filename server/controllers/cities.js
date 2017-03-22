@@ -9,7 +9,6 @@ function citiesController(){
 				console.log(err);
 				res.send(200);
 			} else {
-				console.log(data);
 				res.json(data);
 			}
 		})
