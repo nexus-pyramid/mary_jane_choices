@@ -22,7 +22,7 @@ function ($routeProvider, $locationProvider) {
    templateUrl: 'assets/partials/login.html',
    controller: 'loginController'
   })
-  .when('/delivery/:id', {
+  .when('/show/:id', {
    templateUrl: 'assets/partials/delivery.html',
    controller: 'deliveryController'
   })

@@ -21,21 +21,17 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			});
 		}
-		// this.addDelivery = function(callback){
-		// 	$http.post('/addDelivery').then(function(returned_data){
-		// 		callback(returned_data.data);
-		// 	})
-		// }
+		this.show = function(id, callback){
+			$http.get('/show/'+id, id).then(function(returned_data){
+				callback(returned_data.data);
+			})
+		}
 		this.getFlowers = function(callback){
 			$http.get('/flowers').then(function(returned_data){
 				callback(returned_data.data);
 			});
 		}
-		this.show = function(deliveryId, callback){
-			$http.get('/show/'+deliveryId, deliveryId).then(function(returned_data){
-				callback(returned_data.data);
-			});
-		}
+
 		this.addFlower = function(flowerInfo, callback){
 			$http.post('/flower', flowerInfo).then(function(returned_data){
 				if(typeof(callback) == 'function'){

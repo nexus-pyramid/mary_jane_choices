@@ -1,6 +1,6 @@
-app.factory('deliveryFactory', ['$http', function($http){
+app.factory('dispensaryFactory', ['$http', function($http){
 
-	function UserFactory(){
+	function dispensaryFactory(){
 
 		this.register = function(userInfo, callback){
 			$http.post('/register', userInfo).then(function(returned_data){
@@ -24,5 +24,5 @@ app.factory('deliveryFactory', ['$http', function($http){
 			})
 		}
 	}
-	return new UserFactory();
+	return new dispensaryFactory();
 }]);

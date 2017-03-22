@@ -21,7 +21,7 @@ module.exports = function(app){
   app.post('/register', deliveries.create);
   app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
-  app.get('/delivery/:id', deliveries.show);
+  app.get('/show/:id', deliveries.show);
   app.post('/user/:id', users.addUser);
   app.post('/user', users.login);
   app.get('/getDeliveries', deliveries.index);
