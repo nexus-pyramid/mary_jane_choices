@@ -2,12 +2,21 @@
 <html ng-app="app">
   <head>
     <meta charset="utf-8">
-    <title></title>
-    <script  src="bower_components/angular/angular.js"></script>
+    <title>Mary Jane Choices</title>
+
+    <script type="text/javaScript" src="bower_components/angular/angular.js"></script>
     <script type="text/javaScript" src="bower_components/angular-route/angular-route.js"></script>
-    <script type="text/javaScript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javaScript" src="bower_components/angular-route/angular-route.js"></script>
     <script type="text/javaScript" src="bower_components/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
+    <script type="text/javaScript" src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script type="text/javaScript" src="bower_components/ng-file-upload/FileAPI.min.js"></script>
+    <script type="text/javaScript" src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+    <script type="text/javaScript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+
     <script type="text/javaScript" src="assets/app.js"></script>
+    
+    <!-- Controllers -->
     <script type="text/javaScript" src="assets/controllers/dashboardController.js"></script>
     <script type="text/javaScript" src="assets/controllers/deliveryController.js"></script>
     <script type="text/javascript" src="assets/controllers/loginController.js"></script>
@@ -16,39 +25,50 @@
     <script type="text/javaScript" src="assets/controllers/addCtrl.js"></script>
     <script type="text/javaScript" src="assets/controllers/ArticlesController.js"></script>
     <script type="text/javaScript" src="assets/controllers/fileupload.js"></script>
+
+    <!-- Factories -->
     <script type="text/javaScript" src="assets/factories/userFactory.js"></script>
     <script type="text/javaScript" src="assets/factories/countyFactory.js"></script>
     <script type="text/javaScript" src="assets/factories/gservice.js"></script>
     <script type="text/javaScript" src="assets/factories/deliveryFactory.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+
+<!--     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
-    <!-- <link href="dist/css/flat-ui.css" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"> -->
+    
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/dist/Icons/HTML_CSS/16/style.css">
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/delivery.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/register.css">
-    <!-- <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="/dist/Icons/HTML_CSS/16/style.css"> -->
+
+    <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHt2XofXYe52MXTfA3rqgsP0EDVBTGpEg"></script>
-    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
-    <script src="bower_components/ng-file-upload/FileAPI.min.js"></script>
-    <script src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
-    <!-- Loading Flat UI -->
-    <!-- <link href="dist/css/flat-ui.min.css" rel="stylesheet"> -->
 
     <link rel="shortcut icon" href="img/favicon.ico">
-    <script src="dist/js/vendor/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="dist/js/vendor/video.js"></script>
-    <script src="dist/js/flat-ui.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+
   </head>
   <body>
     <ul ng-if='errors.length > 0'>
 		    <li ng-repeat='error in errors'>{{error}}</li>
-	  </ul>
-      <div ng-view=""></div>
+	</ul>
+    <div id="hp-container">
+    <ul class="topnav">
+        <li><a href="/">Mary Jane Choices</a></li>
+        <li><a href="#/deliveries">Deliveries</a></li>
+        <li><a href="#/doctors">Doctors</a></li>
+        <li><a href="#/deals">Deals</a></li>
+        <li><a href="#/login">Login</a></li>
+        <li><a href="#/register">Join</a></li>
+    </ul>
+
+
+    <div ng-view=""></div>
+    </div>
   </body>
 </html>
