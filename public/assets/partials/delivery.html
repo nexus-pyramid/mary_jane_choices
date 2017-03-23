@@ -2,12 +2,12 @@
 <table>
   <tr>
     <td> flowers </td>
-    <td> type </td>
-    <td> thc% </td>
+    <td> image</td>
+    <td> </td>
   </tr>
   <tr ng-repeat="flower in flowers">
-    <td><img data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
-    <td><img data-ng-src="data:image/png;base64,{{flower.image}}"</td>
+    <td><img id="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
+    <td> {{flower.name}}</td>
     <td>{{flower.description}}</td>
   </tr>
 </table>

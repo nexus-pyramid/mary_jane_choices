@@ -65,7 +65,8 @@ app.controller('adminController', function($scope, deliveryFactory, countyFactor
             url: '/flowerUpload',
             data: {
                 file: file,
-                title: $scope.name,
+                name: $scope.name,
+                type: $scope.type,
                 content: $scope.thc,
                 description: $scope.description,
                 one_gram: $scope.one_gram,
