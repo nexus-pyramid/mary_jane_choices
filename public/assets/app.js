@@ -22,7 +22,7 @@ app.config( function ($routeProvider, $locationProvider) {
    templateUrl: 'assets/partials/login.html',
    controller: 'loginController'
   })
-  .when('/show/:id', {
+  .when('/delivery/:id', {
    templateUrl: 'assets/partials/delivery.html',
    controller: 'deliveryController'
   })
@@ -36,6 +36,14 @@ app.config( function ($routeProvider, $locationProvider) {
   })
   .when('/register', {
     templateUrl: 'assets/partials/register.html',
+    controller:  'addCtrl'
+  })
+  .when('/register/user', {
+    templateUrl: 'assets/partials/userregister.html',
+    controller:  'addCtrl'
+  })
+  .when('/register/business', {
+    templateUrl: 'assets/partials/businessregister.html',
     controller:  'addCtrl'
   })
   .otherwise({
