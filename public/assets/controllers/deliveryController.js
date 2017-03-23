@@ -15,8 +15,9 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
       $scope.cities = data;
     })
   }getCities();
-  deliveryFactory.show($routeParams._id, function(data){
-    console.log(data);
+  deliveryFactory.show($routeParams.id, function(data){
+    console.log($routeParams.id);
+    console.log('hello')
     $scope.delivery = data;
   });
   $scope.show = function(){
@@ -30,7 +31,7 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
         console.log($scope.delivery);
         $location.url('/show/'+ _id);
       }
-    })
+    });
   }
 
 });

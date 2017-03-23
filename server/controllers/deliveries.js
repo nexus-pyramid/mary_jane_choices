@@ -5,36 +5,52 @@ var City = mongoose.model('City');
 function deliveriesController(){
 	console.log("yooooooo");
 	this.addDelivery = function(req,res){
-		console.log('in the add function');
-		var newDelivery  = new Delivery(req.body);
-		console.log('this is the delivery');
-		console.log(newDelivery);
-		newDelivery._city = req.params.id;
+			console.log('in the add function');
+			var newDelivery  = new Delivery(req.body);
+			console.log('this is the delivery');
+			console.log(newDelivery);
+			newDelivery._city = req.params.id;
+
 		// if(req.files.file){
 		// 	newDelivery.image = req.files.file.name;
 		// } else {
 		//  newDelivery.image= 'default.jpg';
 		// 	}
-		newDelivery.save(function(err, result){
-			if(err){
-				console.log(err);
-				res.json(err);
-			} else {
-				City.findOne({_id: req.params.id}).exec(function(err, city){
-					console.log("city we're adding delivery too" + city);
+			fs.readFile(file.path, function (err, original_data){
+				if (err){
+					res.json(400);
+				} else {
+					var bs = original_data.toString('base64');
+					fs.unlink(file.path, function(err){
+						if (err){
+							console.log('failed to delete' + file.path);
+						} else {
+							console.log('successfully' + file.path);
+						}
+				});
+		 		newDelivery.image = bs
+				newDelivery.save(function(err, result){
 					if(err){
+						console.log(err);
 						res.json(err);
 					} else {
-						city.deliveries.push(newDelivery._id);
-						city.save(function(err, result){
+						City.findOne({_id: req.params.id}).exec(function(err, city){
+							console.log("city we're adding delivery too" + city);
 							if(err){
 								res.json(err);
 							} else {
-								res.json(result);
-							}
-						})
-					}
-				})
+								city.deliveries.push(newDelivery._id);
+								city.save(function(err, result){
+									if(err){
+										res.json(err);
+									} else {
+										res.json(result);
+								}
+							})
+						}
+					})
+				}
+			})
 			}
 		})
 	}
@@ -129,7 +145,8 @@ function deliveriesController(){
 				_id: Delivery._id,
 				name: Delivery.name
 			}
-			 console.log(req.session.Delivery)
+			console.log('this is the session delivery');
+			 console.log(req.session.Delivery);
 			// res.json(req.session.Delivery);
 			res.status(200).send("good")
 			}

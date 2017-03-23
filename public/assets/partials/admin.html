@@ -4,16 +4,19 @@
   <ul ng-if='errors.length > 0'>
     <li ng-repeat='error in errors'>{{error}}</li>
   </ul>
-
-    <label>Name: <input type="text" ng-model='flowerInfo.name'></label><br>
-    <label>thc: <input type="number" ng-model='flowerInfo.thc'></label><br>
-    <label>description: <textarea ng-model='flowerInfo.description'></textarea></label><br>
-    <label>One Gram:  <input type="text" ng-model='flowerInfo.one_gram'></label><br>
-    <label>Two Grams: <input type="text" ng-model='flowerInfo.two_gram'></label><br>
-    <label>Eigth: <input type="text" ng-model='flowerInfo.eigth'></label><br>
-    <label>Quarter: <input type="text" ng-model='flowerInfo.quarter'></label><br>
-    <label>Half: <input type="text" ng-model='flowerInfo.half'></label><br>
-    <label>Ounce: <input type="text" ng-model='flowerInfo.ounce'></label><br>
+  <form>
+    <label>Name: <input type="text" ng-model='name'></label><br>
+    <label>thc: <input type="number" ng-model='thc'></label><br>
+    <label>description: <textarea ng-model='description'></textarea></label><br>
+    <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
+    <label>Two Grams: <input type="text" ng-model='two_gram'></label><br>
+    <label>Eigth: <input type="text" ng-model='eigth'></label><br>
+    <label>Quarter: <input type="text" ng-model='quarter'></label><br>
+    <label>Half: <input type="text" ng-model='half'></label><br>
+    <label>Ounce: <input type="text" ng-model='ounce'></label><br>
+    <button type="file" ng-model="file" ngf-select="addFlower($file, $invalidFiles)"
+            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+        Select File</button>
     <button ng-click='addFlower()'>add flower</button>
   </form><br>
   <legend> add county </legend>
@@ -61,6 +64,9 @@
     <label>email: <input type="text" ng-model='formData.email'></label><br>
     <label>password: <input type="password" ng-model='formData.password'></label><br>
     <label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
+    <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
+            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+        Select File</button>
     <button ng-click='addDelivery()'>Register</button>
 </form>
 <h1> Add picture </h1>

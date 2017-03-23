@@ -19,13 +19,14 @@ function loginAuthentication(req,res,next){
 module.exports = function(app){
   app.post('/login', deliveries.login);
   app.post('/register', deliveries.create);
-  app.post('/flower', deliveries.addFlower);
+  // app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
   app.get('/show/:id', deliveries.show);
   app.post('/user/:id', users.addUser);
   app.post('/user', users.login);
   app.get('/getDeliveries', deliveries.index);
   app.get('/flowers', flowers.index);
+  app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
   app.post('/articleupload', multipartyMiddleware, articles.createWithUpload);
   app.post('/addCounty', counties.addCounty);
   app.get('/getCounties', counties.index);

@@ -21,8 +21,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			});
 		}
-		this.show = function(callback){
-			$http.get('/show/'+id, id).then(function(returned_data){
+		this.show = function(deliveryId, callback){
+			$http.get('/show/'+deliveryId, deliveryId).then(function(returned_data){
 				console.log(returned_data.data)
 				callback(returned_data.data);
 			});
@@ -33,14 +33,14 @@ app.factory('deliveryFactory', ['$http', function($http){
 			});
 		}
 
-		this.addFlower = function(flowerInfo, callback){
-			$http.post('/flower', flowerInfo).then(function(returned_data){
-				if(typeof(callback) == 'function'){
-					console.log(returned_data.data);
-					callback(returned_data.data);
-				}
-			});
-		}
+		// this.addFlower = function(flowerInfo, callback){
+		// 	$http.post('/flower', flowerInfo).then(function(returned_data){
+		// 		if(typeof(callback) == 'function'){
+		// 			console.log(returned_data.data);
+		// 			callback(returned_data.data);
+		// 		}
+		// 	});
+		// }
 		this.login = function(delivery_serviceInfo, callback){
 			$http.post('/login', delivery_serviceInfo).then(function(returned_data){
 				if(typeof(callback) == 'function'){

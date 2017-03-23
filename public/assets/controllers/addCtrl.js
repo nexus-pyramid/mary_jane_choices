@@ -110,8 +110,8 @@ $scope.createDelivery = function() {
       console.log($scope.delivery);
       $scope.delivery = delivery;
     });
-    $scope.show = function(delivery){
-      deliveryFactory.show($scope.delivery_id, $scope.delivery, function(data){
+    $scope.show = function(){
+      deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
         console.log(data + " helloooooo");
         if(data['errors']){
 				$scope.errors.push(data['errors']);
