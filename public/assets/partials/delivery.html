@@ -6,9 +6,9 @@
     <td> thc% </td>
   </tr>
   <tr ng-repeat="flower in flowers">
-    <td> {{flower.name}} </td>
-    <td> {{flower.type}} </td>
-    <td>{{flower.thc}} </td>
+    <td><img data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
+    <td><img data-ng-src="data:image/png;base64,{{flower.image}}"</td>
+    <td>{{flower.description}}</td>
   </tr>
 </table>
 <h1> hello</h1>
