@@ -5,6 +5,7 @@ var FlowerSchema = new Schema({
 	_dispensary: {type: Schema.Types.ObjectId, ref:'Dispensary'},
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now},
+	image: {type: String},
 	name: {type: String},
 	description: String,
 	type: String,

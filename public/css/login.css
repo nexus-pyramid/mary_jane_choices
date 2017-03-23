@@ -23,7 +23,7 @@
 }
 #login-box {
   position: relative;
- top: 50%;
+ top: 25%;
  transform: translateY(-50%);
   margin: 0 auto;
   width:300px;
