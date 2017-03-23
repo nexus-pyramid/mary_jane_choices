@@ -13,10 +13,14 @@
     "multer": "^1.3.0",
     "socket.io": "^0.9.16"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.5.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build-css": "node-sass --output-style compressed -o public/css development/scss",
+    "watch-css": "nodemon -e scss -x \"npm run build-css\""
   },
   "keywords": [],
   "author": "",
