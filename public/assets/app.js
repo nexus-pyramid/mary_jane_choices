@@ -1,6 +1,6 @@
-var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload']);
-app.config(['$routeProvider', '$locationProvider',
-function ($routeProvider, $locationProvider) {
+var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload','ui.bootstrap']);
+app.config( function ($routeProvider, $locationProvider) {
+  $locationProvider.hashPrefix('');
   $routeProvider
   .when('/', {
     templateUrl: 'assets/partials/dashboard.html',
@@ -38,8 +38,8 @@ function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/register.html',
     controller:  'addCtrl'
   })
-    .otherwise({
-      redirectTo: '/'
-    });
+  .otherwise({
+    redirectTo: '/'
+  });
     // $locationProvider.html5Mode(true);
-}]);
+});
