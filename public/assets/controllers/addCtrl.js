@@ -121,15 +121,14 @@ $scope.createDelivery = function() {
 				}
       });
     }
-    $(function(){
-      $('#register-delivery').hide();
-      $('#register-user').hide();
-
-      $('#user-reg').click( function() {
-        $('#register-user').show();
-      });
-    $('#delivery-reg').click( function() {
-      $('#register-delivery').show();
-    });
-    })
+    // $(function(){
+    //   $('#register-delivery').hide();
+    //   $('#register-user').hide();
+    //   $('#user-reg').click( function() {
+    //     $('#register-user').show();
+    //   });
+    // $('#delivery-reg').click( function() {
+    //   $('#register-delivery').show();
+    // });
+    // })
 })

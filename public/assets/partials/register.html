@@ -15,55 +15,13 @@
 			<img src="pics/drug.svg" id="login-logo">
 		</div>
 		<div id="registration-content">
-			<button id="user-reg">User</button>
-			<button id="delivery-reg">Delivery</button>
+			<a href="#/register/user"><button id="user-reg">User</button></a>
+			<a href="#/register/business"><button href="" id="delivery-reg">Delivery</button></a>
 	  </div>
 	</div>
-  <div id="register-delivery">
-    <hr>
-  	<legend>create new delivery service</legend>
-  	<hr>
-  		<ul ng-if='errors.length > 0'>
-  			<li ng-repeat='error in errors'>{{error}}</li>
-  		</ul>
-  		<form>
-  			<label>Name: <input type="text" ng-model='formData.name'></label><br>
-  			<label>phone: <input type="text" ng-model='formData.phone'></label><br>
-  			<label>bio: <textarea ng-model='formData.bio'></textarea><br>
-  			<label> city:
-  			<select ng-model="city._id">
-  				<option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-  					{{city.name}}
-  				</option>
-  			</select>
-  		</label>
-  			<label>street adress: <textarea ng-model='formData.street_address'></textarea><br>
-  			<label>email: <input type="text" ng-model='formData.email'></label><br>
-  			<label>password: <input type="password" ng-model='formData.password'></label><br>
-  			<label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
-  			<button ng-click='addDelivery(formData, city._id)'>Register</button>
-  		</form>
-  </div>
-  <div id="register-user">
-		<h2> Add User </h2>
-    <form>
-      <label>Name: <input type="text" ng-model='userData.name'></label><br>
-      <label>email: <input type="text" ng-model='userData.email'></label><br>
-      <label>bio: <textarea ng-model='userData.bio'></textarea><br>
-      <label> city:
-      <select ng-model="city._id">
-        <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-          {{city.name}}
-        </option>
-      </select>
-      </label>
-      <label>password: <input type="password" ng-model='userData.password'></label><br>
-      <label>Password confirmation: <input type="password" ng-model='userData.confirm'></label><br>
-      <button ng-click='addUser(userData, city._id)'>Register</button>
-    </form>
-  </div>
 </div>
-<script>
+  
+<!-- <script>
 $(function(){
   $('#register-delivery').hide();
   $('#register-user').hide();
@@ -74,4 +32,4 @@ $(function(){
     $('#register-delivery').show();
   });
 })
-</script>
+</script> -->
