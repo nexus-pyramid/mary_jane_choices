@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload','ui.bootstrap']);
+var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload']);
 app.config( function ($routeProvider, $locationProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider
