@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Mary Jane Choices</title>
 
+
+    <!-- Bower Components -->
     <script type="text/javaScript" src="bower_components/angular/angular.js"></script>
     <script type="text/javaScript" src="bower_components/angular-route/angular-route.js"></script>
     <script type="text/javaScript" src="bower_components/angular-route/angular-route.js"></script>
@@ -13,7 +15,8 @@
     <script type="text/javaScript" src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
     <script type="text/javaScript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <link rel="stylesheet" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
-
+    
+    <!-- App -->
     <script type="text/javaScript" src="assets/app.js"></script>
     
     <!-- Controllers -->
@@ -31,15 +34,14 @@
     <script type="text/javaScript" src="assets/factories/countyFactory.js"></script>
     <script type="text/javaScript" src="assets/factories/gservice.js"></script>
     <script type="text/javaScript" src="assets/factories/deliveryFactory.js"></script>
-
-<!--     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet"> -->
+<!-- 
+    <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/delivery.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/login.css">
@@ -59,17 +61,23 @@
 		    <li ng-repeat='error in errors'>{{error}}</li>
 	</ul>
     <div id="hp-container">
-    <ul class="topnav">
-        <li><a href="/">Mary Jane Choices</a></li>
-        <li><a href="#/deliveries">Deliveries</a></li>
-        <li><a href="#/doctors">Doctors</a></li>
-        <li><a href="#/deals">Deals</a></li>
-        <li><a href="#/login">Login</a></li>
-        <li><a href="#/register">Join</a></li>
-    </ul>
-
-
-    <div ng-view=""></div>
+        <!-- Nav Bar -->
+        <ul class="topnav">
+            <li><a href="/">Mary Jane Choices</a></li>
+            <li><a href="#/deliveries">Deliveries</a></li>
+            <li><a href="#/doctors">Doctors</a></li>
+            <li><a href="#/deals">Deals</a></li>
+            <li><a href="#/login">Login</a></li>
+            <li><a href="#/register">Join</a></li>
+        </ul>
+        <!-- END Nav Bar -->
+        <!-- Partial -->
+        <div class="partial-container" ng-view=""></div>
+        <!-- END Partial -->
+        <footer>
+                &copy; Mary Jane Choices 2017
+        </footer>
     </div>
+
   </body>
 </html>
