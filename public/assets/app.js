@@ -24,7 +24,7 @@ app.config( function ($routeProvider, $locationProvider) {
   })
   .when('/delivery/:id', {
    templateUrl: 'assets/partials/delivery.html',
-   controller: 'deliveryController'
+   controller: 'addCtrl'
   })
   .when('/deliveries', {
     templateUrl: 'assets/partials/deliveries.html',

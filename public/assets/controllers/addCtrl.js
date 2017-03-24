@@ -1,6 +1,7 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation,   deliveryFactory, UserFactory, $location, $routeParams){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, deliveryFactory, UserFactory, $location, $routeParams){
   // $scope.formData = {};
+
   var coords = {};
   var lat = 0;
   var long = 0;
@@ -18,6 +19,36 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation,   deliveryFac
       console.log(data);
     })
   }getDeliveries();
+  function getFlowers(){
+    deliveryFactory.getFlowers(function(data){
+      $scope.flowers = data;
+      console.log(data);
+    })
+  }getFlowers
+
+  console.log("add controller")
+  function getdelivery(){
+    console.log("get delivery ran");
+    console.log($routeParams.id);
+    deliveryFactory.show($routeParams.id, function(data){
+      console.log('helllppp')
+      $scope.delivery = data;
+      console.lof(data)
+      console.log($routeParams._id)
+    });
+  }getdelivery();
+
+  $scope.show = function(){
+    deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+      console.log(data + " helloooooo");
+      if(data['errors']){
+      $scope.errors.push(data['errors']);
+      } else{
+        console.log(data);
+        $location.url('/show/'+deliveryId);
+      }
+    });
+  }
   $scope.login = function(){
     deliveryFactory.login($scope.delivery_serviceInfo, function(data){
       console.log("in the loginmethod")
@@ -31,6 +62,33 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation,   deliveryFac
      }
    });
  }
+ $scope.addReview = function(newReview, deliveryId){
+   console.log(deliveryId);
+   console.log(newReview);
+   deliveryFactory.addReview(newReview, deliveryId, function(data){
+     if(data['errors']){
+       $scope.errors.push(data['errors']);
+     } else {
+
+       getReviews();
+     }
+   })
+ }
+ $scope.visitDelivery = function(delivery, deliveryId){
+   console.log('hey in the visit delivery');
+   console.log(deliveryId)
+   console.log(delivery);
+   deliveryFactory.visit(deliveryId, function(data){
+     if(data['errors']){
+       $scope.errors.push(data['errors'])
+     } else {
+       $scope.delivery = data;
+       console.log(data);
+       $location.url('/delivery/'+deliveryId);
+     }
+   })
+  }
+
 $scope.createDelivery = function() {
 
   var deliveryData =  {
@@ -105,22 +163,28 @@ $scope.createDelivery = function() {
   			}
   		});
   }
-    deliveryFactory.show($routeParams._id, function(delivery){
-      console.log(delivery);
-      console.log($scope.delivery);
-      $scope.delivery = delivery;
-    });
-    $scope.show = function(){
-      deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
-        console.log(data + " helloooooo");
-        if(data['errors']){
-				$scope.errors.push(data['errors']);
-				} else{
-          console.log(data);
-					$location.url('/show/');
-				}
-      });
-    }
+    // deliveryFactory.show($routeParams.id, function(data){
+    //   console.log($routeParams.id);
+    //   console.log('i spy ');
+    //   $scope.delivery = data;
+    //   console.log(data)
+    // });
+    // deliveryFactory.show($routeParams._id, function(delivery){
+    //   console.log(delivery);
+    //   console.log($scope.delivery);
+    //   $scope.delivery = delivery;
+    // });
+    // $scope.show = function(){
+    //   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+    //     console.log(data + " helloooooo");
+    //     if(data['errors']){
+		// 		$scope.errors.push(data['errors']);
+		// 		} else{
+    //       console.log(data);
+		// 			$location.url('/show/'+deliveryId);
+		// 		}
+    //   });
+    // }
     // $(function(){
     //   $('#register-delivery').hide();
     //   $('#register-user').hide();

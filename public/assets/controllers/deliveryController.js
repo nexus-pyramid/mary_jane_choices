@@ -15,11 +15,43 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
       $scope.cities = data;
     })
   }getCities();
-  deliveryFactory.show($routeParams.id, function(data){
-    console.log($routeParams.id);
-    console.log('hello')
-    $scope.delivery = data;
-  });
+  function getReviews(){
+    deliveryFactory.getReviews(function(data){
+      console.log(data)
+      $scope.reviews = data;
+    });
+  }getReviews();
+
+  // deliveryFactory.show($routeParams.id, function(data){
+  //   console.log($routeParams.id);
+  //   console.log('hello');
+  //   $scope.delivery = data;
+  //   console.log(data)
+  // });
+  $scope.visitDelivery = function(){
+    console.log('in the visitdelivery in delivery controller');
+    deliveryFactory.visit(deliveryId, function(data){
+      if(data['errors']){
+        $scope.errors.push(data['errors'])
+      } else {
+        $scope.delivery = data;
+        console.log('visitdelivery' + data);
+        $location.url('/delivery/'+deliveryId);
+      }
+    })
+  }
+  $scope.addReview = function( deliveryId){
+    console.log(deliveryId);
+    console.log($scope.newReview);
+    deliveryFactory.addReview(newReview, deliveryId, function(data){
+      if(data['errors']){
+        $scope.errors.push(data['errors']);
+      } else {
+
+        getReviews();
+      }
+    })
+  }
   $scope.show = function(){
     deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
       console.log(data + " helloooooo");
@@ -28,8 +60,8 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
       } else{
         // $scope.delivery = data;
         console.log(data);
-        console.log($scope.delivery);
-        $location.url('/show/'+ _id);
+
+        $location.url('/delivery/'+ _id);
       }
     });
   }

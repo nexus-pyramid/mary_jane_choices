@@ -1,3 +1,5 @@
+
+
 {{delivery.name}}
 <table>
   <tr>
@@ -12,8 +14,13 @@
   </tr>
 </table>
 <h1> hello</h1>
-{{delivery.name}}
-<p>{{delivery.name}}</p>
-<p>{{delivery.phone}}</p>
+{{h.name}}
+<p>{{h.phone}}</p>
 <p>{{delivery.bio}}</p>
 <p>{{delivery.email}}</p>
+<p>{{delvery._id}}</p>
+</div>
+<form>
+  <label> Leave a review:</label><input type="text" ng-model="newReview.review">
+  <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
+</form>
