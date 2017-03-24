@@ -33,7 +33,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, deliveryFacto
     deliveryFactory.show($routeParams.id, function(data){
       console.log('helllppp')
       $scope.delivery = data;
-      console.lof(data)
+      console.log(data)
       console.log($routeParams._id)
     });
   }getdelivery();

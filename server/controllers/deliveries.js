@@ -119,7 +119,7 @@ function deliveriesController(){
 	this.show = function(req, res){
 		console.log('ayeeenlk');
 		console.log('in the show delivery function');
-		Delivery.findOne({_id: req.params.id}).populate('reviews').exec(function(err, data){
+		Delivery.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).exec(function(err, data){
 			if(err){
 				console.log(err);
 				res.send(400);
