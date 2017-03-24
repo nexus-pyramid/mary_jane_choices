@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Mary Jane Choices</title>
-
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 
     <!-- Bower Components -->
     <script type="text/javaScript" src="bower_components/angular/angular.js"></script>
@@ -13,6 +13,11 @@
     <script type="text/javaScript" src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script type="text/javaScript" src="bower_components/ng-file-upload/FileAPI.min.js"></script>
     <script type="text/javaScript" src="bower_components/ng-file-upload/ng-file-upload-shim.js"></script>
+
+    <!-- *** BOWER INSTALL JQUERY *** -->
+    <!--  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/nav.min.js" ></script>
 
     <!-- App -->
     <script type="text/javaScript" src="assets/app.js"></script>
@@ -43,14 +48,11 @@
     <link rel="stylesheet" href="/css/delivery.css">
     <link rel="stylesheet" href="/css/admin.css">
     <link rel="stylesheet" href="/css/login.css">
-    <link rel="stylesheet" href="/css/register.css">
 
     <!-- <link rel="stylesheet" href="/dist/Icons/HTML_CSS/16/style.css"> -->
 
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHt2XofXYe52MXTfA3rqgsP0EDVBTGpEg"></script>
-
-    <link rel="shortcut icon" href="img/MJC-Favicon.png" type="image/x-icon">
 
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
@@ -61,13 +63,36 @@
 	</ul>
     <div id="hp-container">
         <!-- Nav Bar -->
+        
+
+        <header>
+            <a class="mobile" href="">&#9776;</a>
+            <nav>
+              <ul>
+                
+                <li><a href="/">Mary Jane Choices</a></li>
+                <li><a href="#/deliveries">Deliveries</a></li>
+                <li><a href="#/doctors">Doctors</a></li>
+                <li><a href="#/deals">Deals</a></li>
+                <li><a href="#/login">Login</a></li>
+                <li>
+                    <a href="">Join</a>
+                    <ul>
+                        <li><a href="#/register/user">User</a></li>
+                        <li><a href="#/register/business">Business</a></li>
+                    </ul>
+                </li>
+              </ul>
+              <div style="clear:both;"></div>
+            </nav>
+        </header>
+
+
+
+
+
         <ul class="topnav">
-            <li><a href="/">Mary Jane Choices</a></li>
-            <li><a href="#/deliveries">Deliveries</a></li>
-            <li><a href="#/doctors">Doctors</a></li>
-            <li><a href="#/deals">Deals</a></li>
-            <li><a href="#/login">Login</a></li>
-            <li><a href="#/register">Join</a></li>
+
         </ul>
         <!-- END Nav Bar -->
         <!-- Partial -->
