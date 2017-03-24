@@ -2,8 +2,42 @@ var mongoose = require('mongoose');
 var Delivery = mongoose.model('Delivery');
 var Flower = mongoose.model('Flower');
 var City = mongoose.model('City');
+var Review = mongoose.model('Review');
 function deliveriesController(){
 	console.log("yooooooo");
+	this.addReview = function(req, res){
+		var newReview = new Review(req.body);
+		console.log(newReview)
+		newReview._delivery = req.params.id;
+		newReview._user = req.session.User;
+		newReview.save(function(err, result){
+			if(err){
+				res.send(400);
+				console.log(err)
+			} else {
+				console.log('finding delivery');
+				Delivery.findOne({_id: req.params.id}).exec(function(err, delivery){
+					if(err){
+						res.send(err);
+						console.log(err);
+					} else {
+						delivery.reviews.push(newReview._id);
+						delivery.save(function(err, result){
+							if(err){
+								res.json(err);
+							} else {
+								console.log('we made it ' + result);
+								res.json(result);
+							}
+						});
+					}
+				})
+			}
+		});
+	}
+	this.getReviews = function(req, res){
+
+	}
 	this.addDelivery = function(req,res){
 			console.log('in the add function');
 			var newDelivery  = new Delivery(req.body);
@@ -85,7 +119,7 @@ function deliveriesController(){
 	this.show = function(req, res){
 		console.log('ayeeenlk');
 		console.log('in the show delivery function');
-		Delivery.findOne({_id: req.params.id}, function(err, data){
+		Delivery.findOne({_id: req.params.id}).populate('reviews').exec(function(err, data){
 			if(err){
 				console.log(err);
 				res.send(400);

@@ -11,6 +11,7 @@ var DeliverySchema = new Schema({
 	_city: {type: Schema.Types.ObjectId, ref:'City'},
   email: String,
   created_at: {type: Date, default: Date.now },
+	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	street_address: String,
 	location: {type: [Number]}, // [Long, Lat]
   flowers: [{type: Schema.Types.ObjectId, ref: 'Flower'}],

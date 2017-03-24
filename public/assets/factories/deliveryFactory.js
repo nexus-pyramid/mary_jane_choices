@@ -22,15 +22,37 @@ app.factory('deliveryFactory', ['$http', function($http){
 			});
 		}
 		this.show = function(deliveryId, callback){
-			$http.get('/show/'+deliveryId, deliveryId).then(function(returned_data){
+			console.log("THIS IS THE DELIVERY ID");
+			console.log(deliveryId)
+			$http.get('/show/'+deliveryId).then(function(returned_data){
+				console.log('hello');
 				console.log(returned_data.data)
 				callback(returned_data.data);
 			});
+		}
+		this.visit = function(deliveryId, callback){
+			$http.post('/visit/'+deliveryId).then(function(returned_data){
+				console.log(returned_data.data)
+				callback(returned_data.data);
+			})
 		}
 		this.getFlowers = function(callback){
 			$http.get('/flowers').then(function(returned_data){
 				callback(returned_data.data);
 			});
+		}
+		this.getReviews = function(callback){
+			$http.get('/getReviews').then(function(returned_data){
+				callback(returned_data.data)
+			})
+		}
+		this.addReview = function(review, deliveryId, callback){
+			console.log("in the delivery factory", deliveryId);
+			console.log(review);
+			$http.post('/review/'+deliveryId, review).then(function(returned_data){
+				callback(returned_data.data);
+				console.log(returned_data.data);
+			})
 		}
 
 		// this.addFlower = function(flowerInfo, callback){

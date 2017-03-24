@@ -21,9 +21,12 @@ module.exports = function(app){
   app.post('/register', deliveries.create);
   // app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
+  app.post('/visit/:id', deliveries.show);
   app.get('/show/:id', deliveries.show);
   app.post('/user/:id', users.addUser);
+  app.post('/review/:id', deliveries.addReview);
   app.post('/user', users.login);
+  app.get('/getReviews',  deliveries.getReviews);
   app.get('/getDeliveries', deliveries.index);
   app.get('/flowers', flowers.index);
   app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
