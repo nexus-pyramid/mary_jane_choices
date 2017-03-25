@@ -1,26 +1,28 @@
-<div id="register-delivery">
-  <div class="container">
+<div class="sheet__register">
+
+  <div id="register-delivery">
     <form class="form-container">
-  		<ul ng-if='errors.length > 0'>
-  			<li ng-repeat='error in errors'>{{error}}</li>
-  		</ul>
+      <ul ng-if='errors.length > 0'>
+        <li ng-repeat='error in errors'>{{error}}</li>
+      </ul>
       <h2>Register Business</h2>
-  			<!-- <label>Name: </label> --><input type="text" ng-model='formData.name'  placeholder="Name"><br>
-  			<!-- <label>Phone: </label> --><input type="text" ng-model='formData.phone' placeholder="Phone"><br>
-  			<!-- <label>Bio: </label> --><textarea ng-model='formData.bio' placeholder="Bio"></textarea><br>
-  			<!-- <label>City: </label> -->
-  			<select ng-model="city._id" placeholder="City">
+        <!-- <label>Name: </label> --><input type="text" ng-model='formData.name'  placeholder="Name"><br>
+        <!-- <label>Phone: </label> --><input type="text" ng-model='formData.phone' placeholder="Phone"><br>
+        <!-- <label>Bio: </label> --><textarea ng-model='formData.bio' placeholder="Bio"></textarea><br>
+        <!-- <label>City: </label> -->
+        <select ng-model="city._id" placeholder="City">
           <option class="default-option" value="" selected data-default>City</option>
-  				<option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-  					{{city.name}}
-  				</option>
-  			</select> <br>
-  			<!-- <label>Street Address:</label>  --><input type="text" ng-model='formData.street_address' placeholder="Street Address"></input><br>
-  			<!-- <label>Email: </label> --><input type="text" ng-model='formData.email' placeholder="Email"><br>
-  			<!-- <label>Password: </label> --><input type="password" ng-model='formData.password' placeholder="Password"><br>
-  			<!-- <label>Password Confirmation: </label> --><input type="password" ng-model='formData.confirm' placeholder="Confirm Password"><br>
-  			<button class="form-btn" ng-click='addDelivery(formData, city._id)'>REGISTER</button>
-  		</form>
+          <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
+            {{city.name}}
+          </option>
+        </select> <br>
+        <!-- <label>Street Address:</label>  --><input type="text" ng-model='formData.street_address' placeholder="Street Address"></input><br>
+        <!-- <label>Email: </label> --><input type="text" ng-model='formData.email' placeholder="Email"><br>
+        <!-- <label>Password: </label> --><input type="password" ng-model='formData.password' placeholder="Password"><br>
+        <!-- <label>Password Confirmation: </label> --><input type="password" ng-model='formData.confirm' placeholder="Confirm Password"><br>
+        <button class="form-btn" ng-click='addDelivery(formData, city._id)'>REGISTER</button>
+      </form>
     </div>
-  </div>
+  </div>  
+
 </div>

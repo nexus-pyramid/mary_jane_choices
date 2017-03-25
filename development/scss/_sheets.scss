@@ -1,0 +1,52 @@
+[class*="sheet__"]{
+	width:100%;
+	padding:50px 0;
+	/* fix background */
+	background-attachment: fixed;
+	/* center it */
+	background-position: center center;
+	/* Scale it nicely to the element */
+	background-size: cover;
+
+
+}
+
+
+
+// DASHBOARD SHEETS
+.sheet__dashboard{
+	height: auto;
+	text-align: center;
+	background-image: url("../pics/mary_jane.png");
+}
+
+
+// DELIVERY SHEETS
+.sheet__delivery{
+	height: auto;
+	// background-image: url("../pics/mary_jane.png");
+}
+
+.sheet__banner {
+	height:200px;
+	background-color: #424949;
+  	text-align: center;
+  	color: white;
+}
+
+
+// REGISTER SHEETS
+.sheet__register{
+	display: flex;
+	justify-content: center; 
+	align-items: center;
+}
+
+
+//LOGIN SHEETS
+.sheet__login {
+	background-color:$green;
+	display:flex;
+	justify-content: center;
+}
+
