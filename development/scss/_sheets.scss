@@ -11,8 +11,6 @@
 
 }
 
-
-
 // DASHBOARD SHEETS
 .sheet__dashboard{
 	height: auto;
@@ -20,16 +18,15 @@
 	background-image: url("../pics/mary_jane.png");
 }
 
-
 // DELIVERY SHEETS
 .sheet__delivery{
 	height: auto;
-	// background-image: url("../pics/mary_jane.png");
+	background-color:$lightteal;
 }
 
 .sheet__banner {
 	height:200px;
-	background-color: #424949;
+	background-color: $grey;
   	text-align: center;
   	color: white;
 }
@@ -40,13 +37,15 @@
 	display: flex;
 	justify-content: center; 
 	align-items: center;
+	background-color: $lightgreen;
 }
 
 
 //LOGIN SHEETS
 .sheet__login {
-	background-color:$green;
+	background-color:$lightgreen;
 	display:flex;
 	justify-content: center;
+
 }
 

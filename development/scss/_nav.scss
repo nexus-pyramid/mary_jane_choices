@@ -5,7 +5,7 @@
 VARIABLES
 **********************/
 $link-color:white;
-$link-hover:#00aedb;
+$link-hover:$mint;
 $link-vertical-padding:20px;      /*Controls Menu top & bottom padding*/
 $link-horizontal-padding:25px;    /*Contols Menu left & right padding*/
 $menu-background: #353535;        /*Control Menu Color Scheme*/
@@ -16,15 +16,15 @@ NAVIGATION STYLES
 **********************/
 nav {
   width:100%;
-  background: linear-gradient(to bottom, $menu-background 0%, darken($menu-background,7%) 100%);
-  box-shadow:0px 2px 2px rgba(0,0,0,.35);
+  // background: linear-gradient(to bottom, $menu-background 0%, darken($menu-background,7%) 100%);
+  // box-shadow:0px 2px 2px rgba(0,0,0,.35);
 
   @include breakpoint(715) {
     margin:65px 0 0 0;
     max-height:0;
     overflow:hidden;
     transition: all 0.5s ease;
-    background:darken(#262626,5%);
+    // background:darken(#262626,5%);
   }
 }
 
@@ -37,7 +37,7 @@ nav ul {
       margin:0;
       padding:0;
       width:100%;
-      box-shadow:0px 1px 3px rgba(0,0,0,.7);
+      // box-shadow:0px 1px 3px rgba(0,0,0,.7);
       z-index:15;
     } 
   
@@ -58,8 +58,8 @@ nav ul {
       text-align:center;
       color:$link-color;
       text-decoration:none;
-      border-right:1px solid darken($menu-background,10%);
-      text-shadow:2px 2px 2px rgba(0,0,0,.8);
+      // border-right:1px solid darken($menu-background,10%);
+      // text-shadow:2px 2px 2px rgba(0,0,0,.8);
       transition: all 0.1s ease;
       
       &:hover {
@@ -73,8 +73,8 @@ nav ul {
         margin:0;
         padding:15px 2px;
         color:white;
-        border-top:1px solid rgba(0,0,0,.15);
-        box-shadow:inset 0px 1px 3px rgba(255,255,255,.03);
+        // border-top:1px solid rgba(0,0,0,.15);
+        // box-shadow:inset 0px 1px 3px rgba(255,255,255,.03);
         text-shadow:none;
         width:100%;
       }
@@ -105,7 +105,7 @@ nav ul {
       opacity:0;
       overflow:hidden;
       font-size:.9em;
-      box-shadow:0px 2px 2px rgba(0,0,0,.5);
+      // box-shadow:0px 2px 2px rgba(0,0,0,.5);
       transition: all 0.3s ease;
       
       @include breakpoint(715) {
@@ -114,7 +114,7 @@ nav ul {
         width:100%;
         position:relative;
         overflow:hidden;
-        box-shadow:inset 0px 2px 2px rgba(0,0,0,.5);
+        // box-shadow:inset 0px 2px 2px rgba(0,0,0,.5);
         transition: all 2s ease;
       }
       
@@ -132,8 +132,8 @@ nav ul {
           padding:$link-vertical-padding/1.5 $link-horizontal-padding/1.5;
           margin:0;
           border-right:none;
-          border-top:1px solid darken($menu-background,12%);;
-          box-shadow:inset 0px 1px 3px rgba(255,255,255,.03);
+          // border-top:1px solid darken($menu-background,12%);
+          // box-shadow:inset 0px 1px 3px rgba(255,255,255,.03);
           text-transform:none;
           text-shadow:none;
           transition: all 0.2s ease;
@@ -163,14 +163,14 @@ MOBILE NAV STYLES
   display:none;
   margin:0;
   padding:20px 15px;
-  background: linear-gradient(to bottom, #353535 0%,#262626 100%);
+  // background: linear-gradient(to bottom, #353535 0%,#262626 100%);
   position:absolute;
   color:white;
   text-decoration:none;
   top:15px;
   right:15px;
   line-height:0;
-  box-shadow:0px 2px 2px rgba(0,0,0,.35);
+  // box-shadow:0px 2px 2px rgba(0,0,0,.35);
   
   @include breakpoint(715) {
     display:table;

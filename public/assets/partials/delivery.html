@@ -2,9 +2,9 @@
 <h2>{{delivery.name}}</h2>
 <table>
   <tr>
-    <td> flower </td>
-    <td>name</td>
-    <td>description</td>
+    <td>Flower </td>
+    <td>Name</td>
+    <td>Description</td>
   </tr>
   <tr ng-repeat="flower in delivery.flowers">
     <td><img id="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
@@ -16,11 +16,11 @@
 <p>{{delivery.email}}</p>
 </div>
 <div ng-repeat="review in delivery.reviews">
-  <label>reviews </label>
-  <h3> review:</h3> <p>{{review.review}}<p>
+  <label>Reviews</label>
+  <h3>Review:</h3> <p>{{review.review}}<p>
   <h3>User:<h3><p>{{review._user.name}}</p>
 </div>
 <form>
-  <label>Leave a review:</label><input type="text" ng-model="newReview.review">
+  <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
   <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
 </form>
