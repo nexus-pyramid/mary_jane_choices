@@ -2,15 +2,18 @@
 
 $(document).ready(function() {
   $('.mobile').click(function () {
+      console.log('Toggled')
       $('nav').toggleClass('active'); 
    });
-  
+
    $('nav ul li ul').each(function() {
     $(this).before('<span class=\"arrow\"></span>');
   });
   
   $('nav ul li').click(function() {
+    console.log('Toggled');
     $(this).children('ul').toggleClass('active');
      $(this).children('.arrow').toggleClass('rotate');
   });
+
 });
