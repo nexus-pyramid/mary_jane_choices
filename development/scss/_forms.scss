@@ -1,27 +1,23 @@
-.container {
-  display: flex;
-  height: 80vh;
-  justify-content: center; 
-  align-items: center;
-}
 .form-container {
-  border: 1px solid black;
+  border: 1px solid $darkgrey;
+  color: #607D8B;
+  background-color: $lightteal;
   border-radius: 5px; 
   padding: 40px 20px;
 /* offset-x | offset-y | blur-radius | color */
-  // box-shadow:10px 10px 20px black;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 $darkgrey;
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
-.form-btn {
-  border-color: black;
-  color: black;
+button.form-btn {
+  border-color: $grey;
+  color: $grey;
+  background-color: $lightgreen;
 }
 
 input {
   // border-radius: 2px;
-
 }
 
 input, select, textarea {

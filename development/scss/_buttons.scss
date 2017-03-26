@@ -1,0 +1,15 @@
+button[class*="-btn"]{
+  background-color: Transparent;
+  border-radius: 4px;
+  border-style: solid;
+  text-align: center;
+  padding: 15px 32px;
+  font-family: 'Muli', sans-serif;
+  font-size: 16px;
+  box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+.mary-btn {
+  border-color: white;
+  color: white;
+}

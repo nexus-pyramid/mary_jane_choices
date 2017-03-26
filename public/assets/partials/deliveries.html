@@ -1,46 +1,24 @@
-<nav class="navbar navbar-inverse" role="navigation">
-<div class="navbar-header">
-<!--   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
-    <span class="sr-only">Toggle navigation</span>
-  </button> -->
-  <!-- <a class="navbar-brand" href="/">Mary Jane Choices</a> -->
+<div class="sheet__banner">
+    <h1 id=banner-txt> Los Angeles </h1> <br>
+    <h1 class="banner-txt"> California </h1>
 </div>
-<!-- <div class="collapse navbar-collapse" id="navbar-collapse-01"> -->
-<!--   <ul class="nav navbar-nav">
-    <li class="active"><a href="/deliveries">Deliveries</a></li>
-    <li><a href="#fakk">Dispensaries</a></li>
-    <li><a href="#fakelink">Doctors</a></li>
-    <li><a href="#fakelink">Deals</a></li>
-  </ul> -->
-<!--   <span class="box1">
-    <span aria-hidden="true" class="fui-man-16"></span>
-  </span> -->
-  <!-- <form class="navbar-form navbar-right" action="#" role="search">
-    <div class="form-group">
-      <div class="input-group">
-        <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
-        <span class="input-group-btn">
-          <button type="submit" class="btn"><span class="fui-search"></span></button>
-        </span>
-      </div>
+
+<div class="sheet__delivery">
+  
+  <div class="delivery-container">
+    <div ng-repeat="delivery in deliveries">
+      <p>{{delivery.name}}</p>
+      <p>{{delivery.phone}}</p>
+      <p>{{delivery.bio}}</p>
+      <p>{{delivery.email}}</p>
+      <p>{{delivery._id}}</p>
+      <a href="#/delivery/{{delivery._id}}"><button ng-click="show()">menu</button></a>
     </div>
-  </form> -->
-<!-- </div> .navbar-collapse -->
-</nav><!-- navbar -->
-<div id="banner">
-<span id="banner-txt"><h1 id=banner-txt> Los Angeles </h1> <br>
-<h1 id="banner-txt"> California </h1></span>
+  </div>
+
 </div>
-<div class="delivery-container">
-  <div ng-repeat="delivery in deliveries">
-    <p>{{delivery.name}}</p>
-    <p>{{delivery.phone}}</p>
-    <p>{{delivery.bio}}</p>
-    <p>{{delivery.email}}</p>
-    <p>{{delivery._id}}</p>
-    <a href="#/delivery/{{delivery._id}}"><button ng-click="show()">menu</button></a>
-  </div>
-  </div>
-<div class="col-md-7">
+<div class="sheet__map">
+  <div class="col-md-7">
     <div id="map" style="width:645px; height:645px"></div>
+  </div>
 </div>

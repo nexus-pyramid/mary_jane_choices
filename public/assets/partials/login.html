@@ -1,62 +1,16 @@
-<!-- <legend> admin Login</legend>
-<hr>
-	<form>
-		<label>Password: <input type="password" ng-model='delivery_serviceInfo.password'></label>
-		<button ng-click='login()'>Login</button>
-	</form>
-	<hr>
-	<legend>create new delivery service</legend>
-	<hr>
-		<ul ng-if='errors.length > 0'>
-			<li ng-repeat='error in errors'>{{error}}</li>
-		</ul>
-		<form>
-			<label>Name: <input type="text" ng-model='formData.name'></label><br>
-			<label>phone: <input type="text" ng-model='formData.phone'></label><br>
-			<label>bio: <textarea ng-model='formData.bio'></textarea><br>
-			<label> city:
-			<select ng-model="city._id">
-				<option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-					{{city.name}}
-				</option>
-			</select>
-		</label>
-			<label>street adress: <textarea ng-model='formData.location'></textarea><br>
-			<label> Latitude: <input type="text" ng-model="formData.latitude" readonly=""></label><br>
-			<label> Longitude: <input type="text" ng-model="formData.longitude"readonly=""></label><br>
-			<label>email: <input type="texts" ng-model='formData.email'></label><br>
-			<label>password: <input type="password" ng-model='formData.password'></label><br>
-			<label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
-			<button ng-click='createDelivery()'>Register</button>
-		</form> -->
-<div id="login-container">
-	<div id="login-box">
-		<div id="login-nav">
-			<img src="pics/drug.svg" id="login-logo">
-			<h3> delivery login </h3>
-		</div>
-		<div id="login-content">
-			<form>
-				<label><span>Name:</span><input type="text"></label><br>
-				<label><span>Password:</span><input type="text" ng-model="delivery_serviceInfo.password"></label><br>
-				<button id="login-button" ng-click="login()">Login</button>
-			</form>
-		</div>
-	</div>	<div id="login-box">
-			<div id="login-nav">
-				<img src="pics/drug.svg" id="login-logo">
-				<h3> user login </h3>
-			</div>
-			<div id="login-content">
-				<form>
-					<label><span>Name:</span><input type="text"></label><br>
-					<label><span>Password:</span><input type="text" ng-model="userInfo.password"></label><br>
-					<button id="login-button" ng-click="userLogin()">Login</button>
-
-				</form>
-			</div>
-		</div>
-	<div id="account">
-	<a href="#/register"><p> Create Account</p> </a>
+<div class="sheet__login">
+		<form class="form-container">
+		<h3> Delivery Login </h3>
+			<label><input type="text" placeholder="Name"></label><br>
+			<label><input type="text" ng-model="delivery_serviceInfo.password" placeholder="Password"></label><br>
+			<button class="form-btn" ng-click="login()">Login</button>
+		</form>
+		<form class="form-container">
+		<h3> User Login </h3>
+			<label><input type="text" placeholder="Name"></label><br>
+			<label><input type="text" ng-model="userInfo.password" placeholder="Password"></label><br>
+			<button class="form-btn" ng-click="userLogin()">Login</button>
+			<a href="#/register/user"><p> Create Account</p> </a>
+		</form>
 	</div>
 </div>

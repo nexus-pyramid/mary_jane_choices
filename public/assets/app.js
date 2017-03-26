@@ -34,10 +34,6 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/article.html',
     controller:  'ArticlesController'
   })
-  .when('/register', {
-    templateUrl: 'assets/partials/register.html',
-    controller:  'addCtrl'
-  })
   .when('/register/user', {
     templateUrl: 'assets/partials/userregister.html',
     controller:  'addCtrl'
