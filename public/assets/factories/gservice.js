@@ -72,7 +72,7 @@ angular.module('gservice', [])
             for(var i= 0; i < response.data.length; i++) {
                 var delivery = response.data[i];
                 console.log(response.data);
-                console.log(delivery);
+                console.log(delivery.location);
 
                 // Create popup windows for each record
                 var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>'
