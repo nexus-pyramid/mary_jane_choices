@@ -15,6 +15,20 @@ app.factory('countyFactory', ['$http', function($http){
 				}
 			});
 		}
+		this.deleteCounty = function(countyId, callback){
+			$http.post('/deleteCounty/'+countyId).then(function(returned_data){
+				if(typeof(callback) == 'function'){
+					callback(returned_data.data);
+				}
+			});
+		}
+		this.deleteCity = function(cityId, callback){
+			$http.post('/deleteCity/' + cityId).then(function(returned_data){
+				if(typeof(callback) == 'function'){
+					callback(returned_data.data);
+				}
+			});
+		}
 		this.getCities = function(callback){
 			$http.get('/getCities').then(function(returned_data){
 				if(typeof(callback) == 'function'){

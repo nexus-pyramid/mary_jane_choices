@@ -11,6 +11,13 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			});
 		}
+		this.deleteDelivery = function(deliveryId, callback){
+			$http.post('/deleteDelivery'+deliveryId, deliveryId).then(function(returned_data){
+				if(typeof(callback) == 'function');{
+					callback(returned_data.data);
+				}
+			})
+		}
 		this.getDeliveries = function(callback){
 			$http.get('/getDeliveries').then(function(returned_data){
 				callback(returned_data.data);
