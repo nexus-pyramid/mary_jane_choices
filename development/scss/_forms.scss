@@ -10,6 +10,7 @@
   flex-direction: column;
   margin: 10px;
 }
+
 button.form-btn {
   border-color: $grey;
   color: $grey;
@@ -32,4 +33,13 @@ input, select, textarea {
 }
 .form-container > h3{
   margin: 0px 0 10px 0;
+}
+
+// Validations
+.form-container input.ng-touched.ng-invalid {
+  background-color: #FA787E;
+}
+
+.form-container input.ng-valid.ng-touched {
+  background-color: #78FA89;
 }
