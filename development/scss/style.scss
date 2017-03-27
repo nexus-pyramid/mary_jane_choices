@@ -1,12 +1,13 @@
+@import 'reset';
 @import 'colors';
 @import 'buttons';
 @import 'breakpoints';
-@import 'reset';
 @import 'nav';
 @import 'general';
 @import 'footer';
 @import 'sheets';
 @import 'forms';
+
 
 body{
     display:flex;
