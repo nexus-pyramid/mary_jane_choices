@@ -2,50 +2,25 @@
 
   <div id="register-delivery">
     <form class="form-container">
+      <h2>Register Business</h2>
       <ul ng-if='errors.length > 0'>
         <li ng-repeat='error in errors'>{{error}}</li>
       </ul>
-      <h2>Register Business</h2>
-      <h1> yo</h1>
-                                      <!-- <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image"> -->
-  			<!-- <label>Name: </label> --><input type="text" ng-model='name'  placeholder="Name"><br>
-  			<!-- <label>Phone: </label> --><input type="text" ng-model='phone' placeholder="Phone"><br>
-  			<!-- <label>Bio: </label> --><textarea ng-model='bio' placeholder="Bio"></textarea><br>
-  			<!-- <label>City: </label> -->
-  			<select ng-model="city._id" placeholder="City">
-          <option class="default-option" value="" selected data-default>City</option>
-  				<option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-  					{{city.name}}
-  				</option>
-  			</select> <br>                           <input type="text" ng-model="latitude" placeholder="latitude" value="39.500"><br>
-                                                <input type="text" ng-model="longitude" placeholder="longitude" value="-98.350"><br>
-  			<!-- <label>Street Address:</label>  --><input type="text" ng-model='street_address' placeholder="Street Address"></input><br>
-  			<!-- <label>Email: </label> --><input type="text" ng-model='email' placeholder="Email"><br>
-  			<!-- <label>Password: </label> --><input type="password" ng-model='password' placeholder="Password"><br>
-  			<!-- <label>Password Confirmation: </label> --><input type="password" ng-model='confirm' placeholder="Confirm Password"><br>
-                                            <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
-
-  			<button class="form-btn" ng-click='createDelivery(file)'>REGISTER</button>
-  		</form>
-    </div>
+      <input type="text" ng-model='name'  placeholder="Name"><br>
+      <input type="text" ng-model='phone' placeholder="Phone"><br>
+      <textarea ng-model='bio' placeholder="Bio"></textarea><br>
+      <select ng-model="city._id" placeholder="City">
+        <option class="default-option" value="" selected data-default>City</option>
+        <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
+          {{city.name}}
+        </option>
+      </select> <br>
+      <input type="text" ng-model='street_address' placeholder="Street Address"><br>
+      <input type="text" ng-model='email' placeholder="Email"><br>
+      <input type="password" ng-model='password' placeholder="Password"><br>
+      <input type="password" ng-model='confirm' placeholder="Confirm Password"><br>
+      <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
+      <button class="form-btn" ng-click='createDelivery(file)'>REGISTER</button>
+    </form>
   </div>
-        <!-- <label>Name: </label> --><input type="text" ng-model='formData.name'  placeholder="Name"><br>
-        <!-- <label>Phone: </label> --><input type="text" ng-model='formData.phone' placeholder="Phone"><br>
-        <!-- <label>Bio: </label> --><textarea ng-model='formData.bio' placeholder="Bio"></textarea><br>
-        <!-- <label>City: </label> -->
-        <select ng-model="city._id" placeholder="City">
-          <option class="default-option" value="" selected data-default>City</option>
-          <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-            {{city.name}}
-          </option>
-        </select> <br>
-        <!-- <label>Street Address:</label>  --><input type="text" ng-model='formData.street_address' placeholder="Street Address"></input><br>
-        <!-- <label>Email: </label> --><input type="text" ng-model='formData.email' placeholder="Email"><br>
-        <!-- <label>Password: </label> --><input type="password" ng-model='formData.password' placeholder="Password"><br>
-        <!-- <label>Password Confirmation: </label> --><input type="password" ng-model='formData.confirm' placeholder="Confirm Password"><br>
-        <button class="form-btn" ng-click='addDelivery(formData, city._id)'>Register</button>
-      </form>
-    </div>
-  </div>
-
-</div>
+</div>                           
