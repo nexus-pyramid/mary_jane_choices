@@ -5,6 +5,44 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var coords = {};
   var lat = 0;
   var long = 0;
+  var address = '';
+  geolocation.getLocation().then(function(data){
+
+// Set the latitude and longitude equal to the HTML5 coordinates
+coords = {lat:data.coords.latitude, long:data.coords.longitude};
+console.log(coords);
+// Display coordinates in location textboxes rounded to three decimal points
+// $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+// $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+//
+// // Display message confirming that the coordinates verified.
+// $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+// gservice.initialize(coords.lat, coords.long);
+gservice.refresh(coords.lat, coords.long);
+function displayLocation(){
+  var geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(coords.lat, coords.long);
+  console.log(latlng);
+  geocoder.geocode({'location': latlng}, function(results, status){
+    console.log(results)
+    $scope.address = results[0];
+    console.log($scope.address);
+    if( status === 'Ok'){
+      if(results[1]){
+        console.log(results);
+        address = results;
+        console.log(address);
+        $scope.address = address;
+        console.log($scope.address)
+      } else {
+        console.log('no results found');
+      }
+    }
+  })
+}displayLocation()
+
+});
+
   $scope.errors = [];
   function getCities(){
     deliveryFactory.getCities(function(data){
@@ -136,4 +174,3 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
     });
   }
 })
-  
