@@ -29,9 +29,11 @@ module.exports = function(app){
   app.get('/getReviews',  deliveries.getReviews);
   app.get('/getDeliveries', deliveries.index);
   app.get('/flowers', flowers.index);
+  app.post('/addDelivery', multipartyMiddleware, deliveries.addDelivery)
   app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
   app.post('/articleupload', multipartyMiddleware, articles.createWithUpload);
   app.post('/addCounty', counties.addCounty);
+  app.post('/deleteCounty/:id', counties.delete)
   app.get('/getCounties', counties.index);
   app.get('/getCities', cities.index);
   app.post('/county/:id/cities', cities.addCity);

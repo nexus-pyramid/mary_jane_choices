@@ -141,6 +141,25 @@ $scope.formData.latitude = 39.500;
       }
     });
   }
+  $scope.deleteDelivery = function(deliveryId){
+    deliveryFactory.deleteDelivery(deliveryId, function(data){
+    if(data['errors']){
+      $scope.errors.push(data['errors']);
+    } else{
+      getCities();
+    }
+  });
+};
+  $scope.deleteCounty = function(countyId){
+    console.log('in the delete county method'+ countyId)
+    countyFactory.deleteCounty(countyId, function(data){
+      if(data['errors']){
+        $scope.errors.push(data['errors']);
+      } else{
+        getCounties();
+      }
+    })
+  }
   $scope.addCity = function(newCity, countyId){
     console.log('in the add city method;')
     console.log(newCity);

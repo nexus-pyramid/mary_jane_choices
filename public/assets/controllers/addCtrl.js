@@ -1,10 +1,48 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, deliveryFactory, UserFactory, $location, $routeParams){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, $location, $routeParams, Upload){
   // $scope.formData = {};
 
   var coords = {};
   var lat = 0;
   var long = 0;
+  var address = '';
+  geolocation.getLocation().then(function(data){
+
+// Set the latitude and longitude equal to the HTML5 coordinates
+coords = {lat:data.coords.latitude, long:data.coords.longitude};
+console.log(coords);
+// Display coordinates in location textboxes rounded to three decimal points
+// $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+// $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+//
+// // Display message confirming that the coordinates verified.
+// $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+// gservice.initialize(coords.lat, coords.long);
+gservice.refresh(coords.lat, coords.long);
+function displayLocation(){
+  var geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(coords.lat, coords.long);
+  console.log(latlng);
+  geocoder.geocode({'location': latlng}, function(results, status){
+    console.log(results)
+    $scope.address = results[0];
+    console.log($scope.address);
+    if( status === 'Ok'){
+      if(results[1]){
+        console.log(results);
+        address = results;
+        console.log(address);
+        $scope.address = address;
+        console.log($scope.address)
+      } else {
+        console.log('no results found');
+      }
+    }
+  })
+}displayLocation()
+
+});
+
   $scope.errors = [];
   function getCities(){
     deliveryFactory.getCities(function(data){
@@ -86,31 +124,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, deliveryFacto
        console.log(data);
        $location.url('/delivery/'+deliveryId);
      }
-   })
-  }
-
-$scope.createDelivery = function() {
-
-  var deliveryData =  {
-  	name: $scope.formData.name,
-  	phone: $scope.formData.phone,
-  	bio: $scope.formData.bio,
-  	email: $scope.formData.email,
-  	location: [$scope.formData.longitude, $scope.formData.latitude]
-  }
-  $http.post('/register', deliveryData)
-            .success(function (data) {
-
-                // Once complete, clear the form (except location)
-                $scope.formData.name = "";
-                $scope.formData.phone = "";
-                $scope.formData.bio = "";
-                $scope.formData.email = "";
-
-            })
-            .error(function (data) {
-                console.log('Error: ' + data);
-            });
+   });
   }
   $scope.addUser  = function(userData, cityId){
     UserFactory.addUser(userData, cityId, function(data){
@@ -131,68 +145,32 @@ $scope.createDelivery = function() {
       }
     })
   }
-  $scope.addDelivery = function(formData, cityId){
-    // var formData =  {
-    // 	name: $scope.formData.name,
-    // 	phone: $scope.formData.phone,
-    // 	bio: $scope.formData.bio,
-    // 	email: $scope.formData.email,
-    //   street_address: $scope.formData.street_address,
-    //   password: $scope.formData.password,
-    // 	location: [$scope.formData.longitude, $scope.formData.latitude]
-    // };
-  		console.log(formData, cityId);
-  		deliveryFactory.addDelivery(formData, cityId, function(data){
-  		 console.log(formData);
-  		 console.log(cityId);
-  			$scope.errors = [];
-  			if(data['errmsg']){
-  				$scope.errors.push("email is already registered")
-  			} if(data['errors']){
-  				if(typeof(data['errors']) == 'object'){
-  					for(var key in data['errors']){
-  						$scope.errors.push(data['errors'][key].message.replace('Path ', ''));
-  					}
-  				}else{
-  					$scope.errors.push(data['errors']);
-  				}
-  			  }
-  			if($scope.errors.length == 0){
-  				$scope.regInfo = '';
-  				$location.url('/success');
-  			}
-  		});
+  $scope.createDelivery = function(file) {
+    console.log(file)
+      file.upload = Upload.upload({
+        url:'/addDelivery',
+        data: {
+        file: file,
+        name: $scope.name,
+        _city: $scope.city._id,
+        phone: $scope.phone,
+        bio: $scope.bio,
+        email: $scope.email,
+        password: $scope.password,
+        address: $scope.street_address,
+        location: [$scope.longitude, $scope.latitude]
+      }
+    });
+    file.upload.then(function (response) {
+        $timeout(function () {
+            file.result = response.data;
+        });
+    }, function (response) {
+        if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+        file.progress = Math.min(100, parseInt(100.0 *
+                                 evt.loaded / evt.total));
+    });
   }
-    // deliveryFactory.show($routeParams.id, function(data){
-    //   console.log($routeParams.id);
-    //   console.log('i spy ');
-    //   $scope.delivery = data;
-    //   console.log(data)
-    // });
-    // deliveryFactory.show($routeParams._id, function(delivery){
-    //   console.log(delivery);
-    //   console.log($scope.delivery);
-    //   $scope.delivery = delivery;
-    // });
-    // $scope.show = function(){
-    //   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
-    //     console.log(data + " helloooooo");
-    //     if(data['errors']){
-		// 		$scope.errors.push(data['errors']);
-		// 		} else{
-    //       console.log(data);
-		// 			$location.url('/show/'+deliveryId);
-		// 		}
-    //   });
-    // }
-    // $(function(){
-    //   $('#register-delivery').hide();
-    //   $('#register-user').hide();
-    //   $('#user-reg').click( function() {
-    //     $('#register-user').show();
-    //   });
-    // $('#delivery-reg').click( function() {
-    //   $('#register-delivery').show();
-    // });
-    // })
 })

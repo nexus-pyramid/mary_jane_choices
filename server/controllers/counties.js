@@ -15,7 +15,17 @@ function countiesController(){
 			}
 		});
 	}
-
+	this.delete = function(req, res){
+		County.remove({_id: req.params.id}).exec(function(err, county){
+			if(err){
+				console.log('couldnt find county');
+			} else {
+				
+				console.log('county we are removing:' + county );
+				res.json(200);
+			}
+		})
+	}
 	this.index = function(req, res){
 		County.find({}).populate('cities').exec(function(err, data){
 			if(err){

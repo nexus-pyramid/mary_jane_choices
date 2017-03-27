@@ -3,6 +3,7 @@ var Delivery = mongoose.model('Delivery');
 var Flower = mongoose.model('Flower');
 var City = mongoose.model('City');
 var Review = mongoose.model('Review');
+var fs = require('fs')
 function deliveriesController(){
 	console.log("yooooooo");
 	this.addReview = function(req, res){
@@ -43,7 +44,13 @@ function deliveriesController(){
 			var newDelivery  = new Delivery(req.body);
 			console.log('this is the delivery');
 			console.log(newDelivery);
-			newDelivery._city = req.params.id;
+			var file = req.files.file;
+			console.log(file);
+			console.log(file.type);
+			console.log(file.path);
+			console.log(req.body);
+			console.log(req.body._city)
+			// newDelivery._city = req.params.id;
 
 		// if(req.files.file){
 		// 	newDelivery.image = req.files.file.name;
@@ -68,7 +75,9 @@ function deliveriesController(){
 						console.log(err);
 						res.json(err);
 					} else {
-						City.findOne({_id: req.params.id}).exec(function(err, city){
+						console.log('city weree addding delivery too')
+						console.log()
+						City.findOne({_id: req.body._city}).exec(function(err, city){
 							console.log("city we're adding delivery too" + city);
 							if(err){
 								res.json(err);
@@ -106,18 +115,17 @@ function deliveriesController(){
 	}
 	this.index  = function(req, res){
 		Delivery.find({}).exec(function(err, data){
-			// console.log('getting all deliveries')
+			console.log('getting all deliveries')
 			if(err){
 				console.log(err);
 				res.send(200);
 			} else {
-				// console.log(data);
+			console.log(data);
 				res.json(data);
 			}
 		})
 	}
 	this.show = function(req, res){
-		console.log('ayeeenlk');
 		console.log('in the show delivery function');
 		Delivery.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).exec(function(err, data){
 			if(err){
