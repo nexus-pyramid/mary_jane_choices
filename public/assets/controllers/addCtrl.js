@@ -40,9 +40,15 @@ function displayLocation(){
     }
   })
 }displayLocation()
-
 });
 
+function geocodeAddress(){
+  var geocoder = new google.maps.Geocoder();
+  var address = $scope.address;
+  geocoder.deocode({'address': address}, function(results, status){
+
+  })
+}
   $scope.errors = [];
   function getCities(){
     deliveryFactory.getCities(function(data){
@@ -146,31 +152,51 @@ function displayLocation(){
     })
   }
   $scope.createDelivery = function(file) {
-    console.log(file)
-      file.upload = Upload.upload({
-        url:'/addDelivery',
-        data: {
-        file: file,
-        name: $scope.name,
-        _city: $scope.city._id,
-        phone: $scope.phone,
-        bio: $scope.bio,
-        email: $scope.email,
-        password: $scope.password,
-        address: $scope.street_address,
-        location: [$scope.longitude, $scope.latitude]
-      }
-    });
-    file.upload.then(function (response) {
-        $timeout(function () {
-            file.result = response.data;
-        });
-    }, function (response) {
-        if (response.status > 0)
-            $scope.errorMsg = response.status + ': ' + response.data;
-    }, function (evt) {
-        file.progress = Math.min(100, parseInt(100.0 *
-                                 evt.loaded / evt.total));
-    });
+    function geocodeAddress(){
+      var geocoder = new google.maps.Geocoder();
+      var address = $scope.street_address;
+      console.log(address);
+      var loc = [];
+      geocoder.geocode({'address': address}, function(results, status){
+
+        // $scope.loc = results[0].geometry.location;
+        // console.log(results[0].geometry.location);
+        $scope.loc = {};
+        $scope.loc.lng = results[0].geometry.location.lng();
+        $scope.loc.lat = results[0].geometry.location.lat();
+        console.log($scope.loc);
+        file.upload = Upload.upload({
+          url:'/addDelivery',
+          data: {
+          file: file,
+          name: $scope.name,
+          _city: $scope.city._id,
+          phone: $scope.phone,
+          bio: $scope.bio,
+          email: $scope.email,
+          password: $scope.password,
+          address: $scope.street_address,
+          location: [$scope.loc.lng, $scope.loc.lat]
+        }
+      });
+      file.upload.then(function (response) {
+          $timeout(function () {
+              file.result = response.data;
+          });
+      }, function (response) {
+          if (response.status > 0)
+              $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 *
+                                   evt.loaded / evt.total));
+      });
+        if( status === 'Ok'){
+          console.log('status ok');
+        }
+        else {
+         alert("Geocode was not successful for the following reason: " + status);
+       }
+     });
+   }geocodeAddress();
   }
 })
