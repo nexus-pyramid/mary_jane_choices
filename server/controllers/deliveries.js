@@ -125,6 +125,19 @@ function deliveriesController(){
 			}
 		})
 	}
+	this.validate = function(req, res){
+		Delivery.update({_id: req.params.id}, {registered: true}).exec(function(err, data){
+			if(!Delivery){
+				console.log(err)
+			}
+			else if(err){
+				console.log(err)
+			} else {
+				console.log(data);
+				res.json(data);
+			}
+		})
+	}
 	this.show = function(req, res){
 		console.log('in the show delivery function');
 		Delivery.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).exec(function(err, data){

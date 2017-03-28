@@ -43,6 +43,8 @@
 <div id="county-info">
   <p ng-repeat="county in counties">
     <span id="county-id">{{county._id}}<span>
+    <span id="validation"><h3> validate? </h3>
+    <input type="checkbox" ng-model="validate(d)"> 
     <button ng-click="deleteCounty(county._id)"><span id="county-name"> {{county.name}}<span></button
   </p>
 </div> <br>

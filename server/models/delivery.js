@@ -10,6 +10,7 @@ var DeliverySchema = new Schema({
   bio: String,
 	_city: {type: Schema.Types.ObjectId, ref:'City'},
   email: String,
+	registered:{type:Boolean},
   created_at: {type: Date, default: Date.now },
 	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	street_address: String,
