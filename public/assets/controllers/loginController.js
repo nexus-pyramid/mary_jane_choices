@@ -13,9 +13,10 @@ app.controller('loginController', function($scope, deliveryFactory, UserFactory,
 	    $scope.errors = [];
 	    if(data['errors']){
 	    $scope.errors.push(data['errors']);
+			$scope.userInfo = '';
 	    }
 	    else {
-	       $scope.loginfo = '';
+	       $scope.userInfo = '';
 	      $location.url('/success');
 	    }
 	  });

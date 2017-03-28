@@ -114,7 +114,7 @@ function deliveriesController(){
 		});
 	}
 	this.index  = function(req, res){
-		Delivery.find({}).exec(function(err, data){
+		Delivery.find({}).populate('_city').exec(function(err, data){
 			console.log('getting all deliveries')
 			if(err){
 				console.log(err);

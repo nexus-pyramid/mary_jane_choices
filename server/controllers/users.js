@@ -30,23 +30,28 @@ function usersController(){
 	this.login = function(req, res){
 		var errors = {errors:{
 			general: 'Invalid login information'}}
-		User.findOne({password: req.body.password}, function(err, User){
-			// console.log(User)
-			if(err){
-				res.json(err);
-			} if(User.password != req.body.password) {
+			if (!User){
+				console.log(errors)
 				res.json(errors);
-			} else {
-				req.session.User = {
-				_id: User._id,
-				name: User.name
 			}
-			 console.log(req.session.User)
-			res.json(req.session.User);
-			// res.status(200).send("good")
-			}
-		})
-	}
+				User.findOne({password: req.body.password}, function(err, User){
+
+					if(!User){
+						res.json(err);
+					} else if(User.password != req.body.password) {
+						res.json(errors);
+					} else {
+						req.session.User = {
+						_id: User._id,
+						name: User.name
+					}
+					 console.log(req.session.User)
+					res.json(req.session.User);
+					// res.status(200).send("good")
+					}
+				})
+		}
+
 	this.getLogged = function(req, res){
 		 console.log(req.session.User)
 		return res.json(req.session.User)
