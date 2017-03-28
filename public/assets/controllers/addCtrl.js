@@ -57,13 +57,15 @@ function geocodeAddress(){
       console.log(data);
     })
   }getCities();
-  $scope.getDeliveries = function (){
+
+  $scope.getDeliveries = function(){
     deliveryFactory.getDeliveries(function(data){
       console.log('getting deliveries')
       $scope.deliveries = data;
       console.log(data);
     })
-  }
+
+  };
   function getFlowers(){
     deliveryFactory.getFlowers(function(data){
       $scope.flowers = data;
