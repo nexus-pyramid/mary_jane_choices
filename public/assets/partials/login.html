@@ -7,7 +7,7 @@
 		</form>
 		<form class="form-container">
 		<h3> User Login </h3>
-			<label><input type="text" placeholder="Name"></label><br>
+			<label><input type="text"  ng-model = "userInfo.name" placeholder="Name"></label><br>
 			<label><input type="text" ng-model="userInfo.password" placeholder="Password"></label><br>
 			<button class="form-btn" ng-click="userLogin()">Login</button>
 			<a href="#/register/user"><p> Create Account</p> </a>
