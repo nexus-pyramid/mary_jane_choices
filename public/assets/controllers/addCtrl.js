@@ -17,7 +17,7 @@ console.log(coords);
 //
 // // Display message confirming that the coordinates verified.
 // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
-gservice.initialize(coords.lat, coords.long);
+// gservice.initialize(coords.lat, coords.long);
 gservice.refresh(coords.lat, coords.long);
 function displayLocation(){
   var geocoder = new google.maps.Geocoder();
