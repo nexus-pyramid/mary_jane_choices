@@ -75,16 +75,23 @@ angular.module('gservice', [])
                 // Create popup windows for each record
                 var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>'
 
-                // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
-                locations.push(new Location(
-                    new google.maps.LatLng(delivery.location[1], delivery.location[0]),
-                    new google.maps.InfoWindow({
-                        content: contentString,
-                        maxWidth: 320
-                    }),
-                    delivery.name,
-                    delivery.email
-                ))
+                try {
+                    // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
+                    locations.push(new Location(
+                        new google.maps.LatLng(delivery.location[1], delivery.location[0]),
+                        new google.maps.InfoWindow({
+                            content: contentString,
+                            maxWidth: 320
+                        }),
+                        delivery.name,
+                        delivery.email
+                    ))
+
+                }
+                catch(err){
+                    console.log("Couldn't convert point")
+                }
+                
             }
             // location is now an array populated with records in Google Maps format
             return locations;
