@@ -1,3 +1,9 @@
+////////////////////////////////////
+// WE ARE DELETING THIS MAYBE
+////////////////////////////////////
+
+
+
 app.controller('adminController', function($scope, deliveryFactory, countyFactory, $location, Upload){
   function getDeliveries(){
     deliveryFactory.getDeliveries(function(data){

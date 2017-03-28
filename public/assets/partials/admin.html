@@ -1,3 +1,6 @@
+<div ng-init="adminView()">
+
+
 <h1> Admin Panel </h1>
 <legend>add flower</legend>
 <hr>
@@ -43,59 +46,53 @@
 <div id="county-info">
   <p ng-repeat="county in counties">
     <span id="county-id">{{county._id}}<span>
-    <span id="validation"><h3> validate? </h3>
-    <input type="checkbox" ng-model="validate(d)"> 
-    <button ng-click="deleteCounty(county._id)"><span id="county-name"> {{county.name}}<span></button
+    <button ng-click="deleteCounty(county._id)"><span id="county-name"> {{county.name}}<span></button>
   </p>
 </div> <br>
+<div class="sheet__deliveries">
+  <div class="card__delivery" ng-repeat="delivery in deliveries">
+  <div class="title">{{delivery.name}}</div>
+      <span id="validation"><h3> Validate? </h3>
+    <input type="checkbox"> <!--  ng-model="validate()">  -->
+  </div>
+</div>
 
-<legend>create new delivery service</legend><br>
+
+
+<legend>Create new delivery service</legend><br>
 <hr>
   <ul ng-if='errors.length > 0'>
     <li ng-repeat='error in errors'>{{error}}</li>
   </ul>
   <form>
     <label>Name: <input type="text" ng-model='formData.name'></label><br>
-    <label>phone: <input type="text" ng-model='formData.phone'></label><br>
-    <label>bio: <textarea ng-model='formData.bio'></textarea></label><br>
-    <label> city:
+    <label>Phone: <input type="text" ng-model='formData.phone'></label><br>
+    <label>Bio: <textarea ng-model='formData.bio'></textarea></label><br>
+    <label>City:
     <select ng-model="city._id">
       <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
         {{city.name}}
       </option>
     </select>
   </label>
-    <label>street adress: <textarea ng-model='formData.address'></textarea></label><br>
-    <label> Latitude: <input type="text" ng-model="formData.latitude" readonly=""></label><br>
-    <label> Longitude: <input type="text" ng-model="formData.longitude"readonly=""></label><br>
-    <label>email: <input type="text" ng-model='formData.email'></label><br>
-    <label>password: <input type="password" ng-model='formData.password'></label><br>
+    <label>Street Address: <textarea ng-model='formData.address'></textarea></label><br>
+    <label>Latitude: <input type="text" ng-model="formData.latitude" readonly=""></label><br>
+    <label>Longitude: <input type="text" ng-model="formData.longitude"readonly=""></label><br>
+    <label>Email: <input type="text" ng-model='formData.email'></label><br>
+    <label>Password: <input type="password" ng-model='formData.password'></label><br>
     <label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
     <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
             accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
         Select File</button>
     <button ng-click='addDelivery()'>Register</button>
 </form>
-<h1> Add picture </h1>
-<hr>
-<div ng-controller="ArticlesController">
-<form>
-<label> title: </label>  <input type="text" ng-model="title">
-<label> content: </label>  <input type="text" ng-model="content">
-  <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
-          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-      Select File</button>
-  <br><br>
-  File:
-</form>
-  <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-      <span class="progress" ng-show="f.progress >= 0">
-          <div style="width:{{f.progress}}%"
-               ng-bind="f.progress + '%'"></div>
-      </span>
-  </div>
-  </div>
-    <hr>
-    <h1> all images uploaded to databse </h1>
-    <img ng-src="data:image/jpeg;base64,{{article.image}}" id="photo-id" width="200" height="200"/>
-<a href="#!articles"><button>Add Picture</button></a>
+
+
+
+
+
+
+
+  
+
+</div>

@@ -7,7 +7,6 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
   function getFlowers(){
     deliveryFactory.getFlowers(function(data){
       $scope.flowers = data;
-      console.log(data);
     })
   }getFlowers();
   function getCities(){
@@ -17,7 +16,6 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
   }getCities();
   function getReviews(){
     deliveryFactory.getReviews(function(data){
-      console.log(data)
       $scope.reviews = data;
     });
   }getReviews();
@@ -29,13 +27,11 @@ app.controller('deliveryController', function($scope, deliveryFactory, countyFac
   //   console.log(data)
   // });
   $scope.visitDelivery = function(){
-    console.log('in the visitdelivery in delivery controller');
     deliveryFactory.visit(deliveryId, function(data){
       if(data['errors']){
         $scope.errors.push(data['errors'])
       } else {
         $scope.delivery = data;
-        console.log('visitdelivery' + data);
         $location.url('/delivery/'+deliveryId);
       }
     })

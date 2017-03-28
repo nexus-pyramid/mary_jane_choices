@@ -12,7 +12,7 @@ app.config( function ($routeProvider, $locationProvider) {
   })
   .when('/success', {
     templateUrl: 'assets/partials/admin.html',
-    controller: 'adminController'
+    controller: 'addCtrl'
   })
   .when('/dispensaries',{
    templateUrl: 'assets/partials/dispensary.html',
@@ -30,16 +30,12 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/deliveries.html',
     controller:  'addCtrl'
   })
-  .when('/articles', {
-    templateUrl: 'assets/partials/article.html',
-    controller:  'ArticlesController'
-  })
   .when('/register/user', {
-    templateUrl: 'assets/partials/userregister.html',
+    templateUrl: 'assets/partials/register_user.html',
     controller:  'addCtrl'
   })
   .when('/register/business', {
-    templateUrl: 'assets/partials/businessregister.html',
+    templateUrl: 'assets/partials/register_business.html',
     controller:  'addCtrl'
   })
   .otherwise({

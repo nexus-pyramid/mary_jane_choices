@@ -17,8 +17,8 @@ angular.module('gservice', [])
         var currentSelectedMarker;
 
         // User Selected Location (initialize to center of America)
-        var selectedLat = 39.50;
-        var selectedLong = -98.35;
+        var selectedLat = 34.052235;
+        var selectedLong = -118.243683;
 
         // Functions
         // --------------------------------------------------------------
@@ -71,10 +71,9 @@ angular.module('gservice', [])
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.data.length; i++) {
                 var delivery = response.data[i];
-                console.log(delivery.location);
 
                 // Create popup windows for each record
-                var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>'
+                var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>' + "<a href=\"#/delivery/"+ delivery._id + "\"> Visit </a> "
 
                 try {
                     // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
@@ -87,7 +86,6 @@ angular.module('gservice', [])
                         delivery.name,
                         delivery.email
                     ))
-                    console.log(locations);
                 }
                 catch(err){
                     console.log("Couldn't convert point")
@@ -99,13 +97,10 @@ angular.module('gservice', [])
         };
 
         // Constructor for generic location
-        var Location = function(latlon, message, username, gender, age, favlang){
+        var Location = function(latlon, message, link){
             this.latlon = latlon;
             this.message = message;
-            this.username = username;
-            this.gender = gender;
-            this.age = age;
-            this.favlang = favlang
+            this.link = link;
         };
 
         // Initializes the map

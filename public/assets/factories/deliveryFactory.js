@@ -5,8 +5,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		this.addDelivery = function(formData, cityId,  callback){
 			$http.post('/delivery/'+cityId, formData, cityId).then(function(returned_data){
 				if(typeof(callback) == 'function'){
-					console.log('in the register method');
-					console.log(returned_data.data);
 					callback(returned_data.data);
 				}
 			});
@@ -20,7 +18,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.getDeliveries = function(callback){
 			$http.get('/getDeliveries').then(function(returned_data){
-				console.log(' getting deliveries in the delivery factory')
 				callback(returned_data.data);
 			});
 		}
@@ -30,17 +27,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 			});
 		}
 		this.show = function(deliveryId, callback){
-			console.log("THIS IS THE DELIVERY ID");
-			console.log(deliveryId)
 			$http.get('/show/'+deliveryId).then(function(returned_data){
-				console.log('hello');
-				console.log(returned_data.data)
 				callback(returned_data.data);
 			});
 		}
 		this.visit = function(deliveryId, callback){
 			$http.post('/visit/'+deliveryId).then(function(returned_data){
-				console.log(returned_data.data)
 				callback(returned_data.data);
 			})
 		}
@@ -55,11 +47,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 			})
 		}
 		this.addReview = function(review, deliveryId, callback){
-			console.log("in the delivery factory", deliveryId);
-			console.log(review);
 			$http.post('/review/'+deliveryId, review).then(function(returned_data){
 				callback(returned_data.data);
-				console.log(returned_data.data);
 			})
 		}
 
@@ -71,10 +60,10 @@ app.factory('deliveryFactory', ['$http', function($http){
 		// 		}
 		// 	});
 		// }
+
 		this.login = function(delivery_serviceInfo, callback){
 			$http.post('/login', delivery_serviceInfo).then(function(returned_data){
 				if(typeof(callback) == 'function'){
-					console.log(returned_data.data);
 					callback(returned_data.data);
 				}
 			});

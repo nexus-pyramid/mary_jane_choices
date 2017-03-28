@@ -1,3 +1,11 @@
+
+////////////////////////////////////
+// WE ARE DELETING THIS MAYBE...PROBABLY
+////////////////////////////////////
+
+
+
+
 app.controller('ArticlesController', function($scope, $timeout, Upload, $location) {
   $scope.fileReaderSupported = window.FileReader !== null;
   // create new articles
