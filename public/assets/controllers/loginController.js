@@ -11,12 +11,13 @@ app.controller('loginController', function($scope, deliveryFactory, UserFactory,
 	  deliveryFactory.login($scope.delivery_serviceInfo, function(data){
 			console.log("in the loginmethod")
 	    $scope.errors = [];
+
 	    if(data['errors']){
 	    $scope.errors.push(data['errors']);
-			$scope.userInfo = '';
+			$scope.userInfo = {};
 	    }
 	    else {
-	       $scope.userInfo = '';
+	       $scope.userInfo = {};
 	      $location.url('/success');
 	    }
 	  });
@@ -26,9 +27,10 @@ app.controller('loginController', function($scope, deliveryFactory, UserFactory,
 			console.log("user login method");
 			if(data['errors']){
 	    $scope.errors.push(data['errors']);
+			$scope.userInfo = {};
 	    }
 	    else {
-	       $scope.loginfo = '';
+	       $scope.userInfo = {};
 	      $location.url('/deliveries');
 	    }
 		})

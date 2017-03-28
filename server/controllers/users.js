@@ -30,13 +30,14 @@ function usersController(){
 	this.login = function(req, res){
 		var errors = {errors:{
 			general: 'Invalid login information'}}
-			if (!User){
-				console.log(errors)
-				res.json(errors);
-			}
+			// if (!User){
+			// 	console.log(errors)
+			// 	res.json(errors);
+			// }
 				User.findOne({password: req.body.password}, function(err, User){
 
 					if(!User){
+						console.log(err)
 						res.json(err);
 					} else if(User.password != req.body.password) {
 						res.json(errors);
