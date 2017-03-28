@@ -71,12 +71,6 @@ angular.module('gservice', [])
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.data.length; i++) {
                 var delivery = response.data[i];
-                console.log("*********************************")
-
-
-                console.log(delivery)
-                console.log(delivery.location)
-                console.log("*********************************")
                 // console.log(response.data);
                 // console.log(delivery.location);
 

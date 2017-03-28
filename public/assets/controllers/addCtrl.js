@@ -24,8 +24,9 @@ function displayLocation(){
   var latlng = new google.maps.LatLng(coords.lat, coords.long);
   console.log(latlng);
   geocoder.geocode({'location': latlng}, function(results, status){
-    console.log(results)
-    $scope.address = results[0];
+    console.log("**************************");
+    console.log(results);
+    $scope.address = results[2];
     console.log($scope.address);
     if( status === 'Ok'){
       if(results[1]){
