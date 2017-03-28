@@ -4,20 +4,22 @@
 
 <div class="sheet__delivery">
 
-  <div class="delivery-container">
-    <div ng-repeat="delivery in deliveries">
-      <p>{{delivery.name}}</p>
-      <p>{{delivery.phone}}</p>
+  <!-- <div class=""> -->
+    <div class="card__delivery" ng-repeat="delivery in deliveries">
+      <div class="title">{{delivery.name}}</div>
+      <p>{{delivery._city.name}}</p>
+      <!-- <p>{{delivery.phone}}</p>
       <p>{{delivery.bio}}</p>
-      <p>{{delivery.email}}</p>
-      <p>{{delivery._id}}</p>
-      <a href="#/delivery/{{delivery._id}}"><button ng-click="show()">menu</button></a>
+      <p>{{delivery.email}}</p> -->
+      <!-- <p>{{delivery._id}}</p> -->
+      <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+      <a href="#/delivery/{{delivery._id}}"><button class="menu-btn" ng-click="show()">menu</button></a>
     </div>
-  </div>
+  <!-- </div> -->
 
 </div>
 <div class="sheet__map">
-  <div class="col-md-7">
-    <div id="map" style="width:645px; height:645px"></div>
-  </div>
+
+    <div id="map" style="width:80%; height:645px"></div>
+
 </div>
