@@ -71,22 +71,35 @@ angular.module('gservice', [])
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.data.length; i++) {
                 var delivery = response.data[i];
-                console.log(response.data);
-                console.log(delivery.location);
+                console.log("*********************************")
+
+
+                console.log(delivery)
+                console.log(delivery.location)
+                console.log("*********************************")
+                // console.log(response.data);
+                // console.log(delivery.location);
 
                 // Create popup windows for each record
                 var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>'
+                try {
+                    locations.push(new Location(
+                        new google.maps.LatLng(delivery.location[1], delivery.location[0]),
+                        new google.maps.InfoWindow({
+                            content: contentString,
+                            maxWidth: 320
+                        }),
+                        delivery.name,
+                        delivery.email
+                    ))
+                }
+                catch(err){
+                    console.log("Couldnt convert location")
+                    console.log(err)
+                }
 
                 // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
-                locations.push(new Location(
-                    new google.maps.LatLng(delivery.location[1], delivery.location[0]),
-                    new google.maps.InfoWindow({
-                        content: contentString,
-                        maxWidth: 320
-                    }),
-                    delivery.name,
-                    delivery.email
-                ))
+                
             }
             // location is now an array populated with records in Google Maps format
             return locations;
