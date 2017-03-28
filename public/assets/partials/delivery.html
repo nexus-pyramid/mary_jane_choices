@@ -1,28 +1,45 @@
 
-<h2>{{delivery.name}}</h2>
-<table>
-  <tr>
-    <td>Flower </td>
-    <td>Name</td>
-    <td>Description</td>
-  </tr>
-  <tr ng-repeat="flower in delivery.flowers">
-    <td><img id="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
-    <td> {{flower.name}}</td>
-    <td>{{flower.description}}</td>
-  </tr>
-</table>
-<img id="flower-img" data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
-<!-- <img id="flower-img" data-ng-src="data:image/png;base64,{{delivery.image}}"> -->
-<p>{{delivery.bio}}</p>
-<p>{{delivery.email}}</p>
+<div class="sheet__contact">
+  <h2>{{delivery.name}}</h2>  
+  <p>{{delivery.bio}}</p>
+  <p>{{delivery.email}}</p>
+  <img id="flower-img" data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
 </div>
-<div ng-repeat="review in delivery.reviews">
-  <label>Reviews</label>
-  <h3>Review:</h3> <p>{{review.review}}<p>
-  <h3>User:<h3><p>{{review._user.name}}</p>
+
+
+
+
+
+
+<div class="sheet__product">
+  
+  <table>
+    <tr>
+      <td>Flower </td>
+      <td>Name</td>
+      <td>Description</td>
+    </tr>
+    <tr ng-repeat="flower in delivery.flowers">
+      <td><img id="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
+      <td> {{flower.name}}</td>
+      <td>{{flower.description}}</td>
+    </tr>
+  </table>
+
+
 </div>
-<form>
-  <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
-  <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
-</form>
+
+
+<div class="sheet__reviews">
+  <div ng-repeat="review in delivery.reviews">
+    <label>Reviews</label>
+    <h3>Review:</h3> <p>{{review.review}}<p>
+    <h3>User:<h3><p>{{review._user.name}}</p>
+  </div>  
+  <form>
+    <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
+    <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
+  </form>
+
+</div>
+

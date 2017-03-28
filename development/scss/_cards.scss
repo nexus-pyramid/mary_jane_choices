@@ -1,0 +1,19 @@
+[class*="card__"]{
+}
+
+
+
+.card__delivery {
+	width:300px;
+	border-radius:10px;
+	margin:20px;
+	background-color: white;
+	text-align: center;
+	padding-bottom: 16px;
+	div.title{
+		width:100%;
+		padding:16px 0;
+		font-weight: bold;
+		border-bottom:1px solid black
+	}
+}

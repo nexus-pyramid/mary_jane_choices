@@ -1,20 +1,19 @@
 [class*="sheet__"]{
 	width:100%;
 	padding:50px 0;
-	/* fix background */
-	background-attachment: fixed;
-	/* center it */
-	background-position: center center;
-	/* Scale it nicely to the element */
-	background-size: cover;
-
-
+	background-color:$secondary;
 }
 
 // DASHBOARD SHEETS
 .sheet__dashboard{
 	height: auto;
 	text-align: center;
+		/* fix background */
+	background-attachment: fixed;
+	/* center it */
+	background-position: center center;
+	/* Scale it nicely to the element */
+	background-size: cover;
 	background-image: url("../pics/mary_jane.png");
 }
 
@@ -22,13 +21,22 @@
 .sheet__delivery{
 	height: auto;
 	background-color:$lightteal;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-around;
 }
 
 .sheet__banner {
 	height:200px;
 	background-color: $grey;
+	background-image:url("../pics/patterngrey.svg");
   	text-align: center;
   	color: white;
+}
+
+.sheet__map{
+	display:flex;
+	justify-content:center;
 }
 
 
