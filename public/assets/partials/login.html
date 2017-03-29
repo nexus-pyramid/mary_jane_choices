@@ -1,16 +1,16 @@
 <div class="sheet__login">
-		<form class="form-container">
+	<form class="form-container">
 		<h3> Business Login </h3>
-			<label><input type="text" placeholder="Name"></label><br>
-			<label><input type="text" ng-model="delivery_serviceInfo.password" placeholder="Password"></label><br>
-			<button class="form-btn" ng-click="login()">Login</button>
-		</form>
-		<form class="form-container">
+		<label><input type="text" placeholder="Email"></label><br>
+		<label><input type="text" ng-model="delivery_serviceInfo.password" placeholder="Password"></label><br>
+		<button class="form-btn" ng-click="login()">Login</button>
+	</form>
+	<form class="form-container">
 		<h3> User Login </h3>
-			<label><input type="text"  ng-model = "userInfo.name" placeholder="Name"></label><br>
-			<label><input type="text" ng-model="userInfo.password" placeholder="Password"></label><br>
-			<button class="form-btn" ng-click="userLogin()">Login</button>
-			<a href="#/register/user"><p> Create Account</p> </a>
-		</form>
-	</div>
+		<label><input type="text"  ng-model = "userInfo.email" placeholder="Email"></label><br>
+		<label><input type="text" ng-model="userInfo.password" placeholder="Password"></label><br>
+		<button class="form-btn" ng-click="userLogin()">Login</button>
+		<a href="#/register/user"><p> Create Account</p> </a>
+	</form>
 </div>
+

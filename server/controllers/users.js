@@ -33,23 +33,27 @@ function usersController(){
 			// 	console.log(errors)
 			// 	res.json(errors);
 			// }
-				User.findOne({password: req.body.password}, function(err, User){
-
-					if(!User){
-						console.log(err)
-						res.json(err);
-					} else if(User.password != req.body.password) {
-						res.json(errors);
-					} else {
-						req.session.User = {
-						_id: User._id,
-						name: User.name
+			console.log("*******************************")
+			console.log(req.body)
+			console.log("*******************************")
+			User.findOne({email: req.body.email}, function(err, user){
+				console.log(user)
+				console.log(err)
+				console.log("*******************************")
+				if(!user){
+					// console.log(err)
+					res.json(errors);
+				} else if(user.password != req.body.password) {
+					res.json(errors);
+				} else {
+					req.session.User = {
+						_id: user._id,
+						name: user.name
 					}
-					 console.log(req.session.User)
+				 	// console.log(req.session.User)
 					res.json(req.session.User);
-					// res.status(200).send("good")
-					}
-				})
+				}
+			})
 		}
 
 	this.getLogged = function(req, res){

@@ -82,9 +82,22 @@ $scope.adminView = function(){
 // END Admin Constructor
 ////////////////////////////////////////
 
+////////////////////////////////////////
+// Delivery Constructor
 $scope.deliveryView = function(){
-  getdelivery()
+  getdelivery();
 }
+// END Delivery Constructor
+////////////////////////////////////////
+
+////////////////////////////////////////
+// Register Business Constructor
+$scope.registerBusinessView = function(){
+  getCities();
+}
+// Register Business Constructor
+////////////////////////////////////////
+
 
 // END CONSTRUCTORS
 ////////////////////////////////////////
@@ -305,6 +318,7 @@ $scope.createDelivery = function(file) {
         data: {
         file: file,
         name: $scope.name,
+        type: $scope.type,
         _city: $scope.city._id,
         phone: $scope.phone,
         bio: $scope.bio,

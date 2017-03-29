@@ -1,4 +1,4 @@
-<div class="sheet__register">
+<div class="sheet__register" ng-init="registerBusinessView()">
 
   <div id="register-delivery">
     <form name="form" novalidate class="form-container" ng-model-options="{ updateOn: 'blur' }">
@@ -14,6 +14,12 @@
       </div>
       <br>
 
+      <select ng-model="type" required>
+        <option class="default-option" value="" selected data-default>Type</option>
+        <option value="Dispensary" >Dispensary</option>
+        <option value="Delivery" >Delivery</option>
+        <option value="Doctor" >Doctor</option>
+      </select> <br>
 
       <input type="text" ng-model='phone' placeholder="Phone" required><br>
       <textarea ng-model='bio' placeholder="Bio" required></textarea><br>

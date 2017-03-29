@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Flower = mongoose.model('Flower');
 var Delivery = mongoose.model('Delivery');
- var fs = require('fs');
+var fs = require('fs');
 function flowersController(){
   this.index = function(req, res){
     Flower.find({}).exec(function(err, data){

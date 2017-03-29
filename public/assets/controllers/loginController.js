@@ -1,58 +1,54 @@
 // console.log("in the loginController");
 app.controller('loginController', function($scope, deliveryFactory, UserFactory, $location, geolocation){
 	$scope.errors = [];
-	function getCities(){
-    deliveryFactory.getCities(function(data){
-      $scope.cities = data;
-      console.log(data);
-    })
-  }getCities();
+	// function getCities(){
+ //    deliveryFactory.getCities(function(data){
+ //      $scope.cities = data;
+ //      console.log(data);
+ //    })
+ //  }getCities();
 	$scope.login = function(){
 	  deliveryFactory.login($scope.delivery_serviceInfo, function(data){
-			console.log("in the loginmethod")
-	    $scope.errors = [];
-
-	    if(data['errors']){
-	    $scope.errors.push(data['errors']);
-			$scope.userInfo = {};
+	    if(data.errors){
+	    	$scope.errors = data.errors
 	    }
 	    else {
-	       $scope.userInfo = {};
-	      $location.url('/success');
+	    	$scope.userInfo = {};
+	      	$location.url('/success');
 	    }
 	  });
 	}
 	$scope.userLogin = function(){
 		UserFactory.userLogin($scope.userInfo, function(data){
-			console.log("user login method");
-			if(data['errors']){
-	    $scope.errors.push(data['errors']);
-			$scope.userInfo = {};
-	    }
-	    else {
-	       $scope.userInfo = {};
-	      $location.url('/deliveries');
-	    }
+			console.log(data)
+			if(data.errors){
+	    		$scope.errors.push(data['errors']);
+				$scope.userInfo = {};
+	    	}
+	    	else {
+	    		console.log(data)
+	       		$scope.userInfo = data;
+	      		$location.url('/deliveries');
+	    	}
 		})
 	}
-// Initializes Variables
+	// Initializes Variables
     // ----------------------------------------------------------------------------
     $scope.formData = {};
     var coords = {};
     var lat = 0;
     var long = 0;
-		$scope.formData.latitude = 39.500;
-	  $scope.formData.longitude = -98.350;
-var deliveryData =  {
-	name: $scope.formData.name,
-	phone: $scope.formData.phone,
-	bio: $scope.formData.bio,
-	_city: $scope.formData.city,
-	email: $scope.formData.emal,
-	location: [$scope.formData.longitude, $scope.formData.latitude],
-  htmlverified: $scope.formData.htmlverified
-
-}
+	$scope.formData.latitude = 39.500;
+	$scope.formData.longitude = -98.350;
+	var deliveryData =  {
+		name: $scope.formData.name,
+		phone: $scope.formData.phone,
+		bio: $scope.formData.bio,
+		_city: $scope.formData.city,
+		email: $scope.formData.emal,
+		location: [$scope.formData.longitude, $scope.formData.latitude],
+	  htmlverified: $scope.formData.htmlverified
+	}
 var coords = {};
 var lat;
 var long;

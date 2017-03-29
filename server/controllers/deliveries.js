@@ -40,23 +40,13 @@ function deliveriesController(){
 
 	}
 	this.addDelivery = function(req,res){
-			console.log('in the add function');
-			var newDelivery  = new Delivery(req.body);
-			console.log('this is the delivery');
-			console.log(newDelivery);
-			var file = req.files.file;
-			console.log(file);
-			console.log(file.type);
-			console.log(file.path);
-			console.log(req.body);
-			console.log(req.body._city)
-			// newDelivery._city = req.params.id;
 
-		// if(req.files.file){
-		// 	newDelivery.image = req.files.file.name;
-		// } else {
-		//  newDelivery.image= 'default.jpg';
-		// 	}
+			console.log(req.body);
+
+
+			var newDelivery  = new Delivery(req.body);
+			var file = req.files.file;
+
 			fs.readFile(file.path, function (err, original_data){
 				if (err){
 					res.json(400);
@@ -69,14 +59,12 @@ function deliveriesController(){
 							console.log('successfully' + file.path);
 						}
 				});
-		 		newDelivery.image = bs
+		 		console.log(newDelivery.type)
+		 		newDelivery.image = bs;
 				newDelivery.save(function(err, result){
 					if(err){
-						console.log(err);
 						res.json(err);
 					} else {
-						console.log('city weree addding delivery too')
-						console.log()
 						City.findOne({_id: req.body._city}).exec(function(err, city){
 							console.log("city we're adding delivery too" + city);
 							if(err){

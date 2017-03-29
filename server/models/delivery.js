@@ -6,16 +6,17 @@ var DeliverySchema = new Schema({
 		default:''
 	},
 	name: String,
-  phone: Number,
-  bio: String,
+	type: String,
+  	phone: Number,
+  	bio: String,
 	_city: {type: Schema.Types.ObjectId, ref:'City'},
-  email: String,
+  	email: String,
 	registered:{type:Boolean},
-  created_at: {type: Date, default: Date.now },
+  	created_at: {type: Date, default: Date.now },
 	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	street_address: String,
 	location: {type: [Number]}, // [Long, Lat]
-  flowers: [{type: Schema.Types.ObjectId, ref: 'Flower'}],
+  	flowers: [{type: Schema.Types.ObjectId, ref: 'Flower'}],
 	password: {
 		type:String,
 		reuired: true,
