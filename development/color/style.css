@@ -1,0 +1,13 @@
+body{
+	background-color: black;
+}
+.container{
+	display:block;
+}
+.img-container{
+	display:inline;
+}
+.color-container{
+	display:inline-block;
+	vertical-align: top;
+}
