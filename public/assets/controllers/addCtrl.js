@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, $location, $routeParams, Upload){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, $location, $routeParams, Upload){
   // $scope.formData = {};
 
 
@@ -73,6 +73,14 @@ $scope.deliveriesView = function(){
 ////////////////////////////////////////
 
 ////////////////////////////////////////
+// dispensaries Constructor
+$scope.dispensariesView = function(){
+  getDispensaries();
+}
+// END Deliveries Constructor
+////////////////////////////////////////
+
+////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
   getCities();
@@ -81,7 +89,7 @@ $scope.adminView = function(){
 }
 // END Admin Constructor
 ////////////////////////////////////////
-
+// $scope.dispensaryView =
 ////////////////////////////////////////
 // Delivery Constructor
 $scope.deliveryView = function(){
@@ -131,11 +139,16 @@ function getCities(){
 // END Get Cities
 ////////////////////////////////////////
 
-
+function getDispensaries(){
+  dispensaryFactory.getDispensaries(function(data){
+    $scope.dispensaries = data;
+  })
+}
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
 function getDeliveries(){
+  console.log('getting all deliveries')
   deliveryFactory.getDeliveries(function(data){
     $scope.deliveries = data;
   })
@@ -208,7 +221,7 @@ function getdelivery(){
 // END Get Delivery
 ////////////////////////////////////////
 // Show
-//// ng-click to show one delivery 
+//// ng-click to show one delivery
 ////////////////////////////////////////
 $scope.show = function(){
   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
@@ -336,7 +349,7 @@ $scope.createDelivery = function(file) {
         if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
     }, function (evt) {
-        // We can use this to show progress and thumbnail 
+        // We can use this to show progress and thumbnail
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
@@ -352,6 +365,57 @@ $scope.createDelivery = function(file) {
 // END Create Delivery
 ////////////////////////////////////////
 
+////////////////////////////////////////
+// Create Business
+////////////////////////////////////////
+$scope.createBusiness = function(file) {
+  function geocodeAddress(){
+    var geocoder = new google.maps.Geocoder();
+    var address = $scope.street_address;
+    var loc = [];
+    geocoder.geocode({'address': address}, function(results, status){
+      $scope.loc = {};
+      $scope.loc.lng = results[0].geometry.location.lng();
+      $scope.loc.lat = results[0].geometry.location.lat();
+      console.log($scope.loc);
+      file.upload = Upload.upload({
+        url:'/addBusiness',
+        data: {
+        file: file,
+        name: $scope.name,
+        type: $scope.type,
+        _city: $scope.city._id,
+        phone: $scope.phone,
+        bio: $scope.bio,
+        email: $scope.email,
+        password: $scope.password,
+        address: $scope.street_address,
+        location: [$scope.loc.lng, $scope.loc.lat]
+      }
+    });
+    file.upload.then(function (response) {
+        $timeout(function () {
+            file.result = response.data;
+        });
+    }, function (response) {
+        if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+        // We can use this to show progress and thumbnail
+        file.progress = Math.min(100, parseInt(100.0 *
+                                 evt.loaded / evt.total));
+    });
+      if( status === 'Ok'){
+        console.log('status ok');
+      }
+      else {
+       alert("Geocode was not successful for the following reason: " + status);
+     }
+   });
+ }geocodeAddress();
+}
+// END Create Delivery
+////////////////////////////////////////
 })
 // END addCtrl
 ////////////////////////////////////////
