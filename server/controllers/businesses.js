@@ -58,7 +58,7 @@ function businessesController(){
 						res.json(err);
 					} else {
 						City.findOne({_id: req.body._city}).exec(function(err, city){
-							console.log("city we're adding delivery too" + city);
+							console.log("city we're adding businesses" + city);
 							if(err){
 								res.json(err);
 							} else {
@@ -69,9 +69,9 @@ function businessesController(){
 									} else {
 										res.json(result);
 								}
-							})
+							});
 						}
-					})
+					});
 				}
 			})
 			}
@@ -81,7 +81,7 @@ function businessesController(){
 		console.log('getting dispensaries');
 		Business.find({type: "Dispensary"}).exec(function(err, data){
 			console.log('getting dispensaries');
-			console.log(data);
+			// console.log(data);
 			if(!Business){
 				console.log(err);
 			}
@@ -89,7 +89,26 @@ function businessesController(){
 				console.log(err);
 				res.json(err);
 			} else {
-				console.log(data);
+				console.log('success')
+				// console.log(data);
+				res.json(data);
+			}
+		})
+	}
+	this.getDoctors = function(req,res){
+		console.log('getting doctors');
+		Business.find({type: "Doctor"}).exec(function(err, data){
+			console.log('getting dispensaries');
+			// console.log(data);
+			if(!Business){
+				console.log(err);
+			}
+			else if(err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('success')
+				// console.log(data);
 				res.json(data);
 			}
 		})

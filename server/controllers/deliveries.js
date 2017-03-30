@@ -108,7 +108,7 @@ function deliveriesController(){
 				console.log(err);
 				res.send(200);
 			} else {
-			console.log(data);
+			// console.log(data);
 				res.json(data);
 			}
 		})

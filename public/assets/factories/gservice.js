@@ -49,6 +49,79 @@ angular.module('gservice', [])
                 // Perform an AJAX call to get all of the records in the db.
                 $http.get('/getDeliveries').then(function(response, err){
                   console.log(response);
+                  // console.log(err);
+                    // Then convert the results into map points
+                    locations = convertToMapPoints(response);
+                    initialize(latitude, longitude, false);
+
+                    if (err){
+                      console.log(err);
+                    };
+                  })
+            }
+        };
+        googleMapService.getDisp = function(latitude, longitude, filteredResults){
+
+            // Clears the holding array of locations
+            locations = [];
+
+            // Set the selected lat and long equal to the ones provided on the refresh() call
+            selectedLat = latitude;
+            selectedLong = longitude;
+
+            // If filtered results are provided in the refresh() call...
+            if (filteredResults){
+              console.log(filteredResults)
+              console.log(locations)
+                // Then convert the filtered results into map points.
+                locations = convertToMapPoints(filteredResults);
+
+                // Then, initialize the map -- noting that a filter was used (to mark icons yellow)
+                initialize(latitude, longitude, true);
+            }
+
+            // If no filter is provided in the refresh() call...
+            else {
+
+                // Perform an AJAX call to get all of the records in the db.
+                $http.get('/getDispensaries').then(function(response, err){
+                  console.log('getting dispensaries gservice' + response)
+                    // Then convert the results into map points
+                    locations = convertToMapPoints(response);
+                    initialize(latitude, longitude, false);
+
+                    if (err){
+                      console.log(err);
+                    };
+                  })
+            }
+        };
+        googleMapService.getDocs = function(latitude, longitude, filteredResults){
+
+            // Clears the holding array of locations
+            locations = [];
+
+            // Set the selected lat and long equal to the ones provided on the refresh() call
+            selectedLat = latitude;
+            selectedLong = longitude;
+
+            // If filtered results are provided in the refresh() call...
+            if (filteredResults){
+              console.log(filteredResults)
+              console.log(locations)
+                // Then convert the filtered results into map points.
+                locations = convertToMapPoints(filteredResults);
+
+                // Then, initialize the map -- noting that a filter was used (to mark icons yellow)
+                initialize(latitude, longitude, true);
+            }
+
+            // If no filter is provided in the refresh() call...
+            else {
+
+                // Perform an AJAX call to get all of the records in the db.
+                $http.get('/getDoctors').then(function(response, err){
+                  console.log('getting doctors gservice' + response)
                     // Then convert the results into map points
                     locations = convertToMapPoints(response);
                     initialize(latitude, longitude, false);
@@ -65,7 +138,7 @@ angular.module('gservice', [])
 
         // Convert a JSON of users into map points
         var convertToMapPoints = function(response, err){
-
+          console.log(response.data);
             // Clear the locations holder
             var locations = [];
 
@@ -74,6 +147,7 @@ angular.module('gservice', [])
 
 
                 var business = response.data[i];
+                // console.log(business.type)
               switch(business.type){
                 case "Delivery":
                 console.log('im a delivery')
@@ -196,8 +270,8 @@ angular.module('gservice', [])
         };
 
         // Refresh the page upon window load. Use the initial latitude and longitude
-        google.maps.event.addDomListener(window, 'load',
-            googleMapService.refresh(selectedLat, selectedLong));
+        // google.maps.event.addDomListener(window, 'load',
+        //     googleMapService.refresh(selectedLat, selectedLong));
 
         return googleMapService;
     });
