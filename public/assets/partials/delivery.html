@@ -1,14 +1,18 @@
 <div ng-init="deliveryView()">
-    
-  <div class="sheet__contact">
-    <h2>{{delivery.name}}</h2>  
-    <p>{{delivery.bio}}</p>
-    <p>{{delivery.email}}</p>
-    <img id="flower-img" data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
-  </div>
+  
 
-
-
+  <div class="sheet__head">
+    <div class="sheet__contact">
+      <div class="icon__profile">
+        <img id="flower-img" data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
+      </div>
+      <h2>{{delivery.name}}</h2>  
+      <p>{{delivery.bio}}</p>
+      <p>{{delivery.email}}</p>
+      <p>{{delivery.phone}}</p>
+    </div>  
+  </div>  
+  
 
 
 

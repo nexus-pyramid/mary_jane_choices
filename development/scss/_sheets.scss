@@ -18,6 +18,10 @@
 }
 
 // DELIVERY SHEETS
+.sheet__head{
+	background-image:url("../pics/patterngrey.svg");
+	padding-top:80px;
+}
 .sheet__delivery{
 	height: auto;
 	background-color:$lightteal;
