@@ -15,8 +15,12 @@ app.config( function ($routeProvider, $locationProvider) {
     controller: 'addCtrl'
   })
   .when('/dispensaries',{
-   templateUrl: 'assets/partials/dispensary.html',
-   controller: 'dispensaryController'
+   templateUrl: 'assets/partials/dispensaries.html',
+   controller: 'addCtrl'
+  })
+  .when('/doctors',{
+   templateUrl: 'assets/partials/doctors.html',
+   controller: 'addCtrl'
   })
   .when('/login',{
    templateUrl: 'assets/partials/login.html',

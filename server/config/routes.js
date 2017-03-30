@@ -1,11 +1,12 @@
 var path = require('path');
 var users = require('../controllers/users.js');
 var deliveries = require('../controllers/deliveries.js');
+var dispensaries = require('../controllers/dispensaries.js');
 var flowers = require('../controllers/flowers.js');
 var counties = require('../controllers/counties.js');
 var cities = require('../controllers/cities.js');
 var articles = require('../controllers/articles.js');
-
+var businesses = require('../controllers/businesses.js');
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty()
 function loginAuthentication(req,res,next){
@@ -28,8 +29,10 @@ module.exports = function(app){
   app.post('/user', users.login);
   app.get('/getReviews',  deliveries.getReviews);
   app.get('/getDeliveries', deliveries.index);
+  app.get('/getDispensaries', businesses.getDispensaries);
   app.get('/flowers', flowers.index);
-  app.post('/addDelivery', multipartyMiddleware, deliveries.addDelivery)
+  app.post('/addDelivery', multipartyMiddleware, deliveries.addDelivery);
+  app.post('/addDispensary', multipartyMiddleware, businesses.addBusiness);
   app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
   app.post('/articleupload', multipartyMiddleware, articles.createWithUpload);
   app.post('/addCounty', counties.addCounty);

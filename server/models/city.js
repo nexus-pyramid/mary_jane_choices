@@ -5,6 +5,7 @@ var CitySchema = new Schema({
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now},
 	users: [{type: Schema.Types.ObjectId, ref: 'User'}],
+	businesses: [{type: Schema.Types.ObjectId, ref: 'Business'}],
 	deliveries: [{type: Schema.Types.ObjectId, ref: 'Delivery'}],
   dispensaries: [{type: Schema.Types.ObjectId, ref: 'Dispensary'}]
 });

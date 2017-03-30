@@ -23,6 +23,7 @@ angular.module('gservice', [])
         // Functions
         // --------------------------------------------------------------
         // Refresh the Map with new data. Takes three parameters (lat, long, and filtering results)
+
         googleMapService.refresh = function(latitude, longitude, filteredResults){
 
             // Clears the holding array of locations
@@ -70,21 +71,31 @@ angular.module('gservice', [])
 
             // Loop through all of the JSON entries provided in the response
             for(var i= 0; i < response.data.length; i++) {
-                var delivery = response.data[i];
 
-                // Create popup windows for each record
-                var  contentString = '<p><b>name</b>: ' + delivery.name + '<br><b>email</b>: ' + delivery.email + '<br>' + "<a href=\"#/delivery/"+ delivery._id + "\"> Visit </a> "
+
+                var business = response.data[i];
+              switch(business.type){
+                case "Delivery":
+                console.log('im a delivery')
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Delivery/"+ business._id + "\"> Visit </a> ";
+                case "Doctor":
+                console.log('im a Doctor')
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Doctor/"+ business._id + "\"> Visit </a> ";
+                case "Dispensary":
+                console.log('im a Dispensary')
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Dispensary/"+ business._id + "\"> Visit </a> ";
+              }
 
                 try {
                     // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
                     locations.push(new Location(
-                        new google.maps.LatLng(delivery.location[1], delivery.location[0]),
+                        new google.maps.LatLng(business.location[1], business.location[0]),
                         new google.maps.InfoWindow({
                             content: contentString,
                             maxWidth: 320
                         }),
-                        delivery.name,
-                        delivery.email
+                        business.name,
+                        business.email
                     ))
                 }
                 catch(err){

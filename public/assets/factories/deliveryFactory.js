@@ -17,7 +17,9 @@ app.factory('deliveryFactory', ['$http', function($http){
 			})
 		}
 		this.getDeliveries = function(callback){
+			console.log('getting deliveries')
 			$http.get('/getDeliveries').then(function(returned_data){
+				console.log(returned_data.data)
 				callback(returned_data.data);
 			});
 		}
