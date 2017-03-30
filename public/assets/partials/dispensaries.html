@@ -1,14 +1,14 @@
 <div ng-init="dispensariesView()">
 
   <div class="sheet__banner">
-      <h1 id=banner-txt> {{address.formatted_address}} </h1>
+      <h1 id=banner-txt>{{address.formatted_address}} </h1>
   </div>
 
   <div class="sheet__delivery">
     <!-- <div class=""> -->
-      <div class="card__delivery" ng-repeat="delivery in deliveries">
-        <div class="title">{{delivery.name}}</div>
-        <p>{{delivery._city.name}}</p>
+      <div class="card__delivery" ng-repeat="disp in dispensaries">
+        <div class="title">{{disp.name}}</div>
+        <p>{{disp.name}}</p>
         <!-- <p>{{delivery.phone}}</p>
         <p>{{delivery.bio}}</p>
         <p>{{delivery.email}}</p> -->

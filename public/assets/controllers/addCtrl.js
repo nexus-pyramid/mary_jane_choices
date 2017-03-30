@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, $location, $routeParams, Upload){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload){
   // $scope.formData = {};
 
 
@@ -55,9 +55,80 @@ function getLocation() {
   });
     // END Geolocation
     ////////////////////////////////////////
+};
+function get_doc() {
+
+  geolocation.getLocation().then(function(data){
+    // Set the latitude and longitude equal to the HTML5 coordinates
+    coords = {lat:data.coords.latitude, long:data.coords.longitude};
+    // Display coordinates in location textboxes rounded to three decimal points
+    // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+    // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+    //
+    // // Display message confirming that the coordinates verified.
+    // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+    // gservice.initialize(coords.lat, coords.long);
+    gservice.getDocs(coords.lat, coords.long);
+
+    ////////////////////////////////////////
+    // Geolocation
+    ////////////////////////////////////////
+    function displayLocation(){
+      var geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(coords.lat, coords.long);
+      geocoder.geocode({'location': latlng}, function(results, status){
+        $scope.address = results[2];
+        if( status === 'Ok'){
+          if(results[1]){
+            address = results;
+            $scope.address = address;
+          } else {
+            console.log('no results found');
+          }
+        }
+      })
+    }displayLocation()
+  });
+}
+function get_disp() {
+
+  geolocation.getLocation().then(function(data){
+      // console.log(data);
+    // Set the latitude and longitude equal to the HTML5 coordinates
+    coords = {lat:data.coords.latitude, long:data.coords.longitude};
+    // Display coordinates in location textboxes rounded to three decimal points
+    // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+    // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+    //
+    // // Display message confirming that the coordinates verified.
+    // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+    // gservice.initialize(coords.lat, coords.long);
+    gservice.getDisp(coords.lat, coords.long);
+
+    ////////////////////////////////////////
+    // Geolocation
+    ////////////////////////////////////////
+    function getAdress(){
+      var geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(coords.lat, coords.long);
+      geocoder.geocode({'location': latlng}, function(results, status){
+        $scope.address = results[2];
+        console.log($scope.address)
+        if( status === 'Ok'){
+          if(results[1]){
+            address = results;
+            $scope.address = address;
+          } else {
+            console.log('no results found');
+          }
+        }
+      })
+    }getAdress();
+  });
+    // END Geolocation
+    ////////////////////////////////////////
 
 };
-
 
 ////////////////////////////////////////
 // CONSTRUCTORS
@@ -75,7 +146,17 @@ $scope.deliveriesView = function(){
 ////////////////////////////////////////
 // dispensaries Constructor
 $scope.dispensariesView = function(){
+  get_disp();
   getDispensaries();
+}
+// END Deliveries Constructor
+////////////////////////////////////////
+
+////////////////////////////////////////
+// doctors Constructor
+$scope.doctorsView = function(){
+  get_doc();
+  getDoctors();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -133,7 +214,6 @@ function geocodeAddress(){
 function getCities(){
   deliveryFactory.getCities(function(data){
     $scope.cities = data;
-    console.log(data);
   })
 };
 // END Get Cities
@@ -148,9 +228,18 @@ function getDispensaries(){
 // Get Deliveries
 ////////////////////////////////////////
 function getDeliveries(){
-  console.log('getting all deliveries')
   deliveryFactory.getDeliveries(function(data){
     $scope.deliveries = data;
+  })
+};
+// END Get Deliveries
+////////////////////////////////////////
+////////////////////////////////////////
+// Get Deliveries
+////////////////////////////////////////
+function getDoctors(){
+  doctorFactory.getDoctors(function(data){
+    $scope.doctors = data;
   })
 };
 // END Get Deliveries
@@ -369,6 +458,7 @@ $scope.createDelivery = function(file) {
 // Create Business
 ////////////////////////////////////////
 $scope.createBusiness = function(file) {
+  console.log('in the create Business');
   function geocodeAddress(){
     var geocoder = new google.maps.Geocoder();
     var address = $scope.street_address;
@@ -414,8 +504,6 @@ $scope.createBusiness = function(file) {
    });
  }geocodeAddress();
 }
-// END Create Delivery
-////////////////////////////////////////
 })
 // END addCtrl
 ////////////////////////////////////////

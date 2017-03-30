@@ -30,9 +30,10 @@ module.exports = function(app){
   app.get('/getReviews',  deliveries.getReviews);
   app.get('/getDeliveries', deliveries.index);
   app.get('/getDispensaries', businesses.getDispensaries);
+  app.get('/getDoctors', businesses.getDoctors);
   app.get('/flowers', flowers.index);
   app.post('/addDelivery', multipartyMiddleware, deliveries.addDelivery);
-  app.post('/addDispensary', multipartyMiddleware, businesses.addBusiness);
+  app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
   app.post('/articleupload', multipartyMiddleware, articles.createWithUpload);
   app.post('/addCounty', counties.addCounty);
