@@ -1,9 +1,17 @@
 [class*="icon__"]{
-	width:80px;
-	height:80px;
+	width:200px;
+	height:200px;
+	@include breakpoint(715) { 
+		width:80px;
+		height:80px;
+	}
 }
 
 .icon__profile {
+	// display: inline;
+	position: relative;
+	top:-90px;
+	right: -100px;
 	border-radius:16px;
 	overflow:hidden;
 	img {

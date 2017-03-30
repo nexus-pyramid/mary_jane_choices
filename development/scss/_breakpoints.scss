@@ -9,14 +9,7 @@ $large: 1300;
     @media (max-width: 1300px) { @content; }
   }
   @else if $point == 715 {
-  	@media
-    only screen and (-webkit-min-device-pixel-ratio: 3)      and (max-width: 715px),
-	only screen and (   min--moz-device-pixel-ratio: 3)      and (max-width: 715px),
-	only screen and (     -o-min-device-pixel-ratio: 3/1)    and (max-width: 715px),
-	only screen and (        min-device-pixel-ratio: 3)      and (max-width: 715px),
-	only screen and (                min-resolution: 401dpi) and (max-width: 715px),
-	only screen and (                min-resolution: 2.46dppx)  and (max-width: 715px) { 
-	 @content; }
+  	@media (max-width: 715px) { @content; }
   }
 }
 
