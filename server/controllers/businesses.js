@@ -1,40 +1,8 @@
 var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
-var City = mongoose.model('City');
 var Review = mongoose.model('Review');
 var fs = require('fs')
 function businessesController(){
-	console.log("yooooooo");
-	this.addReview = function(req, res){
-		var newReview = new Review(req.body);
-		console.log(newReview)
-		newReview._delivery = req.params.id;
-		newReview._user = req.session.User;
-		newReview.save(function(err, result){
-			if(err){
-				res.send(400);
-				console.log(err)
-			} else {
-				console.log('finding delivery');
-				Delivery.findOne({_id: req.params.id}).exec(function(err, delivery){
-					if(err){
-						res.send(err);
-						console.log(err);
-					} else {
-						delivery.reviews.push(newReview._id);
-						delivery.save(function(err, result){
-							if(err){
-								res.json(err);
-							} else {
-								console.log('we made it ' + result);
-								res.json(result);
-							}
-						});
-					}
-				})
-			}
-		});
-	}
 
 	this.addBusiness = function(req,res){
 			console.log(req.body);
@@ -45,35 +13,22 @@ function businessesController(){
 					res.json(400);
 				} else {
 					var bs = original_data.toString('base64');
+					newBusiness.image = bs;
 					fs.unlink(file.path, function(err){
 						if (err){
 							console.log('failed to delete' + file.path);
 						} else {
 							console.log('successfully' + file.path);
 						}
-				});
-		 		newBusiness.image = bs;
-				newBusiness.save(function(err, result){
-					if(err){
-						res.json(err);
-					} else {
-						City.findOne({_id: req.body._city}).exec(function(err, city){
-							console.log("city we're adding businesses" + city);
+						newBusiness.save(function(err, result){
 							if(err){
 								res.json(err);
-							} else {
-								city.businesses.push(newBusiness._id);
-								city.save(function(err, result){
-									if(err){
-										res.json(err);
-									} else {
-										res.json(result);
-								}
-							});
+						} else {
+							console.log(result);
+							res.json(result)
 						}
-					});
-				}
-			})
+					})
+				});
 			}
 		})
 	}
@@ -113,14 +68,20 @@ function businessesController(){
 			}
 		})
 	}
-	this.index  = function(req, res){
-		Delivery.find({}).populate('_city').exec(function(err, data){
-			console.log('getting all deliveries')
-			if(err){
-				console.log(err);
-				res.send(200);
-			} else {
+	this.getDeliveries = function(req,res){
+		console.log('getting deliveries');
+		Business.find({type: "Delivery"}).exec(function(err, data){
+			console.log('getting dispensaries');
 			// console.log(data);
+			if(!Business){
+				console.log(err);
+			}
+			else if(err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('success')
+				console.log(data);
 				res.json(data);
 			}
 		})

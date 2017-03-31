@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Delivery = mongoose.model('Delivery');
 var Flower = mongoose.model('Flower');
-var City = mongoose.model('City');
 var Review = mongoose.model('Review');
 var fs = require('fs')
 function deliveriesController(){
@@ -64,22 +63,9 @@ function deliveriesController(){
 				newDelivery.save(function(err, result){
 					if(err){
 						res.json(err);
-					} else {
-						City.findOne({_id: req.body._city}).exec(function(err, city){
-							console.log("city we're adding delivery too" + city);
-							if(err){
-								res.json(err);
-							} else {
-								city.deliveries.push(newDelivery._id);
-								city.save(function(err, result){
-									if(err){
-										res.json(err);
-									} else {
-										res.json(result);
-								}
-							})
-						}
-					})
+				} else {
+					console.log(result);
+					res.json(result)
 				}
 			})
 			}
