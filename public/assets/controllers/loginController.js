@@ -32,49 +32,4 @@ app.controller('loginController', function($scope, deliveryFactory, UserFactory,
 	    	}
 		})
 	}
-	// Initializes Variables
-    // ----------------------------------------------------------------------------
-    $scope.formData = {};
-    var coords = {};
-    var lat = 0;
-    var long = 0;
-	$scope.formData.latitude = 39.500;
-	$scope.formData.longitude = -98.350;
-	var deliveryData =  {
-		name: $scope.formData.name,
-		phone: $scope.formData.phone,
-		bio: $scope.formData.bio,
-		_city: $scope.formData.city,
-		email: $scope.formData.emal,
-		location: [$scope.formData.longitude, $scope.formData.latitude],
-	  htmlverified: $scope.formData.htmlverified
-	}
-var coords = {};
-var lat;
-var long;
-$scope.addDelivery = function(formData, cityId){
-			// console.log($scope.regInfo);
-		deliveryFactory.register(formData, cityId, function(data){
-		 console.log(formData);
-		 console.log(cityId);
-			$scope.errors = [];
-			if(data['errmsg']){
-				$scope.errors.push("email is already registered")
-			} if(data['errors']){
-				if(typeof(data['errors']) == 'object'){
-					for(var key in data['errors']){
-						$scope.errors.push(data['errors'][key].message.replace('Path ', ''));
-					}
-				}else{
-					$scope.errors.push(data['errors']);
-				}
-			  }
-			if($scope.errors.length == 0){
-				$scope.regInfo = '';
-				$location.url('/success');
-			}
-		});
-	}
-
-
 });

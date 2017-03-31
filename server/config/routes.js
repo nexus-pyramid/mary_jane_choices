@@ -1,14 +1,11 @@
-var path = require('path');
-var users = require('../controllers/users.js');
-var deliveries = require('../controllers/deliveries.js');
-var dispensaries = require('../controllers/dispensaries.js');
-var flowers = require('../controllers/flowers.js');
-var counties = require('../controllers/counties.js');
-var cities = require('../controllers/cities.js');
-var articles = require('../controllers/articles.js');
-var businesses = require('../controllers/businesses.js');
-var multiparty = require('connect-multiparty');
-var multipartyMiddleware = multiparty()
+var path = require('path'),
+    users = require('../controllers/users.js'),
+    deliveries = require('../controllers/deliveries.js'),
+    dispensaries = require('../controllers/dispensaries.js'),
+    flowers = require('../controllers/flowers.js'),
+    businesses = require('../controllers/businesses.js'),
+    multiparty = require('connect-multiparty'),
+    multipartyMiddleware = multiparty();
 function loginAuthentication(req,res,next){
   if (req.session.User){
     next();
@@ -28,17 +25,10 @@ module.exports = function(app){
   app.post('/review/:id', deliveries.addReview);
   app.post('/user', users.login);
   app.get('/getReviews',  deliveries.getReviews);
-  app.get('/getDeliveries', deliveries.index);
+  app.get('/getDeliveries', businesses.getDeliveries);
   app.get('/getDispensaries', businesses.getDispensaries);
   app.get('/getDoctors', businesses.getDoctors);
   app.get('/flowers', flowers.index);
-  app.post('/addDelivery', multipartyMiddleware, deliveries.addDelivery);
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
-  app.post('/articleupload', multipartyMiddleware, articles.createWithUpload);
-  app.post('/addCounty', counties.addCounty);
-  app.post('/deleteCounty/:id', counties.delete)
-  app.get('/getCounties', counties.index);
-  app.get('/getCities', cities.index);
-  app.post('/county/:id/cities', cities.addCity);
 };

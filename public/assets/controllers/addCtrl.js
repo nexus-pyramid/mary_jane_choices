@@ -179,15 +179,6 @@ $scope.deliveryView = function(){
 // END Delivery Constructor
 ////////////////////////////////////////
 
-////////////////////////////////////////
-// Register Business Constructor
-$scope.registerBusinessView = function(){
-  getCities();
-}
-// Register Business Constructor
-////////////////////////////////////////
-
-
 // END CONSTRUCTORS
 ////////////////////////////////////////
 
@@ -205,25 +196,21 @@ function geocodeAddress(){
 
   })
 }
-// Geocode Address
+// END Geocode Address
 ////////////////////////////////////////
 
 ////////////////////////////////////////
-// Get Cities
+// Get dispensaries
 ////////////////////////////////////////
-function getCities(){
-  deliveryFactory.getCities(function(data){
-    $scope.cities = data;
-  })
-};
-// END Get Cities
-////////////////////////////////////////
-
 function getDispensaries(){
   dispensaryFactory.getDispensaries(function(data){
     $scope.dispensaries = data;
   })
 }
+// END Get dispensaries
+////////////////////////////////////////
+
+
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
@@ -474,7 +461,9 @@ $scope.createBusiness = function(file) {
         file: file,
         name: $scope.name,
         type: $scope.type,
-        _city: $scope.city._id,
+        city: $scope.city,
+        zip_code: $scope.zip_code,
+        state: $scope.state,
         phone: $scope.phone,
         bio: $scope.bio,
         email: $scope.email,
