@@ -17,6 +17,28 @@
 	background-image: url("../pics/mary_jane.png");
 }
 
+.sheet__topstrains{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-around;
+}
+
+.sheet__featured{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-around;
+}
+
+.sheet__sponsors{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-around;
+}
+
+
+
+
+
 // DELIVERY SHEETS
 .sheet__head{
 	background-image:url("../pics/patterngrey.svg");

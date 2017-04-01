@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
 	Schema = mongoose.Schema;
 var FlowerSchema = new Schema({
-  _delivery:{type: Schema.Types.ObjectId, ref:'Delivery'},
-	_dispensary: {type: Schema.Types.ObjectId, ref:'Dispensary'},
+  	_business:{type: Schema.Types.ObjectId, ref:'Business'},
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now},
 	image: {type: String},

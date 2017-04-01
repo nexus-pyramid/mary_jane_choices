@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
+var request = require('request');
 var Flower = mongoose.model('Flower');
+var Strain = mongoose.model('Strain');
 var Delivery = mongoose.model('Delivery');
 var fs = require('fs');
 function flowersController(){
@@ -13,6 +15,50 @@ function flowersController(){
       }
     })
   }
+
+
+ //  this.getAPI = function(req, res){
+ //  	var page = 0;
+ //  	var apidata = []
+
+ //  	request.get("https://www.cannabisreports.com/api/v1.0/strains?page=0", function(err, response, body) {
+	// 	if (!err && response.statusCode == 200) {
+	// 		var locals = JSON.parse(body);
+	// 		page = 901
+	// 		console.log(page)
+	// 		for (var i = 10; i >= 0; i --){
+	// 			request.headers = {}
+	// 			request.headers.X_API_Key = "3aaa9829ada967127e2c634c3f7258aff328d791"
+	// 	  		request.get("https://www.cannabisreports.com/api/v1.0/strains?page=" + i, function(err, response, body) {
+	// 				if (!err && response.statusCode == 200) {
+	// 					var locals = JSON.parse(body);
+	// 					for (var n =0; n < locals.meta.pagination.count; n++){
+
+	// 						// save to data base
+							
+	// 						apidata.push({"name" : locals.data[n].name})	
+	// 					}
+						
+	// 					console.log("api hit " + i)
+	// 				}
+	// 				if (i < 0){
+	// 	  				console.log("response ran")
+	// 					res.json(apidata);
+	// 				}
+	// 			})	
+	// 			console.log(i)
+	// 	  	}
+	// 	}
+	// })	
+
+
+  	
+
+	
+ //  }
+
+
+
   this.addFlower = function(req,res){
 		console.log('in the add Flower function');
     var file = req.files.file;
