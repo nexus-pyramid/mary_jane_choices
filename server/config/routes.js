@@ -6,14 +6,18 @@ var path = require('path'),
     businesses = require('../controllers/businesses.js'),
     multiparty = require('connect-multiparty'),
     multipartyMiddleware = multiparty();
-function loginAuthentication(req,res,next){
-  if (req.session.User){
-    next();
-  }else{
-    res.status(401).send("User not found");
-  }
-}
-
+// function loginAuthentication(req,res,next){
+//   if (req.session.User){
+//     next();
+//   }else{
+//     res.status(401).send("User not found");
+//   }
+// }
+ function isLoggedIn(req, res, next) {
+   if (req.isAuthenticated())
+     return next();
+     res.redirect('/');
+ }
 module.exports = function(app){
   app.post('/login', deliveries.login);
   app.post('/register', deliveries.create);
