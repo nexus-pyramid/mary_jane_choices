@@ -21,6 +21,10 @@
 	display:flex;
 	flex-wrap:wrap;
 	justify-content:space-around;
+	div.title{
+		width:100%;
+		text-align:center;
+	}
 }
 
 .sheet__featured{
