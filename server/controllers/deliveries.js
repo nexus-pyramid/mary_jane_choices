@@ -39,10 +39,7 @@ function deliveriesController(){
 
 	}
 	this.addDelivery = function(req,res){
-
 			console.log(req.body);
-
-
 			var newDelivery  = new Delivery(req.body);
 			var file = req.files.file;
 
