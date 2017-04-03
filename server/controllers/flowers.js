@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
-var request = require('request');
+// var request = require('request');
 var Flower = mongoose.model('Flower');
 var Strain = mongoose.model('Strain');
 var Delivery = mongoose.model('Delivery');
+var Business = mongoose.model('Business');
 var fs = require('fs');
 function flowersController(){
   this.index = function(req, res){
@@ -35,29 +36,45 @@ function flowersController(){
 	// 					for (var n =0; n < locals.meta.pagination.count; n++){
 
 	// 						// save to data base
-							
-	// 						apidata.push({"name" : locals.data[n].name})	
+
+	// 						apidata.push({"name" : locals.data[n].name})
 	// 					}
-						
+
 	// 					console.log("api hit " + i)
 	// 				}
 	// 				if (i < 0){
 	// 	  				console.log("response ran")
 	// 					res.json(apidata);
 	// 				}
-	// 			})	
+	// 			})
 	// 			console.log(i)
 	// 	  	}
 	// 	}
-	// })	
+	// })
 
 
-  	
 
-	
+
+
  //  }
 
-
+  this.addStrain = function(req, res){
+    var newStrain = new Strain(req.body)
+    newStrain.save(function(err, result){
+      if(err){
+        res.json(err);
+      } else {
+        Business.findon({_id: req.params.id}).exec(function(err, business){
+          console.log(business);
+          if(!business){
+            res.json(err);
+          } else {
+            strain.businesses.push()
+          }
+        })
+      }
+    })
+  }
 
   this.addFlower = function(req,res){
 		console.log('in the add Flower function');
@@ -65,7 +82,8 @@ function flowersController(){
 		var newFlower = new Flower(req.body);
 		console.log(newFlower);
     console.log(file)
-		newFlower._delivery = req.session.Delivery;
+		newFlower._business = req.session.Business;
+
     fs.readFile(file.path, function ( err, original_data){
       if (err){
         res.json(400);
@@ -84,20 +102,22 @@ function flowersController(){
 			       if(err){
 				         res.sendStatus(400);
 			            } else {
-				                Delivery.findOne({_id: req.session.Delivery._id }).exec(function(err, delivery){
+                        // var newstrain = new Strain(newFlower.name)
+                        // if
+				                Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
 					              console.log("company we're adding flowers too")
-					              console.log(delivery);
+					              console.log(business);
 					              if(err){
 						               console.log(err);
 						              res.sendStatus(400);
 					              } else{
-						              delivery.flowers.push(newFlower._id);
-						              delivery.save(function(err, result){
+						              business.flowers.push(newFlower._id);
+						              business.save(function(err, result){
 							                if(err){
 								               res.json(err);
 							                } else {
-								                console.log('it lit');
-								               res.json(result);
+								                console.log('adding flower');
+								                res.json(result);
 							              }
 						             })
 					            }

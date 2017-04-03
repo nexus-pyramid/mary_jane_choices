@@ -11,6 +11,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var lat = 0;
   var long = 0;
   var address = '';
+
 // END Global Variables
 ////////////////////////////////////////
 
@@ -249,6 +250,8 @@ function getFlowers(){
 // Add Flower
 ////////////////////////////////////////
 $scope.addFlower = function(file, errFiles){
+
+  console.log("Weedid this")
   $scope.h = file;
   $scope.errFile = errFiles && errFiles[0];
   if (file) {
@@ -291,7 +294,11 @@ $scope.addFlower = function(file, errFiles){
 ////////////////////////////////////////
 function getdelivery(){
   deliveryFactory.show($routeParams.id, function(data){
+    console.log('in the getdelivery function');
+    console.log(data);
     $scope.delivery = data;
+    console.log($scope.delivery);
+    console.log($scope.delivery.flowers);
   });
 };
 // END Get Delivery
@@ -301,6 +308,7 @@ function getdelivery(){
 ////////////////////////////////////////
 $scope.show = function(){
   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+    console.log('in the scope showe function');
     if(data['errors']){
       $scope.errors.push(data['errors']);
     } else{

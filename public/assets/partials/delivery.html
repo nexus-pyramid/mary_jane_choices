@@ -1,23 +1,38 @@
 <div ng-init="deliveryView()">
-  
+
 
   <div class="sheet__head">
     <div class="sheet__contact">
       <div class="icon__profile">
         <img data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
       </div>
-      <h1>{{delivery.name}}</h1>  
+      <h1>{{delivery.name}}</h1>
       <p>{{delivery.bio}}</p>
       <p>{{delivery.email}}</p>
       <p>{{delivery.phone}}</p>
-    </div>  
-  </div>  
-  
+    </div>
+  </div>
 
 
+  <a class="mobile" href="">&#9776;</a>
+  <nav>
+    <ul id="nav">
+      <li><a href="#/{{delivery._id}}/menu">Menu</a></li>
+      <li><a href="#/{{delivery._id}}/reviews">Reviews</a></li>
+      <li><a href="#/{{delvery._id}}/deals">Deals</a></li>
+      <li><a href="#/{{delivery._id}}/bio">Bio</a></li>
+    </ul>
+    <div style="clear:both;"></div>
+  </nav>
+<div class="business_info">
+  <label>Click me: <button ng-model="checked" ng-init="checked=true" /></label><br/></button>
+  Show when checked:
+  <span ng-if="checked">
+    This is removed when the checkbox is unchecked.
+  </span>
 
+  </div>
   <div class="sheet__product">
-    
     <table>
       <tr>
         <td>Flower </td>
@@ -25,7 +40,7 @@
         <td>Description</td>
       </tr>
       <tr ng-repeat="flower in delivery.flowers">
-        <td><img data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
+        <td><img class="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
         <td> {{flower.name}}</td>
         <td>{{flower.description}}</td>
       </tr>
@@ -40,7 +55,7 @@
       <label>Reviews</label>
       <h3>Review:</h3> <p>{{review.review}}<p>
       <h3>User:<h3><p>{{review._user.name}}</p>
-    </div>  
+    </div>
     <form>
       <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
       <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">

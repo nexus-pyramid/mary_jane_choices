@@ -19,12 +19,12 @@ var path = require('path'),
      res.redirect('/');
  }
 module.exports = function(app){
-  app.post('/login', deliveries.login);
+  app.post('/login', businesses.login);
   app.post('/register', deliveries.create);
   // app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
-  app.post('/visit/:id', deliveries.show);
-  app.get('/show/:id', deliveries.show);
+  // app.post('/visit/:id', deliveries.show);
+  app.get('/show/:id', businesses.show);
   app.post('/user/:id', users.addUser);
   app.post('/review/:id', deliveries.addReview);
   app.post('/user', users.login);

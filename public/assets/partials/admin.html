@@ -2,6 +2,7 @@
 
 
 <h1> Admin Panel </h1>
+<div class="admin-flower">
 <legend>add flower</legend>
 <hr>
   <ul ng-if='errors.length > 0'>
@@ -11,12 +12,13 @@
     <label>Name: <input type="text" ng-model='name'></label><br>
     <label>thc: <input type="number" ng-model='thc'></label><br>
     <label>description: <textarea ng-model='description'></textarea></label><br>
-    <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
     <label>Type:</label><select ng-model="type">
               <option value="Indica "> Indica</option>
               <option value="Sativa"> Sativa</option>
               <option value="Hybrid"> Hybrid</option>
           </select>
+    <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
+
     <label>Two Grams: <input type="text" ng-model='two_gram'></label><br>
     <label>Eigth: <input type="text" ng-model='eigth'></label><br>
     <label>Quarter: <input type="text" ng-model='quarter'></label><br>
@@ -27,28 +29,7 @@
         Select File</button>
     <button ng-click='addFlower()'>add flower</button>
   </form><br>
-  <legend> add county </legend>
-  <form>
-    <label> County name: <input type="text" ng-model='countyInfo.name'></label><br>
-    <button ng-click='addCounty()'>add County </button>
-  </form>
-  <legend> add city</legend>
-  <form>
-    <label> County name:
-      <select ng-model="county._id">
-        <option ng-repeat="county in counties" value="{{county._id}}" ng-model="county._id">
-         {{county.name}}
-        </option>
-      </select>
-      <label> City Name: <input type="text" ng-model="newCity.name"></label><br>
-    <button ng-click='addCity(newCity, county._id)'>add City </button>
-  </form>
-<div id="county-info">
-  <p ng-repeat="county in counties">
-    <span id="county-id">{{county._id}}<span>
-    <button ng-click="deleteCounty(county._id)"><span id="county-name"> {{county.name}}<span></button>
-  </p>
-</div> <br>
+ </div>
 <div class="sheet__deliveries">
   <div class="card__delivery" ng-repeat="delivery in deliveries">
   <div class="title">{{delivery.name}}</div>
@@ -93,6 +74,6 @@
 
 
 
-  
+
 
 </div>

@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
 var Review = mongoose.model('Review');
+var Flower = mongoose.model('Flower')
 var fs = require('fs')
 function businessesController(){
 
@@ -29,6 +30,20 @@ function businessesController(){
 						}
 					})
 				});
+			}
+		})
+	}
+	this.show = function(req, res){
+		Business.findOne({_id: req.params.id}).populate('flowers').exec(function(err, data){
+			if(!Business){
+				console.log(err);
+			} else if(err) {
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('this is the business')
+				// console.log(data.flowers)
+				res.json(data);
 			}
 		})
 	}
@@ -99,38 +114,25 @@ function businessesController(){
 			}
 		})
 	}
-	this.show = function(req, res){
-		console.log('in the show delivery function');
-		Delivery.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).exec(function(err, data){
-			if(err){
-				console.log(err);
-				res.send(400);
-			} else {
-				console.log("this is the delivery service");
-				console.log(data);
-				res.json(data);
-			}
-		});
-	}
 	this.addFlower = function(req,res){
 		console.log('in the add Flower function');
 		var newFlower = new Flower(req.body);
 		console.log(newFlower);
-		newFlower._delivery = req.session.Delivery;
-		console.log(req.session.Delivery);
+		newFlower._business = req.session.Business;
+		console.log(req.session.Business);
 		newFlower.save(function(err, result){
 			if(err){
 				res.sendStatus(400);
 			} else {
-				Delivery.findOne({_id: req.session.Delivery._id }).exec(function(err, delivery){
+				Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
 					console.log("company we're adding flowers too")
-					console.log(delivery);
+					console.log(business);
 					if(err){
 						console.log(err);
 						res.sendStatus(400);
 					} else{
-						delivery.flowers.push(newFlower._id);
-						delivery.save(function(err, result){
+						business.flowers.push(newFlower._id);
+						business.save(function(err, result){
 							if(err){
 								res.json(err);
 							} else {
@@ -144,25 +146,28 @@ function businessesController(){
 		})
 	}
 	this.login = function(req, res){
+		console.log(req.body)
 		var errors = {errors:{
 			general: 'Invalid login information'}}
-      console.log(Delivery);
 			console.log("in the login in method");
-		Delivery.findOne({password: req.body.password}, function(err, Delivery){
-			// console.log(User)
+		Business.findOne({email: req.body.email}, function(err, Business){
+			console.log(Business);
+			if(!Business){
+				res.json(errors)
+			}
 			if(err){
-				console.log(Delivery);
+				console.log(Business);
 				console.log(password);
 				res.json(err);
-			} if(Delivery.password != req.body.password) {
+			} if(Business.password != req.body.password) {
 				res.json(errors);
 			} else {
-				req.session.Delivery = {
-				_id: Delivery._id,
-				name: Delivery.name
+				req.session.Business = {
+				_id: Business._id,
+				name: Business.name
 			}
-			console.log('this is the session delivery');
-			 console.log(req.session.Delivery);
+			console.log('this is the session Business');
+			 console.log(req.session.Business);
 			// res.json(req.session.Delivery);
 			res.status(200).send("good")
 			}
