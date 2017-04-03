@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Delivery = mongoose.model('Delivery');
+var Business = mongoose.model('Business');
 var Flower = mongoose.model('Flower');
 var Review = mongoose.model('Review');
 var fs = require('fs')
@@ -111,13 +112,13 @@ function deliveriesController(){
 	}
 	this.show = function(req, res){
 		console.log('in the show delivery function');
-		Delivery.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate({path:'reviews', populate:{path: '_user'}}).populate('flowers').exec(function(err, data){
 			if(err){
 				console.log(err);
 				res.send(400);
 			} else {
 				console.log("this is the delivery service");
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		});

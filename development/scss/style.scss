@@ -9,7 +9,8 @@
 @import 'icons';
 @import 'forms';
 @import 'cards';
-
+@import 'business';
+@import 'admin';
 body{
     display:flex;
     flex-direction: column;
@@ -32,18 +33,6 @@ body{
   width:200px;
   height:200px;
 }
-
-#county-info {
-  width:100%;
-  height: 300px;
-  border-style: solid;
-  border-color: blue;
-}
-#county-id {
-  font-size: 15px;
-  text-align: center;
-}
-#county-name {
-  font-size: 15px;
-  text-align: center;
-}
+// .business_info {
+//   background-color: grey;
+// }

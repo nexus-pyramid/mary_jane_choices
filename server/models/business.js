@@ -5,6 +5,8 @@ var BusinessSchema = new Schema({
 		type: String,
 		default:''
 	},
+	age: Number,
+	rating: Number,
 	name: String,
 	type: String,
   phone: Number,
@@ -12,7 +14,8 @@ var BusinessSchema = new Schema({
 	city: String,
 	zip_code: String,
 	state: String,
-  email: String,
+	hours: [{ open: Number, close: Number}],
+  email: {type:String, unique: true},
 	registered:{type:Boolean},
   created_at: {type: Date, default: Date.now },
 	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
