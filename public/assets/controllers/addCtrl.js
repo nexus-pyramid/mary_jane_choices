@@ -328,7 +328,11 @@ $scope.show = function(){
 $scope.login = function(){
   deliveryFactory.login($scope.delivery_serviceInfo, function(data){
     if(data.errors){
+      console.log(data)
+      console.log(data.errors)
       $scope.errors = data.errors
+      $scope.delivery_serviceInfo.email = '';
+      $scope.delivery_serviceInfo.password - '';
     }
     else {
       // $scope.userInfo = {}
