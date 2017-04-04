@@ -19,9 +19,9 @@
         </select>
         <select ng-model="type" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
           <option class="default-option" value="" selected data-default>Type</option>
-          <option value="Indica "> Indica</option>
-          <option value="Sativa"> Sativa</option>
-          <option value="Hybrid"> Hybrid</option>
+          <option value="Indica ">Indica</option>
+          <option value="Sativa">Sativa</option>
+          <option value="Hybrid">Hybrid</option>
         </select>
         <input type="number" ng-model='thc' placeholder="THC" min="1" max="100" ng-show="productType == 'Flower' || productType == 'Extract' || productType == 'Edible' || productType == 'Topical'" class="ng-hide">
         <br>

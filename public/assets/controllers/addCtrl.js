@@ -252,8 +252,6 @@ function getFlowers(){
 // Add Flower
 ////////////////////////////////////////
 $scope.addFlower = function(file, errFiles){
-
-  console.log("Weedid this")
   $scope.h = file;
   $scope.errFile = errFiles && errFiles[0];
   if (file) {
@@ -262,14 +260,18 @@ $scope.addFlower = function(file, errFiles){
           data: {
               file: file,
               name: $scope.name,
+              productType: $scope.productType,
               type: $scope.type,
               content: $scope.thc,
               description: $scope.description,
+              thc: $scope.thc,
+              half_gram: $scope.half_gram,
               one_gram: $scope.one_gram,
               two_gram: $scope.two_gram,
               eigth: $scope.eigth,
               half: $scope.half,
-              ounce: $scope.ounce
+              ounce: $scope.ounce,
+              price: $scope.price
             }
       });
       file.upload.then(function (response) {
