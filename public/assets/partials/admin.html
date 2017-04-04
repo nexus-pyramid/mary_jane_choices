@@ -25,7 +25,7 @@
         </select>
         <input type="number" ng-model='thc' placeholder="THC" min="1" max="100" ng-show="productType == 'Flower' || productType == 'Extract' || productType == 'Edible' || productType == 'Topical'" class="ng-hide">
         <br>
-        <h3 ng-show="productType" class="ng-hide">Price:</h3>
+        <h4 ng-show="productType" class="ng-hide">Price:</h4>
    
           <input type="text" ng-model='half_gram' placeholder="Half Gram" ng-show="productType == 'Extract'" class="ng-hide">
           <input type="text" ng-model='one_gram' placeholder="One Gram" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
