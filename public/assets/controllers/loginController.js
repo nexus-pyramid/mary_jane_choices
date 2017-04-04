@@ -13,7 +13,11 @@ app.controller('loginController', function($scope, deliveryFactory, UserFactory,
 	    	$scope.errors = data.errors
 	    }
 	    else {
-	    	$scope.userInfo = {};
+	    	// $scope.userInfo = {};
+				console.log(data);
+				$scope.loggedIn = data
+				cons
+				// $scope.loggedIn.type = "business"
 	      	$location.url('/success');
 	    }
 	  });

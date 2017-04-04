@@ -25,7 +25,7 @@ function businessesController(){
 							if(err){
 								res.json(err);
 						} else {
-							console.log(result);
+							// console.log(result);
 							res.json(result)
 						}
 					})
@@ -48,9 +48,7 @@ function businessesController(){
 		})
 	}
 	this.getDispensaries = function(req,res){
-		console.log('getting dispensaries');
 		Business.find({type: "Dispensary"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
 				console.log(err);
@@ -66,9 +64,7 @@ function businessesController(){
 		})
 	}
 	this.getDoctors = function(req,res){
-		console.log('getting doctors');
 		Business.find({type: "Doctor"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
 				console.log(err);
@@ -84,19 +80,15 @@ function businessesController(){
 		})
 	}
 	this.getDeliveries = function(req,res){
-		console.log('getting deliveries');
 		Business.find({type: "Delivery"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
-				console.log(err);
 			}
 			else if(err){
-				console.log(err);
 				res.json(err);
 			} else {
 				console.log('success')
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		})
@@ -109,7 +101,7 @@ function businessesController(){
 			else if(err){
 				console.log(err)
 			} else {
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		})
@@ -146,7 +138,7 @@ function businessesController(){
 		})
 	}
 	this.login = function(req, res){
-		console.log(req.body)
+		// console.log(req.body)
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");
@@ -168,8 +160,10 @@ function businessesController(){
 			}
 			console.log('this is the session Business');
 			 console.log(req.session.Business);
+			 console.log(Business.type);
 			// res.json(req.session.Delivery);
-			res.status(200).send("good")
+			// res.status(200).send("good")
+			res.json(req.session.Business);
 			}
 		})
 	}

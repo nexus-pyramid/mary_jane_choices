@@ -11,7 +11,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var lat = 0;
   var long = 0;
   var address = '';
-
+  $scope.logged;
 // END Global Variables
 ////////////////////////////////////////
 
@@ -165,9 +165,10 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
-  getCities();
   getDeliveries();
   getFlowers();
+  console.log($scope.logged)
+  console.log("ON PAGE LOAD^^^^^^")
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -222,6 +223,7 @@ function getDeliveries(){
 };
 // END Get Deliveries
 ////////////////////////////////////////
+
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
@@ -271,13 +273,12 @@ $scope.addFlower = function(file, errFiles){
             }
       });
       file.upload.then(function (response) {
-          $timeout(function () {
-              file.result = response.data;
-          });
+        console.log( 'Sucess' + response.config.data.file.name)
       }, function (response) {
           if (response.status > 0)
               $scope.errorMsg = response.status + ': ' + response.data;
       }, function (evt) {
+
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
       });
@@ -326,15 +327,25 @@ $scope.show = function(){
 ////////////////////////////////////////
 $scope.login = function(){
   deliveryFactory.login($scope.delivery_serviceInfo, function(data){
-    $scope.errors = [];
-    if(data['errors']){
-      $scope.errors.push(data['errors']);
+    if(data.errors){
+      $scope.errors = data.errors
     }
     else {
-     $scope.loginfo = '';
-     $location.url('/success');
-   }
- });
+      // $scope.userInfo = {}
+      var loggedin = '';
+
+      console.log(data);
+      $scope.logged = data;
+      loggedin = $scope.logged
+      console.log($scope.logged);
+      console.log(loggedin)    // $scope.loggedIn.type = "business"
+       $location.path('/success/'+$scope.logged+'/')
+    }
+  });
+}
+
+$scope.test = function(){
+  console.log($scope.logged);
 }
 // END Log in
 ////////////////////////////////////////
@@ -488,15 +499,19 @@ $scope.createBusiness = function(file) {
         if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
     }, function (evt) {
+
         // We can use this to show progress and thumbnail
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
-      if( status === 'Ok'){
+      console.log('***********88888')
+      console.log(status)
+      if( status == 'OK'){
         console.log('status ok');
+        $location.url('/success')
       }
       else {
-       alert("Geocode was not successful for the following reason: " + status);
+        console.log("There was an error in the geocode");
      }
    });
  }geocodeAddress();

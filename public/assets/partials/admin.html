@@ -4,6 +4,10 @@
 <h1> Admin Panel </h1>
 <div class="admin-flower">
 <legend>add flower</legend>
+{{loggedin}}
+{{loggedin.name}}
+<p style="color:red">{{logged.name}}</p>
+<a ng-click="test()">this shit</a>
 <hr>
   <ul ng-if='errors.length > 0'>
     <li ng-repeat='error in errors'>{{error}}</li>
@@ -24,10 +28,11 @@
     <label>Quarter: <input type="text" ng-model='quarter'></label><br>
     <label>Half: <input type="text" ng-model='half'></label><br>
     <label>Ounce: <input type="text" ng-model='ounce'></label><br>
-    <button type="file" ng-model="file" ngf-select="addFlower($file, $invalidFiles)"
-            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-        Select File</button>
-    <button ng-click='addFlower()'>add flower</button>
+    <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+        Select File
+    </button>
+        Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+    <button ng-click='addFlower(file)'>add flower</button>
   </form><br>
  </div>
 <div class="sheet__deliveries">
