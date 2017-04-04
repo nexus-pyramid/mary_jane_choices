@@ -26,6 +26,10 @@ app.config( function ($routeProvider, $locationProvider) {
    templateUrl: 'assets/partials/login.html',
    controller: 'addCtrl'
   })
+  .when('/:id/reviews', {
+    templateUrl: 'asssets/partials/delivery-reviews.html',
+    controller: 'addCtrl'
+  })
   .when('/delivery/:id', {
    templateUrl: 'assets/partials/delivery.html',
    controller: 'addCtrl'

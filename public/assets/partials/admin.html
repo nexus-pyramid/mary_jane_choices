@@ -31,7 +31,6 @@
     <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
         Select File
     </button>
-        Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
     <button ng-click='addFlower(file)'>add flower</button>
   </form><br>
  </div>
@@ -43,6 +42,31 @@
   </div>
 </div>
 
+<legend> Add Product </legend>
+<form>
+  <label>Name: <input type="text" ng-model='name'></label><br>
+  <label>thc: <input type="number" ng-model='thc'></label><br>
+  <label>description: <textarea ng-model='description'></textarea></label><br>
+  <label>Type:</label><select ng-model="type">
+            <option value="Indica "> Indica</option>
+            <option value="Sativa"> Sativa</option>
+            <option value="Hybrid"> Hybrid</option>
+            <option value
+        </select>
+
+  <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
+
+  <label>Two Grams: <input type="text" ng-model='two_gram'></label><br>
+  <label>Eigth: <input type="text" ng-model='eigth'></label><br>
+  <label>Quarter: <input type="text" ng-model='quarter'></label><br>
+  <label>Half: <input type="text" ng-model='half'></label><br>
+  <label>Ounce: <input type="text" ng-model='ounce'></label><br>
+  <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+      Select File
+  </button>
+      Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+  <button ng-click='addFlower(file)'>add flower</button>
+</form><br>
 
 
 <legend>Create new delivery service</legend><br>
