@@ -24,30 +24,47 @@
     </ul>
     <div style="clear:both;"></div>
   </nav>
-<div class="business_info">
-  <label>Click me: <button ng-model="checked" ng-init="checked=true" /></label><br/></button>
-  Show when checked:
-  <span ng-if="checked">
-    This is removed when the checkbox is unchecked.
-  </span>
 
-  </div>
-  <div class="sheet__product">
-    <table>
-      <tr>
-        <td>Flower </td>
-        <td>Name</td>
-        <td>Description</td>
-      </tr>
-      <tr ng-repeat="flower in delivery.flowers">
-        <td><img class="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
-        <td> {{flower.name}}</td>
-        <td>{{flower.description}}</td>
-      </tr>
-    </table>
+  <div class="sheet__product grid">
+    <div class="product_nav col-1-4">
+      <ul>
+        <li><a href="">ALL CATEGORIES</a><br></li>
+        <li><a href="">INDICA</a><br></li>
+        <li><a href="">SATIVA</a><br></li>
+        <li><a href="">HYBRID</a><br></li>
+        <li><a href="">EXTRACT</a><br></li>
+        <li><a href="">EDIBLE</a><br></li>
+        <li><a href="">TOPICALS</a><br></li>
+        <li><a href="">GROW</a><br></li>
+        <li><a href="">GEAR</a><br></li>
+        <li><a href="">PREROLL</a><br></li>
+        <input type="text" placeholder="Search...">
+      </ul>
+    </div>
+    <div class="products col-3-4">
+      <div class="product_categories grid">
+        <h2 class="col-1-8"></h2>
+        <h2 class="col-1-4">Name</h2>
+        <h2 class="col-1-4">Description</h2>
+        <h2 class="col-3-8">Price</h2> 
+      </div>
+      <div class="product_container" class="grid">
+          <div class="product_card" ng-repeat="flower in delivery.flowers">
 
-
-  </div>
+              <img class="flower-img col-1-8" data-ng-src="data:image/JPEG;base64,{{flower.image}}">
+              <h2 class="col-1-4"> {{flower.name}}</h2>
+              <h2 class="col-1-4"> {{flower.description}}</h2>
+              <div class="col-3-8 grid"> 
+                <div class="col-1-8">GRAM<br>{{flower.one_gram}} </div>
+                <div class="col-1-8">2GRAM<br>{{flower.two_gram}}</div>
+                <div class="col-1-8">1/8<br>{{flower.eigth}}</div>
+                <div class="col-1-8">1/2<br>{{flower.half}}</div>
+                <div class="col-1-8">OZ<br>{{flower.ounce}}</div>
+              </div>
+          </div>
+        </div>
+      </div>  
+    </div>
 
 
   <div class="sheet__reviews">

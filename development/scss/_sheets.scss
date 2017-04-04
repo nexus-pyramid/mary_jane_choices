@@ -45,7 +45,7 @@
 
 // DELIVERY SHEETS
 .sheet__head{
-	background-image:url("../pics/patterngrey.svg");
+	background-image:$gradient;
 	padding-top:120px;
 }
 .sheet__delivery{
@@ -59,9 +59,14 @@
 .sheet__banner {
 	height:200px;
 	background-color: $grey;
-	background-image:url("../pics/patterngrey.svg");
+	background-image:$gradient;
   	text-align: center;
   	color: white;
+}
+
+.sheet__product{
+	padding-top:0;
+	height:600px;
 }
 
 .sheet__map{
