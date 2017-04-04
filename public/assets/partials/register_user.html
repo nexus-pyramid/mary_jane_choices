@@ -6,12 +6,12 @@
         <li ng-repeat='error in errors'>{{error}}</li>
       </ul>
       <h2> Sign Up </h2>
-      <input type="text" ng-model='userData.name' placeholder="Name"><br>
-      <input type="text" ng-model='userData.email' placeholder="Email"><br>
-      <textarea ng-model='userData.bio' placeholder="Bio"></textarea><br>
-      <br>
-      <input type="password" ng-model='userData.password' placeholder="Password"><br>
-      <input type="password" ng-model='userData.confirm' placeholder="Confirm Password"><br>
+      <input type="text" ng-model='userData.name' placeholder="Name">
+      <input type="text" ng-model='userData.email' placeholder="Email">
+      <textarea ng-model='userData.bio' placeholder="Bio"></textarea>
+      
+      <input type="password" ng-model='userData.password' placeholder="Password">
+      <input type="password" ng-model='userData.confirm' placeholder="Confirm Password">
       <button class="form-btn" ng-click='addUser(userData, city._id)'>Register</button>
     </form>
   </div>
