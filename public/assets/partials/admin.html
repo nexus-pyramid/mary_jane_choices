@@ -1,84 +1,56 @@
-<div ng-init="adminView()">
+<div class="sheet__register">
+  <div class="register-delivery"> 
+    <div ng-init="adminView()">
+      <ul ng-if='errors.length > 0'>
+        <li ng-repeat='error in errors'>{{error}}</li>
+      </ul>
+      <form class="form-container">
+      <h2>Add Product</h2>
+        <input type="text" ng-model='name' placeholder="Name">
+        <textarea ng-model='description' placeholder="Description"></textarea>
+        <select ng-model="productType">
+          <option class="default-option" value="" selected data-default>Type</option>
+          <option value="Flower">Flower</option>
+          <option value="Edible">Edible</option>
+          <option value="Extract">Extract</option>
+          <option value="Topical">Topical</option>
+          <option value="Grow">Grow</option>
+          <option value="Gear">Gear</option>
+        </select>
+        <select ng-model="type" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
+          <option class="default-option" value="" selected data-default>Type</option>
+          <option value="Indica "> Indica</option>
+          <option value="Sativa"> Sativa</option>
+          <option value="Hybrid"> Hybrid</option>
+        </select>
+        <input type="number" ng-model='thc' placeholder="THC" min="1" max="100" ng-show="productType == 'Flower' || productType == 'Extract' || productType == 'Edible' || productType == 'Topical'" class="ng-hide">
+        <br>
+        <h3 ng-show="productType" class="ng-hide">Price:</h3>
+   
+          <input type="text" ng-model='half_gram' placeholder="Half Gram" ng-show="productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='one_gram' placeholder="One Gram" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='two_gram' placeholder="Two Grams" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='eigth' placeholder="Eigth" ng-show="productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='quarter' placeholder="Quarter" ng-show="productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='half' placeholder="Half" ng-show="productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='ounce' placeholder="Ounce" ng-show="productType == 'Flower'" class="ng-hide">  
+          <input type="text" ng-model='price' placeholder="$" ng-show="productType == 'Grow' || productType == 'Edible' || productType == 'Topical' || productType == 'Gear'" class="ng-hide">
+        <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+            Select File
+        </button>
+            Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+        <button class="form-btn" ng-click='addFlower(file)'>Add Product</button>
+      </form><br>
+    <!-- <div class="sheet__deliveries">
+      <div class="card__delivery" ng-repeat="delivery in deliveries">
+      <div class="title">{{delivery.name}}</div>
+          <span id="validation"><h3> Validate? </h3>
+        <input type="checkbox"> ng-model="validate()"> -->
+    <!--  </div>
+    </div> -->
 
 
-<h1> Admin Panel </h1>
-<div class="admin-flower">
-<legend>add flower</legend>
-{{loggedin}}
-{{loggedin.name}}
-<p style="color:red">{{logged.name}}</p>
-<a ng-click="test()">this shit</a>
-<hr>
-  <ul ng-if='errors.length > 0'>
-    <li ng-repeat='error in errors'>{{error}}</li>
-  </ul>
-  <form>
-    <label>Name: <input type="text" ng-model='name'></label><br>
-    <label>thc: <input type="number" ng-model='thc'></label><br>
-    <label>description: <textarea ng-model='description'></textarea></label><br>
-    <label>Type:</label><select ng-model="type">
-              <option value="Indica "> Indica</option>
-              <option value="Sativa"> Sativa</option>
-              <option value="Hybrid"> Hybrid</option>
-          </select>
-    <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
 
-    <label>Two Grams: <input type="text" ng-model='two_gram'></label><br>
-    <label>Eigth: <input type="text" ng-model='eigth'></label><br>
-    <label>Quarter: <input type="text" ng-model='quarter'></label><br>
-    <label>Half: <input type="text" ng-model='half'></label><br>
-    <label>Ounce: <input type="text" ng-model='ounce'></label><br>
-    <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-        Select File
-    </button>
-        Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
-    <button ng-click='addFlower(file)'>add flower</button>
-  </form><br>
- </div>
-<div class="sheet__deliveries">
-  <div class="card__delivery" ng-repeat="delivery in deliveries">
-  <div class="title">{{delivery.name}}</div>
-      <span id="validation"><h3> Validate? </h3>
-    <input type="checkbox"> <!--  ng-model="validate()">  -->
+    </div>
   </div>
-</div>
-
-
-
-<legend>Create new delivery service</legend><br>
-<hr>
-  <ul ng-if='errors.length > 0'>
-    <li ng-repeat='error in errors'>{{error}}</li>
-  </ul>
-  <form>
-    <label>Name: <input type="text" ng-model='formData.name'></label><br>
-    <label>Phone: <input type="text" ng-model='formData.phone'></label><br>
-    <label>Bio: <textarea ng-model='formData.bio'></textarea></label><br>
-    <label>City:
-    <select ng-model="city._id">
-      <option ng-repeat="city in cities" value="{{city._id}}" ng-model="city._id">
-        {{city.name}}
-      </option>
-    </select>
-  </label>
-    <label>Street Address: <textarea ng-model='formData.address'></textarea></label><br>
-    <label>Latitude: <input type="text" ng-model="formData.latitude" readonly=""></label><br>
-    <label>Longitude: <input type="text" ng-model="formData.longitude"readonly=""></label><br>
-    <label>Email: <input type="text" ng-model='formData.email'></label><br>
-    <label>Password: <input type="password" ng-model='formData.password'></label><br>
-    <label>Password confirmation: <input type="password" ng-model='formData.confirm'></label><br>
-    <button type="file" ngf-select="uploadFiles($file, $invalidFiles)"
-            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-        Select File</button>
-    <button ng-click='addDelivery()'>Register</button>
-</form>
-
-
-
-
-
-
-
-
-
 </div>

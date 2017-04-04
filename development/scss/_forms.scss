@@ -21,10 +21,15 @@ input {
   // border-radius: 2px; //this breaks the border style
 }
 
-input, select, textarea {
+input, select, textarea{
   font-family : inherit;
   font-size   : 100%;
   box-sizing: border-box;
+  display:block;
+}
+
+input, select, textarea, button {
+  margin-top: 10px;
 }
 // Add this to every Select list it will prevent 
 // the default item from being selected
