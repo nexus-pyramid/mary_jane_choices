@@ -146,12 +146,8 @@ function businessesController(){
 			console.log(Business);
 			if(!Business){
 				res.json(errors)
-			}
-			if(err){
-				console.log(Business);
-				console.log(password);
-				res.json(err);
-			} if(Business.password != req.body.password) {
+			} else if(Business.password != req.body.password) {
+				console.log(err);
 				res.json(errors);
 			} else {
 				req.session.Business = {

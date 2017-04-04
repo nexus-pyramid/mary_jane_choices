@@ -8,6 +8,8 @@ var ProductSchema = new Schema({
 	name: {type: String},
 	description: String,
 	type: String,
+  class: String,
+  each: Number,
   half_gram: Number,
 	one_gram: Number,
 	two_gram: Number,
@@ -15,7 +17,6 @@ var ProductSchema = new Schema({
 	quarter: Number,
 	half: Number,
 	ounce: Number,
-  thc: Number,
-  cbd: Number
+  thc: Number
 });
-mongoose.model('ProductSchema', ProductSchema);
+mongoose.model('Product', ProductSchema);

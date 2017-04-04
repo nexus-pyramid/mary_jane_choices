@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 // var request = require('request');
 var Flower = mongoose.model('Flower');
-var Strain = mongoose.model('Strain');
+// var Strain = mongoose.model('Strain');
 var Delivery = mongoose.model('Delivery');
 var Business = mongoose.model('Business');
 var fs = require('fs');
