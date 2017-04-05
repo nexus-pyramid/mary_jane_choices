@@ -8,25 +8,17 @@ var ProductSchema = new Schema({
 	name: {type: String},
 	description: String,
 	type: String,
-<<<<<<< HEAD
-    half_gram: Number,
-=======
-  class: String,
-  each: Number,
-  half_gram: Number,
->>>>>>> 8bb6c3666f5bfb1df90983c6f759c9eb907c1aec
+  	class: String,
+  	each: Number,
+  	half_gram: Number,
 	one_gram: Number,
 	two_gram: Number,
 	eigth: Number,
 	quarter: Number,
-  age_restriction: Number,
 	half: Number,
 	ounce: Number,
-<<<<<<< HEAD
+	age_restriction: Number,
     thc: Number,
     cbd: Number
-=======
-  thc: Number
->>>>>>> 8bb6c3666f5bfb1df90983c6f759c9eb907c1aec
 });
 mongoose.model('Product', ProductSchema);

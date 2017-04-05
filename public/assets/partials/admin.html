@@ -1,39 +1,4 @@
 
-<<<<<<< HEAD
-
-<h1> Admin Panel </h1>
-<div class="admin-flower">
-<legend>add Product</legend>
-<hr>
-  <ul ng-if='errors.length > 0'>
-    <li ng-repeat='error in errors'>{{error}}</li>
-  </ul>
-  <form>
-    <label>Name: <input type="text" ng-model='name'></label><br>
-    <label>thc: <input type="number" ng-model='thc'></label><br>
-    <label>description: <textarea ng-model='description'></textarea></label><br>
-    <label>One Gram:  <input type="text" ng-model='one_gram'></label><br>
-    <label>Type:</label><select ng-model="type">
-              <option value="Indica "> Indica</option>
-              <option value="Sativa"> Sativa</option>
-              <option value="Hybrid"> Hybrid</option>
-          </select>
-    <label>Two Grams: <input type="text" ng-model='two_gram'></label><br>
-    <label>Eigth: <input type="text" ng-model='eigth'></label><br>
-    <label>Quarter: <input type="text" ng-model='quarter'></label><br>
-    <label>Half: <input type="text" ng-model='half'></label><br>
-    <label>Ounce: <input type="text" ng-model='ounce'></label><br>
-    <input type="file" ng-model="picfile" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-        Select 
-    <button ng-click='addProduct(picfile)'>add Product</button>
-  </form><br>
- </div>
-<div class="sheet__deliveries">
-  <div class="card__delivery" ng-repeat="delivery in deliveries">
-  <div class="title">{{delivery.name}}</div>
-      <span id="validation"><h3> Validate? </h3>
-    <input type="checkbox"> <!--  ng-model="validate()">  -->
-=======
 <div class="sheet__register" ng-init="adminView()">
   <div class="register-delivery">
       <ul ng-if='errors.length > 0'>
@@ -83,6 +48,5 @@
         <input type="checkbox"> ng-model="validate()"> -->
     <!--  </div>
     </div> -->
->>>>>>> 8bb6c3666f5bfb1df90983c6f759c9eb907c1aec
   </div>
 </div>
