@@ -34,7 +34,7 @@ function businessesController(){
 		})
 	}
 	this.show = function(req, res){
-		Business.findOne({_id: req.params.id}).populate('flowers').exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate('flowers').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
@@ -42,7 +42,7 @@ function businessesController(){
 				res.json(err);
 			} else {
 				console.log('this is the business')
-				// console.log(data.flowers)
+				console.log(data)
 				res.json(data);
 			}
 		})

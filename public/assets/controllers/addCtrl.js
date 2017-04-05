@@ -253,6 +253,8 @@ function getFlowers(){
 // Add Flower
 ////////////////////////////////////////
 $scope.addFlower = function(file, errFiles){
+
+  console.log("Weedid this")
   $scope.h = file;
   $scope.errFile = errFiles && errFiles[0];
   if (file) {
@@ -261,18 +263,14 @@ $scope.addFlower = function(file, errFiles){
           data: {
               file: file,
               name: $scope.name,
-              productType: $scope.productType,
               type: $scope.type,
               content: $scope.thc,
               description: $scope.description,
-              thc: $scope.thc,
-              half_gram: $scope.half_gram,
               one_gram: $scope.one_gram,
               two_gram: $scope.two_gram,
               eigth: $scope.eigth,
               half: $scope.half,
-              ounce: $scope.ounce,
-              price: $scope.price
+              ounce: $scope.ounce
             }
       });
       file.upload.then(function (response) {
@@ -335,7 +333,7 @@ $scope.login = function(){
       console.log(data.errors)
       $scope.errors = data.errors
       $scope.delivery_serviceInfo.email = '';
-      $scope.delivery_serviceInfo.password - '';
+      $scope.delivery_serviceInfo.password = '';
     }
     else {
       // $scope.userInfo = {}
@@ -357,6 +355,26 @@ $scope.test = function(){
 // END Log in
 ////////////////////////////////////////
 
+////////////////////////////////////////
+// Log in
+//// only for logging in users
+////////////////////////////////////////
+$scope.userLogin = function(){
+  console.log('in the scuserlogin method')
+  UserFactory.userLogin($scope.userInfo, function(data){
+    console.log('in the scuserlogin method')
+    if(data.errors){
+      $scope.errors = data.errors;
+      $scope.userInfo.email = '';
+      $scope.userInfo.password = '';
+      }
+      else {
+          $scope.user = data;
+          console.log($scope.user)
+          $location.path('/user/' + $scope.user.name);
+      }
+  })
+}
 ////////////////////////////////////////
 // Add Review
 //// for adding reviews

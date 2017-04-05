@@ -12,19 +12,9 @@ function usersController(){
 			});
 		}
 	this.login = function(req, res){
-		var errors = {errors:{
-			general: 'Invalid login information'}}
-			// if (!User){
-			// 	console.log(errors)
-			// 	res.json(errors);
-			// }
-			console.log("*******************************")
-			console.log(req.body)
-			console.log("*******************************")
 			User.findOne({email: req.body.email}, function(err, user){
-				console.log(user)
-				console.log(err)
-				console.log("*******************************")
+				var errors = {errors:{
+					general: 'Invalid login information'}}
 				if(!user){
 					// console.log(err)
 					res.json(errors);

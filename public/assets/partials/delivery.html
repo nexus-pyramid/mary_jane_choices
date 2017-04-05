@@ -49,7 +49,7 @@
         <h2 class="col-1-8"></h2>
         <h2 class="col-1-4">Name</h2>
         <h2 class="col-1-4">Description</h2>
-        <h2 class="col-3-8">Price</h2> 
+        <h2 class="col-3-8">Price</h2>
       </div>
       <div class="product_container" class="grid">
           <div class="product_card" ng-repeat="flower in delivery.flowers">
@@ -57,7 +57,7 @@
               <img class="flower-img col-1-8" data-ng-src="data:image/JPEG;base64,{{flower.image}}">
               <h2 class="col-1-4"> {{flower.name}}</h2>
               <h2 class="col-1-4"> {{flower.description}}</h2>
-              <div class="col-3-8 grid"> 
+              <div class="col-3-8 grid">
                 <div class="col-1-8">GRAM<br>{{flower.one_gram}} </div>
                 <div class="col-1-8">2GRAM<br>{{flower.two_gram}}</div>
                 <div class="col-1-8">1/8<br>{{flower.eigth}}</div>
@@ -76,12 +76,7 @@
       <h3>Review:</h3> <p>{{review.review}}<p>
       <h3>User:</h3><p>{{review._user.name}}</p>
     </div>
-    <form>
-      <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
-      <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
-    </form>
 
-  </div>
 
   <div class="sheet__deals" ng-switch-when="deals">
     
