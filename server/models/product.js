@@ -15,6 +15,7 @@ var ProductSchema = new Schema({
 	two_gram: Number,
 	eigth: Number,
 	quarter: Number,
+  age_restriction: Number,
 	half: Number,
 	ounce: Number,
   thc: Number
