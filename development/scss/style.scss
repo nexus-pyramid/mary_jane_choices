@@ -11,6 +11,7 @@
 @import 'cards';
 @import 'business';
 @import 'admin';
+@import  'user';
 body{
     display:flex;
     flex-direction: column;
@@ -29,10 +30,7 @@ body{
   height: 100%;
 }
 
-.flower-img {
-  width:200px;
-  height:200px;
-}
+
 // .business_info {
 //   background-color: grey;
 // }

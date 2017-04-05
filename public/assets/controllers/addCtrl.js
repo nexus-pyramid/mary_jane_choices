@@ -262,6 +262,7 @@ $scope.addProduct = function(file){
               one_gram: $scope.one_gram,
               two_gram: $scope.two_gram,
               eigth: $scope.eigth,
+              quarter: $scope.quarter,
               half: $scope.half,
               ounce: $scope.ounce
             }

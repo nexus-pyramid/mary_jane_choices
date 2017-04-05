@@ -8,9 +8,9 @@ app.config( function ($routeProvider, $locationProvider) {
    })
   .when('/admin', {
     templateUrl: 'assets/partials/login.html',
-    controller:  'loginController'
+    controller:  'addCtrl'
   })
-  .when('/success', {
+  .when('/success/:id', {
     templateUrl: 'assets/partials/admin.html',
     controller: 'addCtrl'
   })
@@ -24,7 +24,11 @@ app.config( function ($routeProvider, $locationProvider) {
   })
   .when('/login',{
    templateUrl: 'assets/partials/login.html',
-   controller: 'loginController'
+   controller: 'addCtrl'
+  })
+  .when('/user/:id', {
+    templateUrl: 'assets/partials/user-page.html',
+    controller: 'addCtrl'
   })
   .when('/delivery/:id', {
    templateUrl: 'assets/partials/delivery.html',

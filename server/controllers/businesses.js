@@ -26,7 +26,7 @@ function businessesController(){
 							if(err){
 								res.json(err);
 						} else {
-							console.log(result);
+							// console.log(result);
 							res.json(result)
 						}
 					})
@@ -36,7 +36,7 @@ function businessesController(){
 	}
 	thi
 	this.show = function(req, res){
-		Business.findOne({_id: req.params.id}).populate('flowers').exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate('flowers').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
@@ -44,15 +44,13 @@ function businessesController(){
 				res.json(err);
 			} else {
 				console.log('this is the business')
-				// console.log(data.flowers)
+				console.log(data)
 				res.json(data);
 			}
 		})
 	}
 	this.getDispensaries = function(req,res){
-		console.log('getting dispensaries');
 		Business.find({type: "Dispensary"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
 				console.log(err);
@@ -121,9 +119,7 @@ function businessesController(){
   }
 
 	this.getDoctors = function(req,res){
-		console.log('getting doctors');
 		Business.find({type: "Doctor"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
 				console.log(err);
@@ -139,19 +135,15 @@ function businessesController(){
 		})
 	}
 	this.getDeliveries = function(req,res){
-		console.log('getting deliveries');
 		Business.find({type: "Delivery"}).exec(function(err, data){
-			console.log('getting dispensaries');
 			// console.log(data);
 			if(!Business){
-				console.log(err);
 			}
 			else if(err){
-				console.log(err);
 				res.json(err);
 			} else {
 				console.log('success')
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		})
@@ -164,7 +156,7 @@ function businessesController(){
 			else if(err){
 				console.log(err)
 			} else {
-				console.log(data);
+				// console.log(data);
 				res.json(data);
 			}
 		})
@@ -201,7 +193,7 @@ function businessesController(){
 		})
 	}
 	this.login = function(req, res){
-		console.log(req.body)
+		// console.log(req.body)
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");
@@ -209,12 +201,8 @@ function businessesController(){
 			console.log(Business);
 			if(!Business){
 				res.json(errors)
-			}
-			if(err){
-				console.log(Business);
-				console.log(password);
-				res.json(err);
-			} if(Business.password != req.body.password) {
+			} else if(Business.password != req.body.password) {
+				console.log(err);
 				res.json(errors);
 			} else {
 				req.session.Business = {
@@ -223,8 +211,10 @@ function businessesController(){
 			}
 			console.log('this is the session Business');
 			 console.log(req.session.Business);
+			 console.log(Business.type);
 			// res.json(req.session.Delivery);
-			res.status(200).send("good")
+			// res.status(200).send("good")
+			res.json(req.session.Business);
 			}
 		})
 	}

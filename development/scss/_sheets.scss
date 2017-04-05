@@ -21,6 +21,10 @@
 	display:flex;
 	flex-wrap:wrap;
 	justify-content:space-around;
+	div.title{
+		width:100%;
+		text-align:center;
+	}
 }
 
 .sheet__featured{
@@ -35,13 +39,9 @@
 	justify-content:space-around;
 }
 
-
-
-
-
 // DELIVERY SHEETS
 .sheet__head{
-	background-image:url("../pics/patterngrey.svg");
+	background-image:$gradient;
 	padding-top:120px;
 }
 .sheet__delivery{
@@ -51,13 +51,22 @@
 	flex-wrap:wrap;
 	justify-content:space-around;
 }
+.sheet__contact{
+	padding: 0;
+	text-align:center;
+}
 
 .sheet__banner {
 	height:200px;
 	background-color: $grey;
-	background-image:url("../pics/patterngrey.svg");
+	background-image:$gradient;
   	text-align: center;
   	color: white;
+}
+
+.sheet__product{
+	padding-top:0;
+	height:600px;
 }
 
 .sheet__map{

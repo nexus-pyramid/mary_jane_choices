@@ -1,15 +1,18 @@
-<div ng-init="deliveryView()">
+<div ng-init="deliveryView()" >
 
 
   <div class="sheet__head">
     <div class="sheet__contact">
+      <!-- <div class="contact__container"> -->
+        <h1>{{delivery.name | uppercase}}</h1>
+        <p>{{delivery.email}}</p>
+        <p>{{delivery.phone}}</p>  
+      <!-- </div> -->
+
       <div class="icon__profile">
         <img data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
       </div>
-      <h1>{{delivery.name}}</h1>
-      <p>{{delivery.bio}}</p>
-      <p>{{delivery.email}}</p>
-      <p>{{delivery.phone}}</p>
+      
     </div>
   </div>
 
@@ -17,52 +20,76 @@
   <a class="mobile" href="">&#9776;</a>
   <nav>
     <ul id="nav">
-      <li><a href="#/{{delivery._id}}/menu">Menu</a></li>
-      <li><a href="#/{{delivery._id}}/reviews">Reviews</a></li>
-      <li><a href="#/{{delvery._id}}/deals">Deals</a></li>
-      <li><a href="#/{{delivery._id}}/bio">Bio</a></li>
+      <li><a href="" ng-click="page='menu'">Menu</a></li>
+      <li><a href="" ng-click="page='reviews'">Reviews</a></li>
+      <li><a href="" ng-click="page='deals'">Deals</a></li>
+      <li><a href="" ng-click="page='bio'">Bio</a></li>
     </ul>
     <div style="clear:both;"></div>
   </nav>
-<div class="business_info">
-  <label>Click me: <button ng-model="checked" ng-init="checked=true" /></label><br/></button>
-  Show when checked:
-  <span ng-if="checked">
-    This is removed when the checkbox is unchecked.
-  </span>
+<div ng-switch on="page">
+  <div class="sheet__product grid" ng-switch-when="menu">
+    <div class="product_nav col-1-4">
+      <ul>
+        <li><a href="">ALL CATEGORIES</a><br></li>
+        <li><a href="">INDICA</a><br></li>
+        <li><a href="">SATIVA</a><br></li>
+        <li><a href="">HYBRID</a><br></li>
+        <li><a href="">EXTRACT</a><br></li>
+        <li><a href="">EDIBLE</a><br></li>
+        <li><a href="">TOPICALS</a><br></li>
+        <li><a href="">GROW</a><br></li>
+        <li><a href="">GEAR</a><br></li>
+        <li><a href="">PREROLL</a><br></li>
+        <input type="text" placeholder="Search...">
+      </ul>
+    </div>
+    <div class="products col-3-4">
+      <div class="product_categories grid">
+        <h2 class="col-1-8"></h2>
+        <h2 class="col-1-4">Name</h2>
+        <h2 class="col-1-4">Description</h2>
+        <h2 class="col-3-8">Price</h2>
+      </div>
+      <div class="product_container" class="grid">
+          <div class="product_card" ng-repeat="flower in delivery.flowers">
 
-  </div>
-  <div class="sheet__product">
-    <table>
-      <tr>
-        <td>Flower </td>
-        <td>Name</td>
-        <td>Description</td>
-      </tr>
-      <tr ng-repeat="flower in delivery.flowers">
-        <td><img class="flower-img" data-ng-src="data:image/JPEG;base64,{{flower.image}}"</td>
-        <td> {{flower.name}}</td>
-        <td>{{flower.description}}</td>
-      </tr>
-    </table>
+              <img class="flower-img col-1-8" data-ng-src="data:image/JPEG;base64,{{flower.image}}">
+              <h2 class="col-1-4"> {{flower.name}}</h2>
+              <h2 class="col-1-4"> {{flower.description}}</h2>
+              <div class="col-3-8 grid">
+                <div class="col-1-8">GRAM<br>{{flower.one_gram}} </div>
+                <div class="col-1-8">2GRAM<br>{{flower.two_gram}}</div>
+                <div class="col-1-8">1/8<br>{{flower.eigth}}</div>
+                <div class="col-1-8">1/2<br>{{flower.half}}</div>
+                <div class="col-1-8">OZ<br>{{flower.ounce}}</div>
+              </div>
+          </div>
+        </div>
+      </div>  
+    </div>
 
 
-  </div>
-
-
-  <div class="sheet__reviews">
+  <div class="sheet__reviews" ng-switch-when="reviews">
     <div ng-repeat="review in delivery.reviews">
       <label>Reviews</label>
       <h3>Review:</h3> <p>{{review.review}}<p>
-      <h3>User:<h3><p>{{review._user.name}}</p>
+      <h3>User:</h3><p>{{review._user.name}}</p>
     </div>
-    <form>
-      <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
-      <input type="submit" value="add review" ng-click="addReview(newReview, delivery._id)">
-    </form>
+
+
+  <div class="sheet__deals" ng-switch-when="deals">
+    
+    <h3>Deals</h3>
 
   </div>
 
+  <div class="sheet__bio" ng-switch-when="bio">
+      <h3>Bio</h3>
+      <p>{{delivery.bio}}</p>
+
+  </div>
+</div>
 
 
 
