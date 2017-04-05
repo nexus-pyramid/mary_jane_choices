@@ -177,6 +177,7 @@ $scope.adminView = function(){
 // Delivery Constructor
 $scope.deliveryView = function(){
   getdelivery();
+  $scope.page = "menu"
 }
 // END Delivery Constructor
 ////////////////////////////////////////

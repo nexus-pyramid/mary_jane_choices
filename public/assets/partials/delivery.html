@@ -1,15 +1,18 @@
-<div ng-init="deliveryView()">
+<div ng-init="deliveryView()" >
 
 
   <div class="sheet__head">
     <div class="sheet__contact">
+      <!-- <div class="contact__container"> -->
+        <h1>{{delivery.name | uppercase}}</h1>
+        <p>{{delivery.email}}</p>
+        <p>{{delivery.phone}}</p>  
+      <!-- </div> -->
+
       <div class="icon__profile">
         <img data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
       </div>
-      <h1>{{delivery.name}}</h1>
-      <p>{{delivery.bio}}</p>
-      <p>{{delivery.email}}</p>
-      <p>{{delivery.phone}}</p>
+      
     </div>
   </div>
 
@@ -17,15 +20,15 @@
   <a class="mobile" href="">&#9776;</a>
   <nav>
     <ul id="nav">
-      <li><a href="#/{{delivery._id}}/menu">Menu</a></li>
-      <li><a href="#/{{delivery._id}}/reviews">Reviews</a></li>
-      <li><a href="#/{{delvery._id}}/deals">Deals</a></li>
-      <li><a href="#/{{delivery._id}}/bio">Bio</a></li>
+      <li><a href="" ng-click="page='menu'">Menu</a></li>
+      <li><a href="" ng-click="page='reviews'">Reviews</a></li>
+      <li><a href="" ng-click="page='deals'">Deals</a></li>
+      <li><a href="" ng-click="page='bio'">Bio</a></li>
     </ul>
     <div style="clear:both;"></div>
   </nav>
-
-  <div class="sheet__product grid">
+<div ng-switch on="page">
+  <div class="sheet__product grid" ng-switch-when="menu">
     <div class="product_nav col-1-4">
       <ul>
         <li><a href="">ALL CATEGORIES</a><br></li>
@@ -67,11 +70,11 @@
     </div>
 
 
-  <div class="sheet__reviews">
+  <div class="sheet__reviews" ng-switch-when="reviews">
     <div ng-repeat="review in delivery.reviews">
       <label>Reviews</label>
       <h3>Review:</h3> <p>{{review.review}}<p>
-      <h3>User:<h3><p>{{review._user.name}}</p>
+      <h3>User:</h3><p>{{review._user.name}}</p>
     </div>
     <form>
       <label>Leave a Review:</label><input type="text" ng-model="newReview.review">
@@ -80,6 +83,18 @@
 
   </div>
 
+  <div class="sheet__deals" ng-switch-when="deals">
+    
+    <h3>Deals</h3>
+
+  </div>
+
+  <div class="sheet__bio" ng-switch-when="bio">
+      <h3>Bio</h3>
+      <p>{{delivery.bio}}</p>
+
+  </div>
+</div>
 
 
 

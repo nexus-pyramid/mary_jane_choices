@@ -39,10 +39,6 @@
 	justify-content:space-around;
 }
 
-
-
-
-
 // DELIVERY SHEETS
 .sheet__head{
 	background-image:$gradient;
@@ -54,6 +50,10 @@
 	display:flex;
 	flex-wrap:wrap;
 	justify-content:space-around;
+}
+.sheet__contact{
+	padding: 0;
+	text-align:center;
 }
 
 .sheet__banner {
