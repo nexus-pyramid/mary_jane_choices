@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
 var Review = mongoose.model('Review');
-var Flower = mongoose.model('Flower')
+var Flower = mongoose.model('Flower');
+var Product = mongoose.model('Product');
 var fs = require('fs')
 function businessesController(){
 
@@ -33,6 +34,7 @@ function businessesController(){
 			}
 		})
 	}
+	thi
 	this.show = function(req, res){
 		Business.findOne({_id: req.params.id}).populate('flowers').exec(function(err, data){
 			if(!Business){
@@ -65,6 +67,59 @@ function businessesController(){
 			}
 		})
 	}
+
+	 this.addProduct = function(req,res){
+		console.log('in the add Product function');
+    var file = req.files.file;
+		var newProduct = new Product(req.body);
+		console.log(newProduct);
+    console.log(file)
+		newFlower._business = req.session.Business;
+
+    fs.readFile(file.path, function ( err, original_data){
+      if (err){
+        res.json(400);
+      } else {
+        var bs = original_data.toString('base64');
+        fs.unlink(file.path, function(err){
+          if (err){
+            console.log(err);
+            console.log('failed to delete' + file.path);
+          } else {
+            console.log('successfully' + file.path);
+          }
+        });
+        newProduct.image = bs;
+		    newProduct.save(function(err, result){
+			       if(err){
+				         res.sendStatus(400);
+			            } else {
+                        // var newstrain = new Strain(newFlower.name)
+                        // if
+				                Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
+					              console.log("company we're adding flowers too")
+					              console.log(business);
+					              if(err){
+						               console.log(err);
+						              res.sendStatus(400);
+					              } else{
+						              business.flowers.push(newFlower._id);
+						              business.save(function(err, result){
+							                if(err){
+								               res.json(err);
+							                } else {
+								                console.log('adding flower');
+								                res.json(result);
+							              }
+						             })
+					            }
+				            })
+			         }
+		     })
+	    }
+    })
+  }
+
 	this.getDoctors = function(req,res){
 		console.log('getting doctors');
 		Business.find({type: "Doctor"}).exec(function(err, data){

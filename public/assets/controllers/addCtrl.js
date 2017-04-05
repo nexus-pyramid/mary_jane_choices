@@ -249,12 +249,10 @@ function getFlowers(){
 ////////////////////////////////////////
 // Add Flower
 ////////////////////////////////////////
-$scope.addFlower = function(file, errFiles){
-  $scope.h = file;
-  $scope.errFile = errFiles && errFiles[0];
-  if (file) {
+$scope.addProduct = function(file){
+    if (file) {
       file.upload = Upload.upload({
-          url: '/flowerUpload',
+          url: '/productUpload',
           data: {
               file: file,
               name: $scope.name,

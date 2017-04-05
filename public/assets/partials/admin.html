@@ -3,7 +3,7 @@
 
 <h1> Admin Panel </h1>
 <div class="admin-flower">
-<legend>add flower</legend>
+<legend>add Product</legend>
 <hr>
   <ul ng-if='errors.length > 0'>
     <li ng-repeat='error in errors'>{{error}}</li>
@@ -23,10 +23,9 @@
     <label>Quarter: <input type="text" ng-model='quarter'></label><br>
     <label>Half: <input type="text" ng-model='half'></label><br>
     <label>Ounce: <input type="text" ng-model='ounce'></label><br>
-    <button type="file" ng-model="file" ngf-select="addFlower($file, $invalidFiles)"
-            accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-        Select File</button>
-    <button ng-click='addFlower()'>add flower</button>
+    <input type="file" ng-model="picfile" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+        Select 
+    <button ng-click='addProduct(picfile)'>add Product</button>
   </form><br>
  </div>
 <div class="sheet__deliveries">
