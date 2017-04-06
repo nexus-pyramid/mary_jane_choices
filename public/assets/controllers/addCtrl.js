@@ -12,6 +12,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var long = 0;
   var address = '';
   $scope.UserService = UserService;
+  $scope.page = 'menu'
 // END Global Variables
 ////////////////////////////////////////
 
@@ -167,10 +168,9 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
+  getCities();
   getDeliveries();
   getFlowers();
-  console.log($scope.UserService)
-  console.log("ON PAGE LOAD^^^^^^")
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -179,7 +179,6 @@ $scope.adminView = function(){
 // Delivery Constructor
 $scope.deliveryView = function(){
   getdelivery();
-  $scope.page = "menu"
 }
 // END Delivery Constructor
 ////////////////////////////////////////
@@ -226,7 +225,6 @@ function getDeliveries(){
 };
 // END Get Deliveries
 ////////////////////////////////////////
-
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
@@ -254,33 +252,35 @@ function getFlowers(){
 ////////////////////////////////////////
 // Add Flower
 ////////////////////////////////////////
-$scope.addFlower = function(file, errFiles){
 
-  $scope.h = file;
-  $scope.errFile = errFiles && errFiles[0];
-  if (file) {
+$scope.addProduct = function(file){
+  console.log(file);
+    if (file) {
       file.upload = Upload.upload({
-          url: '/flowerUpload',
+          url: '/productUpload',
           data: {
               file: file,
               name: $scope.name,
               type: $scope.type,
+              productType: $scope.productType,
               content: $scope.thc,
               description: $scope.description,
               one_gram: $scope.one_gram,
               two_gram: $scope.two_gram,
               eigth: $scope.eigth,
+              quarter: $scope.quarter,
               half: $scope.half,
               ounce: $scope.ounce
             }
       });
       file.upload.then(function (response) {
-        console.log( 'Sucess' + response.config.data.file.name)
+          $timeout(function () {
+              file.result = response.data;
+          });
       }, function (response) {
           if (response.status > 0)
               $scope.errorMsg = response.status + ': ' + response.data;
       }, function (evt) {
-
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
       });
@@ -297,11 +297,14 @@ $scope.addFlower = function(file, errFiles){
 ////////////////////////////////////////
 function getdelivery(){
   deliveryFactory.show($routeParams.id, function(data){
-    console.log('in the getdelivery function');
-    console.log(data);
     $scope.delivery = data;
-    console.log($scope.delivery);
-    console.log($scope.delivery.flowers);
+    
+    console.log("THIS BITCHvvvvvvv")
+    console.log($scope.delivery)
+    console.log($scope.delivery.products);
+    console.log("THIS BITCH^^^^^^^^")
+
+
   });
 };
 // END Get Delivery
@@ -328,26 +331,22 @@ $scope.show = function(){
 //// only for logging in deliveries
 ////////////////////////////////////////
 $scope.login = function(){
-  deliveryFactory.login($scope.delivery_serviceInfo, function(data){
-    if(data.errors){
-      $scope.errors = data.errors
-      $scope.delivery_serviceInfo.email = '';
-      $scope.delivery_serviceInfo.password = '';
+  console.log('in the login method')
+  deliveryFactory.login($scope.business_Info, function(data){
+    console.log($scope.business_Info)
+    $scope.errors = [];
+    if(data['errors']){
+      $scope.errors.push(data['errors']);
     }
     else {
-      // $scope.userInfo = {}
-      var loggedin = '';
-
-
-      $scope.UserService._id = data._id;
-      $scope.UserService.name = data.name;
-      $location.path('/success/'+$scope.logged+'/')
-    }
-  });
-}
-
-$scope.test = function(){
-  console.log($scope.logged);
+    console.log(data);
+    $scope.UserService._id = data._id;
+    $scope.UserService.name = data.name;
+    $scope.business_Info.password = ''
+    $scope.business_Info.email = ''
+     $location.url('/success');
+   }
+ });
 }
 // END Log in
 ////////////////////////////////////////
@@ -366,15 +365,15 @@ $scope.userLogin = function(){
       $scope.userInfo.password = '';
       }
     else {
-      $scope.user = data;
       $scope.UserService._id = data._id;
       $scope.UserService.name = data.name;
-      console.log($scope.user)
-      $location.path('/user/' + $scope.user.name);
+      $scope.UserService.type = 'user';
+      $location.path('/user/' + $scope.UserService.name);
       }
   })
 }
 ////////////////////////////////////////
+
 // Add Review
 //// for adding reviews
 ////////////////////////////////////////
@@ -523,19 +522,15 @@ $scope.createBusiness = function(file) {
         if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
     }, function (evt) {
-
         // We can use this to show progress and thumbnail
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
-      console.log('***********88888')
-      console.log(status)
-      if( status == 'OK'){
+      if( status === 'Ok'){
         console.log('status ok');
-        $location.url('/success')
       }
       else {
-        console.log("There was an error in the geocode");
+       alert("Geocode was not successful for the following reason: " + status);
      }
    });
  }geocodeAddress();

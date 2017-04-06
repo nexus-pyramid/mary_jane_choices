@@ -34,5 +34,5 @@ module.exports = function(app){
   app.get('/getDoctors', businesses.getDoctors);
   app.get('/flowers', flowers.index);
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
-  app.post('/flowerUpload', multipartyMiddleware, flowers.addFlower);
+  app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
 };

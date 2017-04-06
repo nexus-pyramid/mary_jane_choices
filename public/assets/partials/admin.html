@@ -35,11 +35,9 @@
           <input type="text" ng-model='half' placeholder="Half" ng-show="productType == 'Flower'" class="ng-hide">
           <input type="text" ng-model='ounce' placeholder="Ounce" ng-show="productType == 'Flower'" class="ng-hide">
           <input type="text" ng-model='price' placeholder="$" ng-show="productType == 'Grow' || productType == 'Edible' || productType == 'Topical' || productType == 'Gear'" class="ng-hide">
-        <button type="file" ng-model="file" accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
-            Select File
-        </button>
+        <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
             Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
-        <button class="form-btn" ng-click='addFlower(file)'>Add Product</button>
+        <button class="form-btn" ng-click='addProduct(file)'>Add Product</button>
       </form><br>
     <!-- <div class="sheet__deliveries">
       <div class="card__delivery" ng-repeat="delivery in deliveries">

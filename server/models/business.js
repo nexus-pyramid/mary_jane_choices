@@ -23,7 +23,7 @@ var BusinessSchema = new Schema({
 	location: {type: [Number]}, // [Long, Lat]
   deals: [{type: Schema.Types.ObjectId, ref: 'Deal'}],
   extract:  [{type: Schema.Types.ObjectId, ref: 'Extract'}],
-  flowers: [{type: Schema.Types.ObjectId, ref: 'Flower'}],
+  products: [{type: Schema.Types.ObjectId, ref: 'Product'}],
 	password: {
 		type:String,
 		reuired: true,
