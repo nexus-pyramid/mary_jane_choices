@@ -21,19 +21,20 @@ function usersController(){
 				} else if(user.password != req.body.password) {
 					res.json(errors);
 				} else {
-					req.session.User = {
+					req.session.Logged = {
 						_id: user._id,
-						name: user.name
+						name: user.name,
+						type: 'user'
 					}
-				 	// console.log(req.session.User)
-					res.json(req.session.User);
+				 	// console.log(req.session.Logged)
+					res.json(req.session.Logged);
 				}
 			})
 		}
 
 	this.getLogged = function(req, res){
-		 console.log(req.session.User)
-		return res.json(req.session.User)
+		 console.log(req.session.Logged)
+		return res.json(req.session.Logged)
 	}
 }
 module.exports = new usersController();

@@ -71,7 +71,7 @@ function businessesController(){
 		var newProduct = new Product(req.body);
 		console.log(newProduct);
     console.log(file)
-		newProduct._business = req.session.Business;
+		newProduct._business = req.session.Logged;
 
     fs.readFile(file.path, function ( err, original_data){
       if (err){
@@ -93,8 +93,8 @@ function businessesController(){
 			            } else {
                         // var newstrain = new Strain(newFlower.name)
                         // if () {}
-                        	console.log(req.session.Business);
-				                Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
+                        	console.log(req.session.Logged);
+				                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
 					              console.log("company we're adding flowers too")
 					              console.log(business);
 					              if(err){
@@ -165,13 +165,13 @@ function businessesController(){
 		console.log('in the add Flower function');
 		var newFlower = new Flower(req.body);
 		console.log(newFlower);
-		newFlower._business = req.session.Business;
-		console.log(req.session.Business);
+		newFlower._business = req.session.Logged;
+		console.log(req.session.Logged);
 		newFlower.save(function(err, result){
 			if(err){
 				res.sendStatus(400);
 			} else {
-				Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
+				Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
 					console.log("company we're adding flowers too")
 					console.log(business);
 					if(err){
@@ -197,31 +197,35 @@ function businessesController(){
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");
-		Business.findOne({email: req.body.email}, function(err, Business){
-			console.log(Business);
-			if(!Business){
+		Business.findOne({email: req.body.email}, function(err, business){
+			console.log(business);
+			if(!business){
 				res.json(errors)
-			} else if(Business.password != req.body.password) {
+			} else if(business.password != req.body.password) {
 				console.log(err);
 				res.json(errors);
 			} else {
-				req.session.Business = {
-				_id: Business._id,
-				name: Business.name,
-				type: Business.type
+				req.session.Logged = {
+				_id: business._id,
+				name: business.name,
+				type: business.type
 			}
 			console.log('this is the session Business');
-			 console.log(req.session.Business);
+			 console.log(req.session.Logged);
 			 console.log(Business.type);
 			// res.json(req.session.Delivery);
 			// res.status(200).send("good")
-			res.json(req.session.Business);
+			res.json(req.session.Logged);
 			}
 		})
 	}
 	this.getLogged = function(req, res){
-		 console.log(req.session.User)
-		return res.json(req.session.User)
+		return res.json(req.session.Logged)
+	}
+	this.logout = function(req,res){
+		console.log("Logging out user");
+		req.session.Logged = '';
+		return res.json(req.session.Logged)	
 	}
 }
 module.exports = new businessesController();

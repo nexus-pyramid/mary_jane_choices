@@ -141,8 +141,7 @@ function get_disp() {
 $scope.deliveriesView = function(){
   getLocation();
   getDeliveries();
-  console.log("LOGGED USER VVVVVV")
-  console.log($scope.UserService)
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -152,6 +151,7 @@ $scope.deliveriesView = function(){
 $scope.dispensariesView = function(){
   get_disp();
   getDispensaries();
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -161,6 +161,7 @@ $scope.dispensariesView = function(){
 $scope.doctorsView = function(){
   get_doc();
   getDoctors();
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -168,9 +169,9 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
-  getCities();
   getDeliveries();
   getFlowers();
+  getLogged();
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -179,6 +180,7 @@ $scope.adminView = function(){
 // Delivery Constructor
 $scope.deliveryView = function(){
   getdelivery();
+  getLogged();
 }
 // END Delivery Constructor
 ////////////////////////////////////////
@@ -187,6 +189,21 @@ $scope.deliveryView = function(){
 ////////////////////////////////////////
 
 
+////////////////////////////////////////
+// Get Logged User
+////////////////////////////////////////
+function getLogged(){
+
+  deliveryFactory.getLogged(function(data){
+    console.log('Getting logged user vvvvv')
+    console.log(data.data)
+    $scope.UserService._id = data.data._id;
+    $scope.UserService.name = data.data.name;
+    $scope.UserService.type = data.data.type;
+  })
+}
+// END Get Logged User
+////////////////////////////////////////
 
 
 
@@ -298,13 +315,6 @@ $scope.addProduct = function(file){
 function getdelivery(){
   deliveryFactory.show($routeParams.id, function(data){
     $scope.delivery = data;
-    
-    console.log("THIS BITCHvvvvvvv")
-    console.log($scope.delivery)
-    console.log($scope.delivery.products);
-    console.log("THIS BITCH^^^^^^^^")
-
-
   });
 };
 // END Get Delivery
@@ -342,6 +352,7 @@ $scope.login = function(){
     console.log(data);
     $scope.UserService._id = data._id;
     $scope.UserService.name = data.name;
+    $scope.UserService.type = data.type;
     $scope.business_Info.password = ''
     $scope.business_Info.email = ''
      $location.url('/success');
