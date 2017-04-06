@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -11,7 +11,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var lat = 0;
   var long = 0;
   var address = '';
-  $scope.logged;
+  $scope.UserService = UserService;
 // END Global Variables
 ////////////////////////////////////////
 
@@ -140,6 +140,8 @@ function get_disp() {
 $scope.deliveriesView = function(){
   getLocation();
   getDeliveries();
+  console.log("LOGGED USER VVVVVV")
+  console.log($scope.UserService)
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -167,7 +169,7 @@ $scope.doctorsView = function(){
 $scope.adminView = function(){
   getDeliveries();
   getFlowers();
-  console.log($scope.logged)
+  console.log($scope.UserService)
   console.log("ON PAGE LOAD^^^^^^")
 }
 // END Admin Constructor
@@ -254,7 +256,6 @@ function getFlowers(){
 ////////////////////////////////////////
 $scope.addFlower = function(file, errFiles){
 
-  console.log("Weedid this")
   $scope.h = file;
   $scope.errFile = errFiles && errFiles[0];
   if (file) {
@@ -329,8 +330,6 @@ $scope.show = function(){
 $scope.login = function(){
   deliveryFactory.login($scope.delivery_serviceInfo, function(data){
     if(data.errors){
-      console.log(data)
-      console.log(data.errors)
       $scope.errors = data.errors
       $scope.delivery_serviceInfo.email = '';
       $scope.delivery_serviceInfo.password = '';
@@ -339,12 +338,10 @@ $scope.login = function(){
       // $scope.userInfo = {}
       var loggedin = '';
 
-      console.log(data);
-      $scope.logged = data;
-      loggedin = $scope.logged
-      console.log($scope.logged);
-      console.log(loggedin)    // $scope.loggedIn.type = "business"
-       $location.path('/success/'+$scope.logged+'/')
+
+      $scope.UserService._id = data._id;
+      $scope.UserService.name = data.name;
+      $location.path('/success/'+$scope.logged+'/')
     }
   });
 }
@@ -368,10 +365,12 @@ $scope.userLogin = function(){
       $scope.userInfo.email = '';
       $scope.userInfo.password = '';
       }
-      else {
-          $scope.user = data;
-          console.log($scope.user)
-          $location.path('/user/' + $scope.user.name);
+    else {
+      $scope.user = data;
+      $scope.UserService._id = data._id;
+      $scope.UserService.name = data.name;
+      console.log($scope.user)
+      $location.path('/user/' + $scope.user.name);
       }
   })
 }

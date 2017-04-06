@@ -31,6 +31,7 @@
     <script type="text/javaScript" src="assets/controllers/dashboardController.js"></script>
     <!-- <script type="text/javascript" src="assets/controllers/loginController.js"></script> -->
     <script type="text/javaScript" src="assets/controllers/addCtrl.js"></script>
+    <script type="text/javaScript" src="assets/controllers/navController.js"></script>
 
     <!-- Factories -->
     <script type="text/javaScript" src="assets/factories/userFactory.js"></script>
@@ -38,6 +39,9 @@
     <script type="text/javaScript" src="assets/factories/gservice.js"></script>
     <script type="text/javaScript" src="assets/factories/dispensaryFactory.js"></script>
     <script type="text/javaScript" src="assets/factories/deliveryFactory.js"></script>
+
+    <!-- Service -->
+    <script type="text/javaScript" src="assets/services/userService.js"></script>
 <!--
     <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">-->
@@ -59,23 +63,25 @@
 		    <li ng-repeat='error in errors'>{{error}}</li>
 	</ul>
         <!-- Nav Bar -->
-        <header>
+        <header ng-controller="navController">
             <a class="mobile" href="">&#9776;</a>
             <nav>
               <ul id="nav">
-
                 <li><a href="/"><div id="logo"></div></a></li>
                 <li><a href="#/dispensaries">DISPENSARIES</a></li>
                 <li><a href="#/deliveries">DELIVERIES</a></li>
                 <li><a href="#/doctors">DOCTORS</a></li>
                 <li><a href="#/deals">DEALS</a></li>
-                <li><a href="#/login">LOGIN</a></li>
-                <li>
+                <li ng-hide="UserService.name"><a href="#/login">LOGIN</a></li>
+                <li ng-hide="UserService.name">
                     <a href="">JOIN</a>
                     <ul>
                         <li><a href="#/register/user">USER</a></li>
                         <li><a href="#/register/business">BUSINESS</a></li>
                     </ul>
+                </li>
+                <li ng-show="UserService.name" class="ng-hide">
+                    <a href="#/user/{{UserService.name}}">{{UserService.name | uppercase}}</a>
                 </li>
               </ul>
               <div style="clear:both;"></div>
