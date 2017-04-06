@@ -10,7 +10,7 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/login.html',
     controller:  'addCtrl'
   })
-  .when('/success/:id', {
+  .when('/success', {
     templateUrl: 'assets/partials/admin.html',
     controller: 'addCtrl'
   })

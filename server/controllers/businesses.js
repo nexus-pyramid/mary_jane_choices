@@ -34,9 +34,8 @@ function businessesController(){
 			}
 		})
 	}
-	thi
 	this.show = function(req, res){
-		Business.findOne({_id: req.params.id}).populate('flowers').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
@@ -72,7 +71,7 @@ function businessesController(){
 		var newProduct = new Product(req.body);
 		console.log(newProduct);
     console.log(file)
-		newFlower._business = req.session.Business;
+		newProduct._business = req.session.Business;
 
     fs.readFile(file.path, function ( err, original_data){
       if (err){
@@ -93,7 +92,8 @@ function businessesController(){
 				         res.sendStatus(400);
 			            } else {
                         // var newstrain = new Strain(newFlower.name)
-                        // if
+                        // if () {}
+                        	console.log(req.session.Business);
 				                Business.findOne({_id: req.session.Business._id }).exec(function(err, business){
 					              console.log("company we're adding flowers too")
 					              console.log(business);
@@ -101,7 +101,7 @@ function businessesController(){
 						               console.log(err);
 						              res.sendStatus(400);
 					              } else{
-						              business.flowers.push(newFlower._id);
+						              business.products.push(newProduct._id);
 						              business.save(function(err, result){
 							                if(err){
 								               res.json(err);
@@ -207,7 +207,8 @@ function businessesController(){
 			} else {
 				req.session.Business = {
 				_id: Business._id,
-				name: Business.name
+				name: Business.name,
+				type: Business.type
 			}
 			console.log('this is the session Business');
 			 console.log(req.session.Business);

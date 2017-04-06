@@ -250,6 +250,7 @@ function getFlowers(){
 // Add Flower
 ////////////////////////////////////////
 $scope.addProduct = function(file){
+  console.log(file);
     if (file) {
       file.upload = Upload.upload({
           url: '/productUpload',
@@ -257,6 +258,7 @@ $scope.addProduct = function(file){
               file: file,
               name: $scope.name,
               type: $scope.type,
+              productType: $scope.productType,
               content: $scope.thc,
               description: $scope.description,
               one_gram: $scope.one_gram,
@@ -322,13 +324,17 @@ $scope.show = function(){
 //// only for logging in deliveries
 ////////////////////////////////////////
 $scope.login = function(){
-  deliveryFactory.login($scope.delivery_serviceInfo, function(data){
+  console.log('in the login method')
+  deliveryFactory.login($scope.business_Info, function(data){
+    console.log($scope.business_Info)
     $scope.errors = [];
     if(data['errors']){
       $scope.errors.push(data['errors']);
     }
     else {
-     $scope.loginfo = '';
+    console.log(data);
+    $scope.business_Info.password = ''
+    $scope.business_Info.email = ''
      $location.url('/success');
    }
  });
