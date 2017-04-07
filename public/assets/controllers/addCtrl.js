@@ -11,8 +11,7 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
   var lat = 0;
   var long = 0;
   var address = '';
-  $scope.UserService = UserService;
-  $scope.page = 'menu'
+
 // END Global Variables
 ////////////////////////////////////////
 
@@ -269,7 +268,6 @@ function getFlowers(){
 ////////////////////////////////////////
 // Add Flower
 ////////////////////////////////////////
-
 $scope.addProduct = function(file){
     if (file) {
       file.upload = Upload.upload({
@@ -287,7 +285,7 @@ $scope.addProduct = function(file){
               quarter: $scope.quarter,
               half: $scope.half,
               ounce: $scope.ounce
-            }
+           }
       });
       file.upload.then(function (response) {
           $timeout(function () {
@@ -302,7 +300,7 @@ $scope.addProduct = function(file){
       });
   }
 }
-// END Add Flower
+// END Add Product
 ////////////////////////////////////////
 
 
@@ -313,7 +311,6 @@ $scope.addProduct = function(file){
 ////////////////////////////////////////
 function getbusiness(){
   deliveryFactory.show($routeParams.id, function(data){
-    console.log("THIS IS DATA FROM getdelivery");
     console.log(data);
     $scope.delivery = data;
   });
