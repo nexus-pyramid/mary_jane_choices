@@ -1,9 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-<<<<<<< HEAD
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload){
-=======
 addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
->>>>>>> 571f85a4a36a18714e9e5bb912a81141420f84e1
   // $scope.formData = {};
 
 
