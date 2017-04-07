@@ -20,6 +20,8 @@ var path = require('path'),
  }
 module.exports = function(app){
   app.post('/login', businesses.login);
+  app.get('/getlogged', businesses.getLogged);
+  app.get('/logout', businesses.logout);
   app.post('/register', deliveries.create);
   // app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
@@ -35,4 +37,5 @@ module.exports = function(app){
   app.get('/flowers', flowers.index);
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
+
 };

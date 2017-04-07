@@ -16,6 +16,18 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+
+		this.getLogged = function(callback){
+			$http.get('/getlogged').then(function(returned_data){
+				callback(returned_data);
+			});
+		}
+		this.logout = function(callback){
+			$http.get('/logout').then(function(returned_data){
+				callback(returned_data)
+			})
+		}
+
 		this.getDeliveries = function(callback){
 			$http.get('/getDeliveries').then(function(returned_data){
 				console.log(returned_data.data)

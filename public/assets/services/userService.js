@@ -2,6 +2,7 @@ app.factory('UserService', function(){
 
     return {
     	_id: '',
-    	name: ''
+    	name: '',
+    	type: ''
     };
 });

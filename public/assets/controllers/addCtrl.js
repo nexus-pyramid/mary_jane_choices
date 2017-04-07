@@ -1,5 +1,9 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
+<<<<<<< HEAD
 addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload){
+=======
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
+>>>>>>> 571f85a4a36a18714e9e5bb912a81141420f84e1
   // $scope.formData = {};
 
 
@@ -140,6 +144,7 @@ function get_disp() {
 $scope.deliveriesView = function(){
   getLocation();
   getDeliveries();
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -149,6 +154,7 @@ $scope.deliveriesView = function(){
 $scope.dispensariesView = function(){
   get_disp();
   getDispensaries();
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -158,6 +164,7 @@ $scope.dispensariesView = function(){
 $scope.doctorsView = function(){
   get_doc();
   getDoctors();
+  getLogged();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -165,9 +172,9 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
-  getCities();
   getDeliveries();
   getFlowers();
+  getLogged();
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -176,6 +183,7 @@ $scope.adminView = function(){
 // Delivery Constructor
 $scope.deliveryView = function(){
   getdelivery();
+  getLogged();
 }
 // END Delivery Constructor
 ////////////////////////////////////////
@@ -184,6 +192,21 @@ $scope.deliveryView = function(){
 ////////////////////////////////////////
 
 
+////////////////////////////////////////
+// Get Logged User
+////////////////////////////////////////
+function getLogged(){
+
+  deliveryFactory.getLogged(function(data){
+    console.log('Getting logged user vvvvv')
+    console.log(data.data)
+    $scope.UserService._id = data.data._id;
+    $scope.UserService.name = data.data.name;
+    $scope.UserService.type = data.data.type;
+  })
+}
+// END Get Logged User
+////////////////////////////////////////
 
 
 
@@ -250,7 +273,6 @@ function getFlowers(){
 // Add Flower
 ////////////////////////////////////////
 $scope.addProduct = function(file){
-  console.log(file);
     if (file) {
       file.upload = Upload.upload({
           url: '/productUpload',
@@ -296,8 +318,6 @@ function getdelivery(){
     console.log('in the getdelivery function');
     console.log(data);
     $scope.delivery = data;
-    console.log($scope.delivery);
-    console.log($scope.delivery.flowers);
   });
 };
 // END Get Delivery
@@ -307,7 +327,6 @@ function getdelivery(){
 ////////////////////////////////////////
 $scope.show = function(){
   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
-    console.log('in the scope showe function');
     if(data['errors']){
       $scope.errors.push(data['errors']);
     } else{
@@ -326,16 +345,17 @@ $scope.show = function(){
 $scope.login = function(){
   console.log('in the login method')
   deliveryFactory.login($scope.business_Info, function(data){
-    console.log($scope.business_Info)
     $scope.errors = [];
     if(data['errors']){
       $scope.errors.push(data['errors']);
     }
     else {
     console.log(data);
-    $scope.business_Info.password = ''
-    $scope.business_Info.email = ''
-     $location.url('/success');
+    $scope.UserService._id = data._id;
+    $scope.UserService.name = data.name;
+    $scope.UserService.type = data.type;
+    $rootScope.$broadcast('loggedin')
+    $location.url('/success');
    }
  });
 }
@@ -343,6 +363,29 @@ $scope.login = function(){
 ////////////////////////////////////////
 
 ////////////////////////////////////////
+// Log in
+//// only for logging in users
+////////////////////////////////////////
+$scope.userLogin = function(){
+  console.log('in the scuserlogin method')
+  UserFactory.userLogin($scope.userInfo, function(data){
+    console.log('in the scuserlogin method')
+    if(data.errors){
+      $scope.errors = data.errors;
+      $scope.userInfo.email = '';
+      $scope.userInfo.password = '';
+      }
+    else {
+      $scope.UserService._id = data._id;
+      $scope.UserService.name = data.name;
+      $scope.UserService.type = 'user';
+      $rootScope.$broadcast('loggedin')
+      $location.path('/user/' + $scope.UserService.name);
+      }
+  })
+}
+////////////////////////////////////////
+
 // Add Review
 //// for adding reviews
 ////////////////////////////////////////
@@ -444,7 +487,7 @@ $scope.createDelivery = function(file) {
         console.log('status ok');
       }
       else {
-       alert("Geocode was not successful for the following reason: " + status);
+       // alert("Geocode was not successful for the following reason: " + status);
      }
    });
  }geocodeAddress();
@@ -499,7 +542,7 @@ $scope.createBusiness = function(file) {
         console.log('status ok');
       }
       else {
-       alert("Geocode was not successful for the following reason: " + status);
+       // alert("Geocode was not successful for the following reason: " + status);
      }
    });
  }geocodeAddress();

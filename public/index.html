@@ -81,7 +81,12 @@
                     </ul>
                 </li>
                 <li ng-show="UserService.name" class="ng-hide">
-                    <a href="#/user/{{UserService.name}}">{{UserService.name | uppercase}}</a>
+                    <a href="">{{UserService.name | uppercase}}</a>
+                    <ul>
+                        <li ng-show="UserService.type == 'user'" class="ng-hide"><a href="#/user/{{UserService.name}}">SETTINGS</a></li>
+                        <li ng-show="UserService.type == 'Delivery' || UserService.type == 'Dispensary' || UserService.type == 'Doctor'" class="ng-hide"><a href="#/success">SETTINGS</a></li>
+                        <li><a ng-click="logout()">LOGOUT</a></li>
+                    </ul>
                 </li>
               </ul>
               <div style="clear:both;"></div>
