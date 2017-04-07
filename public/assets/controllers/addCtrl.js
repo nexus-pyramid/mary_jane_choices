@@ -180,6 +180,7 @@ $scope.adminView = function(){
 $scope.deliveryView = function(){
   getbusiness();
   getLogged();
+  $scope.page = 'menu';
 }
 // END Delivery Constructor
 ////////////////////////////////////////
