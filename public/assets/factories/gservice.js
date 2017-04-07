@@ -147,17 +147,16 @@ angular.module('gservice', [])
 
 
                 var business = response.data[i];
-                // console.log(business.type)
               switch(business.type){
                 case "Delivery":
-                console.log('im a delivery')
                   var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Delivery/"+ business._id + "\"> Visit </a> ";
+                  break
                 case "Doctor":
-                console.log('im a Doctor')
                   var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Doctor/"+ business._id + "\"> Visit </a> ";
+                  break
                 case "Dispensary":
-                console.log('im a Dispensary')
                   var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Dispensary/"+ business._id + "\"> Visit </a> ";
+                  break
               }
 
                 try {

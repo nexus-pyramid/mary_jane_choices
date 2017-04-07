@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -271,7 +271,6 @@ function getFlowers(){
 ////////////////////////////////////////
 
 $scope.addProduct = function(file){
-  console.log(file);
     if (file) {
       file.upload = Upload.upload({
           url: '/productUpload',
@@ -324,7 +323,6 @@ function getdelivery(){
 ////////////////////////////////////////
 $scope.show = function(){
   deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
-    console.log('in the scope showe function');
     if(data['errors']){
       $scope.errors.push(data['errors']);
     } else{
@@ -343,7 +341,6 @@ $scope.show = function(){
 $scope.login = function(){
   console.log('in the login method')
   deliveryFactory.login($scope.business_Info, function(data){
-    console.log($scope.business_Info)
     $scope.errors = [];
     if(data['errors']){
       $scope.errors.push(data['errors']);
@@ -353,9 +350,8 @@ $scope.login = function(){
     $scope.UserService._id = data._id;
     $scope.UserService.name = data.name;
     $scope.UserService.type = data.type;
-    $scope.business_Info.password = ''
-    $scope.business_Info.email = ''
-     $location.url('/success');
+    $rootScope.$broadcast('loggedin')
+    $location.url('/success');
    }
  });
 }
@@ -379,6 +375,7 @@ $scope.userLogin = function(){
       $scope.UserService._id = data._id;
       $scope.UserService.name = data.name;
       $scope.UserService.type = 'user';
+      $rootScope.$broadcast('loggedin')
       $location.path('/user/' + $scope.UserService.name);
       }
   })
@@ -486,7 +483,7 @@ $scope.createDelivery = function(file) {
         console.log('status ok');
       }
       else {
-       alert("Geocode was not successful for the following reason: " + status);
+       // alert("Geocode was not successful for the following reason: " + status);
      }
    });
  }geocodeAddress();
@@ -541,7 +538,7 @@ $scope.createBusiness = function(file) {
         console.log('status ok');
       }
       else {
-       alert("Geocode was not successful for the following reason: " + status);
+       // alert("Geocode was not successful for the following reason: " + status);
      }
    });
  }geocodeAddress();
