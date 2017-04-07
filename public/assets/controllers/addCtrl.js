@@ -179,7 +179,7 @@ $scope.adminView = function(){
 ////////////////////////////////////////
 // Delivery Constructor
 $scope.deliveryView = function(){
-  getdelivery();
+  getbusiness();
   getLogged();
 }
 // END Delivery Constructor
@@ -311,8 +311,10 @@ $scope.addProduct = function(file){
 // Get Delivery
 //// get one delivery
 ////////////////////////////////////////
-function getdelivery(){
+function getbusiness(){
   deliveryFactory.show($routeParams.id, function(data){
+    console.log("THIS IS DATA FROM getdelivery");
+    console.log(data);
     $scope.delivery = data;
   });
 };

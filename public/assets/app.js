@@ -30,7 +30,7 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/user-page.html',
     controller: 'addCtrl'
   })
-  .when('/delivery/:id', {
+  .when('/business/:id', {
    templateUrl: 'assets/partials/delivery.html',
    controller: 'addCtrl'
   })
