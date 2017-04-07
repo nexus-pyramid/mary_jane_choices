@@ -149,13 +149,13 @@ angular.module('gservice', [])
                 var business = response.data[i];
               switch(business.type){
                 case "Delivery":
-                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Delivery/"+ business._id + "\"> Visit </a> ";
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/business/"+ business._id + "\"> Visit </a> ";
                   break
                 case "Doctor":
-                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Doctor/"+ business._id + "\"> Visit </a> ";
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/business/"+ business._id + "\"> Visit </a> ";
                   break
                 case "Dispensary":
-                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/Dispensary/"+ business._id + "\"> Visit </a> ";
+                  var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/business/"+ business._id + "\"> Visit </a> ";
                   break
               }
 
