@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload){
   // $scope.formData = {};
 
 
@@ -11,8 +11,7 @@ addCtrl.controller('addCtrl', function($scope, $http, geolocation, gservice, del
   var lat = 0;
   var long = 0;
   var address = '';
-  $scope.UserService = UserService;
-  $scope.page = 'menu'
+
 // END Global Variables
 ////////////////////////////////////////
 
@@ -141,8 +140,6 @@ function get_disp() {
 $scope.deliveriesView = function(){
   getLocation();
   getDeliveries();
-  console.log("LOGGED USER VVVVVV")
-  console.log($scope.UserService)
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -252,7 +249,6 @@ function getFlowers(){
 ////////////////////////////////////////
 // Add Flower
 ////////////////////////////////////////
-
 $scope.addProduct = function(file){
   console.log(file);
     if (file) {
@@ -271,7 +267,7 @@ $scope.addProduct = function(file){
               quarter: $scope.quarter,
               half: $scope.half,
               ounce: $scope.ounce
-            }
+           }
       });
       file.upload.then(function (response) {
           $timeout(function () {
@@ -286,7 +282,7 @@ $scope.addProduct = function(file){
       });
   }
 }
-// END Add Flower
+// END Add Product
 ////////////////////////////////////////
 
 
@@ -297,14 +293,11 @@ $scope.addProduct = function(file){
 ////////////////////////////////////////
 function getdelivery(){
   deliveryFactory.show($routeParams.id, function(data){
+    console.log('in the getdelivery function');
+    console.log(data);
     $scope.delivery = data;
-    
-    console.log("THIS BITCHvvvvvvv")
-    console.log($scope.delivery)
-    console.log($scope.delivery.products);
-    console.log("THIS BITCH^^^^^^^^")
-
-
+    console.log($scope.delivery);
+    console.log($scope.delivery.flowers);
   });
 };
 // END Get Delivery
@@ -340,8 +333,6 @@ $scope.login = function(){
     }
     else {
     console.log(data);
-    $scope.UserService._id = data._id;
-    $scope.UserService.name = data.name;
     $scope.business_Info.password = ''
     $scope.business_Info.email = ''
      $location.url('/success');
@@ -352,28 +343,6 @@ $scope.login = function(){
 ////////////////////////////////////////
 
 ////////////////////////////////////////
-// Log in
-//// only for logging in users
-////////////////////////////////////////
-$scope.userLogin = function(){
-  console.log('in the scuserlogin method')
-  UserFactory.userLogin($scope.userInfo, function(data){
-    console.log('in the scuserlogin method')
-    if(data.errors){
-      $scope.errors = data.errors;
-      $scope.userInfo.email = '';
-      $scope.userInfo.password = '';
-      }
-    else {
-      $scope.UserService._id = data._id;
-      $scope.UserService.name = data.name;
-      $scope.UserService.type = 'user';
-      $location.path('/user/' + $scope.UserService.name);
-      }
-  })
-}
-////////////////////////////////////////
-
 // Add Review
 //// for adding reviews
 ////////////////////////////////////////
