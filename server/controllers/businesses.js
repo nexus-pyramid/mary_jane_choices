@@ -206,16 +206,13 @@ function businessesController(){
 				res.json(errors);
 			} else {
 				req.session.Logged = {
-				_id: business._id,
-				name: business.name,
-				type: business.type
-			}
-			console.log('this is the session Business');
-			 console.log(req.session.Logged);
-			 console.log(Business.type);
-			// res.json(req.session.Delivery);
-			// res.status(200).send("good")
-			res.json(req.session.Logged);
+					_id: business._id,
+					name: business.name,
+					type: business.type
+				}
+				console.log('this is the session Business');
+				console.log(req.session.Logged);
+				res.json(req.session.Logged);
 			}
 		})
 	}
