@@ -1,18 +1,20 @@
-<div ng-init="deliveryView()" >
+<div class="wrapper" ng-init="deliveryView()" >
 
 
   <div class="sheet__head">
     <div class="sheet__contact">
       <!-- <div class="contact__container"> -->
-        <h1>{{delivery.name | uppercase}}</h1>
-        <p>{{delivery.type}}</p>
-        <p>{{delivery.email}}</p>
-        <p>{{delivery.phone}}</p>  
+        <div class="icon__profile">
+          <img data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
+        </div>
+        <div class="business_info">
+          <h1>{{delivery.name | uppercase}}</h1>
+          <p>{{delivery.type}}</p>
+          <p>{{delivery.email}}</p>
+          <p>{{delivery.phone}}</p>    
+        </div>
+        
       <!-- </div> -->
-
-      <div class="icon__profile">
-        <img data-ng-src="data:image/JPEG;base64,{{delivery.image}}">
-      </div>
       
     </div>
   </div>
