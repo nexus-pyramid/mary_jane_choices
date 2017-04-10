@@ -22,6 +22,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data);
 			});
 		}
+		this.showProducts = function(callback){
+			$http.get('/showProducts').then(function(returned_data){
+				console.log(returned_data)
+				callback(returned_data.data)
+			})
+		}
 		this.logout = function(callback){
 			$http.get('/logout').then(function(returned_data){
 				callback(returned_data)

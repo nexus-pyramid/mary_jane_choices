@@ -168,9 +168,10 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
-  getDeliveries();
-  getFlowers();
+  // getDeliveries();
+  // getFlowers();
   getLogged();
+  showProducts();
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -187,6 +188,20 @@ $scope.deliveryView = function(){
 // END CONSTRUCTORS
 ////////////////////////////////////////
 
+////////////////////////////////////////
+// show proucts to edit/delete on admin page
+////////////////////////////////////////
+function showProducts(){
+console.log('showing products')
+  deliveryFactory.showProducts(function(data){
+    console.log('about to show producs')
+    console.log(data.data)
+    UserService._id = data.data._id;
+    
+  })
+}
+// END Show Products
+////////////////////////////////////////
 
 ////////////////////////////////////////
 // Get Logged User
