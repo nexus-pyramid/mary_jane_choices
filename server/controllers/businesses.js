@@ -35,7 +35,8 @@ function businessesController(){
 		})
 	}
 	this.show = function(req, res){
-		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+		console.log('in the show function')
+		Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
@@ -206,16 +207,13 @@ function businessesController(){
 				res.json(errors);
 			} else {
 				req.session.Logged = {
-				_id: business._id,
-				name: business.name,
-				type: business.type
-			}
-			console.log('this is the session Business');
-			 console.log(req.session.Logged);
-			 console.log(Business.type);
-			// res.json(req.session.Delivery);
-			// res.status(200).send("good")
-			res.json(req.session.Logged);
+					_id: business._id,
+					name: business.name,
+					type: business.type
+				}
+				console.log('this is the session Business');
+				console.log(req.session.Logged);
+				res.json(req.session.Logged);
 			}
 		})
 	}

@@ -168,9 +168,10 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
-  getDeliveries();
-  getFlowers();
+  // getDeliveries();
+  // getFlowers();
   getLogged();
+  showProducts();
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -188,6 +189,20 @@ $scope.deliveryView = function(){
 // END CONSTRUCTORS
 ////////////////////////////////////////
 
+////////////////////////////////////////
+// show proucts to edit/delete on admin page
+////////////////////////////////////////
+function showProducts(){
+console.log('showing products')
+  deliveryFactory.showProducts(function(data){
+    console.log('about to show producs')
+    console.log(data.data)
+    UserService._id = data.data._id;
+    
+  })
+}
+// END Show Products
+////////////////////////////////////////
 
 ////////////////////////////////////////
 // Get Logged User
@@ -197,9 +212,9 @@ function getLogged(){
   deliveryFactory.getLogged(function(data){
     console.log('Getting logged user vvvvv')
     console.log(data.data)
-    $scope.UserService._id = data.data._id;
-    $scope.UserService.name = data.data.name;
-    $scope.UserService.type = data.data.type;
+    UserService._id = data.data._id;
+    UserService.name = data.data.name;
+    UserService.type = data.data.type;
   })
 }
 // END Get Logged User
@@ -347,9 +362,9 @@ $scope.login = function(){
     }
     else {
     console.log(data);
-    $scope.UserService._id = data._id;
-    $scope.UserService.name = data.name;
-    $scope.UserService.type = data.type;
+    UserService._id = data._id;
+    UserService.name = data.name;
+    UserService.type = data.type;
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
    }
@@ -372,11 +387,11 @@ $scope.userLogin = function(){
       $scope.userInfo.password = '';
       }
     else {
-      $scope.UserService._id = data._id;
-      $scope.UserService.name = data.name;
-      $scope.UserService.type = 'user';
+      UserService._id = data._id;
+      UserService.name = data.name;
+      UserService.type = data.type
       $rootScope.$broadcast('loggedin')
-      $location.path('/user/' + $scope.UserService.name);
+      $location.path('/user/' + UserService.name);
       }
   })
 }
