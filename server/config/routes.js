@@ -35,6 +35,6 @@ module.exports = function(app){
   app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
-  app.get('/showProducts', businesses.show);
+  app.get('/showProducts/:id', businesses.show);
   app.post('/review/:id', deliveries.addReview);
 };

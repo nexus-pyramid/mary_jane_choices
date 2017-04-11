@@ -22,8 +22,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data);
 			});
 		}
-		this.showProducts = function(callback){
-			$http.get('/showProducts').then(function(returned_data){
+		this.showProducts = function(id,callback){
+			$http.get('/showProducts/'+id).then(function(returned_data){
 				console.log(returned_data)
 				callback(returned_data.data)
 			})

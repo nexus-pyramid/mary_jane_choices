@@ -194,7 +194,7 @@ $scope.deliveryView = function(){
 ////////////////////////////////////////
 function showProducts(){
 console.log('showing products')
-  deliveryFactory.showProducts(function(data){
+  deliveryFactory.showProducts(UserService._id, function(data){
     $scope.products = data.products;
     // UserService._id = data.data._id;
     
@@ -315,6 +315,19 @@ $scope.addProduct = function(file){
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
       });
+      // $scope.name = '';
+      // $scope.type = '';
+      // $scope.productType = '';
+      // $scope.thc = '';
+      // $scope.description = '';
+      // $scope.one_gram = '';
+      // $scope.two_gram = '';
+      // $scope.eigth = '';
+      // $scope.quarter = '';
+      // $scope.half = '';
+      // $scope.ounce = '';
+      // $scope.price = '';
+      // $scope.half_gram = '';
   }
 }
 // END Add Product
