@@ -72,8 +72,8 @@
     <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
       <div class="price-3" ><p>Price</p>{{product.price}}</div>
     </div>
-    <button class="edit-btn">Edit</button>
-    <button class="delete-btn">Delete</button>
+    <button class="edit-btn" ng-click="editProduct(product._id)">Edit</button>
+    <button class="delete-btn" ng-click="deleteProduct(product._id)">Delete</button>
   </div>
 
 </div>
