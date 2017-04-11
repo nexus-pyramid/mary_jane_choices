@@ -19,6 +19,7 @@ var ProductSchema = new Schema({
 	ounce: Number,
 	age_restriction: Number,
     thc: Number,
-    cbd: Number
+    cbd: Number,
+    price: Number
 });
 mongoose.model('Product', ProductSchema);

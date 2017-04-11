@@ -31,3 +31,43 @@
 		border-bottom:1px solid black
 	}
 }
+
+.card-product-image {
+	width:300px;
+	height:300px;
+}
+.upload-product-image {
+	width:100px;
+	height:100px;
+}
+.price{
+	padding:0;
+	margin:0;
+	width:300px;
+	height:100px;
+	display:block;
+}
+.price-1{}
+.price-3{
+	padding:0;
+	margin:0;
+	width:100px;
+	display:inline-block;
+	vertical-align:top;
+	p{
+		color:grey;
+		color:light-grey;
+	}
+	// display:inline-block;
+}
+.price-6{
+	padding:0;
+	margin:0;
+	width:50px;
+	display:inline-block;
+	vertical-align:top;
+	p{
+		color:grey;
+		color:light-grey;
+	}
+}

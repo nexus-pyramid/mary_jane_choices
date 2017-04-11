@@ -195,9 +195,8 @@ $scope.deliveryView = function(){
 function showProducts(){
 console.log('showing products')
   deliveryFactory.showProducts(function(data){
-    console.log('about to show producs')
-    console.log(data.data)
-    UserService._id = data.data._id;
+    $scope.products = data.products;
+    // UserService._id = data.data._id;
     
   })
 }
@@ -282,7 +281,7 @@ function getFlowers(){
 ////////////////////////////////////////
 
 ////////////////////////////////////////
-// Add Flower
+// Add Product
 ////////////////////////////////////////
 $scope.addProduct = function(file){
     if (file) {
@@ -300,7 +299,9 @@ $scope.addProduct = function(file){
               eigth: $scope.eigth,
               quarter: $scope.quarter,
               half: $scope.half,
-              ounce: $scope.ounce
+              ounce: $scope.ounce,
+              price: $scope.price,
+              half_gram: $scope.half_gram
            }
       });
       file.upload.then(function (response) {
@@ -319,6 +320,24 @@ $scope.addProduct = function(file){
 // END Add Product
 ////////////////////////////////////////
 
+
+////////////////////////////////////////
+// Edit Product
+////////////////////////////////////////
+$scope.editProduct = function(id){
+  console.log(id);
+}
+// END Edit Product
+////////////////////////////////////////
+
+////////////////////////////////////////
+// Delete Product
+////////////////////////////////////////
+$scope.deleteProduct = function(id){
+  console.log(id);
+}
+// END Delete Product
+////////////////////////////////////////
 
 
 ////////////////////////////////////////
@@ -505,6 +524,7 @@ $scope.createDelivery = function(file) {
 }
 // END Create Delivery
 ////////////////////////////////////////
+
 
 ////////////////////////////////////////
 // Create Business

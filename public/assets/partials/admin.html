@@ -36,7 +36,7 @@
           <input type="text" ng-model='ounce' placeholder="Ounce" ng-show="productType == 'Flower'" class="ng-hide">
           <input type="text" ng-model='price' placeholder="$" ng-show="productType == 'Grow' || productType == 'Edible' || productType == 'Topical' || productType == 'Gear'" class="ng-hide">
         <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
-            Image thumbnail: <img ngf-thumbnail="file || '/thumb.jpg'">
+            Image thumbnail: <img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'">
         <button class="form-btn" ng-click='addProduct(file)'>Add Product</button>
       </form><br>
     <!-- <div class="sheet__deliveries">
@@ -47,4 +47,33 @@
     <!--  </div>
     </div> -->
   </div>
+</div>
+<div class="sheet__products">
+
+    <div class="card__strain" ng-repeat="product in products | orderBy: '-created_at'">
+    <div class="title">{{product.name}}</div>
+    <img class="card-product-image" data-ng-src="data:image/JPEG;base64,{{product.image}}">
+    <p>{{product.productType}}</p>
+    <p>{{product.type}}</p>
+    <p>{{product.thc}}</p>
+    <div class="price ng-hide" ng-show="product.productType == 'Flower'">
+      <div class="price-6" ><p>Gram</p>{{product.one_gram}}</div><!-- 
+       --><div class="price-6"><p>2 G</p>{{product.two_gram}}</div><!-- 
+       --><div class="price-6"><p>1/8</p>{{product.eigth}}</div><!-- 
+       --><div class="price-6"><p>1/4</p>{{product.quarter}}</div><!-- 
+       --><div class="price-6"><p>1/2</p>{{product.half}}</div><!-- 
+       --><div class="price-6"><p>1oz</p>{{product.ounce}}</div>
+    </div>
+    <div class="price ng-hide" ng-show="product.productType == 'Extract'">
+      <div class="price-3" ><p>1/2 Gram</p>{{product.half_gram}}</div><!-- 
+      --><div class="price-3" ><p>Gram</p>{{product.one_gram}}</div><!-- 
+       --><div class="price-3"><p>2 G</p>{{product.two_gram}}</div>
+    </div>
+    <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
+      <div class="price-3" ><p>Price</p>{{product.price}}</div>
+    </div>
+    <button class="edit-btn">Edit</button>
+    <button class="delete-btn">Delete</button>
+  </div>
+
 </div>

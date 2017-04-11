@@ -13,3 +13,16 @@ button[class*="-btn"]{
   border-color: white;
   color: white;
 }
+
+.edit-btn{
+  border-color: $greenborder;
+  background-color:$green  !important;
+  color: white;
+  margin-bottom:10px;
+}
+.delete-btn{
+  border-color: $light-red;
+  background-color: $red !important;
+  color: white;
+  margin-bottom:10px;
+}
