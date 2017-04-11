@@ -6,6 +6,7 @@
       </ul>
       <form class="form-container">
       <h2>Add Product</h2>
+      <span ng-if="edit"><h2>Edit Product</h2></span>
         <input type="text" ng-model='name' placeholder="Name">
         <textarea ng-model='description' placeholder="Description"></textarea>
         <select ng-model="productType">
@@ -72,8 +73,8 @@
     <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
       <div class="price-3" ><p>Price</p>{{product.price}}</div>
     </div>
-    <button class="edit-btn" ng-click="editProduct(product._id)">Edit</button>
-    <button class="delete-btn" ng-click="deleteProduct(product._id)">Delete</button>
+   <button class="edit-btn" ng-click="editProduct(product)" ng-model="edit" ng-init="edit=true">Edit</button>
+    <button class="delete-btn" ng-click="deleteProduct(product)">Delete</button>
   </div>
 
 </div>
