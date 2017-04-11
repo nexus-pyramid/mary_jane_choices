@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+
 function usersController(){
 	this.addUser = function(req,res){
 		var newUser = new User(req.body);

@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope,$q, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, $timeout, UserService){
   // $scope.formData = {};
 
 
@@ -170,8 +170,12 @@ $scope.doctorsView = function(){
 $scope.adminView = function(){
   // getDeliveries();
   // getFlowers();
-  getLogged();
-  showProducts();
+  getLogged()
+  $timeout(function(){showProducts()},100)
+
+  // var promise = getLoggedPromise();
+  // promise.then(showProducts);
+  
 }
 // END Admin Constructor
 ////////////////////////////////////////
@@ -195,6 +199,10 @@ $scope.deliveryView = function(){
 function showProducts(){
 console.log('showing products')
   deliveryFactory.showProducts(UserService._id, function(data){
+    console.log("Ran showProducts and this is the INPUTvvvv")
+    console.log(UserService._id)
+    console.log("Ran showProducts and this is the resultvvvv")
+    console.log(data.products)
     $scope.products = data.products;
     // UserService._id = data.data._id;
     
@@ -207,17 +215,37 @@ console.log('showing products')
 // Get Logged User
 ////////////////////////////////////////
 function getLogged(){
-
   deliveryFactory.getLogged(function(data){
-    console.log('Getting logged user vvvvv')
-    console.log(data.data)
     UserService._id = data.data._id;
     UserService.name = data.data.name;
     UserService.type = data.data.type;
+    console.log("GOT USER")
   })
 }
 // END Get Logged User
 ////////////////////////////////////////
+
+
+////////////////////////////////////////
+// Get Logged User with Promise
+////////////////////////////////////////
+function getLoggedPromise(){
+
+  var deferred = $q.defer();
+  var gotdata;
+  deliveryFactory.getLogged(function(data){
+    UserService._id = data.data._id;
+    UserService.name = data.data.name;
+    UserService.type = data.data.type;
+    gotdata = data;
+    console.log("GOT USER")
+  })
+  deferred.resolve(gotdata);
+
+  return deferred.promise;
+}
+
+
 
 
 
