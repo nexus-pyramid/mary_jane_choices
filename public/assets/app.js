@@ -46,6 +46,10 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/register_business.html',
     controller:  'addCtrl'
   })
+  .when('/:id', {
+    templateUrl: 'assets/partials/edit.html',
+    controller:  'addCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });

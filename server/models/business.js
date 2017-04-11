@@ -30,5 +30,21 @@ var BusinessSchema = new Schema({
 		minlength: 8
 	}
 });
+BusinessSchema.pre('save', function(next){
+    var business = this;
+    if (!business.isModified('password')) return next();
+ 
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
+        if(err) return next(err);
+ 
+        bcrypt.hash(user.password, salt, function(err, hash){
+            if(err) return next(err);
+ 
+            business.password = hash;
+            next();
+        });
+    });
+});
+
 BusinessSchema.index({location: '2dsphere'});
 mongoose.model('Business', BusinessSchema);

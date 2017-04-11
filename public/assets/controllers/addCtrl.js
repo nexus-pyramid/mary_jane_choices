@@ -1,5 +1,5 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
-addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -292,7 +292,7 @@ $scope.addProduct = function(file){
               name: $scope.name,
               type: $scope.type,
               productType: $scope.productType,
-              content: $scope.thc,
+              thc: $scope.thc,
               description: $scope.description,
               one_gram: $scope.one_gram,
               two_gram: $scope.two_gram,
@@ -337,8 +337,24 @@ $scope.addProduct = function(file){
 ////////////////////////////////////////
 // Edit Product
 ////////////////////////////////////////
-$scope.editProduct = function(id){
-  console.log(id);
+$scope.editProduct = function(product){
+      console.log(product._id);
+      $scope.name = product.name;
+      $scope.type = product.type;
+      $scope.productType =product.productType;
+      $scope.thc = product.thc;
+      $scope.description = product.description;
+      $scope.one_gram = product.one_gram;
+      $scope.two_gram = product.two_gram;
+      $scope.eigth = product.eigth;
+      $scope.quarter = product.quarter;
+      $scope.half = product.half;
+      $scope.ounce = product.ounce;
+      $scope.price = product.price;
+      $scope.half_gram = product.half_gram;
+  
+ // $location.url('/edit/'+deliveryId);
+
 }
 // END Edit Product
 ////////////////////////////////////////
@@ -346,8 +362,21 @@ $scope.editProduct = function(id){
 ////////////////////////////////////////
 // Delete Product
 ////////////////////////////////////////
-$scope.deleteProduct = function(id){
-  console.log(id);
+$scope.deleteProduct = function(product){
+  $scope.name = '';
+      // $scope.type = '';
+      // $scope.productType = '';
+      // $scope.thc = '';
+      // $scope.description = '';
+      // $scope.one_gram = '';
+      // $scope.two_gram = '';
+      // $scope.eigth = '';
+      // $scope.quarter = '';
+      // $scope.half = '';
+      // $scope.ounce = '';
+      // $scope.price = '';
+      // $scope.half_gram = '';
+  
 }
 // END Delete Product
 ////////////////////////////////////////
