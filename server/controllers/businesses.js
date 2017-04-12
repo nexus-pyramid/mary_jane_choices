@@ -68,10 +68,8 @@ function businessesController(){
 			}
 		})
 	}
-	this.editProduct = function(req,res){
-		console.log("editing" + req.body._id);
-		Product.findOne({_id: req.body._id}, function(err, newproduct){
-			console.log("We are editing")
+	this.updateProduct = function(req,res){
+		Product.findOne({_id: product._id}, function(err, newproduct){
 			if(err){
 				console.log(err);
 			} else {
@@ -104,7 +102,34 @@ function businessesController(){
 	            				console.log('successfully' + newfile.path);
 	          				}
 	        			});
-	        			newProduct.image = bs;
+	        			newProduct.image = bs
+	        			newProduct.save(function(err, result){
+	        				if(err){
+					         res.sendStatus(400);
+				            } else {
+	                        // var newstrain = new Strain(newFlower.name)
+	                        // if () {}
+	                        	console.log(req.session.Logged);
+					                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
+						              console.log("company we're adding this mf product too")
+						              console.log(business);
+						              if(err){
+							               console.log(err);
+							              res.sendStatus(400);
+						              } else{
+							              business.products.push(newProduct._id);
+							              business.save(function(err, result){
+								                if(err){
+									               res.json(err);
+								                } else {
+									                console.log('adding flower');
+									                res.json(result);
+								              }
+							             })
+						            }
+					            })
+				         }
+	        			})
 					}
 				})
 			}
