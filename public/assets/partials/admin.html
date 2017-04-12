@@ -5,8 +5,8 @@
         <li ng-repeat='error in errors'>{{error}}</li>
       </ul>
       <form class="form-container">
-      <h2>Add Product</h2>
-      <span ng-if="edit"><h2>Edit Product</h2></span>
+      <h2 class="ng-hide" ng-show="mode == 'add'">Add Product</h2>
+      <h2 class="ng-hide" ng-show="mode == 'edit'">Edit Product</h2>
         <input type="text" ng-model='name' placeholder="Name">
         <textarea ng-model='description' placeholder="Description"></textarea>
         <select ng-model="productType">
@@ -36,9 +36,24 @@
           <input type="text" ng-model='half' placeholder="Half" ng-show="productType == 'Flower'" class="ng-hide">
           <input type="text" ng-model='ounce' placeholder="Ounce" ng-show="productType == 'Flower'" class="ng-hide">
           <input type="text" ng-model='price' placeholder="$" ng-show="productType == 'Grow' || productType == 'Edible' || productType == 'Topical' || productType == 'Gear'" class="ng-hide">
-        <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
-            Image thumbnail: <img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'">
-        <button class="form-btn" ng-click='addProduct(file)'>Add Product</button>
+
+          <div class="ng-hide" ng-show="mode=='add'"><img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'"></div>
+
+          <div ng-switch on="file">
+            <div ng-switch-when="file.length > 1000">
+              <img class="upload-product-image ng-hide" ng-show="mode=='edit'" data-ng-src="data:image/JPEG;base64,{{file}}">
+            </div>
+            <div ng-switch>
+              <img class="upload-product-image ng-hide"  ng-show="mode=='edit'" ngf-thumbnail="file">
+            </div>
+          </div>
+
+          
+          
+          <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
+          {{typeof file}}
+        <button class="form-btn ng-hide" ng-click='addProduct(file)' ng-show="mode == 'add'">Add Product</button>
+        <button class="form-btn ng-hide" ng-click='editProduct(file)' ng-show="mode == 'edit'">Edit Product</button>
       </form><br>
     <!-- <div class="sheet__deliveries">
       <div class="card__delivery" ng-repeat="delivery in deliveries">
@@ -73,8 +88,8 @@
     <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
       <div class="price-3" ><p>Price</p>{{product.price}}</div>
     </div>
-   <button class="edit-btn" ng-click="editProduct(product)" ng-model="edit" ng-init="edit=true">Edit</button>
-    <button class="delete-btn" ng-click="deleteProduct(product)">Delete</button>
+   <button class="edit-btn" ng-click="editView(product)" ng-model="edit" ng-init="edit=true">Edit</button>
+    <button class="delete-btn" ng-click="deleteView(product)">Delete</button>
   </div>
 
 </div>

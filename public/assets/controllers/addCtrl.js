@@ -174,6 +174,9 @@ $scope.adminView = function(){
   getLogged()
   $timeout(function(){showProducts()},100)
 
+  $scope.mode = 'add';
+  console.log("MODE IS " + $scope.mode)
+
   // var promise = getLoggedPromise();
   // promise.then(showProducts);
   
@@ -200,10 +203,6 @@ $scope.deliveryView = function(){
 function showProducts(){
 console.log('showing products')
   deliveryFactory.showProducts(UserService._id, function(data){
-    console.log("Ran showProducts and this is the INPUTvvvv")
-    console.log(UserService._id)
-    console.log("Ran showProducts and this is the resultvvvv")
-    console.log(data.products)
     $scope.products = data.products;
     // UserService._id = data.data._id;
     
@@ -364,9 +363,9 @@ $scope.addProduct = function(file){
 
 
 ////////////////////////////////////////
-// Edit Product
+// Change to Edit View
 ////////////////////////////////////////
-$scope.editProduct = function(product){
+$scope.editView = function(product){
       console.log(product._id);
       $scope.name = product.name;
       $scope.type = product.type;
@@ -381,17 +380,58 @@ $scope.editProduct = function(product){
       $scope.ounce = product.ounce;
       $scope.price = product.price;
       $scope.half_gram = product.half_gram;
-  
+      $scope.file = product.image;
+      $scope.mode = 'edit';
  // $location.url('/edit/'+deliveryId);
 
+}
+// END Edit View
+////////////////////////////////////////
+
+////////////////////////////////////////
+// Edit Product
+////////////////////////////////////////
+$scope.editProduct = function(file){
+      if (file) {
+      file.upload = Upload.upload({
+          url: '/editProduct',
+          data: {
+              file: file,
+              name: $scope.name,
+              type: $scope.type,
+              productType: $scope.productType,
+              thc: $scope.thc,
+              description: $scope.description,
+              one_gram: $scope.one_gram,
+              two_gram: $scope.two_gram,
+              eigth: $scope.eigth,
+              quarter: $scope.quarter,
+              half: $scope.half,
+              ounce: $scope.ounce,
+              price: $scope.price,
+              half_gram: $scope.half_gram
+           }
+      });
+      file.upload.then(function (response) {
+          $timeout(function () {
+              file.result = response.data;
+          });
+      }, function (response) {
+          if (response.status > 0)
+              $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 *
+                                   evt.loaded / evt.total));
+      });
 }
 // END Edit Product
 ////////////////////////////////////////
 
+
 ////////////////////////////////////////
 // Delete Product
 ////////////////////////////////////////
-$scope.deleteProduct = function(product){
+$scope.deleteView = function(product){
   $scope.name = '';
       // $scope.type = '';
       // $scope.productType = '';
@@ -457,6 +497,7 @@ $scope.login = function(){
     UserService.type = data.type;
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
+    $scope.mode = "add";
    }
  });
 }
