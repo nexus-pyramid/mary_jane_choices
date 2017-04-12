@@ -68,8 +68,10 @@ function businessesController(){
 			}
 		})
 	}
-	this.updateProduct = function(req,res){
-		product.findOne({_id: product._id}, function(err, newproduct){
+	this.editProduct = function(req,res){
+		console.log("editing" + req.body._id);
+		Product.findOne({_id: req.body._id}, function(err, newproduct){
+			console.log("We are editing")
 			if(err){
 				console.log(err);
 			} else {

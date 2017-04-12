@@ -34,7 +34,7 @@ module.exports = function(app){
   app.get('/flowers', flowers.index);
   app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
-  app.put('/editProduct', multipartyMiddleware, businesses.editProduct);
+  app.post('/editProduct', multipartyMiddleware, businesses.editProduct);
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
   app.get('/showProducts/:id', businesses.show);
   app.post('/review/:id', deliveries.addReview);

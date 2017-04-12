@@ -367,6 +367,7 @@ $scope.addProduct = function(file){
 ////////////////////////////////////////
 $scope.editView = function(product){
       console.log(product._id);
+      $scope._id = product._id;
       $scope.name = product.name;
       $scope.type = product.type;
       $scope.productType =product.productType;
@@ -398,6 +399,7 @@ $scope.editProduct = function(file){
           data: {
               file: file,
               name: $scope.name,
+              _id: $scope._id,
               type: $scope.type,
               productType: $scope.productType,
               thc: $scope.thc,
@@ -423,6 +425,7 @@ $scope.editProduct = function(file){
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
       });
+    }
 }
 // END Edit Product
 ////////////////////////////////////////
