@@ -68,8 +68,8 @@ function businessesController(){
 			}
 		})
 	}
-	this.updateProduct = function(req,res){
-		Product.findOne({_id: product._id}, function(err, newproduct){
+	this.editProduct = function(req,res){
+		Product.findOne({_id: req.body._id}, function(err, newproduct){
 			if(err){
 				console.log(err);
 			} else {
@@ -88,22 +88,11 @@ function businessesController(){
 				newproduct.thc = req.body.thc;
 				newproduct.cbd = req.body.cbd;
 				newproduct.price = req.body.price;
-				var newfile = req.files.files;
-				fs.readFile(newfile.path, function( err, new_data){
-					if(err){
-						res.json(err);
-					} else {
-						var bs = new_data.toString('base64');
-	        			fs.unlink(newfile.path, function(err){
-	          				if (err){
-	            				console.log(err);
-	            				console.log('failed to delete' + newfile.path);
-	         				} else {
-	            				console.log('successfully' + newfile.path);
-	          				}
-	        			});
-	        			newProduct.image = bs
-	        			newProduct.save(function(err, result){
+				var newfile = req.files.file;
+				console.log(newfile)
+				console.log(req.files.file)
+				if (!req.files.file){
+					newproduct.save(function(err, result){
 	        				if(err){
 					         res.sendStatus(400);
 				            } else {
@@ -117,7 +106,49 @@ function businessesController(){
 							               console.log(err);
 							              res.sendStatus(400);
 						              } else{
-							              business.products.push(newProduct._id);
+							              business.products.push(newproduct._id);
+							              business.save(function(err, result){
+								                if(err){
+									               res.json(err);
+								                } else {
+									                console.log('adding flower');
+									                res.json(result);
+								              }
+							             })
+						            }
+					            })
+				         }
+	        			})
+				} else {
+				fs.readFile(newfile.path, function( err, new_data){
+					if(err){
+						res.json(err);
+					} else {
+						var bs = new_data.toString('base64');
+	        			fs.unlink(newfile.path, function(err){
+	          				if (err){
+	            				console.log(err);
+	            				console.log('failed to delete' + newfile.path);
+	         				} else {
+	            				console.log('successfully' + newfile.path);
+	          				}
+	        			});
+	        			newproduct.image = bs
+	        			newproduct.save(function(err, result){
+	        				if(err){
+					         res.sendStatus(400);
+				            } else {
+	                        // var newstrain = new Strain(newFlower.name)
+	                        // if () {}
+	                        	console.log(req.session.Logged);
+					                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
+						              console.log("company we're adding this mf product too")
+						              console.log(business);
+						              if(err){
+							               console.log(err);
+							              res.sendStatus(400);
+						              } else{
+							              business.products.push(newproduct._id);
 							              business.save(function(err, result){
 								                if(err){
 									               res.json(err);
@@ -132,6 +163,7 @@ function businessesController(){
 	        			})
 					}
 				})
+				} // end if
 			}
 		})
 	}
