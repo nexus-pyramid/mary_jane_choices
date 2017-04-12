@@ -8,9 +8,10 @@
 
 .product_nav{
 	background-color:$black;
-	height: 100%;
 	padding: 0 10px;
 	display:inline-block;
+	vertical-align:top;
+	height:100%;
 	a{
 		color:$white;
 		text-decoration: none !important;
@@ -26,6 +27,8 @@
 	width:600px;
 }
 .product_container {
+	display:inline-block;
+	height:100%;
 	overflow-y:scroll;
 }
 
