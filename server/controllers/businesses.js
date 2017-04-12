@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
 var Review = mongoose.model('Review');
 var Flower = mongoose.model('Flower');
+var bcrypt = require('bcrypt');
 var Product = mongoose.model('Product');
 var fs = require('fs')
 function businessesController(){
@@ -67,7 +68,46 @@ function businessesController(){
 			}
 		})
 	}
-
+	this.updateProduct = function(req,res){
+		product.findOne({_id: product._id}, function(err, newproduct){
+			if(err){
+				console.log(err);
+			} else {
+				newproduct.name = req.body.name;
+				newproduct.description = req.body.description;
+				newproduct.type = req.body.type;
+				newproduct.ProductType = req.body.ProductType;
+				newproduct.each = req.body.each;
+				newproduct.half_gram = req.body.half_gram;
+				newproduct.one_gram = req.body.one_gram;
+				newproduct.two_gram = req.body.two_gram;
+				newproduct.eigth = req.body.eigth;
+				newproduct.quarter = req.body.quarter;
+				newproduct.half = req.body.half;
+				newproduct.ounce = req.body.ounce;
+				newproduct.thc = req.body.thc;
+				newproduct.cbd = req.body.cbd;
+				newproduct.price = req.body.price;
+				var newfile = req.files.files;
+				fs.readFile(newfile.path, function( err, new_data){
+					if(err){
+						res.json(err);
+					} else {
+						var bs = new_data.toString('base64');
+	        			fs.unlink(newfile.path, function(err){
+	          				if (err){
+	            				console.log(err);
+	            				console.log('failed to delete' + newfile.path);
+	         				} else {
+	            				console.log('successfully' + newfile.path);
+	          				}
+	        			});
+	        			newProduct.image = bs;
+					}
+				})
+			}
+		})
+	}
 	this.addProduct = function(req,res){
     	var file = req.files.file;
 		var newProduct = new Product(req.body);
