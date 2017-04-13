@@ -25,8 +25,10 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
 function getLocation() {
 
   geolocation.getLocation().then(function(data){
+    console.log(data)
     // Set the latitude and longitude equal to the HTML5 coordinates
     coords = {lat:data.coords.latitude, long:data.coords.longitude};
+    console.log(coords)
     // Display coordinates in location textboxes rounded to three decimal points
     // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
     // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
@@ -140,7 +142,7 @@ function get_disp() {
 // Deliveries Constructor
 $scope.deliveriesView = function(){
   getLocation();
-  getDeliveries();
+  // getDeliveries();
   getLogged();
 }
 // END Deliveries Constructor
@@ -282,6 +284,8 @@ function getDispensaries(){
 function getDeliveries(){
   deliveryFactory.getDeliveries(function(data){
     $scope.deliveries = data;
+    console.log('******************************')
+    console.log(data)
   })
 };
 // END Get Deliveries

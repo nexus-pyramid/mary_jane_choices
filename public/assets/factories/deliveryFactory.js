@@ -22,6 +22,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data);
 			});
 		}
+		this.sendCoords = function(coords, callback){
+			$http.get('/sendCoords').then(function(returned_data){
+				callback(returned_data.data);
+			})
+		}
 		this.showProducts = function(id,callback){
 			$http.get('/showProducts/'+id).then(function(returned_data){
 				console.log(returned_data)
@@ -34,10 +39,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 			})
 		}
 
-		this.getDeliveries = function(callback){
-			$http.get('/getDeliveries').then(function(returned_data){
+		this.getDeliveries = function(coords, callback){
+			$http.post('/getDeliveries', coords).then(function(returned_data){
+				console.log(returned_data)
+				console.log('*88888888888888')
 				console.log(returned_data.data)
-				callback(returned_data.data);
+				callback(returned_data);
 			});
 		}
 		this.getCities = function(callback){

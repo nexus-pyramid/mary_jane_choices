@@ -4,6 +4,7 @@ var Review = mongoose.model('Review');
 var Flower = mongoose.model('Flower');
 var bcrypt = require('bcrypt');
 var Product = mongoose.model('Product');
+var auth = require('basic-auth');
 var fs = require('fs')
 function businessesController(){
 
@@ -47,12 +48,17 @@ function businessesController(){
 				res.json(err);
 			} else {
 				console.log('this is the business')
-				console.log(data)
+				// console.log(data)
 				res.json(data);
 			}
 		})
 	}
 	this.getDispensaries = function(req,res){
+		console.log(req.body)
+		// Business.geoNear({})
+		// Business.find({geoNear: , near: {type: "Point", coordinates: []}, spherical: true, maxDistance: 16094 }).exec(function(err, data){
+
+		// 			   })
 		Business.find({type: "Dispensary"}).exec(function(err, data){
 			// console.log(data);
 			if(!Business){
@@ -69,6 +75,9 @@ function businessesController(){
 		})
 	}
 	this.editProduct = function(req,res){
+		var cred = auth(req);
+		console.log(cred);
+
 		Product.findOne({_id: req.body._id}, function(err, newproduct){
 			if(err){
 				console.log(err);
@@ -234,6 +243,9 @@ function businessesController(){
 		})
 	}
 	this.getDeliveries = function(req,res){
+		console.log('getting mfucking deliveries')
+				console.log(req.body)
+
 		Business.find({type: "Delivery"}).exec(function(err, data){
 			// console.log(data);
 			if(!Business){
@@ -242,7 +254,7 @@ function businessesController(){
 				res.json(err);
 			} else {
 				console.log('success')
-				// console.log(data);
+				// console.log(data[0]);
 				res.json(data);
 			}
 		})
@@ -320,7 +332,7 @@ function businessesController(){
 	}
 	this.logout = function(req,res){
 		console.log("Logging out user");
-		req.session.Logged = '';
+		req.session.Logged = null;
 		return res.json(req.session.Logged)	
 	}
 }

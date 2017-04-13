@@ -45,9 +45,9 @@ angular.module('gservice', [])
 
             // If no filter is provided in the refresh() call...
             else {
-
+                var coords = [longitude, latitude]
                 // Perform an AJAX call to get all of the records in the db.
-                $http.get('/getDeliveries').then(function(response, err){
+                $http.post('/getDeliveries', coords).then(function(response, err){
                   console.log(response);
                   // console.log(err);
                     // Then convert the results into map points
