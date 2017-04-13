@@ -190,6 +190,8 @@ $scope.deliveryView = function(){
   getbusiness();
   getLogged();
   $scope.page = 'menu';
+  $scope.searchText = '';
+  $scope.searchType = '';
 }
 // END Delivery Constructor
 ////////////////////////////////////////
