@@ -37,6 +37,13 @@ app.factory('UserFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.logout = function(callback){
+			$http.get('/logout').then(function(returned_data){
+				if(typeof(callback) == 'function'){
+					callback(returned_data.data);
+				}
+			})
+		}
 	}
 	return new UserFactory();
 }]);
