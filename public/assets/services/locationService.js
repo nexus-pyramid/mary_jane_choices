@@ -1,7 +1,8 @@
 app.factory('LocationService', function(){
+	console.log(this)
     return {
     	lat: '',
-    	long: '',
-    	type: ''
-    };
+    	long:'',
+    	address:''
+    }
 });

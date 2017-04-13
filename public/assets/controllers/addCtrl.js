@@ -1,6 +1,6 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 
-addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -23,116 +23,227 @@ addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, g
 // Google Maps API
 ////////////////////////////////////////
 function getLocation() {
+  if (LocationService.long == ''){
+    geolocation.getLocation().then(function(data){
+      console.log(data)
+      // Set the latitude and longitude equal to the HTML5 coordinates
+      coords = {lat:data.coords.latitude, long:data.coords.longitude};
+      LocationService = coords;
+      console.log("THIS IS LOCATION SERVICE");
+      console.log(LocationService);
+      // Display coordinates in location textboxes rounded to three decimal points
+      // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+      // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+      //
+      // // Display message confirming that the coordinates verified.
+      // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+      // gservice.initialize(coords.lat, coords.long);
+          gservice.refresh(LocationService.lat, LocationService.long);
 
-  geolocation.getLocation().then(function(data){
-    console.log(data)
-    // Set the latitude and longitude equal to the HTML5 coordinates
-    coords = {lat:data.coords.latitude, long:data.coords.longitude};
-    console.log(coords)
-    // Display coordinates in location textboxes rounded to three decimal points
-    // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
-    // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
-    //
-    // // Display message confirming that the coordinates verified.
-    // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
-    // gservice.initialize(coords.lat, coords.long);
-    gservice.refresh(coords.lat, coords.long);
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
+      function displayLocation(){
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(LocationService.lat, LocationService.long);
+        geocoder.geocode({'location': latlng}, function(results, status){
+          $scope.address = results[2];
+          if( status === 'Ok'){
+            if(results[1]){
+              address = results;
+              $scope.address = address;
+            } else {
+              console.log('no results found');
+            }
+          }
+        })
+      }displayLocation()
+    });
+  } else {
+      console.log("THIS IS THE SAVED LOCATION SERVICE");
+      console.log(LocationService);
 
-    ////////////////////////////////////////
-    // Geolocation
-    ////////////////////////////////////////
+
+        gservice.refresh(LocationService.lat, LocationService.long);
+
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
     function displayLocation(){
       var geocoder = new google.maps.Geocoder();
-      var latlng = new google.maps.LatLng(coords.lat, coords.long);
+      var latlng = new google.maps.LatLng(LocationService.lat, LocationService.long);
       geocoder.geocode({'location': latlng}, function(results, status){
         $scope.address = results[2];
         if( status === 'Ok'){
           if(results[1]){
             address = results;
             $scope.address = address;
+            LocationService.address = address;
+            console.log("this is after address")
+            console.log(LocationService)
           } else {
             console.log('no results found');
           }
         }
       })
     }displayLocation()
-  });
+  }
+
+
     // END Geolocation
     ////////////////////////////////////////
 };
 function get_doc() {
+  if(LocationService.long == ''){
+    geolocation.getLocation().then(function(data){
+      // Set the latitude and longitude equal to the HTML5 coordinates
+      LocationService.lat = data.coords.latitude;
+      LocationService.long = data.coords.longitude;
+      // Display coordinates in location textboxes rounded to three decimal points
+      // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+      // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+      //
+      // // Display message confirming that the coordinates verified.
+      // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+      // gservice.initialize(coords.lat, coords.long);
 
-  geolocation.getLocation().then(function(data){
-    // Set the latitude and longitude equal to the HTML5 coordinates
-    coords = {lat:data.coords.latitude, long:data.coords.longitude};
-    // Display coordinates in location textboxes rounded to three decimal points
-    // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
-    // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
-    //
-    // // Display message confirming that the coordinates verified.
-    // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
-    // gservice.initialize(coords.lat, coords.long);
-    gservice.getDocs(coords.lat, coords.long);
 
-    ////////////////////////////////////////
-    // Geolocation
-    ////////////////////////////////////////
-    function displayLocation(){
-      var geocoder = new google.maps.Geocoder();
-      var latlng = new google.maps.LatLng(coords.lat, coords.long);
-      geocoder.geocode({'location': latlng}, function(results, status){
-        $scope.address = results[2];
-        if( status === 'Ok'){
-          if(results[1]){
-            address = results;
-            $scope.address = address;
-          } else {
-            console.log('no results found');
+
+      console.log("THIS IS THE LOCATION SERVICE");
+      console.log(LocationService);
+
+      gservice.getDocs(LocationService.lat, LocationService.long);
+
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
+      function displayLocation(){
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(coords.lat, coords.long);
+        geocoder.geocode({'location': latlng}, function(results, status){
+          $scope.address = results[2];
+          if( status === 'Ok'){
+            if(results[1]){
+              address = results;
+              $scope.address = address;
+              LocationService.address = address;
+            } else {
+              console.log('no results found');
+            }
           }
-        }
-      })
-    }displayLocation()
-  });
-}
-function get_disp() {
+        })
+      }displayLocation()
+    });
+  } else {
 
-  geolocation.getLocation().then(function(data){
+      console.log("THIS IS THE SAVED LOCATION SERVICE");
+      console.log(LocationService);
+
+      gservice.getDocs(LocationService.lat, LocationService.long);
+
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
+      function displayLocation(){
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(LocationService.lat, LocationService.long);
+        geocoder.geocode({'location': latlng}, function(results, status){
+          $scope.address = results[2];
+          if( status === 'Ok'){
+            if(results[1]){
+              address = results;
+              $scope.address = address;
+            } else {
+              console.log('no results found');
+            }
+          }
+        })
+      }displayLocation()
+  }
+}
+// END Get Doctors
+////////////////////////////////////////
+
+
+////////////////////////////////////////
+//Get Dispensaries
+function get_disp() {
+  if (LocationService.long == ''){
+    geolocation.getLocation().then(function(data){
       // console.log(data);
     // Set the latitude and longitude equal to the HTML5 coordinates
-    coords = {lat:data.coords.latitude, long:data.coords.longitude};
-    // Display coordinates in location textboxes rounded to three decimal points
-    // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
-    // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
-    //
-    // // Display message confirming that the coordinates verified.
-    // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
-    // gservice.initialize(coords.lat, coords.long);
-    gservice.getDisp(coords.lat, coords.long);
+      LocationService.lat = data.coords.latitude;
+      LocationService.long = data.coords.longitude;
+      // Display coordinates in location textboxes rounded to three decimal points
+      // $scope.formData.longitude = parseFloat(coords.long).toFixed(3);
+      // $scope.formData.latitude = parseFloat(coords.lat).toFixed(3);
+      //
+      // // Display message confirming that the coordinates verified.
+      // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
+      // gservice.initialize(coords.lat, coords.long);
 
-    ////////////////////////////////////////
-    // Geolocation
-    ////////////////////////////////////////
-    function getAdress(){
-      var geocoder = new google.maps.Geocoder();
-      var latlng = new google.maps.LatLng(coords.lat, coords.long);
-      geocoder.geocode({'location': latlng}, function(results, status){
-        $scope.address = results[2];
-        console.log($scope.address)
-        if( status === 'Ok'){
-          if(results[1]){
-            address = results;
-            $scope.address = address;
-          } else {
-            console.log('no results found');
+        console.log("THIS IS THE LOCATION SERVICE");
+      console.log(LocationService);
+
+      
+      gservice.getDisp(LocationService.lat, LocationService.long);
+
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
+      function getAdress(){
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(LocationService.lat, LocationService.long);
+        geocoder.geocode({'location': latlng}, function(results, status){
+          $scope.address = results[2];
+          console.log($scope.address)
+          if( status === 'Ok'){
+            if(results[1]){
+              address = results;
+              $scope.address = address;
+            } else {
+              console.log('no results found');
+            }
           }
-        }
-      })
-    }getAdress();
-  });
-    // END Geolocation
-    ////////////////////////////////////////
+        })
+      }getAdress();
+    });
+  } else {
+      console.log("THIS IS THE SAVED LOCATION SERVICE");
+      console.log(LocationService);
+    geolocation.getLocation().then(function(data){
+      gservice.getDisp(LocationService.lat, LocationService.long);
 
+      ////////////////////////////////////////
+      // Geolocation
+      ////////////////////////////////////////
+      function getAdress(){
+        var geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(LocationService.lat, LocationService.long);
+        geocoder.geocode({'location': latlng}, function(results, status){
+          $scope.address = results[2];
+          console.log($scope.address)
+          if( status === 'Ok'){
+            if(results[1]){
+              address = results;
+              $scope.address = address;
+            } else {
+              console.log('no results found');
+            }
+          }
+        })
+      }getAdress();
+    });
+      // END Geolocation
+      ////////////////////////////////////////
+  
+  }
+
+  
 };
+// END Get Dispensaries
+////////////////////////////////////////
+
 
 ////////////////////////////////////////
 // CONSTRUCTORS
