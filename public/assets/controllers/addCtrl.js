@@ -607,8 +607,9 @@ $scope.show = function(){
 $scope.login = function(){
   console.log('in the login method')
   deliveryFactory.login($scope.business_Info, function(data){
-    $scope.errors = [];
     if(data['errors']){
+      $scope.business_Info.email = '';
+      $scope.business_Info.password = '';
       $scope.errors.push(data['errors']);
     }
     else {
@@ -630,9 +631,8 @@ $scope.login = function(){
 //// only for logging in users
 ////////////////////////////////////////
 $scope.userLogin = function(){
-  console.log('in the scuserlogin method')
   UserFactory.userLogin($scope.userInfo, function(data){
-    console.log('in the scuserlogin method')
+    console.log(data);
     if(data.errors){
       $scope.errors = data.errors;
       $scope.userInfo.email = '';
@@ -643,6 +643,7 @@ $scope.userLogin = function(){
       UserService.name = data.name;
       UserService.type = data.type
       $rootScope.$broadcast('loggedin')
+      console.log('we made it')
       $location.path('/user/' + UserService.name);
       }
   })

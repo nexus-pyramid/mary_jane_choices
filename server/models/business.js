@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 	Schema = mongoose.Schema;
+	bcrypt = require('bcrypt');
+	SALT_WORK_FACTOR = 10;
+
 var BusinessSchema = new Schema({
 	image: {
 		type: String,
@@ -37,7 +40,7 @@ BusinessSchema.pre('save', function(next){
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
         if(err) return next(err);
  
-        bcrypt.hash(user.password, salt, function(err, hash){
+        bcrypt.hash(business.password, salt, function(err, hash){
             if(err) return next(err);
  
             business.password = hash;

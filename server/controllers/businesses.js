@@ -312,18 +312,19 @@ function businessesController(){
 			console.log(business);
 			if(!business){
 				res.json(errors)
-			} else if(business.password != req.body.password) {
-				console.log(err);
-				res.json(errors);
-			} else {
-				req.session.Logged = {
-					_id: business._id,
-					name: business.name,
-					type: business.type
-				}
-				console.log('this is the session Business');
-				console.log(req.session.Logged);
-				res.json(req.session.Logged);
+			} else { bcrypt.compare( req.body.password, business.password, function(err, doesMatch) {
+					if (doesMatch){
+						req.session.Logged = {
+							_id: business._id,
+							name: business.name,
+							type: business.type
+						}
+						res.json(req.session.Logged)
+					} else {
+						console.log('bad password')
+						res.json(errors);						
+					}
+				})
 			}
 		})
 	}
