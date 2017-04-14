@@ -245,15 +245,14 @@ function businessesController(){
 	this.getDeliveries = function(req,res){
 		console.log('getting mfucking deliveries')
 				console.log(req.body)
-
-		Business.find({type: "Delivery"}).exec(function(err, data){
-			// console.log(data);
+				// console.log(coords)
+		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
 				res.json(err);
 			} else {
-				console.log('success')
+				console.log(data)
 				// console.log(data[0]);
 				res.json(data);
 			}
@@ -267,6 +266,7 @@ function businessesController(){
 			else if(err){
 				console.log(err)
 			} else {
+
 				// console.log(data);
 				res.json(data);
 			}
@@ -304,7 +304,7 @@ function businessesController(){
 		})
 	}
 	this.login = function(req, res){
-		// console.log(req.body)
+		 console.log(req.body)
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");

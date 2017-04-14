@@ -38,8 +38,9 @@ function getLocation() {
       // // Display message confirming that the coordinates verified.
       // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
       // gservice.initialize(coords.lat, coords.long);
-          gservice.refresh(LocationService.lat, LocationService.long);
-
+          gservice.refresh(LocationService.lat, LocationService.long, function(data){
+            $scope.deliveries = data;
+          });
       ////////////////////////////////////////
       // Geolocation
       ////////////////////////////////////////
@@ -309,7 +310,7 @@ $scope.deliveryView = function(){
 // END Delivery Constructor
 ////////////////////////////////////////
 
-// END CONSTRUCTORS
+// END CONSTRUCTOR
 ////////////////////////////////////////
 
 ////////////////////////////////////////
@@ -394,7 +395,7 @@ function getDispensaries(){
 ////////////////////////////////////////
 function getDeliveries(){
   deliveryFactory.getDeliveries(function(data){
-    $scope.deliveries = data;
+    // $scope.deliveries = data;
     console.log('******************************')
     console.log(data)
   })
