@@ -51,6 +51,9 @@ BusinessSchema.pre('save', function(next){
         });
     });
 });
+BusinessSchema.index({location: '2d'});
 
-BusinessSchema.index({location: '2dsphere'});
+BusinessSchema.methods.findNear = function(cb){
+	return this.model('Business').find({geo: {$nearSphere: this.location, $maxDistance: 16094}}, cb );
+}
 mongoose.model('Business', BusinessSchema);

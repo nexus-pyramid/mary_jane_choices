@@ -18,7 +18,7 @@ function loginAuthentication(req,res,next){
         res.json(401);
       } else {
           console.log('in the mfucking auth')
-        res.redirect('/')
+        res.json(401);
   }
 }
 
@@ -34,13 +34,14 @@ module.exports = function(app){
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
   app.get('/getReviews',  deliveries.getReviews);
+  // app.get('/getDives', businesses.getDeliveries);
   app.post('/getDeliveries', businesses.getDeliveries);
   app.get('/getDispensaries', businesses.getDispensaries);
   app.get('/getDoctors', businesses.getDoctors);
   app.post('/user/:id', users.addUser);
   app.get('/flowers', flowers.index);
   app.get('/showProducts/:id', businesses.show);
-  app.use(loginAuthentication);
+  // app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);

@@ -24,7 +24,7 @@ angular.module('gservice', [])
         // --------------------------------------------------------------
         // Refresh the Map with new data. Takes three parameters (lat, long, and filtering results)
 
-        googleMapService.refresh = function(latitude, longitude, filteredResults){
+        googleMapService.refresh = function(latitude, longitude, callback, filteredResults){
 
             // Clears the holding array of locations
             locations = [];
@@ -48,7 +48,19 @@ angular.module('gservice', [])
                 var coords = [longitude, latitude]
                 // Perform an AJAX call to get all of the records in the db.
                 $http.post('/getDeliveries', coords).then(function(response, err){
+                console.log(coords)
+                console.log('getting deliverires')
                   console.log(response);
+                  if(typeof(callback) == 'function'){
+                    
+                    respArray = [];
+                    for (var i = 0; i < response.data.length; i++){
+                        respArray.push(response.data[i].obj)    
+                    }
+                    
+                    console.log(respArray)
+                    callback(respArray)
+                    }
                   // console.log(err);
                     // Then convert the results into map points
                     locations = convertToMapPoints(response);
@@ -146,7 +158,9 @@ angular.module('gservice', [])
             for(var i= 0; i < response.data.length; i++) {
 
 
-                var business = response.data[i];
+                var business = response.data[i].obj;
+                // console.log(business)
+                // console.log(business.obj)
               switch(business.type){
                 case "Delivery":
                   var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/business/"+ business._id + "\"> Visit </a> ";
@@ -162,6 +176,7 @@ angular.module('gservice', [])
                 try {
                     // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
                     locations.push(new Location(
+                        // console.log()
                         new google.maps.LatLng(business.location[1], business.location[0]),
                         new google.maps.InfoWindow({
                             content: contentString,
@@ -172,6 +187,7 @@ angular.module('gservice', [])
                     ))
                 }
                 catch(err){
+                    // console.log(err)
                     console.log("Couldn't convert point")
                 }
 

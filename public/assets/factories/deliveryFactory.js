@@ -39,10 +39,9 @@ app.factory('deliveryFactory', ['$http', function($http){
 			})
 		}
 
-		this.getDeliveries = function(coords, callback){
-			$http.post('/getDeliveries', coords).then(function(returned_data){
+		this.getDeliveries = function( callback){
+			$http.get('/getDeliveries').then(function(returned_data){
 				console.log(returned_data)
-				console.log('*88888888888888')
 				console.log(returned_data.data)
 				callback(returned_data);
 			});
