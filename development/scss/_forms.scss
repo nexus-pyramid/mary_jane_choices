@@ -50,3 +50,10 @@ input, select, textarea, button {
 .form-container input.ng-valid.ng-touched {
   background-color: #78FA89;
 }
+.dayOfTheWeek > *{
+  display:inline-block;
+}
+.hour24{
+  display:block;
+  float:right;
+}
