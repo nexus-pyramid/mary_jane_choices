@@ -185,7 +185,7 @@ function get_disp() {
         console.log("THIS IS THE LOCATION SERVICE");
       console.log(LocationService);
 
-      
+
       gservice.getDisp(LocationService.lat, LocationService.long);
 
       ////////////////////////////////////////
@@ -730,7 +730,8 @@ $scope.createDelivery = function(file) {
         email: $scope.email,
         password: $scope.password,
         address: $scope.street_address,
-        location: [$scope.loc.lng, $scope.loc.lat]
+        location: [$scope.loc.lng, $scope.loc.lat],
+        hours: $scope.hours
       }
     });
     file.upload.then(function (response) {
