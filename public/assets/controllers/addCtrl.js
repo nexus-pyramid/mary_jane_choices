@@ -1,6 +1,6 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 
-addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope, $route, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -757,6 +757,17 @@ $scope.searchLocation = function() {
         $scope.returned = data
       }
     })
+  })
+}
+$scope.deleteProduct = function(product_id) {
+  console.log(product_id)
+  deliveryFactory.delete(product_id, function(data){
+     if(data['errors']){
+      $scope.errors = data
+     } else {
+      console.log(data)
+      $route.reload()
+     }
   })
 }
 

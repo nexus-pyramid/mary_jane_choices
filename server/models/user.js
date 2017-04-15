@@ -16,7 +16,8 @@ var UserSchema = new Schema({
 		type:String,
 		reuired: true,
 		minlength: 8
-	}
+	}, 
+	admin: Boolean 
 });
 UserSchema.plugin(uniqueValidator);
 
