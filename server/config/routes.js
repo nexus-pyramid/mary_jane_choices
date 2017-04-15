@@ -42,6 +42,7 @@ module.exports = function(app){
   app.get('/flowers', flowers.index);
   app.get('/showProducts/:id', businesses.show);
   app.post('/search', businesses.search)
+  app.post('/delete/:id', businesses.delete);
   // app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);

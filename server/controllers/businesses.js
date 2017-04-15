@@ -36,6 +36,19 @@ function businessesController(){
 			}
 		})
 	}
+	this.delete = function(req, res){
+		console.log('in the delete')
+		console.log(req.params)
+		Product.remove({_id: req.params.id}, function(err){
+			if(err){
+				console.log(err)
+				res.json(err)
+			} else {
+				console.log('deleted product')
+				res.json({message: "deleted Product!"});
+			}
+		})
+	}
 	this.show = function(req, res){
 		console.log('in the show function')
 		//I changed this because it would only show logged in busness' products

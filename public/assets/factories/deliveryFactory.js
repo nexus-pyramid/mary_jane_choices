@@ -77,10 +77,17 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			})
 		}
+		this.delete = function(product_id, callback){
+			// console.log(product_id)
+			$http.post('/delete/'+product_id).then(function(returned_data){
+				console.log(returned_data)
+				callback(returned_data.data);
+			})
+		}
 		this.search = function(coords, callback){
 			$http.post('/search', coords).then(function(returned_data){
-				console.log(returned_data)
-				callback(returned_data.data)
+				console.log(returned_data);
+				callback(returned_data.data);
 			})
 		}
 
