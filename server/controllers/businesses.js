@@ -229,14 +229,13 @@ function businessesController(){
 		})
 	}
 	this.validate = function(req, res){
-		Delivery.update({_id: req.params.id}, {registered: true}).exec(function(err, data){
-			if(!Delivery){
+		Business.update({_id: req.params.id}, {registered: true}).exec(function(err, data){
+			if(!Business){
 				console.log(err)
 			}
 			else if(err){
 				console.log(err)
 			} else {
-
 				// console.log(data);
 				res.json(data);
 			}
