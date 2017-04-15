@@ -72,7 +72,7 @@ angular.module('gservice', [])
                   })
             }
         };
-        googleMapService.getDisp = function(latitude, longitude, filteredResults){
+        googleMapService.getDisp = function(latitude, longitude, callback, filteredResults){
 
             // Clears the holding array of locations
             locations = [];
@@ -80,7 +80,7 @@ angular.module('gservice', [])
             // Set the selected lat and long equal to the ones provided on the refresh() call
             selectedLat = latitude;
             selectedLong = longitude;
-
+            var coords = [longitude, latitude]
             // If filtered results are provided in the refresh() call...
             if (filteredResults){
               console.log(filteredResults)
@@ -96,9 +96,19 @@ angular.module('gservice', [])
             else {
 
                 // Perform an AJAX call to get all of the records in the db.
-                $http.get('/getDispensaries').then(function(response, err){
+                $http.post('/getDispensaries', coords).then(function(response, err){
                   console.log('getting dispensaries gservice' + response)
                     // Then convert the results into map points
+
+                    if(typeof(callback) == 'function'){
+                    
+                        respArray = [];
+                        for (var i = 0; i < response.data.length; i++){
+                            respArray.push(response.data[i].obj)    
+                        }
+                        callback(respArray)
+                    }
+
                     locations = convertToMapPoints(response);
                     initialize(latitude, longitude, false);
 
@@ -108,7 +118,7 @@ angular.module('gservice', [])
                   })
             }
         };
-        googleMapService.getDocs = function(latitude, longitude, filteredResults){
+        googleMapService.getDocs = function(latitude, longitude, callback, filteredResults){
 
             // Clears the holding array of locations
             locations = [];
@@ -116,7 +126,7 @@ angular.module('gservice', [])
             // Set the selected lat and long equal to the ones provided on the refresh() call
             selectedLat = latitude;
             selectedLong = longitude;
-
+            var coords = [longitude, latitude]
             // If filtered results are provided in the refresh() call...
             if (filteredResults){
               console.log(filteredResults)
@@ -132,9 +142,21 @@ angular.module('gservice', [])
             else {
 
                 // Perform an AJAX call to get all of the records in the db.
-                $http.get('/getDoctors').then(function(response, err){
+                $http.post('/getDoctors', coords).then(function(response, err){
                   console.log('getting doctors gservice' + response)
                     // Then convert the results into map points
+
+                    if(typeof(callback) == 'function'){
+                    
+                        respArray = [];
+                        for (var i = 0; i < response.data.length; i++){
+                            respArray.push(response.data[i].obj)    
+                        }
+                    
+                        callback(respArray)
+                    }
+
+
                     locations = convertToMapPoints(response);
                     initialize(latitude, longitude, false);
 

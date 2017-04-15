@@ -1,6 +1,6 @@
 var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 
-addCtrl.controller('addCtrl', function($scope, $http, $rootScope, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
+addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
   // $scope.formData = {};
 
 
@@ -28,7 +28,9 @@ function getLocation() {
       console.log(data)
       // Set the latitude and longitude equal to the HTML5 coordinates
       coords = {lat:data.coords.latitude, long:data.coords.longitude};
-      LocationService = coords;
+      LocationService.lat = data.coords.latitude;
+      LocationService.long = data.coords.longitude;
+
       console.log("THIS IS LOCATION SERVICE");
       console.log(LocationService);
       // Display coordinates in location textboxes rounded to three decimal points
@@ -65,7 +67,9 @@ function getLocation() {
       console.log(LocationService);
 
 
-        gservice.refresh(LocationService.lat, LocationService.long);
+        gservice.refresh(LocationService.lat, LocationService.long,function(data){
+          $scope.deliveries = data;
+        });
 
       ////////////////////////////////////////
       // Geolocation
@@ -113,7 +117,11 @@ function get_doc() {
       console.log("THIS IS THE LOCATION SERVICE");
       console.log(LocationService);
 
-      gservice.getDocs(LocationService.lat, LocationService.long);
+      gservice.getDocs(LocationService.lat, LocationService.long,function(data){
+          console.log("THIS IS DATA")
+          console.log(data)
+          $scope.doctors = data;
+      });
 
       ////////////////////////////////////////
       // Geolocation
@@ -140,7 +148,11 @@ function get_doc() {
       console.log("THIS IS THE SAVED LOCATION SERVICE");
       console.log(LocationService);
 
-      gservice.getDocs(LocationService.lat, LocationService.long);
+      gservice.getDocs(LocationService.lat, LocationService.long,function(data){
+          console.log("THIS IS DATA")
+          console.log(data)
+          $scope.doctors = data;
+        });
 
       ////////////////////////////////////////
       // Geolocation
@@ -187,7 +199,9 @@ function get_disp() {
       console.log(LocationService);
 
 
-      gservice.getDisp(LocationService.lat, LocationService.long);
+      gservice.getDisp(LocationService.lat, LocationService.long,function(data){
+          $scope.dispensaries = data;
+        });
 
       ////////////////////////////////////////
       // Geolocation
@@ -213,7 +227,9 @@ function get_disp() {
       console.log("THIS IS THE SAVED LOCATION SERVICE");
       console.log(LocationService);
     geolocation.getLocation().then(function(data){
-      gservice.getDisp(LocationService.lat, LocationService.long);
+      gservice.getDisp(LocationService.lat, LocationService.long,function(data){
+          $scope.dispensaries = data;
+        });
 
       ////////////////////////////////////////
       // Geolocation
@@ -264,7 +280,7 @@ $scope.deliveriesView = function(){
 // dispensaries Constructor
 $scope.dispensariesView = function(){
   get_disp();
-  getDispensaries();
+  // getDispensaries();
   getLogged();
 }
 // END Deliveries Constructor
@@ -274,7 +290,7 @@ $scope.dispensariesView = function(){
 // doctors Constructor
 $scope.doctorsView = function(){
   get_doc();
-  getDoctors();
+  // getDoctors();
   getLogged();
 }
 // END Deliveries Constructor
@@ -501,6 +517,8 @@ $scope.editView = function(product){
       $scope.half_gram = product.half_gram;
       $scope.file = product.image;
       $scope.mode = 'edit';
+      $location.hash('form');
+      $anchorScroll();
  // $location.url('/edit/'+deliveryId);
 
 }

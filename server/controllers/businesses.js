@@ -53,27 +53,6 @@ function businessesController(){
 			}
 		})
 	}
-	this.getDispensaries = function(req,res){
-		console.log(req.body)
-		// Business.geoNear({})
-		// Business.find({geoNear: , near: {type: "Point", coordinates: []}, spherical: true, maxDistance: 16094 }).exec(function(err, data){
-
-		// 			   })
-		Business.find({type: "Dispensary"}).exec(function(err, data){
-			// console.log(data);
-			if(!Business){
-				console.log(err);
-			}
-			else if(err){
-				console.log(err);
-				res.json(err);
-			} else {
-				console.log('success')
-				// console.log(data);
-				res.json(data);
-			}
-		})
-	}
 	this.editProduct = function(req,res){
 
 		Product.findOne({_id: req.body._id}, function(err, newproduct){
@@ -187,18 +166,45 @@ function businessesController(){
 	}
 
 	this.getDoctors = function(req,res){
-		Business.find({type: "Doctor"}).exec(function(err, data){
-			// console.log(data);
+		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
 			if(!Business){
-				console.log(err);
 			}
 			else if(err){
-				console.log(err);
 				res.json(err);
 			} else {
-				console.log('success')
-				// console.log(data);
-				res.json(data);
+				console.log(data)
+				// console.log(data[0]);
+				var resultData  = [];
+				for (var i = 0; i < data.length; i++){
+					if (data[i].obj.type == "Doctor"){
+						resultData.push(data[i]);
+					}
+				}
+				res.json(resultData);
+			}
+		})
+	}
+	this.getDispensaries = function(req,res){
+		console.log(req.body)
+		// Business.geoNear({})
+		// Business.find({geoNear: , near: {type: "Point", coordinates: []}, spherical: true, maxDistance: 16094 }).exec(function(err, data){
+
+		// 			   })
+		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
+			if(!Business){
+			}
+			else if(err){
+				res.json(err);
+			} else {
+				console.log(data)
+				// console.log(data[0]);
+				var resultData  = [];
+				for (var i = 0; i < data.length; i++){
+					if (data[i].obj.type == "Dispensary"){
+						resultData.push(data[i]);
+					}
+				}
+				res.json(resultData);
 			}
 		})
 	}
@@ -224,7 +230,13 @@ function businessesController(){
 			} else {
 				console.log(data)
 				// console.log(data[0]);
-				res.json(data);
+				var resultData  = [];
+				for (var i = 0; i < data.length; i++){
+					if (data[i].obj.type == "Delivery"){
+						resultData.push(data[i]);
+					}
+				}
+				res.json(resultData);
 			}
 		})
 	}
