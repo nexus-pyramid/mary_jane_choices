@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
-	Schema = mongoose.Schema;
-	bcrypt = require('bcrypt');
+	Schema = mongoose.Schema,
+	uniqueValidator = require('mongoose-unique-validator'),
+	bcrypt = require('bcrypt'),
 	SALT_WORK_FACTOR = 10;
 
 var BusinessSchema = new Schema({
@@ -39,6 +40,7 @@ var BusinessSchema = new Schema({
 		minlength: 8
 	}
 });
+BusinessSchema.plugin(uniqueValidator);
 BusinessSchema.pre('save', function(next){
     var business = this;
     if (!business.isModified('password')) return next();

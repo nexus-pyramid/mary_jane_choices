@@ -2,16 +2,14 @@
 
   <div id="register-user">
     <form class="form-container">
-      <ul ng-if='errors.length > 0'>
-        <li ng-repeat='error in errors'>{{error}}</li>
-      </ul>
+      <h3 class="errors" ng-if='errors.length > 0' ng-repeat='error in errors'>{{error}}</h3>
       <h2> Sign Up </h2>
-      <input type="text" ng-model='userData.name' placeholder="Name">
-      <input type="text" ng-model='userData.email' placeholder="Email">
-      <textarea ng-model='userData.bio' placeholder="Bio"></textarea>
+      <input type="text" ng-model='userData.name' placeholder="Name" required>
+      <input type="text" ng-model='userData.email' placeholder="Email" required>
+      <!-- <textarea ng-model='userData.bio' placeholder="Bio"></textarea> -->
       
-      <input type="password" ng-model='userData.password' placeholder="Password">
-      <input type="password" ng-model='userData.confirm' placeholder="Confirm Password">
+      <input type="password" ng-model='userData.password' placeholder="Password" required>
+      <input type="password" ng-model='userData.confirm' placeholder="Confirm Password" required>
       <button class="form-btn" ng-click='addUser(userData, city._id)'>Register</button>
     </form>
   </div>

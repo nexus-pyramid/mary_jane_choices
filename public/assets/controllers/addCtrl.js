@@ -301,6 +301,9 @@ $scope.doctorsView = function(){
 $scope.adminView = function(){
   // getDeliveries();
   // getFlowers();
+  if (!UserService._id){
+    $location.url('/');
+  }
   getLogged()
   $timeout(function(){showProducts()},100)
 
@@ -501,6 +504,12 @@ $scope.addProduct = function(file){
 ////////////////////////////////////////
 $scope.editView = function(product){
       console.log(product._id);
+      
+      $timeout(function(){
+        $anchorScroll();
+        $location.hash('form');
+      }, 500)
+
       $scope._id = product._id;
       $scope.name = product.name;
       $scope.type = product.type;
@@ -517,8 +526,7 @@ $scope.editView = function(product){
       $scope.half_gram = product.half_gram;
       $scope.file = product.image;
       $scope.mode = 'edit';
-      $location.hash('form');
-      $anchorScroll();
+
  // $location.url('/edit/'+deliveryId);
 
 }
@@ -625,10 +633,12 @@ $scope.show = function(){
 $scope.login = function(){
   console.log('in the login method')
   deliveryFactory.login($scope.business_Info, function(data){
+    console.log(data)
     if(data['errors']){
-      $scope.business_Info.email = '';
-      $scope.business_Info.password = '';
-      $scope.errors.push(data['errors']);
+      // $scope.business_Info.email = '';
+      // $scope.business_Info.password = '';
+      // $scope.errors.push(data['errors']);
+      $scope.businessErrors = data.errors;
     }
     else {
     console.log(data);
@@ -649,12 +659,13 @@ $scope.login = function(){
 //// only for logging in users
 ////////////////////////////////////////
 $scope.userLogin = function(){
+  $scope.userErrors = '';
   UserFactory.userLogin($scope.userInfo, function(data){
-    console.log(data);
     if(data.errors){
-      $scope.errors = data.errors;
-      $scope.userInfo.email = '';
-      $scope.userInfo.password = '';
+      // $scope.errors = data.errors;
+      // $scope.userInfo.email = '';
+      // $scope.userInfo.password = '';
+      $scope.userErrors = data.errors
       }
     else {
       UserService._id = data._id;
@@ -704,10 +715,13 @@ $scope.addReview = function(newReview, deliveryId){
 // Add User
 ////////////////////////////////////////
 $scope.addUser  = function(userData, cityId){
+  $scope.errors = []
   UserFactory.addUser(userData, cityId, function(data){
     if(data['errmsg']){
+
       $scope.errors.push("email is already registered")
-    } if(data['errors']){
+    } 
+    if(data['errors']){
       if(typeof(data['errors']) == 'object'){
         for(var key in data['errors']){
           $scope.errors.push(data['errors'][key].message.replace('Path ', ''));
@@ -715,10 +729,11 @@ $scope.addUser  = function(userData, cityId){
       }else{
         $scope.errors.push(data['errors']);
       }
-      }
+    }
     if($scope.errors.length == 0){
       $scope.regInfo = '';
-      $location.url('/deliveries');
+      $scope.message = "Successfully Signed Up"
+      $location.url('/login');
     }
   })
 }
@@ -843,12 +858,14 @@ $scope.createBusiness = function(file) {
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
+
       if( status === 'Ok'){
         console.log('status ok');
       }
       else {
        // alert("Geocode was not successful for the following reason: " + status);
      }
+     $location.url('/login');
    });
  }geocodeAddress();
 }

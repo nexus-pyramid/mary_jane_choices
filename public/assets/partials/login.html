@@ -1,12 +1,14 @@
 <div class="sheet__login">
 	<form class="form-container">
 		<h3> Business Login </h3>
+		<h3 class="errors">{{businessErrors.general}}</h3>
 		<label><input type="text" ng-model="business_Info.email" placeholder="Email"></label>
 		<label><input type="text" ng-model="business_Info.password" placeholder="Password"></label>
 		<button class="form-btn" ng-click="login()">Login</button>
 	</form>
 	<form class="form-container">
 		<h3> User Login </h3>
+		<h3 class="errors">{{userErrors.general}}</h3>
 		<label><input type="text"  ng-model = "userInfo.email" placeholder="Email"></label>
 		<label><input type="text" ng-model="userInfo.password" placeholder="Password"></label>
 		<button class="form-btn" ng-click="userLogin()">Login</button>

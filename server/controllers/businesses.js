@@ -176,7 +176,7 @@ function businessesController(){
 				// console.log(data[0]);
 				var resultData  = [];
 				for (var i = 0; i < data.length; i++){
-					if (data[i].obj.type == "Doctor"){
+					if (data[i].obj.type == "Doctor"){ // && data[i].obj.valid == true
 						resultData.push(data[i]);
 					}
 				}

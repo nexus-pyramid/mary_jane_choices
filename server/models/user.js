@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
 		bcrypt   = require('bcrypt'),
+		uniqueValidator = require('mongoose-unique-validator'),
 		Schema   = mongoose.Schema;
         SALT_WORK_FACTOR = 10;
 
@@ -8,7 +9,7 @@ var UserSchema = new Schema({
 		type:String,
 		required: true
 	},
-	email: String,
+	email: {type:String, index: {unique: true, dropDups: true}},
 	bio: String,
 	_city:{type: Schema.Types.ObjectId, ref:'City'},
 	password: {
@@ -17,6 +18,8 @@ var UserSchema = new Schema({
 		minlength: 8
 	}
 });
+UserSchema.plugin(uniqueValidator);
+
 UserSchema.pre('save', function(next){
     var user = this;
     if (!user.isModified('password')) return next();

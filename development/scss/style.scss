@@ -31,7 +31,10 @@ body{
     background-color: $black;
     width:100%;
 }
-
+.errors{
+  color:$red;
+  background-color:$light-red;
+}
 .mary-text {
   color: white;
   letter-spacing: 4px;

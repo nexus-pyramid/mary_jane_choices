@@ -2,7 +2,6 @@
 
 $(document).ready(function() {
   $('.mobile').click(function () {
-      console.log('Toggled')
       $('nav').toggleClass('active'); 
    });
 
@@ -11,7 +10,6 @@ $(document).ready(function() {
   });
   
   $('nav ul li').click(function() {
-    console.log('Toggled');
     $(this).children('ul').toggleClass('active');
      $(this).children('.arrow').toggleClass('rotate');
   });
