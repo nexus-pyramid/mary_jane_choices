@@ -36,8 +36,8 @@ module.exports = function(app){
   app.get('/getReviews',  deliveries.getReviews);
   // app.get('/getDives', businesses.getDeliveries);
   app.post('/getDeliveries', businesses.getDeliveries);
-  app.get('/getDispensaries', businesses.getDispensaries);
-  app.get('/getDoctors', businesses.getDoctors);
+  app.post('/getDispensaries', businesses.getDispensaries);
+  app.post('/getDoctors', businesses.getDoctors);
   app.post('/user/:id', users.addUser);
   app.get('/flowers', flowers.index);
   app.get('/showProducts/:id', businesses.show);
