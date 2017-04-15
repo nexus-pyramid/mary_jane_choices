@@ -77,6 +77,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			})
 		}
+		this.search = function(coords, callback){
+			$http.post('/search', coords).then(function(returned_data){
+				console.log(returned_data)
+				callback(returned_data.data)
+			})
+		}
 
 		// this.addFlower = function(flowerInfo, callback){
 		// 	$http.post('/flower', flowerInfo).then(function(returned_data){

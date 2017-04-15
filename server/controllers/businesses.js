@@ -54,8 +54,6 @@ function businessesController(){
 		})
 	}
 	this.editProduct = function(req,res){
-		var cred = auth(req);
-		console.log(cred);
 
 		Product.findOne({_id: req.body._id}, function(err, newproduct){
 			if(err){
@@ -78,82 +76,44 @@ function businessesController(){
 				newproduct.price = req.body.price;
 				var newfile = req.files.file;
 				console.log(newfile)
-				console.log(req.files.file)
+				// console.log(req.files.file)
 				if (!req.files.file){
 					newproduct.save(function(err, result){
 	        				if(err){
 					         res.sendStatus(400);
 				            } else {
-	                        // var newstrain = new Strain(newFlower.name)
-	                        // if () {}
-	                        	console.log(req.session.Logged);
-					                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
-						              console.log("company we're adding this mf product too")
-						              console.log(business);
-						              if(err){
-							               console.log(err);
-							              res.sendStatus(400);
-						              } else{
-							              business.products.push(newproduct._id);
-							              business.save(function(err, result){
-								                if(err){
-									               res.json(err);
-								                } else {
-									                console.log('adding flower');
-									                res.json(result);
-								              }
-							             })
-						            }
-					            })
-				         }
-	        			})
+				            	console.log(result)
+					              res.json(result)
+				            }
+	        			    })
 				} else {
-				fs.readFile(newfile.path, function( err, new_data){
+				        fs.readFile(newfile.path, function( err, new_data){
 					if(err){
 						res.json(err);
 					} else {
-						var bs = new_data.toString('base64');
-	        			fs.unlink(newfile.path, function(err){
-	          				if (err){
-	            				console.log(err);
-	            				console.log('failed to delete' + newfile.path);
-	         				} else {
-	            				console.log('successfully' + newfile.path);
-	          				}
-	        			});
-	        			newproduct.image = bs
-	        			newproduct.save(function(err, result){
+							var bs = new_data.toString('base64');
+	        				fs.unlink(newfile.path, function(err){
+	          					if (err){
+	            					console.log(err);
+	            					console.log('failed to delete' + newfile.path);
+	         					} else {
+	            					console.log('successfully' + newfile.path);
+	          					}	
+	        				});
+	        				newproduct.image = bs
+	        				}
+							newproduct.save(function(err, result){
 	        				if(err){
 					         res.sendStatus(400);
 				            } else {
-	                        // var newstrain = new Strain(newFlower.name)
-	                        // if () {}
-	                        	console.log(req.session.Logged);
-					                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
-						              console.log("company we're adding this mf product too")
-						              console.log(business);
-						              if(err){
-							               console.log(err);
-							              res.sendStatus(400);
-						              } else{
-							              business.products.push(newproduct._id);
-							              business.save(function(err, result){
-								                if(err){
-									               res.json(err);
-								                } else {
-									                console.log('adding flower');
-									                res.json(result);
-								              }
-							             })
-						            }
-					            })
-				         }
-	        			})
-					}
-				})
-				} // end if
-			}
-		})
+				            	console.log(result)
+					              res.json(result)
+				            }
+	        			    })
+				    	})
+	            	}
+	        	}
+	   		})
 	}
 	this.addProduct = function(req,res){
     	var file = req.files.file;
@@ -245,6 +205,16 @@ function businessesController(){
 					}
 				}
 				res.json(resultData);
+			}
+		})
+	}
+	this.search  = function(req, res){
+		Business.geoNear(req.body, {maxDistance: 0.04}, function(err, data){
+			if(err){
+				res.json(err);
+			} else {
+				console.log(data)
+				res.json(data);
 			}
 		})
 	}

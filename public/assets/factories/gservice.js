@@ -52,10 +52,10 @@ angular.module('gservice', [])
                 console.log('getting deliverires')
                   console.log(response);
                   if(typeof(callback) == 'function'){
-                    
-                    respArray = [];
+                        respArray = [];
                     for (var i = 0; i < response.data.length; i++){
-                        respArray.push(response.data[i].obj)    
+                        respArray.push(response.data[i].obj);
+                        console.log(respArray)    
                     }
                     
                     console.log(respArray)
