@@ -706,6 +706,27 @@ $scope.addUser  = function(userData, cityId){
 }
 //END Add User
 ////////////////////////////////////////
+$scope.searchLocation = function() {
+  var address = $scope.search;
+  geocoder.geocode({'address' : address}, function(results, status){
+    $scope.loc = {};
+     var long = results[0].geometry.location.lng();
+     var lat  = results[0].geometry.location.lat(); 
+    var coords = [long, lat]
+      deliveryFactory.search(coords, function(data){
+        if(data['errors']) {
+          if(typeof(data['errors']) == 'object'){
+            for(var key in data['errors']){
+            $scope.errors.push(data['errors'][key].message.replace('Path ', ''));
+          } 
+        }
+      } else {
+        $scope.returned = data
+      }
+    })
+  })
+}
+
 
 ////////////////////////////////////////
 // Create Delivery
