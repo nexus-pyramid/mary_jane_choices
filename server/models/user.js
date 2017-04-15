@@ -15,7 +15,8 @@ var UserSchema = new Schema({
 		type:String,
 		reuired: true,
 		minlength: 8
-	}
+	}, 
+	admin: Boolean 
 });
 UserSchema.pre('save', function(next){
     var user = this;

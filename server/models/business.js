@@ -25,7 +25,7 @@ var BusinessSchema = new Schema({
 			saturday:{ open: String, close: String},
 			sunday:{ open: String, close: String}},
     email: {type:String, unique: true},
-	registered:{type:Boolean},
+	valid:{type:Boolean, default: false},
     created_at: {type: Date, default: Date.now },
 	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	street_address: String,
