@@ -232,31 +232,26 @@ function businessesController(){
 		})
 	}
 	this.getDeliveries = function(req,res){
-		console.log('getting mfucking deliveries')
-				console.log(req.body)
-				// console.log(coords)
 		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
-			if(!Business){
-			}
-			else if(err){
+			 if(err){
 				res.json(err);
 			} else {
-				Business.populate('products').exec(function(err, deliveries){
+				Business.populate(data, {path: 'obj.products'} , function(err, deliveries){
 					if(err){
+						console.log(err)
 						res.json(err)
 					} else {
-						console.log(deliveries)
+						console.log(deliveries);
+					   var resultData  = [];
+					   for (var i = 0; i < deliveries.length; i++){
+					   		if (data[i].obj.type == "Delivery"){
+								resultData.push(data[i]);
+								console.log(resultData)
+					   		}
+						}
+						res.json(resultData);
 					}
 				})
-				console.log(data)
-				// console.log(data[0]);
-				var resultData  = [];
-				for (var i = 0; i < data.length; i++){
-					if (data[i].obj.type == "Delivery"){
-						resultData.push(data[i]);
-					}
-				}
-				res.json(resultData);
 			}
 		})
 	}
