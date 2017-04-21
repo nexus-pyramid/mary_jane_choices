@@ -244,10 +244,10 @@ angular.module('gservice', [])
 
             // If a filter was used set the icons yellow, otherwise blue
             if(filter){
-                icon = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+                icon = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
             }
             else{
-                icon = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+                icon = "https://maps.google.com/mapfiles/ms/icons/blue-dot.png";
             }
 
             // Loop through each location in the array and place a marker
