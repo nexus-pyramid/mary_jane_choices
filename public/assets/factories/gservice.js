@@ -274,7 +274,7 @@ angular.module('gservice', [])
                 position: initialLocation,
                 animation: google.maps.Animation.BOUNCE,
                 map: map,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
             });
             lastMarker = marker;
 
@@ -287,7 +287,7 @@ angular.module('gservice', [])
                     position: e.latLng,
                     animation: google.maps.Animation.BOUNCE,
                     map: map,
-                    icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+                    icon: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png'
                 });
 
                 // When a new spot is selected, delete the old red bouncing marker
