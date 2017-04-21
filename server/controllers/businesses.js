@@ -241,6 +241,13 @@ function businessesController(){
 			else if(err){
 				res.json(err);
 			} else {
+				Business.populate('products').exec(function(err, deliveries){
+					if(err){
+						res.json(err)
+					} else {
+						console.log(deliveries)
+					}
+				})
 				console.log(data)
 				// console.log(data[0]);
 				var resultData  = [];
