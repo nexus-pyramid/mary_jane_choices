@@ -672,8 +672,7 @@ $scope.userLogin = function(){
       UserService.name = data.name;
       UserService.type = data.type
       $rootScope.$broadcast('loggedin')
-      console.log('we made it')
-      $location.path('/user/' + UserService.name);
+      $location.url('/deliveries');
       }
   })
 }
