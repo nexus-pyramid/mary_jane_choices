@@ -198,11 +198,6 @@ function businessesController(){
 		})
 	}
 	this.getDispensaries = function(req,res){
-		console.log(req.body)
-		// Business.geoNear({})
-		// Business.find({geoNear: , near: {type: "Point", coordinates: []}, spherical: true, maxDistance: 16094 }).exec(function(err, data){
-
-		// 			   })
 		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
 			if(!Business){
 			}
@@ -221,34 +216,30 @@ function businessesController(){
 			}
 		})
 	}
-	this.search  = function(req, res){
-		Business.geoNear(req.body, {maxDistance: 0.04}, function(err, data){
-			if(err){
-				res.json(err);
-			} else {
-				console.log(data)
-				res.json(data);
-			}
-		})
-	}
+
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:500}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {
+				// console.log(data)
 				Business.populate(data, {path: 'obj.products'} , function(err, deliveries){
 					if(err){
 						console.log(err)
 						res.json(err)
 					} else {
-						console.log(deliveries);
+						console.log('populating products for business')
+						// console.log(deliveries);
+						// console.log(deliveries)
 					   var resultData  = [];
-					   for (var i = 0; i < deliveries.length; i++){
+					   for (var i = 0; i < data.length; i++){
+					   	console.log(data[i].obj.type)
 					   		if (data[i].obj.type == "Delivery"){
 								resultData.push(data[i]);
 								console.log(resultData)
 					   		}
 						}
+						console.log(resultData)
 						res.json(resultData);
 					}
 				})
