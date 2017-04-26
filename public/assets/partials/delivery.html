@@ -53,14 +53,14 @@
       </ul>
     </div>
     <div class="product_container">
-      <table>
+      <table class="products">
         <tr>
           <th></th>
           <th>Name</th>
           <th>Description</th>
           <th>Price</th>
         </tr>
-        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText">
+        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product">
           <td> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
           <td><h3>{{product.name | uppercase}}</h3></td>
           <td>{{product.description}}</td>

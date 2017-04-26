@@ -76,6 +76,7 @@ background: linear-gradient(to right, #12FFF7, #B3FFAB); /* W3C, IE 10+/ Edge, F
 }
 
 .sheet__product{
+    display:flex;
 	padding-top:0;
 	height:600px;
 }

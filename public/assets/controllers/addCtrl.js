@@ -448,6 +448,36 @@ function getFlowers(){
 ////////////////////////////////////////
 // Add Product
 ////////////////////////////////////////
+$scope.uploadS3 = function(file){
+ $http.post('/s3pic', query)
+ .success(function(result) {
+    Upload.upload({
+        url: result.url, //s3Url
+        transformRequest: function(data, headersGetter) {
+                var headers = headersGetter();
+                delete headers.Authorization;
+                return data;
+            },
+            fields: result.fields, //credentials
+            method: 'POST',
+            file: files[0]
+        }).progress(function(evt) {
+            console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
+        }).success(function(data, status, headers, config) {
+            // file is uploaded successfully
+            console.log(data + status + headers + config)
+            console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+        }).error(function() {
+
+        });
+    })
+    .error(function(data, status, headers, config) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+    });
+}
+
+
 $scope.addProduct = function(file){
     if (file) {
       file.upload = Upload.upload({
