@@ -133,7 +133,7 @@ nav ul {
       transition: all 0.3s ease;
       
       @include breakpoint(715) {
-        max-height:0;
+        // max-height:0;
         opacity:1;
         width:100%;
         position:relative;
@@ -171,7 +171,7 @@ nav ul {
           @include breakpoint(715) {
             color:white;
             padding-left:20px;
-            background:none;
+             background:none;
           }
         }
       }
@@ -187,7 +187,7 @@ MOBILE NAV STYLES
   display:none;
   margin:0;
   padding:20px 15px;
-  // background: linear-gradient(to bottom, #353535 0%,#262626 100%);
+  background: linear-gradient(to bottom, #353535 0%,#262626 100%);
   position:absolute;
   color:white;
   text-decoration:none;
