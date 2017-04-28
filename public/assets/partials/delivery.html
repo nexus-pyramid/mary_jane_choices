@@ -18,38 +18,30 @@
       
     </div>
   </div>
-  <!-- <a class="mobile" href="">&#9776;</a> -->
-  <nav>
-    <a class="mobile" href="">&#9776;</a>
-    <ul id="nav">
+  <a class="mobile_bus_nav" href="">&#9776;</a>
+  <section class="business_nav">
+    <ul id="business_nav">
       <li><a href="" ng-click="page='menu'">Menu</a></li>
       <li><a href="" ng-click="page='reviews'">Reviews</a></li>
       <li><a href="" ng-click="page='deals'">Deals</a></li>
       <li><a href="" ng-click="page='bio'">Bio</a></li>
     </ul>
-    <div style="clear:both;"></div>
-  </nav>
+  </section>
 <div ng-switch on="page">
   <div class="sheet__product grid" ng-switch-when="menu">
          <div class="product_nav">
-      <ul>
-        <li><a href="" ng-click="searchType=''">ALL CATEGORIES</a><br></li>
-        <li><a href="" ng-click="searchType='Flower'">FLOWER</a><br></li>
-        <li>
-          <ul>
-            <li><a href="" ng-click="searchType='Indica'">INDICA</a><br></li>
-            <li><a href="" ng-click="searchType='Sativa'">SATIVA</a><br></li>
-            <li><a href="" ng-click="searchType='Hybrid'">HYBRID</a><br></li>
-          </ul>
-        </li>
-        <li><a href="" ng-click="searchType='Extract'">EXTRACT</a><br></li>
-        <li><a href="" ng-click="searchType='Edible'">EDIBLE</a><br></li>
-        <li><a href="" ng-click="searchType='Topical'">TOPICALS</a><br></li>
-        <li><a href="" ng-click="searchType='Grow'">GROW</a><br></li>
-        <li><a href="" ng-click="searchType='Gear'">GEAR</a><br></li>
-        <li><a href="" ng-click="searchType='Preroll'">PREROLL</a><br></li>
-        <input type="text" placeholder="Search..." ng-model="searchText">
-      </ul>
+     <a href="" ng-click="searchType=''">ALL CATEGORIES</a>
+     <a href="" ng-click="searchType='Flower'">FLOWER</a>
+     <a href="" ng-click="searchType='Indica'">INDICA</a>
+     <a href="" ng-click="searchType='Sativa'">SATIVA</a>
+   <a href="" ng-click="searchType='Hybrid'">HYBRID</a>
+   <a href="" ng-click="searchType='Extract'">EXTRACT</a>
+   <a href="" ng-click="searchType='Edible'">EDIBLE</a>
+   <a href="" ng-click="searchType='Topical'">TOPICALS</a>
+   <a href="" ng-click="searchType='Grow'">GROW</a>
+   <a href="" ng-click="searchType='Gear'">GEAR</a>
+   <a href="" ng-click="searchType='Preroll'">PREROLL</a>
+   <input type="text" placeholder="Search..." ng-model="searchText">
     </div>
     <div class="product_container">
       <table class="products">

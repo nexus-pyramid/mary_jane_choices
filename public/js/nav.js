@@ -13,5 +13,7 @@ $(document).ready(function() {
     $(this).children('ul').toggleClass('active');
      $(this).children('.arrow').toggleClass('rotate');
   });
-
+ $('.mobile_bus_nav').click(function () {
+      $("section").toggleClass('active'); 
+   });
 });

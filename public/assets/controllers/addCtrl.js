@@ -350,6 +350,7 @@ console.log('showing products')
 // Get Logged User
 ////////////////////////////////////////
 function getLogged(){
+  console.log('getting logged')
   deliveryFactory.getLogged(function(data){
     UserService._id = data.data._id;
     UserService.name = data.data.name;
@@ -671,10 +672,10 @@ $scope.login = function(){
       $scope.businessErrors = data.errors;
     }
     else {
-    console.log(data);
     UserService._id = data._id;
     UserService.name = data.name;
     UserService.type = data.type;
+    console.log(UserService)
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
     $scope.mode = "add";

@@ -236,7 +236,7 @@ function businessesController(){
 					   	console.log(data[i].obj.type)
 					   		if (data[i].obj.type == "Delivery"){
 								resultData.push(data[i]);
-								console.log(resultData)
+								// console.log(resultData)
 					   		}
 						}
 						console.log(resultData)

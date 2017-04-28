@@ -3,7 +3,9 @@ app.controller('navController', function($rootScope, $scope, UserService, UserFa
 	  $scope.UserService = UserService;
 
 	$rootScope.$on('loggedin', function () {
+		console.log('ayeeeeee wereel ogging in')
   		$scope.UserService = UserService;
+  		console.log($scope.UserService)
 	});
 
 	  
