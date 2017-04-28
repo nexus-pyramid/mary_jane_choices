@@ -675,7 +675,7 @@ $scope.login = function(){
     UserService._id = data._id;
     UserService.name = data.name;
     UserService.type = data.type;
-    console.log(UserService)
+    console.log(UserService);
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
     $scope.mode = "add";

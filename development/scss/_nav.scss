@@ -242,10 +242,10 @@ MOBILE NAV STYLES
     display:table;
   }
 }
-// .mobile_bus_nav:active {
-//   max-height:9000px !important;
-//   transition: all 1s ease;
-// }
+.mobile_bus_nav:active {
+  max-height:9000px !important;
+  transition: all 1s ease;
+}
 
 .active {
   max-height:9000px !important;
