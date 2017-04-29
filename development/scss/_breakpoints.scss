@@ -11,6 +11,9 @@ $large: 1300;
   	@media (max-width: 715px) { @content; 		
   	}
   }
+  @else if $point == 400 {
+  	@media (max-width: 400px) { @content; }
+  }
 }
 
 

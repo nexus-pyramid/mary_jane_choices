@@ -18,15 +18,17 @@
       
     </div>
   </div>
-  <a class="mobile_bus_nav" href="">&#9776;</a>
+  <a class="mobile_nav" href="">&#9776;</a>
+  <div class="wrapper">
   <section class="business_nav">
-    <ul id="business_nav">
+    <ul class="bus">
       <li><a href="" ng-click="page='menu'">Menu</a></li>
       <li><a href="" ng-click="page='reviews'">Reviews</a></li>
       <li><a href="" ng-click="page='deals'">Deals</a></li>
       <li><a href="" ng-click="page='bio'">Bio</a></li>
     </ul>
   </section>
+  </div>
 <div ng-switch on="page">
   <div class="sheet__product grid" ng-switch-when="menu">
          <div class="product_nav">
