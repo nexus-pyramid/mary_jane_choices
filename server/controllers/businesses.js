@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
+var Applicant = mongoose.model('Applicant');
 var Review = mongoose.model('Review');
 var Flower = mongoose.model('Flower');
 var bcrypt = require('bcrypt');
@@ -196,6 +197,18 @@ function businessesController(){
 				res.json(resultData);
 			}
 		})
+	}
+	this.apply = function(req, res) {
+		console.log('in the apply function');
+		var newapp = new Applicant(req.body);
+		console.log(newapp)
+		newapp.save(function(err, data){
+			if(err){
+				res.json(err);
+			} else {
+				res.json(data);
+			}
+		});
 	}
 	this.getDispensaries = function(req,res){
 		Business.geoNear(req.body, {maxDistance:10, query: {valid: true}}, function(err, data){

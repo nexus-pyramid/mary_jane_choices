@@ -16,7 +16,13 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
-
+		this.apply = function(apply, callback){
+			$http.post('/apply', apply).then(function(returned_data){
+				if(typeof(callback) == 'function');{
+					callback(returned_data.data);
+				}
+			});
+		}
 		this.getLogged = function(callback){
 			$http.get('/getlogged').then(function(returned_data){
 				callback(returned_data);

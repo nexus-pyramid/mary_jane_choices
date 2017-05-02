@@ -38,6 +38,10 @@ app.config( function ($routeProvider, $locationProvider) {
     templateUrl: 'assets/partials/deliveries.html',
     controller:  'addCtrl'
   })
+  .when('/apply', {
+    templateUrl: 'assets/partials/mary.html',
+    controller:  'addCtrl'
+  })
   .when('/register/user', {
     templateUrl: 'assets/partials/register_user.html',
     controller:  'addCtrl'

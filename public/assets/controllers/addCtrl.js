@@ -450,32 +450,40 @@ function getFlowers(){
 // Add Product
 ////////////////////////////////////////
 $scope.uploadS3 = function(file){
- $http.post('/s3pic', query)
- .success(function(result) {
-    Upload.upload({
-        url: result.url, //s3Url
-        transformRequest: function(data, headersGetter) {
-                var headers = headersGetter();
-                delete headers.Authorization;
-                return data;
-            },
-            fields: result.fields, //credentials
-            method: 'POST',
-            file: files[0]
-        }).progress(function(evt) {
-            console.log('progress: ' + parseInt(100.0 * evt.loaded / evt.total));
-        }).success(function(data, status, headers, config) {
-            // file is uploaded successfully
-            console.log(data + status + headers + config)
-            console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-        }).error(function() {
-
-        });
+  console.log('in the s3 function')
+  var policy =  ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ
+ if (file) {
+      file.upload = Upload.upload({
+          url: 'https://' + maryjane420 + '.s3.amazon.com/',
+          method: 'POST',
+          headers: {'Authorization': undefined},
+          data: {
+              file: file,
+              'key': 'images/' + file.name,
+              'acl': 'public-read',
+              "Content-Type": file.type,
+              'AWSAccessKeyId': AKIAJVPIS263F7EXPBSA,
+              'success_action_status': '201',
+              'Policy': policy,
+              'Signature': chmsphsN9plSzKqE7ethKF61vg
+           }
+      });
+      file.upload.then(function (response) {
+        console.log(response);
+      if (response.status === 201) {
+            var data = xml2json.parser(response.data),
+            parsedData;
+            parsedData = {
+                location: data.postresponse.location,
+                bucket: data.postresponse.bucket,
+                key: data.postresponse.key,
+                etag: data.postresponse.etag
+            };
+        } else {
+            alert('Upload Failed');
+        }         
     })
-    .error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
+  }
 }
 
 
@@ -724,7 +732,18 @@ $scope.addReview = function(newReview, deliveryId){
 }
 // END Review
 ////////////////////////////////////////
-
+$scope.apply = function(apply) {
+  console.log(apply)
+  deliveryFactory.apply(apply, function(data){
+    console.log(apply)
+   if(data['errors']){
+     $scope.errors.push(data['errors']);
+   } else {
+    console.log(data);
+  console.log('its lit')
+   } 
+  })
+}
 ////////////////////////////////////////
 // DELETE Visit Delivery
 ////////////////////////////////////////

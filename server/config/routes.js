@@ -24,6 +24,7 @@ function loginAuthentication(req,res,next){
 
 module.exports = function(app){
   app.post('/login', businesses.login);
+  app.post('/apply', businesses.apply);
   app.get('/getlogged', businesses.getLogged);
   app.post('/register', deliveries.create);
   // app.post('/flower', deliveries.addFlower);
