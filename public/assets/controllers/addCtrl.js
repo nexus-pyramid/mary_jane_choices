@@ -18,7 +18,15 @@ addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope,
 
 
 
-
+$scope.openModal = function (index, item){
+  if(index>-1 || index<$scope.delivery.products.length){
+    $scope.activeItem=item;
+    $scope.modalVisible=true;
+    $scope.modalIndex=index;
+    console.log(index);
+  }
+  
+}
 ////////////////////////////////////////
 // Google Maps API
 ////////////////////////////////////////
@@ -272,6 +280,7 @@ $scope.deliveriesView = function(){
   getLocation();
   // getDeliveries();
   getLogged();
+  openModal();
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
@@ -325,6 +334,7 @@ $scope.deliveryView = function(){
   $scope.page = 'menu';
   $scope.searchText = '';
   $scope.searchType = '';
+  $scope.modalVisible=false;
 }
 // END Delivery Constructor
 ////////////////////////////////////////
@@ -519,19 +529,12 @@ $scope.addProduct = function(file){
           file.progress = Math.min(100, parseInt(100.0 *
                                    evt.loaded / evt.total));
       });
-      // $scope.name = '';
-      // $scope.type = '';
-      // $scope.productType = '';
-      // $scope.thc = '';
-      // $scope.description = '';
-      // $scope.one_gram = '';
-      // $scope.two_gram = '';
-      // $scope.eigth = '';
-      // $scope.quarter = '';
-      // $scope.half = '';
-      // $scope.ounce = '';
-      // $scope.price = '';
-      // $scope.half_gram = '';
+        if( status === 'Ok'){
+          toastr.success('Product Added', toastOpts);
+      }
+      else {
+          toastr.success('Product Added', toastOpts);
+     }
   }
 }
 // END Add Product
@@ -767,7 +770,6 @@ $scope.addUser  = function(userData, cityId){
   $scope.errors = []
   UserFactory.addUser(userData, cityId, function(data){
     if(data['errmsg']){
-
       $scope.errors.push("email is already registered")
     } 
     if(data['errors']){

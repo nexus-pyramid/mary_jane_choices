@@ -199,9 +199,7 @@ function businessesController(){
 		})
 	}
 	this.apply = function(req, res) {
-		console.log('in the apply function');
 		var newapp = new Applicant(req.body);
-		console.log(newapp)
 		newapp.save(function(err, data){
 			if(err){
 				res.json(err);
@@ -211,7 +209,7 @@ function businessesController(){
 		});
 	}
 	this.getDispensaries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:10, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:10}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
@@ -231,7 +229,7 @@ function businessesController(){
 	}
 
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:10, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:10}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {

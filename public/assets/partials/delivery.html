@@ -1,6 +1,32 @@
 <div class="wrapper" ng-init="deliveryView()" >
 
-
+ <div class="modal ng-hide" ng-show="modalVisible" >
+   <div class="mobile-overlay" ng-click="modalVisible=false;"></div>
+   <div class="modal-container">
+     <div>{{activeItem.name}}</div>
+     <p>{{activeItem.description}}</p>
+     <div class="price ng-hide" ng-show="activeItem.productType == 'Flower'">
+        <div class="price-6" ><p>Gram</p>{{activeItem.one_gram}}</div><!-- 
+         --><div class="price-6"><p>2 G</p>{{activeItem.two_gram}}</div><!-- 
+         --><div class="price-6"><p>1/8</p>{{activeItem.eigth}}</div><!-- 
+         --><div class="price-6"><p>1/4</p>{{activeItem.quarter}}</div><!-- 
+         --><div class="price-6"><p>1/2</p>{{activeItem.half}}</div><!-- 
+         --><div class="price-6"><p>1oz</p>{{activeItem.ounce}}</div>
+      </div>
+      <div class="price ng-hide" ng-show="activeItem.productType == 'Extract'">
+        <div class="price-3" ><p>1/2 Gram</p>{{activeItem.half_gram}}</div><!-- 
+        --><div class="price-3" ><p>Gram</p>{{activeItem.one_gram}}</div><!-- 
+         --><div class="price-3"><p>2 G</p>{{activeItem.two_gram}}</div>
+      </div>
+      <div class="price ng-hide" ng-show="activeItem.productType == 'Grow' || activeItem.productType == 'Edible' || activeItem.productType == 'Topical' || activeItem.productType == 'Gear'">
+        <div class="price-3" ><p>Price</p>{{activeItem.price}}</div>
+      </div>
+     <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{activeItem.image}}"></td>
+     <button ng-click="openModal(modalIndex-1, delivery.products[modalIndex-1])"><</button>
+     <button ng-click="openModal(modalIndex+1, delivery.products[modalIndex+1])">></button>
+   </div>
+   
+ </div>
   <div class="sheet__head">
     <div class="sheet__contact">
       <!-- <div class="contact__container"> -->
@@ -50,14 +76,13 @@
         <tr>
           <th>Image</th>
           <th>Name</th>
-          <th>Description</th>
           <th>Price</th>
+          <th class="prod-price-mobile"></th>
         </tr>
-        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product">
-          <td> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
-          <td><h3>{{product.name | uppercase}}</h3></td>
-          <td>{{product.description}}</td>
-          <td>
+        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product" ng-click="openModal($index, product)">
+          <td class="prod-img"> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
+          <td class="prod-name"><h3>{{product.name | uppercase}}</h3></td>
+          <td class="prod-price">
             <div class="price ng-hide" ng-show="product.productType == 'Flower'">
               <div class="price-6" ><p>Gram</p>{{product.one_gram}}</div><!-- 
                --><div class="price-6"><p>2 G</p>{{product.two_gram}}</div><!-- 
@@ -76,6 +101,9 @@
             </div>
 
 
+          </td>
+          <td class="prod-price-mobile">
+            
           </td>
         </tr>
       </table>

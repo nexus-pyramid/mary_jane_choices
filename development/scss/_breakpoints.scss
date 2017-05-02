@@ -16,6 +16,10 @@ $large: 1300;
   }
 }
 
-
+@mixin breakpointmin($point){
+	@media (min-width:$point){
+		@content;
+	}
+}
 // use like this:
 // @include breakpoint(715) { }

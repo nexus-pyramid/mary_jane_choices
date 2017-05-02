@@ -10,12 +10,13 @@
 	text-align: center;
 	background-color:$black;
     padding: 0 10px;
-	overflow: auto;
 	// display:inline-block;
 	vertical-align:top;
 	height:60px;
 	width: 100%;
 	white-space: nowrap;
+	overflow-x:auto;
+	overflow-y:auto;
 	a{
 		display: inline-block;
 		// margin: 20px;
@@ -45,6 +46,26 @@
 	 // 	width: 100%;
 	 // }
 	
+}
+.product{
+	.prod-price{
+		text-align: center;
+		.price{
+			margin:0 auto;
+		}
+		@include breakpoint(715){
+			display:none;
+		}
+	}
+	.prod-desc{
+		text-align: center;
+	}
+	.prod-name{
+		text-align: center;
+	}
+	.prod-img{
+		text-align: center;
+	}
 }
 
 .product_container {
@@ -88,6 +109,38 @@
   display: table;
   clear: both;
   // width: 100%;
+}
+
+.modal{
+	background:rgba(0,0,0,0.2);
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	z-index:999;
+	text-align:center;
+	.modal-container{
+		background: #fff;
+		height: 100%;
+		width:80%;
+		position:relative;
+		z-index: 999;
+		margin:0 auto;
+		text-align:center;
+		div, p, button{
+			text-align: center;
+		}
+	}
+	.modal-overlay{
+		z-index: 998;
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background:rgba(0,0,0,0.2);
+	}
 }
 
 // [class*='col-'] {
