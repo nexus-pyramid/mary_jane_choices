@@ -887,6 +887,9 @@ $scope.createDelivery = function(file) {
         console.log('status ok');
       }
       else {
+        if(data['errors']){
+        $scope.errors.push(data['errors']);
+        } 
        // alert("Geocode was not successful for the following reason: " + status);
      }
    });
@@ -910,6 +913,10 @@ $scope.createBusiness = function(file) {
       $scope.loc.lng = results[0].geometry.location.lng();
       $scope.loc.lat = results[0].geometry.location.lat();
       console.log($scope.loc);
+      // if($scope.password.length > 8){
+      //   console.log("passwd to short")
+      //   return;
+      // }
       file.upload = Upload.upload({
         url:'/addBusiness',
         data: {
@@ -928,9 +935,20 @@ $scope.createBusiness = function(file) {
       }
     });
     file.upload.then(function (response) {
+      console.log(response)
         $timeout(function () {
             file.result = response.data;
         });
+
+      if( response.status == 200){
+        console.log('status ok');
+      }
+      else { 
+        console.log(response);
+        if(response['err']){
+        $scope.errors.push(response['err']);
+        } 
+     }
     }, function (response) {
         if (response.status > 0)
             $scope.errorMsg = response.status + ': ' + response.data;
@@ -939,14 +957,7 @@ $scope.createBusiness = function(file) {
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
-
-      if( status === 'Ok'){
-        console.log('status ok');
-      }
-      else {
-       // alert("Geocode was not successful for the following reason: " + status);
-     }
-     $location.url('/login');
+     // $location.url('/login');
    });
  }geocodeAddress();
 }

@@ -2,7 +2,6 @@ var path = require('path'),
     users = require('../controllers/users.js'),
     deliveries = require('../controllers/deliveries.js'),
     dispensaries = require('../controllers/dispensaries.js'),
-    flowers = require('../controllers/flowers.js'),
     businesses = require('../controllers/businesses.js'),
     multiparty = require('connect-multiparty'),
     multipartyMiddleware = multiparty();
@@ -41,7 +40,6 @@ module.exports = function(app){
   app.post('/getDispensaries', businesses.getDispensaries);
   app.post('/getDoctors', businesses.getDoctors);
   app.post('/user/:id', users.addUser);
-  app.get('/flowers', flowers.index);
   app.get('/showProducts/:id', businesses.show);
   app.post('/delete/:id', businesses.delete);
   // app.use(loginAuthentication);

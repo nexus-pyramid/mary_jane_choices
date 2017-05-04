@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var Business = mongoose.model('Business');
 var Applicant = mongoose.model('Applicant');
 var Review = mongoose.model('Review');
-var Flower = mongoose.model('Flower');
 var bcrypt = require('bcrypt');
 var Product = mongoose.model('Product');
 var auth = require('basic-auth');
@@ -10,7 +9,7 @@ var fs = require('fs')
 function businessesController(){
 
 	this.addBusiness = function(req,res){
-			console.log(req.body);
+			console.log('hey');
 			var newBusiness = new Business(req.body);
 			var file = req.files.file;
 			fs.readFile(file.path, function (err, original_data){
