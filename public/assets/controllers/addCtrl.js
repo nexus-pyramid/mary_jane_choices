@@ -284,10 +284,14 @@ $scope.deliveriesView = function(){
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
-
+$scope.dashView = function(){
+  console.log('whats up');
+  getfeatured();
+}
 ////////////////////////////////////////
 // dispensaries Constructor
 $scope.dispensariesView = function(){
+    console.log('whats up');
   get_disp();
   // getDispensaries();
   getLogged();
@@ -329,6 +333,7 @@ $scope.adminView = function(){
 ////////////////////////////////////////
 // Delivery Constructor
 $scope.deliveryView = function(){
+  console.log('hey')
   getbusiness();
   getLogged();
   $scope.page = 'menu';
@@ -360,7 +365,6 @@ console.log('showing products')
 // Get Logged User
 ////////////////////////////////////////
 function getLogged(){
-  console.log('getting logged')
   deliveryFactory.getLogged(function(data){
     UserService._id = data.data._id;
     UserService.name = data.data.name;
@@ -407,7 +411,20 @@ function geocodeAddress(){
 }
 // END Geocode Address
 ////////////////////////////////////////
-
+function getfeatured(){
+  console.log('in the get featured');
+  deliveryFactory.getfeatured(function(data){
+     $scope.featured = data;
+  });
+}
+var getfeatured = function(){
+  console.log('ayeee');
+ deliveryFactory.getfeatured(function(data){
+     $scope.featured = data;
+     console.log(data);
+  });
+} 
+getfeatured();
 ////////////////////////////////////////
 // Get dispensaries
 ////////////////////////////////////////
@@ -460,22 +477,24 @@ function getFlowers(){
 // Add Product
 ////////////////////////////////////////
 $scope.uploadS3 = function(file){
-  console.log('in the s3 function')
-  var policy =  ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ
+  console.log('in the s3 function');
+  console.log(file);
+  var policy = "ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgICB7ImFjbCI6ICJwcml2YXRlIn0sCiAgICB7InN1Y2Nlc3NfYWN0aW9uX3N0YXVzIjogIjIwMSJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ==";
  if (file) {
       file.upload = Upload.upload({
-          url: 'https://' + maryjane420 + '.s3.amazon.com/',
-          method: 'POST',
-          headers: {'Authorization': undefined},
+          // console.log(file);
+          url: "https://maryjane420.s3.amazonaws.com/",
+          method: "POST",
+          headers: {"Authorization": undefined},
           data: {
-              file: file,
-              'key': 'images/' + file.name,
-              'acl': 'public-read',
+              key : file.name,
+              AWSAccessKeyId: "AKIAJVPIS263F7EXPBSA",
+              acl: "private",
+              policy : policy,
+              signature: "TfCsv/ALYuMz/96K3GVo/uSU4nU=",
               "Content-Type": file.type,
-              'AWSAccessKeyId': AKIAJVPIS263F7EXPBSA,
-              'success_action_status': '201',
-              'Policy': policy,
-              'Signature': chmsphsN9plSzKqE7ethKF61vg
+              success_action_status: "201",
+              file: file
            }
       });
       file.upload.then(function (response) {

@@ -16,6 +16,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.getfeatured = function(callback){
+			$http.get('/getfeatured').then(function(returned_data){
+				console.log(returned_data);
+				callback(returned_data.data);
+			})
+		}
 		this.apply = function(apply, callback){
 			$http.post('/apply', apply).then(function(returned_data){
 				if(typeof(callback) == 'function');{

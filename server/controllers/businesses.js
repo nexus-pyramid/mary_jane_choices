@@ -37,6 +37,18 @@ function businessesController(){
 			}
 		})
 	}
+	this.getfeatured = function(req, res){
+		console.log('getting featured');
+		Business.find({featured: true}, function(err, data){
+			if (err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log(data);
+				res.json(data)
+			}
+		})
+	}
 	this.delete = function(req, res){
 		console.log('in the delete')
 		console.log(req.params)
