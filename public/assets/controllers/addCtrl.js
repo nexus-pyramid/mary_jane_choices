@@ -942,6 +942,8 @@ $scope.createBusiness = function(file) {
 
       if( response.status == 200){
         console.log('status ok');
+             $location.url('/login');
+
       }
       else { 
         console.log(response);
@@ -957,7 +959,6 @@ $scope.createBusiness = function(file) {
         file.progress = Math.min(100, parseInt(100.0 *
                                  evt.loaded / evt.total));
     });
-     // $location.url('/login');
    });
  }geocodeAddress();
 }
