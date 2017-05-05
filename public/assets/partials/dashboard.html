@@ -1,4 +1,4 @@
-<div ng-init="dispensariesView()">
+<div ng-init="dashView()">
 <div class="sheet__dashboard">	
 	<span class="mary-text">
 	  <p>- ARE YOU THE NEXT -</p>
@@ -11,9 +11,15 @@
 <div class="featured_text">
 	<h1>Shops Accepting MJ'S Coupons</h1>
 </div>
-<div class="featured">
+<div class="featured" ng-repeat="shop in featured">
+    <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
+ <h2> {{shop.name}} </h2>
+ <a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
+</div>
+<!-- <div class="featured">
 <img class="feat_img" src="pics/top_shelf.jpg">
 <h2> Hollywoods top shelf</h2>
+<a href="#/show/590bbbedd444d26c8efb6743"><button class="menu-btn">Menu</button></a>
 </div>
 <div class="featured">
 <img class="feat_img" src="pics/xclusive.jpg">
@@ -22,7 +28,7 @@
 <div class="featured">
 <img class="feat_img" src="pics/weed_boys.jpg">
 <h2> Weed Boys</h2>
-</div>
+</div> -->
 </div>
 <!-- <div class="sheet__sponsors">
 	<h1>Sponsors</h1>		

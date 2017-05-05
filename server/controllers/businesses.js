@@ -63,6 +63,7 @@ function businessesController(){
 	}
 	this.show = function(req, res){
 		console.log('in the show function')
+		console.log('req.params.id')
 		//I changed this because it would only show logged in busness' products
 		// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
 		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){

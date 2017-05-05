@@ -4,7 +4,7 @@ app.config( function ($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'assets/partials/dashboard.html',
-    controller: 'dashboardController'
+    controller: 'addCtrl'
    })
   .when('/admin', {
     templateUrl: 'assets/partials/login.html',

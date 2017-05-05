@@ -3,7 +3,6 @@ var addCtrl = angular.module('addCtrl', ['geolocation', 'gservice']);
 addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope, $route, geolocation, LocationService, gservice, deliveryFactory, UserFactory, dispensaryFactory, doctorFactory, $location, $routeParams, $timeout, Upload, UserService){
   // $scope.formData = {};
 
-
 ////////////////////////////////////////
 // Global variables
 ////////////////////////////////////////
@@ -16,17 +15,15 @@ addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope,
 // END Global Variables
 ////////////////////////////////////////
 
-
-
-$scope.openModal = function (index, item){
-  if(index>-1 || index<$scope.delivery.products.length){
-    $scope.activeItem=item;
-    $scope.modalVisible=true;
-    $scope.modalIndex=index;
-    console.log(index);
-  }
+// $scope.openModal = function (index, item){
+//   if(index>-1 || index<$scope.delivery.products.length){
+//     $scope.activeItem=item;
+//     $scope.modalVisible=true;
+//     $scope.modalIndex=index;
+//     console.log(index);
+//   }
   
-}
+// }
 ////////////////////////////////////////
 // Google Maps API
 ////////////////////////////////////////
@@ -284,10 +281,10 @@ $scope.deliveriesView = function(){
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
-$scope.dashView = function(){
-  console.log('whats up');
-  getfeatured();
-}
+// $scope.dashView = function(){
+//   console.log('whats up');
+//   getfeatured();
+// }
 ////////////////////////////////////////
 // dispensaries Constructor
 $scope.dispensariesView = function(){
@@ -308,7 +305,9 @@ $scope.doctorsView = function(){
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
-
+$scope.dashView = function(){
+  getfeatured();
+}
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
@@ -675,7 +674,7 @@ function getbusiness(){
 //// ng-click to show one delivery
 ////////////////////////////////////////
 $scope.show = function(){
-  deliveryFactory.show($scope.delivery._id, $scope.delivery, function(data){
+  deliveryFactory.show($scope.business._id, function(data){
     if(data['errors']){
       $scope.errors.push(data['errors']);
     } else{
