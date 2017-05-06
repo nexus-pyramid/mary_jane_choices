@@ -326,12 +326,27 @@ $scope.adminView = function(){
   // promise.then(showProducts);
   
 }
+
 // END Admin Constructor
 ////////////////////////////////////////
 // $scope.dispensaryView =
 ////////////////////////////////////////
 // Delivery Constructor
 $scope.deliveryView = function(){
+  console.log('hey')
+  getbusiness();
+  getLogged();
+  $scope.page = 'menu';
+  $scope.searchText = '';
+  $scope.searchType = '';
+  $scope.modalVisible=false;
+}
+// END Delivery Constructor
+////////////////////////////////////////
+
+////////////////////////////////////////
+// Doctor Constructor
+$scope.doctorView = function(){
   console.log('hey')
   getbusiness();
   getLogged();
@@ -353,6 +368,7 @@ function showProducts(){
 console.log('showing products')
   deliveryFactory.showProducts(UserService._id, function(data){
     $scope.products = data.products;
+    $scope.business = data;
     // UserService._id = data.data._id;
     
   })
@@ -502,10 +518,10 @@ $scope.uploadS3 = function(file){
             var data = xml2json.parser(response.data),
             parsedData;
             parsedData = {
-                location: data.postresponse.location,
-                bucket: data.postresponse.bucket,
-                key: data.postresponse.key,
-                etag: data.postresponse.etag
+                location: data.response.location,
+                bucket: data.response.bucket,
+                key: data.response.key,
+                etag: data.response.etag
             };
         } else {
             alert('Upload Failed');
@@ -666,6 +682,7 @@ function getbusiness(){
   deliveryFactory.show($routeParams.id, function(data){
     console.log(data);
     $scope.delivery = data;
+    $scope.business = data;
   });
 };
 // END Get Delivery

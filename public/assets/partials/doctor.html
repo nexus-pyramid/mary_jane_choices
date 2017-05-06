@@ -1,0 +1,45 @@
+<div class="wrapper" ng-init="doctorView()">
+  <div class="sheet__head">
+    <div class="sheet__contact">
+        <div class="icon__profile">
+          <img data-ng-src="data:image/JPEG;base64,{{business.image}}">
+        </div>
+        <div class="business_info">
+          <h1>{{business.name | uppercase}}</h1>
+          <p>{{business.type}}</p>
+          <p>{{business.email}}</p>
+          <p>{{business.phone}}</p>    
+        </div>     
+    </div>
+  </div>
+  <a class="mobile_nav" href="">&#9776;</a>
+  <div class="wrapper">
+  <section class="business_nav">
+    <ul class="bus">
+      <li><a href="" ng-click="page='reviews'">Reviews</a></li>
+      <li><a href="" ng-click="page='deals'">Deals</a></li>
+      <li><a href="" ng-click="page='about_us'">About Us</a></li>
+      <li><a href="" ng-click="page='disclamier'">Disclaimer</a></li>
+    </ul>
+  </section>
+  </div>
+<div ng-switch on="page">
+  <div class="sheet__reviews" ng-switch-when="reviews">
+    <div ng-repeat="review in business.reviews">
+      <label>Reviews</label>
+      <h3>Review:</h3> <p>{{review.review}}</p>
+      <h3>User:</h3><p>{{review._user.name}}</p>
+    </div>
+  </div>
+  <div class="sheet__deals" ng-switch-when="deals">
+    <h3>Deals</h3>
+  </div>
+  <div class="sheet__about_us" ng-switch-when="about_us"> 
+    <h3>About Us</h3>
+  </div>
+  <div class="sheet__disclaimer" ng-switch-when="disclamier">
+    <h3>Disclaimer</h3> 
+  </div>
+</div>
+</div>
+

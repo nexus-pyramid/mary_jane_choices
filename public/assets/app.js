@@ -34,6 +34,10 @@ app.config( function ($routeProvider, $locationProvider) {
    templateUrl: 'assets/partials/delivery.html',
    controller: 'addCtrl'
   })
+  .when('/doctor/:id', {
+   templateUrl: 'assets/partials/doctor.html',
+   controller: 'addCtrl'
+  })
   .when('/deliveries', {
     templateUrl: 'assets/partials/deliveries.html',
     controller:  'addCtrl'
