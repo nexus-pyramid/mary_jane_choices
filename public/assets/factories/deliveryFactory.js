@@ -34,6 +34,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data);
 			});
 		}
+		this.editPassword = function(editbusiness, callback){
+			$http.post('/password', editbusiness).then(function(returned_data){
+			callback(returned_data.data);	
+			});
+		}
 		this.sendCoords = function(coords, callback){
 			$http.get('/sendCoords').then(function(returned_data){
 				callback(returned_data.data);

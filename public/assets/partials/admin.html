@@ -1,6 +1,32 @@
 
 <div class="sheet__register" ng-init="adminView()">
-  <div class="register-delivery">
+<p>{{business.name}} </p>
+<div class="icon__profile">
+          <img data-ng-src="data:image/JPEG;base64,{{business.image}}">
+</div>
+<button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
+  <h3> Edit Information </h3>
+  <div class="edit_business" class="ng-hide" ng-show="edit =='password'">
+    <form>
+      <input type="text" ng-model="name" placeholder="{{business.name}}">
+      <input type="text" ng-model="email" placeholder="{{business.email}}">
+      <input type="text" ng-model="phone" placeholder="{{business.phone}}">
+      <textarea ng-model="bio" placeholder="{{business.bio}}"></textarea>
+      <div class="ng-hide" ng-show="mode=='Doctor'"><img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'"></div>
+          <div ng-switch on="file">
+            <div ng-switch-when="file.length < 1000">
+              <img class="upload-product-image ng-hide"  ng-show="mode=='Doctor'" ngf-thumbnail="file">
+            </div>
+            <div ng-switch-default>
+              <img class="upload-product-image ng-hide" ng-show="mode=='Doctor'" data-ng-src="data:image/JPEG;base64,{{business.image}}">
+            </div>
+          </div> 
+         <input type="file" ngf-select ng-model="file" name="file" placeholder="icon image">
+          <button class="edit-btn" ng-click="editBusiness(file)">edit Information </button>
+    </form>
+   <a href="#/edit_pass"> Change password </a>
+  </div>
+  <div class="register-delivery" class="ng-hide" ng-show="mode !== 'Doctor'">
       <ul ng-if='errors.length > 0'>
         <li ng-repeat='error in errors'>{{error}}</li>
       </ul>
@@ -8,7 +34,7 @@
       <h2 class="ng-hide" ng-show="mode == 'add'">Add Product</h2>
       <h2 class="ng-hide" ng-show="mode == 'edit'">Edit Product</h2>
         <input type="text" ng-model='name' placeholder="Name">
-        <textarea ng-model='description' placeholder="Description"></textarea>
+        <textarea ng-model='bio' placeholder="Description"></textarea>
         <select ng-model="productType">
           <option class="default-option" value="" selected data-default>Type</option>
           <option value="Flower">Flower</option>
@@ -45,12 +71,8 @@
             </div>
             <div ng-switch-default>
               <img class="upload-product-image ng-hide" ng-show="mode=='edit'" data-ng-src="data:image/JPEG;base64,{{file}}">
-
             </div>
           </div>
-
-          
-          
           <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
         <button class="form-btn ng-hide" ng-click='addProduct(file)' ng-show="mode == 'add'">Add Product</button>
         <button class="form-btn ng-hide" ng-click='editProduct(file)' ng-show="mode == 'edit'">Edit Product</button>
@@ -92,6 +114,9 @@
     <button class="delete-btn" ng-click="deleteProduct(product._id)">Delete</button>
   </div>
 
+</div>
+<div class="sheet__edit" id="edit">
+{{}}
 </div>
 <div class="s3">
 add image to s3

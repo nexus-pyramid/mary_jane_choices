@@ -319,9 +319,13 @@ $scope.adminView = function(){
   getLogged()
   $timeout(function(){showProducts()},100)
 
-  $scope.mode = 'add';
+  // $scope.mode = 'add';
   console.log("MODE IS " + $scope.mode)
-
+    $scope.mode = "add";
+    if (UserService.type == "Doctor") {
+      $scope.mode = "Doctor";
+    } 
+    $scope.edit = "no";
   // var promise = getLoggedPromise();
   // promise.then(showProducts);
   
@@ -375,7 +379,12 @@ console.log('showing products')
 }
 // END Show Products
 ////////////////////////////////////////
-
+// function getBusiness(){
+// console.log('showing products')
+//   deliveryFactory.getBusiness(UserService._id, function(data){
+//     $scope.business = data;    
+//   })
+// }
 ////////////////////////////////////////
 // Get Logged User
 ////////////////////////////////////////
@@ -389,7 +398,6 @@ function getLogged(){
 }
 // END Get Logged User
 ////////////////////////////////////////
-
 
 ////////////////////////////////////////
 // Get Logged User with Promise
@@ -529,7 +537,11 @@ $scope.uploadS3 = function(file){
     })
   }
 }
-
+$scope.editBusiness = function(){
+  $scope.edit == 'business';
+  console.log('in the edit business');
+  console.log($scope.edit);
+}
 
 $scope.addProduct = function(file){
     if (file) {
@@ -608,11 +620,36 @@ $scope.editView = function(product){
 }
 // END Edit View
 ////////////////////////////////////////
+$scope.editbusinessView = function(){
+console.log($scope.business);
+      $timeout(function(){
+        $anchorScroll();
+        $location.hash('form');
+      }, 500)
+        $scope.name =  $scope.business.name;
+        $scope.type = $scope.business.type;
+        $scope.city =  $scope.business.city;
+        $scope.zip_code = $scope.business.zip_code;
+        $scope.state = $scope.business.state;
+        $scope.phone = $scope.business.phone;
+        $scope.bio = $scope.business.bio;
+        $scope.email = $scope.business.email;
+        // $scope.password = $scope.business.password;
+        console.log($scope.password);
+        // $scope.address = $scope.business.street_address;
+        // $scope.location = [$scope.business.loc.lng, $scope.business.loc.lat];
+        $scope.edit ='password';
+ // $location.url('/edit/'+deliveryId);
+}
+// END Edit View
+////////////////////////////////////////
 
 ////////////////////////////////////////
 // Edit Product
 ////////////////////////////////////////
 $scope.editProduct = function(file){
+  console.log($scope.type);
+  console.log($scope.name);
       if (file) {
       file.upload = Upload.upload({
           url: '/editProduct',
@@ -721,10 +758,13 @@ $scope.login = function(){
     UserService._id = data._id;
     UserService.name = data.name;
     UserService.type = data.type;
-    console.log(UserService);
+    console.log(UserService.type);
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
     $scope.mode = "add";
+    if (UserService.type == "Doctor") {
+      $scope.mode = "Doctor";
+    } 
    }
  });
 }
@@ -801,6 +841,18 @@ $scope.apply = function(apply) {
 ////////////////////////////////////////
 // Add User
 ////////////////////////////////////////
+$scope.editPassword = function(editbusiness){
+  console.log(editbusiness)
+  deliveryFactory.editPassword(editbusiness, function(data){
+    if(data['errors']){
+            $scope.errors.push("email is already registered")
+        console.log('fck')
+    } else {
+            $location.url('/login');
+          toastr.success('Successfully edited password', toastOpts);             
+    }
+  })
+}
 $scope.addUser  = function(userData, cityId){
   $scope.errors = []
   UserFactory.addUser(userData, cityId, function(data){
@@ -978,6 +1030,52 @@ $scope.createBusiness = function(file) {
    });
  }geocodeAddress();
 }
+$scope.editBusiness = function(file){
+  console.log(file)
+  console.log(UserService._id)
+  console.log($scope.email)
+    console.log($scope.business)
+      if (file) {
+        console.log('file included');
+      file.upload = Upload.upload({
+          url: '/editBusiness',
+          data: {
+              file: file,
+              name: $scope.name,
+              _id: UserService._id,
+              name: $scope.name,
+              type: $scope.type,
+              city: $scope.city,
+              zip_code: $scope.zip_code,
+              state: $scope.state,
+              phone: $scope.phone,
+              bio: $scope.bio,
+              email: $scope.email,
+              // password: $scope.password,
+              // address: $scope.street_address,
+              // location: [$scope.loc.lng, $scope.loc.lat]
+           }
+      });
+      file.upload.then(function (response) {
+          $timeout(function () {
+              file.result = response.data;
+          });
+          if( response.status == 200){
+        console.log('status ok');
+            $route.reload();
+            toastr.success('Successfully edited business', toastOpts);             
+      }
+      }, function (response) {
+          if (response.status > 0)
+              $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 *
+                                   evt.loaded / evt.total));
+      });
+    }  
+}
+
+
 })
 // END addCtrl
 ////////////////////////////////////////

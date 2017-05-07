@@ -26,6 +26,10 @@ app.config( function ($routeProvider, $locationProvider) {
    templateUrl: 'assets/partials/login.html',
    controller: 'addCtrl'
   })
+  .when('/edit_pass',{
+   templateUrl: 'assets/partials/edit_pass.html',
+   controller: 'addCtrl'
+  })
   .when('/user/:id', {
     templateUrl: 'assets/partials/user-page.html',
     controller: 'addCtrl'

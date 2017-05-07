@@ -42,6 +42,8 @@ module.exports = function(app){
   app.post('/user/:id', users.addUser);
   app.get('/showProducts/:id', businesses.show);
   app.post('/delete/:id', businesses.delete);
+  app.post('/editBusiness', businesses.edit);
+  app.post('/password', businesses.updatePass);
   // app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);

@@ -43,7 +43,6 @@ function businessesController(){
 				console.log(err);
 				res.json(err);
 			} else {
-				console.log(data);
 				res.json(data)
 			}
 		})
@@ -79,12 +78,97 @@ function businessesController(){
 			}
 		})
 	}
+	this.updatePass = function(req, res){
+		Business.findOne({_id: req.session.Logged._id}, function(err, business){
+			if(!business) {
+				console.log(err);
+				res.json(err);
+			}
+			if(err){
+				res.json(err)
+				console.log(err)
+			} else {
+				console.log('hey in the password')
+				business.password = req.body.password;
+				business.save(function(err, result){
+					if(err){
+						console.log(err);
+						res.json(err);
+					} else {
+						console.log(result);
+						res.json(result);
+					}
+				})
+			}
+		})
+	}
+	this.edit = function(req, res){
+		Business.findOne({_id: req.body._id}, function(err, business){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				console.log(req.body._id)
+				console.log('business were updating')
+				console.log(business)
+				console.log('business were updating')
+				business.name = req.body.name;
+				business.email = req.body.email;
+				business.phone = req.body.phone;
+				business.bio = req.body.bio;
+				var newfile = req.files.file;
+				console.log(req.files.file);
+			    req.body.password = bcrypt.hashSync(password);
+
+					console.log('updating password')
+				if (!req.files.file){
+					business.save(function(err, result){
+	        				if(err){
+	        				console.log(err)
+					         res.send(400);
+				            } else {
+				            	console.log(result)
+					              res.json(result)
+				            }
+	        			    })
+				} else {
+				        fs.readFile(newfile.path, function( err, new_data){
+					if(err){
+						res.json(err);
+						} else {
+							var bs = new_data.toString('base64');
+	        				fs.unlink(newfile.path, function(err){
+	          					if (err){
+	            					console.log(err);
+	            					console.log('failed to delete' + newfile.path);
+	         					} else {
+	            					console.log('successfully' + newfile.path);
+	          					}	
+	        				});
+	        				business.image = bs
+							business.save(function(err, result){
+	        				if(err){
+	        				console.log(err);
+					         res.send(400);
+				            } else {
+				            	console.log(result)
+					              res.json(result)
+				            	}
+	        			    })
+	        			   }
+				    	})
+	            	} 
+	        }
+		})
+	}
 	this.editProduct = function(req,res){
 
 		Product.findOne({_id: req.body._id}, function(err, newproduct){
 			if(err){
 				console.log(err);
 			} else {
+				console.log(newproduct)
+				console.log('product were updating')
 				newproduct.name = req.body.name;
 				newproduct.description = req.body.description;
 				newproduct.type = req.body.type;
