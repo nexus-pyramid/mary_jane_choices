@@ -1,5 +1,5 @@
 var app = angular.module("app", ['ngRoute', 'geolocation', 'addCtrl',  'ngFileUpload', 'gservice']);
-app.config( function ($routeProvider, $locationProvider) {
+app.config( function ($routeProvider, $locationProvider, $httpProvider) {
   $locationProvider.hashPrefix('');
   $routeProvider
   .when('/', {
@@ -66,4 +66,27 @@ app.config( function ($routeProvider, $locationProvider) {
     redirectTo: '/'
   });
     // $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('authInterceptor');
 });
+
+ angular
+    .module('app')
+    .factory('authInterceptor', authInterceptor);
+
+  authInterceptor.$inject = ['$rootScope', '$q', '$location'];
+
+  function authInterceptor($rootScope, $q, $location) {
+
+    return {
+
+      // intercept every request
+      request: function(config) {
+        var foreignUrl = config.url.indexOf('amazonaws') > -1;
+        if(foreignUrl) {
+          console.log('yah im fuckde')
+          config.headers['Authorization'] = undefined;
+        }
+        return config;
+      }
+    };
+  }

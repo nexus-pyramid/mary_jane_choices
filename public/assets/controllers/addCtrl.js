@@ -502,23 +502,24 @@ function getFlowers(){
 $scope.uploadS3 = function(file){
   console.log('in the s3 function');
   console.log(file);
-  var policy = "ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgICB7ImFjbCI6ICJwcml2YXRlIn0sCiAgICB7InN1Y2Nlc3NfYWN0aW9uX3N0YXVzIjogIjIwMSJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ==";
+  var sub = file;
+  var policy = "ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwiJGtleSIsICJpbWFnZXMvIl0sCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRzdWNjZXNzX2FjdGlvbl9zdGF0dXMiLCAiMjAxIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ==";
  if (file) {
-      file.upload = Upload.upload({
+    var policy = "ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogIm1hcnlqYW5lNDIwIn0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiaW1hZ2VzLyJdLAogICAgeyJhY2wiOiAicHVibGljLXJlYWQifSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICIiXSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJGZpbGVuYW1lIiwgIiJdLAogICAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDUyNDI4ODAwMF0KICBdCn0=";
+     file.upload = Upload.upload({
           // console.log(file);
           url: "https://maryjane420.s3.amazonaws.com/",
           method: "POST",
-          headers: {"Authorization": undefined},
           data: {
-              key : file.name,
+              key: "images/" + file.name,
               AWSAccessKeyId: "AKIAJVPIS263F7EXPBSA",
-              acl: "private",
+              acl: "public-read",
               policy : policy,
-              signature: "TfCsv/ALYuMz/96K3GVo/uSU4nU=",
-              "Content-Type": file.type,
+              signature: "wtNtxv8MduG7zsHqwEMtqFP4RtE=",
+              "Content-Type": file.type != '' ? file.type : 'application/octet-stream',
               success_action_status: "201",
-              file: file
-           }
+              file: sub
+          }
       });
       file.upload.then(function (response) {
         console.log(response);
@@ -913,56 +914,56 @@ $scope.deleteProduct = function(product_id) {
 ////////////////////////////////////////
 // Create Delivery
 ////////////////////////////////////////
-$scope.createDelivery = function(file) {
-  function geocodeAddress(){
-    var geocoder = new google.maps.Geocoder();
-    var address = $scope.street_address;
-    var loc = [];
-    geocoder.geocode({'address': address}, function(results, status){
-      $scope.loc = {};
-      $scope.loc.lng = results[0].geometry.location.lng();
-      $scope.loc.lat = results[0].geometry.location.lat();
-      console.log($scope.loc);
-      file.upload = Upload.upload({
-        url:'/addDelivery',
-        data: {
-        file: file,
-        name: $scope.name,
-        type: $scope.type,
-        _city: $scope.city._id,
-        phone: $scope.phone,
-        bio: $scope.bio,
-        email: $scope.email,
-        password: $scope.password,
-        address: $scope.street_address,
-        location: [$scope.loc.lng, $scope.loc.lat],
-        hours: $scope.hours
-      }
-    });
-    file.upload.then(function (response) {
-        $timeout(function () {
-            file.result = response.data;
-        });
-    }, function (response) {
-        if (response.status > 0)
-            $scope.errorMsg = response.status + ': ' + response.data;
-    }, function (evt) {
-        // We can use this to show progress and thumbnail
-        file.progress = Math.min(100, parseInt(100.0 *
-                                 evt.loaded / evt.total));
-    });
-      if( status === 'Ok'){
-        console.log('status ok');
-      }
-      else {
-        if(data['errors']){
-        $scope.errors.push(data['errors']);
-        } 
-       // alert("Geocode was not successful for the following reason: " + status);
-     }
-   });
- }geocodeAddress();
-}
+// $scope.createDelivery = function(file) {
+//   function geocodeAddress(){
+//     var geocoder = new google.maps.Geocoder();
+//     var address = $scope.street_address;
+//     var loc = [];
+//     geocoder.geocode({'address': address}, function(results, status){
+//       $scope.loc = {};
+//       $scope.loc.lng = results[0].geometry.location.lng();
+//       $scope.loc.lat = results[0].geometry.location.lat();
+//       console.log($scope.loc);
+//       file.upload = Upload.upload({
+//         url:'/addDelivery',
+//         data: {
+//         file: file,
+//         name: $scope.name,
+//         type: $scope.type,
+//         _city: $scope.city._id,
+//         phone: $scope.phone,
+//         bio: $scope.bio,
+//         email: $scope.email,
+//         password: $scope.password,
+//         address: $scope.street_address,
+//         location: [$scope.loc.lng, $scope.loc.lat],
+//         hours: $scope.hours
+//       }
+//     });
+//     file.upload.then(function (response) {
+//         $timeout(function () {
+//             file.result = response.data;
+//         });
+//     }, function (response) {
+//         if (response.status > 0)
+//             $scope.errorMsg = response.status + ': ' + response.data;
+//     }, function (evt) {
+//         // We can use this to show progress and thumbnail
+//         file.progress = Math.min(100, parseInt(100.0 *
+//                                  evt.loaded / evt.total));
+//     });
+//       if( status === 'Ok'){
+//         console.log('status ok');
+//       }
+//       else {
+//         if(data['errors']){
+//         $scope.errors.push(data['errors']);
+//         } 
+//        // alert("Geocode was not successful for the following reason: " + status);
+//      }
+//    });
+//  }geocodeAddress();
+// }
 // END Create Delivery
 ////////////////////////////////////////
 
@@ -984,7 +985,11 @@ $scope.createBusiness = function(file) {
       // if($scope.password.length > 8){
       //   console.log("passwd to short")
       //   return;
-      // }
+      // } name="input"
+      console.log($scope.example.value);
+      $scope.example.value = new Date();
+            console.log($scope.example.value);
+
       file.upload = Upload.upload({
         url:'/addBusiness',
         data: {
@@ -992,6 +997,9 @@ $scope.createBusiness = function(file) {
         name: $scope.name,
         type: $scope.type,
         city: $scope.city,
+        hours: {
+          monday: {open: $scope.example.value, close: $scope.example.value}
+        },
         zip_code: $scope.zip_code,
         state: $scope.state,
         phone: $scope.phone,
@@ -1002,6 +1010,7 @@ $scope.createBusiness = function(file) {
         location: [$scope.loc.lng, $scope.loc.lat]
       }
     });
+      console.log(file)
     file.upload.then(function (response) {
       console.log(response)
         $timeout(function () {

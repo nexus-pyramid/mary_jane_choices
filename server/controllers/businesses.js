@@ -9,9 +9,10 @@ var fs = require('fs')
 function businessesController(){
 
 	this.addBusiness = function(req,res){
-			console.log('hey');
+		console.log(req.body);
 			var newBusiness = new Business(req.body);
 			var file = req.files.file;
+			console.log(newBusiness);
 			fs.readFile(file.path, function (err, original_data){
 				if (err){
 					res.json(400);

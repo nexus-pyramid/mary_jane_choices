@@ -30,7 +30,14 @@ var sessionConfig = {
        maxAge: 3600000
     }
 }
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'example.com');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    next();
+}
+app.use(allowCrossDomain)
 // app.use( express.static( path.join( root, 'bower_components' )));
 app.use(bp.urlencoded({extended:true}));
 app.use(bp.json({extended: true}));

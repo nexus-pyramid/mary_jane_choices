@@ -19,10 +19,12 @@
         <option value="Delivery" >Delivery</option>
         <option value="Doctor" >Doctor</option>
       </select>
-
+      <p> open hours monday </p>
+      value="{{ startDt | date: 'dd/MM/yyyy' }}"
+      <input type="time" ng-model="example.value" placeholder="HH:mm:ss"  name="input" value="{{ input | date: 'HH:mm:ss' }}"/>
       <h3>Hours of Operation</h3>
       <div class="dayOfTheWeek">
-        <label for="monday" class="dayOfTheWeek"><input type="checkbox" id="monday" ng-model="hours.monday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Mon</label>
+        <!-- <label for="monday" class="dayOfTheWeek"><input type="checkbox" id="monday" ng-model="hours.monday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Mon</label> -->
         <p>from</p>
         <select ng-model="hours.monday.open">
           <option value="7:00AM">7:00AM</option>
