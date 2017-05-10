@@ -37,6 +37,34 @@ function businessesController(){
 			}
 		})
 	}
+	this.addReview = function(req, res){
+		var newReview = new Review(req.body);
+		newReview._user = req.session.Logged._id;
+		newReview._business = req.params.id;
+		newReview.save(function(err, results){
+		if(err){
+			res.sendStatus(400);
+		} else {
+			console.log('we really made it')
+			Business.findOne({_id: req.params.id}).exec(function(err, business){
+				if(err){
+					res.sendStatus(400);
+				}
+				else{
+					business.reviews.push(newReview._id)
+					business.save(function(err, results){
+						if(err){
+							res.json(err);
+						} else{
+							console.log('it lit')
+							res.json(results);
+						}
+					})
+				}
+			})
+		}
+	})
+	}
 	this.getfeatured = function(req, res){
 		console.log('getting featured');
 		Business.find({featured: true}, function(err, data){

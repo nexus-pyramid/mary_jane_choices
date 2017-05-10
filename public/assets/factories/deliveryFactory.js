@@ -89,8 +89,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data)
 			})
 		}
-		this.addReview = function(review, deliveryId, callback){
-			$http.post('/review/'+deliveryId, review).then(function(returned_data){
+		this.addReview = function(newReview, deliveryId, userId, callback){
+			$http.post('/review/'+deliveryId, newReview, userId).then(function(returned_data){
 				callback(returned_data.data);
 			})
 		}

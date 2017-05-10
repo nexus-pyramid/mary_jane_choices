@@ -8,4 +8,3 @@ var ApplicantSchema = new Schema({
 	email: String
 });
 mongoose.model('Applicant', ApplicantSchema);
-console.log('etdtdtdtdtydt')

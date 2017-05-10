@@ -110,12 +110,19 @@
   clear: both;
   // width: 100%;
 }
-
+.review {
+	border-style: solid;
+	border-color: #9E9E9E;
+}
+.add-review {
+	border-style: solid;
+	border-color: black;
+}
 .modal{
 	background:rgba(0,0,0,0.2);
 	position:absolute;
 	top:0;
-	left:0;
+	left:0; 
 	bottom:0;
 	right:0;
 	z-index:999;

@@ -3,9 +3,7 @@ var	Schema = mongoose.Schema;
 
 var ReviewSchema = new Schema({
 	_user: {type: Schema.Types.ObjectId, ref:'User'},
-	_delivery: {type: Schema.Types.ObjectId, ref: 'Delivery'},
-	_dispensary: {type: Schema.Types.ObjectId, ref: "Dispensary"},
-	_doctor: {type: Schema.Types.ObjectId, ref: "Doctor"},
+	_business: {type: Schema.Types.ObjectId, ref: 'Business'},
 	review: {type: String}
 });
 mongoose.model('Review', ReviewSchema);

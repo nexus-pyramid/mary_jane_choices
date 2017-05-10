@@ -1083,6 +1083,17 @@ $scope.editBusiness = function(file){
       });
     }  
 }
+$scope.addReview = function(newReview, deliveryId){
+  console.log(UserService._id)
+  deliveryFactory.addReview(newReview, deliveryId, UserService._id, function(data){
+   if(data['errors']){
+        $scope.errors.push(data['errors']);
+      } else{
+        $route.reload();
+        toastr.success('Successfully Added Review', toastOpts);
+      }
+  })
+}
 
 
 })

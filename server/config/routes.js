@@ -48,5 +48,5 @@ module.exports = function(app){
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
-  app.post('/review/:id', deliveries.addReview);
+  app.post('/review/:id', businesses.addReview);
 };
