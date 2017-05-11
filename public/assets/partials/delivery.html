@@ -37,7 +37,16 @@
           <h1>{{delivery.name | uppercase}}</h1>
           <p>{{delivery.type}}</p>
           <p>{{delivery.email}}</p>
-          <a href="tel:{{delivery.phone}}">{{delivery.phone}}</a>   
+          <a href="tel:{{delivery.phone}}">{{delivery.phone}}</a>
+            <ul class="hours">
+              <li>monday {{delivery.hours.monday.open}}-{{deliver.hours.monday.close}}</li>
+              <li>tuesday: {{delivery.hours.tuesday.open}}-{{delivery.hours.tuesday.close}}</li>
+              <li>wednesday: {{delivery.hours.wednesday.open}}-{{delivery.hours.wednesday.close}}</li>
+              <li>thursday: {{delivery.hours.thursday.open}}-{{delivery.hours.thursday.close}}</li>
+              <li>friday: {{delivery.hours.friday.open}}-{{delivery.hours.friday.close}}</li>
+              <li>saturday: {{delivery.hours.saturday.open}}-{{delivery.hours.saturday.close}}</li>
+              <li>sunday: {{delivery.hours.sunday.open}}-{{delivery.hours.sunday.close}}</li>
+            </ul>
         </div>
         
       <!-- </div> -->

@@ -24,7 +24,8 @@ var BusinessSchema = new Schema({
 			thursday:{ open: String, close: String},
 			friday:{ open: String, close: String},
 			saturday:{ open: String, close: String},
-			sunday:{ open: String, close: String}},
+			sunday:{ open: String, close: String}
+		},
     email: {type:String, unique: true},
 	valid:{type:Boolean, default: false},
 	featured:{type:Boolean, default: false},

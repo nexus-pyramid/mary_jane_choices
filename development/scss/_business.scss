@@ -4,8 +4,12 @@
   margin-top:-80px;
   padding-bottom:20px;
 }
-
-
+.hour-container {
+	max-width:30%;
+}
+.hours {
+	display: block;
+}
 .product_nav{
 	text-align: center;
 	background-color:$black;

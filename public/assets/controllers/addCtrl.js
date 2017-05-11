@@ -998,7 +998,13 @@ $scope.createBusiness = function(file) {
         type: $scope.type,
         city: $scope.city,
         hours: {
-          monday: {open: $scope.example.value, close: $scope.example.value}
+          monday: {open: $scope.hours.monday.open, close: $scope.hours.monday.close},
+          tuesday: {open: $scope.hours.tuesday.open, close: $scope.hours.tuesday.close},
+          wednesday: {open: $scope.hours.wednesday.open, close: $scope.hours.wednesday.close},
+          thursday: {open: $scope.hours.thursday.open, close: $scope.hours.thursday.close},
+          friday: {open: $scope.hours.friday.open, close: $scope.hours.friday.close},
+          saturday: {open: $scope.hours.saturday.open, close: $scope.hours.saturday.close},
+          sunday: {open: $scope.hours.sunday.open, close: $scope.hours.sunday.close}
         },
         zip_code: $scope.zip_code,
         state: $scope.state,
@@ -1060,6 +1066,15 @@ $scope.editBusiness = function(file){
               phone: $scope.phone,
               bio: $scope.bio,
               email: $scope.email,
+              hours: {
+                monday: {open: $scope.hours.monday.open, close: $scope.hours.monday.close},
+                tuesday: {open: $scope.hours.tuesday.open, close: $scope.hours.tuesday.close},
+                wednesday: {open: $scope.hours.wednesday.open, close: $scope.hours.wednesday.close},
+                thursday: {open: $scope.hours.thursday.open, close: $scope.hours.thursday.close},
+                friday: {open: $scope.hours.friday.open, close: $scope.hours.friday.close},
+                saturday: {open: $scope.hours.saturday.open, close: $scope.hours.saturday.close},
+                sunday: {open: $scope.hours.sunday.open, close: $scope.hours.sunday.close}
+              }
               // password: $scope.password,
               // address: $scope.street_address,
               // location: [$scope.loc.lng, $scope.loc.lat]
