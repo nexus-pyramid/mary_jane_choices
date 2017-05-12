@@ -46,7 +46,9 @@ input, select, textarea, button {
 .form-container input.ng-touched.ng-invalid {
   background-color: #FA787E;
 }
-
+// .product_form {
+//   width: 30%;
+// }
 .form-container input.ng-valid.ng-touched {
   background-color: #78FA89;
 }

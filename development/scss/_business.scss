@@ -10,6 +10,22 @@
 .hours {
 	display: block;
 }
+.shop_info {
+	display: block;
+}
+.bio {
+	width: 15%;
+	height:15%;
+}
+.edit_business {
+	text-align:center;
+background-color:#F2F5F5;
+	form {
+		text-align:center;
+		align-content: center;
+		display: inline-block;
+	}
+}
 .product_nav{
 	text-align: center;
 	background-color:$black;

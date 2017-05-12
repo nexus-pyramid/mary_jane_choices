@@ -6,13 +6,11 @@
       <ul ng-if='errors.length > 0'>
         <li ng-repeat='error in errors'>{{error}}</li>
       </ul>
-
       <input type="text" name="name" ng-model='name'  placeholder="Name" required="" />
       <!-- NAME VALIDATION -->
       <div ng-show="form.$submitted || form.name.$touched">
         <div ng-show="form.name.$error.required">Name is required.</div>
       </div>
-
       <select ng-model="type" required>
         <option class="default-option" value="" selected data-default>Type</option>
         <option value="Dispensary" >Dispensary</option>

@@ -1,9 +1,9 @@
 
 <div class="sheet__register" ng-init="adminView()">
-<p>{{business.name}} </p>
-<div class="icon__profile">
-          <img data-ng-src="data:image/JPEG;base64,{{business.image}}">
-</div>
+  <div class="shop_info">
+    <h3> Welcome, {{business.name}} </h3>
+    <img class="bio" data-ng-src="data:image/JPEG;base64,{{business.image}}">
+  </div> 
 <button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
   <h3> Edit Information </h3>
   <div class="edit_business ng-hide" ng-show="show == 'edit'">
@@ -393,7 +393,7 @@
             </div>
           </div> 
          <input type="file" ngf-select ng-model="file" name="file" placeholder="icon image">
-          <button class="edit-btn" ng-click="editBusiness(file)">edit Information </button>
+          <button class="edit-btn" ng-click="editBusiness(file)">submit edited Information </button>
     </form>
    <a href="#/edit_pass"> Change password </a>
   </div>
