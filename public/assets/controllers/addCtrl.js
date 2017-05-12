@@ -627,6 +627,7 @@ console.log($scope.business);
         $anchorScroll();
         $location.hash('form');
       }, 500)
+        $scope.show = 'edit';
         $scope.name =  $scope.business.name;
         $scope.type = $scope.business.type;
         $scope.city =  $scope.business.city;
@@ -635,11 +636,23 @@ console.log($scope.business);
         $scope.phone = $scope.business.phone;
         $scope.bio = $scope.business.bio;
         $scope.email = $scope.business.email;
-        // $scope.password = $scope.business.password;
-        console.log($scope.password);
+        $scope.monop = $scope.business.hours.monday.open;
+        $scope.monco = $scope.business.hours.monday.open;
+        $scope.tuop = $scope.business.hours.tuesday.open;
+        $scope.tuco = $scope.business.hours.tuesday.close;
+        $scope.weop = $scope.business.hours.wednesday.open;
+        $scope.weco = $scope.business.hours.wednesday.close;
+        $scope.thop = $scope.business.hours.thursday.open;
+        $scope.thco = $scope.business.hours.thursday.close;
+        $scope.friop = $scope.business.hours.friday.open;
+        $scope.frico = $scope.business.hours.friday.close;
+        $scope.satop = $scope.business.hours.saturday.open;
+        $scope.satco = $scope.business.hours.saturday.close;
+        $scope.sunop = $scope.business.hours.sunday.open;
+        $scope.sunco = $scope.business.hours.sunday.close;
+        $scope.file = $scope.business.image;
         // $scope.address = $scope.business.street_address;
         // $scope.location = [$scope.business.loc.lng, $scope.business.loc.lat];
-        $scope.edit ='password';
  // $location.url('/edit/'+deliveryId);
 }
 // END Edit View
@@ -1067,17 +1080,14 @@ $scope.editBusiness = function(file){
               bio: $scope.bio,
               email: $scope.email,
               hours: {
-                monday: {open: $scope.hours.monday.open, close: $scope.hours.monday.close},
-                tuesday: {open: $scope.hours.tuesday.open, close: $scope.hours.tuesday.close},
-                wednesday: {open: $scope.hours.wednesday.open, close: $scope.hours.wednesday.close},
-                thursday: {open: $scope.hours.thursday.open, close: $scope.hours.thursday.close},
-                friday: {open: $scope.hours.friday.open, close: $scope.hours.friday.close},
-                saturday: {open: $scope.hours.saturday.open, close: $scope.hours.saturday.close},
-                sunday: {open: $scope.hours.sunday.open, close: $scope.hours.sunday.close}
+                monday: {open: $scope.monop, close: $scope.monco},
+                tuesday: {open: $scope.tuop, close: $scope.tuco},
+                wednesday: {open: $scope.weop, close: $scope.weco},
+                thursday: {open: $scope.thop, close: $scope.thop},
+                friday: {open: $scope.friop, close: $scope.frico},
+                saturday: {open: $scope.satop, close: $scope.satco},
+                sunday: {open: $scope.sunop, close: $scope.sunco}
               }
-              // password: $scope.password,
-              // address: $scope.street_address,
-              // location: [$scope.loc.lng, $scope.loc.lat]
            }
       });
       file.upload.then(function (response) {

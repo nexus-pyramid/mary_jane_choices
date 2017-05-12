@@ -66,7 +66,6 @@ function businessesController(){
 	})
 	}
 	this.getfeatured = function(req, res){
-		console.log('getting featured');
 		Business.find({featured: true}, function(err, data){
 			if (err){
 				console.log(err);
@@ -119,12 +118,12 @@ function businessesController(){
 			} else {
 				console.log('hey in the password')
 				business.password = req.body.password;
+				business.password = bcrypt.hashSync(password);
 				business.save(function(err, result){
 					if(err){
 						console.log(err);
 						res.json(err);
 					} else {
-						console.log(result);
 						res.json(result);
 					}
 				})
@@ -132,32 +131,42 @@ function businessesController(){
 		})
 	}
 	this.edit = function(req, res){
-		Business.findOne({_id: req.body._id}, function(err, business){
+		console.log('yo wtf')
+		Business.findOne({_id: req.body._id}, function(err, shop){
 			if(err){
 				console.log(err)
 				res.json(err);
 			} else {
-				console.log(req.body._id)
 				console.log('business were updating')
-				console.log(business)
-				console.log('business were updating')
-				business.name = req.body.name;
-				business.email = req.body.email;
-				business.phone = req.body.phone;
-				business.bio = req.body.bio;
+				console.log(req.body)
+				shop.name = req.body.name;
+				shop.email = req.body.email;
+				shop.phone = req.body.phone;
+				shop.bio = req.body.bio;
+				shop.hours.monday.open = req.body.hours.monday.open
+				shop.hours.monday.close = req.body.hours.monday.close;
+				shop.hours.tuesday.open = req.body.hours.tuesday.open;
+				shop.hours.tuesday.close = req.body.hours.tuesday.close;
+				shop.hours.wednesday.open = req.body.hours.wednesday.open;
+				shop.hours.wednesday.close = req.body.wednesday.close;
+				shop.hours.thursday.open = req.body.thursday.open;
+				shop.hours.thursday.close = req.body.thurday.close;
+				shop.hours.friday.open = req.body.friday.open;
+				shop.hours.friday.close = req.body.friday.close;
+				shop.hours.saturday.open = req.body.saturday.open;
+				shop.hours.saturday.close = req.body.saturday.close;
+				shop.hours.sunday.open = req.body.sunday.open;
+				shop.hours.sunday.close = req.body.sunday.close;
 				var newfile = req.files.file;
-				console.log(req.files.file);
-			    req.body.password = bcrypt.hashSync(password);
-
-					console.log('updating password')
+				console.log(shop.hours)
 				if (!req.files.file){
-					business.save(function(err, result){
+					shop.save(function(err, result){
 	        				if(err){
 	        				console.log(err)
 					         res.send(400);
 				            } else {
 				            	console.log(result)
-					              res.json(result)
+					              res.json(200)
 				            }
 	        			    })
 				} else {
@@ -174,20 +183,20 @@ function businessesController(){
 	            					console.log('successfully' + newfile.path);
 	          					}	
 	        				});
-	        				business.image = bs
-							business.save(function(err, result){
+	        				shop.image = bs
+							shop.save(function(err, result){
 	        				if(err){
 	        				console.log(err);
 					         res.send(400);
 				            } else {
 				            	console.log(result)
-					              res.json(result)
-				            	}
-	        			    })
-	        			   }
-				    	})
-	            	} 
+					              res.send(200)
+				            }
+	        			})
+	        		}
+				})
 	        }
+	        } 
 		})
 	}
 	this.editProduct = function(req,res){
@@ -340,7 +349,6 @@ function businessesController(){
 			else if(err){
 				res.json(err);
 			} else {
-				console.log(data)
 				// console.log(data[0]);
 				var resultData  = [];
 				for (var i = 0; i < data.length; i++){
@@ -376,7 +384,6 @@ function businessesController(){
 								// console.log(resultData)
 					   		}
 						}
-						console.log(resultData)
 						res.json(resultData);
 					}
 				})
