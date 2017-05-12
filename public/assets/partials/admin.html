@@ -386,10 +386,10 @@
       <img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'">
           <div ng-switch on="file">
             <div ng-switch-when="file.length < 1000">
-              <img class="upload-product-image ng-hide"  ngf-thumbnail="file">
+              <img class="upload-product-image"  ngf-thumbnail="file">
             </div>
             <div ng-switch-default>
-              <img class="upload-product-image ng-hide" data-ng-src="data:image/JPEG;base64,{{business.image}}">
+              <img class="upload-product-image" data-ng-src="data:image/JPEG;base64,{{business.image}}">
             </div>
           </div> 
          <input type="file" ngf-select ng-model="file" name="file" placeholder="icon image">

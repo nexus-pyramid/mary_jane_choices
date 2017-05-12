@@ -148,15 +148,15 @@ function businessesController(){
 				shop.hours.tuesday.open = req.body.hours.tuesday.open;
 				shop.hours.tuesday.close = req.body.hours.tuesday.close;
 				shop.hours.wednesday.open = req.body.hours.wednesday.open;
-				shop.hours.wednesday.close = req.body.wednesday.close;
-				shop.hours.thursday.open = req.body.thursday.open;
-				shop.hours.thursday.close = req.body.thurday.close;
-				shop.hours.friday.open = req.body.friday.open;
-				shop.hours.friday.close = req.body.friday.close;
-				shop.hours.saturday.open = req.body.saturday.open;
-				shop.hours.saturday.close = req.body.saturday.close;
-				shop.hours.sunday.open = req.body.sunday.open;
-				shop.hours.sunday.close = req.body.sunday.close;
+				shop.hours.wednesday.close = req.body.hours.wednesday.close;
+				shop.hours.thursday.open = req.body.hours.thursday.open;
+				shop.hours.thursday.close = req.body.hours.thursday.close;
+				shop.hours.friday.open = req.body.hours.friday.open;
+				shop.hours.friday.close = req.body.hours.friday.close;
+				shop.hours.saturday.open = req.body.hours.saturday.open;
+				shop.hours.saturday.close = req.body.hours.saturday.close;
+				shop.hours.sunday.open = req.body.hours.sunday.open;
+				shop.hours.sunday.close = req.body.hours.sunday.close;
 				var newfile = req.files.file;
 				console.log(shop.hours)
 				if (!req.files.file){

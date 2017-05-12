@@ -651,6 +651,7 @@ console.log($scope.business);
         $scope.sunop = $scope.business.hours.sunday.open;
         $scope.sunco = $scope.business.hours.sunday.close;
         $scope.file = $scope.business.image;
+        console.log($scope.business.image);
         // $scope.address = $scope.business.street_address;
         // $scope.location = [$scope.business.loc.lng, $scope.business.loc.lat];
  // $location.url('/edit/'+deliveryId);
@@ -686,6 +687,7 @@ $scope.editProduct = function(file){
            }
       });
       file.upload.then(function (response) {
+        $route.reload();
           $timeout(function () {
               file.result = response.data;
           });
@@ -999,10 +1001,6 @@ $scope.createBusiness = function(file) {
       //   console.log("passwd to short")
       //   return;
       // } name="input"
-      console.log($scope.example.value);
-      $scope.example.value = new Date();
-            console.log($scope.example.value);
-
       file.upload = Upload.upload({
         url:'/addBusiness',
         data: {
@@ -1090,6 +1088,8 @@ $scope.editBusiness = function(file){
               }
            }
       });
+      $route.reload();
+            toastr.success('Successfully edited business', toastOpts);    
       file.upload.then(function (response) {
           $timeout(function () {
               file.result = response.data;
