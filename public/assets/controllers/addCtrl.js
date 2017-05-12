@@ -636,6 +636,7 @@ console.log($scope.business);
         $scope.phone = $scope.business.phone;
         $scope.bio = $scope.business.bio;
         $scope.email = $scope.business.email;
+        $scope.file = $scope.business.image;
         $scope.monop = $scope.business.hours.monday.open;
         $scope.monco = $scope.business.hours.monday.open;
         $scope.tuop = $scope.business.hours.tuesday.open;
@@ -650,8 +651,6 @@ console.log($scope.business);
         $scope.satco = $scope.business.hours.saturday.close;
         $scope.sunop = $scope.business.hours.sunday.open;
         $scope.sunco = $scope.business.hours.sunday.close;
-        $scope.file = $scope.business.image;
-        console.log($scope.business.image);
         // $scope.address = $scope.business.street_address;
         // $scope.location = [$scope.business.loc.lng, $scope.business.loc.lat];
  // $location.url('/edit/'+deliveryId);
@@ -1089,7 +1088,7 @@ $scope.editBusiness = function(file){
            }
       });
       $route.reload();
-            toastr.success('Successfully edited business', toastOpts);    
+      toastr.success('Successfully edited business', toastOpts);    
       file.upload.then(function (response) {
           $timeout(function () {
               file.result = response.data;
