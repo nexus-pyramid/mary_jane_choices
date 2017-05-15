@@ -1,0 +1,17 @@
+<div ng-init="admindashView()">
+  <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="delivery in unverified">
+        <div class="title">{{delivery.name}}</div>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+       	<button class="menu-btn" ng-click=validate(delivery)>validate</button>
+       	<button class="menu-btn" ng-click="delete(delivery._id)">delete</button> <!-- ng-click="show()" -->
+      </div>
+    <!-- </div> -->
+
+  </div>
+</div>

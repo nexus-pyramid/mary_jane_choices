@@ -16,9 +16,28 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.checkAdmin = function(admin, callback){
+			console.log('int the check admin function')
+			$http.post('/admin', admin).then(function(returned_data){
+				console.log(returned_data);
+				if(typeof(callback) == 'function');{
+					callback(returned_data.data);
+				}
+			})
+		}
+		this.unverified = function(callback){
+			$http.get('/getUnverified').then(function(returned_data){
+				console.log(returned_data)
+				callback(returned_data.data);
+			})
+		}
+		this.validate = function(delivery, callback){
+			$http.post('/validate', delivery).then(function(returned_data){
+				callback(returned_data.data);	
+			});
+		}
 		this.getfeatured = function(callback){
 			$http.get('/getfeatured').then(function(returned_data){
-				console.log(returned_data);
 				callback(returned_data.data);
 			})
 		}
@@ -46,7 +65,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.showProducts = function(id,callback){
 			$http.get('/showProducts/'+id).then(function(returned_data){
-				console.log(returned_data)
 				callback(returned_data.data)
 			})
 		}

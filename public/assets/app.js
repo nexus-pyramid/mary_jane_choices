@@ -30,6 +30,14 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
    templateUrl: 'assets/partials/edit_pass.html',
    controller: 'addCtrl'
   })
+   .when('/mjc',{
+   templateUrl: 'assets/partials/check-admin.html',
+   controller: 'addCtrl'
+  })
+  .when('/admin-dash',{
+   templateUrl: 'assets/partials/admin-dash.html',
+   controller: 'addCtrl'
+  })
   .when('/user/:id', {
     templateUrl: 'assets/partials/user-page.html',
     controller: 'addCtrl'

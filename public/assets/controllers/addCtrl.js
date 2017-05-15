@@ -296,6 +296,10 @@ $scope.dispensariesView = function(){
 // END Deliveries Constructor
 ////////////////////////////////////////
 
+$scope.admindashView = function(){
+  check();
+  getUnverified()
+}
 ////////////////////////////////////////
 // doctors Constructor
 $scope.doctorsView = function(){
@@ -375,6 +379,11 @@ console.log('showing products')
     $scope.business = data;
     // UserService._id = data.data._id;
     
+  })
+}
+function getUnverified(){
+  deliveryFactory.unverified(function(data){
+    $scope.unverified = data
   })
 }
 // END Show Products
@@ -459,7 +468,12 @@ function getDispensaries(){
 // END Get dispensaries
 ////////////////////////////////////////
 
-
+function check(){
+  if(UserService.admin !== 'admin'){
+      $location.url('/');
+      toastr.error('you do not have access to this page', toastOpts);
+  }
+}
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
@@ -753,7 +767,19 @@ $scope.show = function(){
 }
 // END Show
 ////////////////////////////////////////
-
+$scope.validate = function(delivery){
+  console.log(delivery)
+  delete delivery.image
+  console.log(delivery)
+  deliveryFactory.validate(delivery, function(data){
+    if(data['errors']){
+      $scope.errors.push(data['errors']);
+    } else{
+      $route.reload();
+      toastr.success('Successfully validated business', toastOpts);
+    }
+  })
+}
 
 ////////////////////////////////////////
 // Log in
@@ -1106,6 +1132,20 @@ $scope.editBusiness = function(file){
                                    evt.loaded / evt.total));
       });
     }  
+}
+$scope.checkAdmin = function(admin){
+  console.log(admin)
+  deliveryFactory.checkAdmin(admin, function(data){
+    console.log(data);
+    if(data['errors']){
+        $scope.errors.push(data['errors']);
+        $location.url('/');
+      } else{
+        $location.url('/admin-dash');
+        UserService.admin = 'admin';
+        toastr.success('Successfully Logged in as Admin', toastOpts);
+      }
+  })
 }
 $scope.addReview = function(newReview, deliveryId){
   console.log(UserService._id)

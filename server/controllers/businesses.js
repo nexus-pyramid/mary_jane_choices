@@ -362,7 +362,7 @@ function businessesController(){
 	}
 
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:10}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:10, query: {valid: true}}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {
@@ -390,16 +390,36 @@ function businessesController(){
 			}
 		})
 	}
+	this.getUnverified = function(req, res){
+		Business.find({valid: false}, function(err, data){
+			if(err){
+				res.json(err);
+			} else {
+				res.json(data);
+			}
+		})
+	}
 	this.validate = function(req, res){
-		Business.update({_id: req.params.id}, {registered: true}).exec(function(err, data){
-			if(!Business){
+		console.log('in the validate function')
+		console.log(req.body)
+		Business.findOne({_id: req.body._id}, function(err, buss){
+			console.log(buss)
+			if(!buss){
 				console.log(err)
+				res.json(err);
 			}
 			else if(err){
 				console.log(err)
 			} else {
-				// console.log(data);
-				res.json(data);
+				buss.valid = true;
+				buss.save(function(err, result){
+	        				if(err){
+					         res.sendStatus(400);
+				            } else {
+				            	console.log(result)
+					              res.json(result)
+				            }
+	        	})
 			}
 		})
 	}
@@ -458,6 +478,14 @@ function businessesController(){
 				})
 			}
 		})
+	}
+	this.checkAdmin = function(req, res){
+		console.log(req.body);
+		if(req.body!== 'medical13'){
+			res.json(401);
+		} else {
+			res.json(200);
+		}
 	}
 	this.getLogged = function(req, res){
 		return res.json(req.session.Logged)

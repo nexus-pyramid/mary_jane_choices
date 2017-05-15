@@ -1,5 +1,6 @@
 var path = require('path'),
     users = require('../controllers/users.js'),
+    admin = require('../controllers/admins.js')
     deliveries = require('../controllers/deliveries.js'),
     dispensaries = require('../controllers/dispensaries.js'),
     businesses = require('../controllers/businesses.js'),
@@ -30,6 +31,8 @@ module.exports = function(app){
   app.post('/delivery/:id', deliveries.addDelivery);
   // app.post('/visit/:id', deliveries.show);
   app.get('/show/:id', businesses.show);
+  app.post('/admin', admin.login);
+  app.get('/getUnverified', businesses.getUnverified);
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
@@ -39,6 +42,7 @@ module.exports = function(app){
   app.post('/getDeliveries', businesses.getDeliveries);
   app.post('/getDispensaries', businesses.getDispensaries);
   app.post('/getDoctors', businesses.getDoctors);
+  app.post('/validate', businesses.validate);
   app.post('/user/:id', users.addUser);
   app.get('/showProducts/:id', businesses.show);
   app.post('/delete/:id', businesses.delete);
