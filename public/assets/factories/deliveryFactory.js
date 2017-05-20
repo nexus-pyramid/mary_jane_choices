@@ -25,6 +25,14 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.addLocation = function(info, callback){
+			$http.post('/addLocation', info).then(function(returned_data){
+				console.log(returned_data);
+				if(typeof(callback) == 'function');{
+					callback(returned_data.data);
+				}
+			})
+		}
 		this.unverified = function(callback){
 			$http.get('/getUnverified').then(function(returned_data){
 				console.log(returned_data)
@@ -36,8 +44,9 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);	
 			});
 		}
-		this.getfeatured = function(callback){
-			$http.get('/getfeatured').then(function(returned_data){
+		this.getfeatured = function(coords, callback){
+			console.log('coords are' + coords)
+			$http.post('/getfeatured', coords).then(function(returned_data){
 				callback(returned_data.data);
 			})
 		}

@@ -29,6 +29,7 @@ module.exports = function(app){
   app.post('/register', deliveries.create);
   // app.post('/flower', deliveries.addFlower);
   app.post('/delivery/:id', deliveries.addDelivery);
+  app.post('/addLocation', businesses.addLocation);
   // app.post('/visit/:id', deliveries.show);
   app.get('/show/:id', businesses.show);
   app.post('/admin', admin.login);
@@ -37,7 +38,7 @@ module.exports = function(app){
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
   app.get('/getReviews',  deliveries.getReviews);
-  app.get('/getfeatured', businesses.getfeatured);
+  app.post('/getfeatured', businesses.getfeatured);
   // app.get('/getDives', businesses.getDeliveries);
   app.post('/getDeliveries', businesses.getDeliveries);
   app.post('/getDispensaries', businesses.getDispensaries);

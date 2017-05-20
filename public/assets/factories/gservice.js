@@ -61,7 +61,7 @@ angular.module('gservice', [])
                     console.log(respArray)
                     callback(respArray)
                     }
-                  // console.log(err);
+                     // console.log(err);
                     // Then convert the results into map points
                     locations = convertToMapPoints(response);
                     initialize(latitude, longitude, false);
@@ -182,8 +182,7 @@ angular.module('gservice', [])
 
 
                 var business = response.data[i].obj;
-                // console.log(business)
-                // console.log(business.obj)
+                console.log(business);
               switch(business.type){
                 case "Delivery":
                   var  contentString = '<p><b>name</b>: ' + business.name + '<br><b>email</b>: ' + business.email + '<br>' + "<a href=\"#/business/"+ business._id + "\"> Visit </a> ";
@@ -197,8 +196,12 @@ angular.module('gservice', [])
               }
 
                 try {
-                    // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
-                    locations.push(new Location(
+                   // Converts each of the JSON records into Google Maps Location format (Note Lat, Lng format).
+                // for business.location in business {
+                //     console.log('these are the locations')
+                //     console.log(location);
+                // }
+                      locations.push(new Location(
                         // console.log()
                         new google.maps.LatLng(business.location[1], business.location[0]),
                         new google.maps.InfoWindow({
@@ -208,6 +211,20 @@ angular.module('gservice', [])
                         business.name,
                         business.email
                     ))
+                    console.log('theres are the locations')
+                        
+                    // locations.push(new Location(
+                    //     // console.log()
+
+                    //     new google.maps.LatLng(business.location[1], business.location[0]),
+                    //     new google.maps.InfoWindow({
+                    //         content: contentString,
+                    //         maxWidth: 320
+                    //     }),
+                    //     business.name,
+                    //     business.email
+                    // ))
+                console.log(locations)
                 }
                 catch(err){
                     // console.log(err)

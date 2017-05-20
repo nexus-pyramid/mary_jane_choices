@@ -444,19 +444,34 @@ function geocodeAddress(){
 // END Geocode Address
 ////////////////////////////////////////
 function getfeatured(){
-  console.log('in the get featured');
-  deliveryFactory.getfeatured(function(data){
-     $scope.featured = data;
+    geolocation.getLocation().then(function(data){
+      console.log(data)
+      // Set the latitude and longitude equal to the HTML5 coordinates
+      coords = [data.coords.longitude, data.coords.latitude];
+      console.log(coords)
+      LocationService.lat = data.coords.latitude;
+      LocationService.long = data.coords.longitude;
+
+  deliveryFactory.getfeatured(coords, function(data){
+    console.log('these are the localized featured businesses');
+    console.log(data)
+    respArray = [];
+    for (var i = 0; i < data.length; i++){
+        respArray.push(data[i].obj)    
+    }          
+    console.log(respArray)
+     $scope.featured = respArray;
   });
+})
 }
-var getfeatured = function(){
-  console.log('ayeee');
- deliveryFactory.getfeatured(function(data){
-     $scope.featured = data;
-     console.log(data);
-  });
-} 
-getfeatured();
+// var getfeatured = function(){
+//   console.log('ayeee');
+//  deliveryFactory.getfeatured(function(data){
+//      $scope.featured = data;
+//      console.log(data);
+//   });
+// } 
+// getfeatured();
 ////////////////////////////////////////
 // Get dispensaries
 ////////////////////////////////////////
@@ -835,7 +850,39 @@ $scope.userLogin = function(){
   })
 }
 ////////////////////////////////////////
-
+$scope.addLocation = function(business, businessId){
+    console.log(business);
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode({'address': business.street_address}, function(results, status){
+          console.log(results);
+      console.log(status);
+        if(status = 'OK') {
+         // var lng = results[0].geometry.location.lng();
+         // var lat = results[0].geometry.location.lat();
+          // var location = [$scope.loc.lng, $scope.loc.lat];
+          // _id = businessId
+      $scope.loc = {};
+      $scope.loc.lng = results[0].geometry.location.lng();
+      $scope.loc.lat = results[0].geometry.location.lat();
+      var but = [$scope.loc.lng, $scope.loc.lat];
+      console.log($scope.locrs)
+          info = {
+            location: but,
+            _id: businessId
+          }
+          console.log('this is the info')
+          console.log(info)
+          deliveryFactory.addLocation(info, function(data){
+            if(data['errors']){
+               $scope.errors.push(data['errors']);
+            } else {
+              $route.reload();
+              toastr.success('Successfully added location', toastOpts);             
+            }
+          })
+        }
+    });
+}
 // Add Review
 //// for adding reviews
 ////////////////////////////////////////
@@ -921,6 +968,8 @@ $scope.addUser  = function(userData, cityId){
 $scope.searchLocation = function() {
   var address = $scope.search;
   geocoder.geocode({'address' : address}, function(results, status){
+    console.log(results);
+    console.log(status);
     $scope.loc = {};
      var long = results[0].geometry.location.lng();
      var lat  = results[0].geometry.location.lat(); 

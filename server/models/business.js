@@ -32,7 +32,7 @@ var BusinessSchema = new Schema({
     created_at: {type: Date, default: Date.now },
 	reviews: [{type: Schema.Types.ObjectId, ref: 'Review'}],
 	street_address: String,
-	location: {type: [Number]}, // [Long, Lat]
+	location: [{type: [Number]}], // [Long, Lat]
     deals: [{type: Schema.Types.ObjectId, ref: 'Deal'}],
     extract:  [{type: Schema.Types.ObjectId, ref: 'Extract'}],
     products: [{type: Schema.Types.ObjectId, ref: 'Product'}],

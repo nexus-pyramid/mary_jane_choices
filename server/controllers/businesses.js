@@ -10,6 +10,7 @@ function businessesController(){
 
 	this.addBusiness = function(req,res){
 		console.log(req.body);
+			console.log(req.body.location);
 			var newBusiness = new Business(req.body);
 			var file = req.files.file;
 			console.log(newBusiness);
@@ -59,19 +60,24 @@ function businessesController(){
 							console.log('it lit')
 							res.json(results);
 						}
-					})
+					});
 				}
-			})
+			});
 		}
-	})
+	});
 	}
 	this.getfeatured = function(req, res){
-		Business.find({featured: true}, function(err, data){
+		console.log('this is the location')
+		console.log(req.body);
+		console.log('************')
+		Business.geoNear(req.body, {maxDistance:0.017, query: {featured: true}}, function(err, data){
 			if (err){
 				console.log(err);
 				res.json(err);
 			} else {
-				res.json(data)
+				console.log('theses are the featured businesses');
+				console.log(data);
+				res.json(data);
 			}
 		})
 	}
@@ -130,15 +136,46 @@ function businessesController(){
 			}
 		})
 	}
+	this.addLocation = function(req, res){
+		console.log(req.body);
+		console.log(req.body.location)
+		Business.update({_id: req.body._id}, {$push:{location:req.body.location}}, {upsert: true}, function(err, val){
+				if(err){
+					console.log(err);
+				} else {
+					console.log('successfully added location');
+					res.json(val)
+				}
+		})
+	}
+	// 	Business.findOne({_id: req.body._id}).exec(function(err, business){
+	// 			if(err){
+	// 				res.sendStatus(400);
+	// 			}
+	// 			else{
+	// 				address = req.body.location;
+	// 				console.log(address)
+	// 				business.location.push(req.body.location);
+	// 				business.save(function(err, results){
+	// 					if(err){
+	// 						res.json(err);
+	// 					} else{
+	// 						console.log(results);
+	// 						res.json(results);
+	// 					}
+	// 				})
+	// 			}
+	// 		})
+	// }
 	this.edit = function(req, res){
-		console.log('yo wtf')
+		console.log('yo wtf');
 		Business.findOne({_id: req.body._id}, function(err, shop){
 			if(err){
-				console.log(err)
+				console.log(err);
 				res.json(err);
 			} else {
-				console.log('business were updating')
-				console.log(req.body)
+				console.log('business were updating');
+				console.log(req.body);
 				shop.name = req.body.name;
 				shop.email = req.body.email;
 				shop.phone = req.body.phone;
@@ -268,7 +305,7 @@ function businessesController(){
 		var newProduct = new Product(req.body);
 		newProduct._business = req.session.Logged;
 
-	    fs.readFile(file.path, function ( err, original_data){
+	    fs.readFile(file.path, function (err, original_data){
 	      if (err){
 	        res.json(400);
 	      } else {
@@ -314,7 +351,7 @@ function businessesController(){
 	}
 
 	this.getDoctors = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.04}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
@@ -343,7 +380,7 @@ function businessesController(){
 		});
 	}
 	this.getDispensaries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:10}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
@@ -362,7 +399,7 @@ function businessesController(){
 	}
 
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:10, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {
@@ -391,7 +428,7 @@ function businessesController(){
 		})
 	}
 	this.getUnverified = function(req, res){
-		Business.find({valid: false}, function(err, data){
+		Business.find({}, function(err, data){
 			if(err){
 				res.json(err);
 			} else {
@@ -414,7 +451,7 @@ function businessesController(){
 				buss.valid = true;
 				buss.save(function(err, result){
 	        				if(err){
-					         res.sendStatus(400);
+					         res.json(400);
 				            } else {
 				            	console.log(result)
 					              res.json(result)
