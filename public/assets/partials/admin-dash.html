@@ -1,22 +1,89 @@
 <div ng-init="admindashView()">
-  <div class="sheet__delivery">
+  <div class="wrapper">
+  <section class="business_nav">
+    <ul class="bus">
+      <li><a href="" ng-click="page='delivery'">validate Delivery</a></li>
+      <li><a href="" ng-click="page='disp'">validate Dispensary</a></li>
+      <li><a href="" ng-click="page='doctor'">validate Doctors</a></li>
+      <li><a href="" ng-click="page='featured'">add Featured</a></li>
+      <li><a href="" ng-click="page='location'">locations</a></li>
+    </ul>
+  </section>
+  </div>
+  <div ng-switch on="page">
+    <div class="sheet__product grid" ng-switch-when="delivery">
+    <div class="sheet__delivery">
     <!-- <div class=""> -->
-      <div class="card__delivery" ng-repeat="delivery in unverified">
+      <div class="card__delivery" ng-repeat="delivery in dels">
         <div class="title">{{delivery.name}}</div>
         <!-- <p>{{delivery.phone}}</p>
         <p>{{delivery.bio}}</p>
         <p>{{delivery.email}}</p> -->
         <!-- <p>{{delivery._id}}</p> -->
         <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
-       	<button class="menu-btn" ng-click="validate(delivery)">validate</button>
+        <button class="menu-btn" ng-click="validate(delivery)">validate</button>
           <!-- <button class="menu-btn" ng-click="addLocation(delivery)">add location</button>
           <form>
                 <input type="text" ng-model='business.street_address' placeholder="Street Address" required>
                 <button class="form-btn" ng-click="addLocation(business, delivery._id)">Submit additional location</button>
           </form>
-       	<button class="menu-btn" ng-click="delete(delivery._id)">delete</button -->> <!-- ng-click="show()" -->
+        <button class="menu-btn" ng-click="delete(delivery._id)">delete</button --><!-- ng-click="show()" -->
       </div>
     <!-- </div> -->
 
+    </div>
+    </div>
+    <div class="sheet__disp" ng-switch-when="disp">
+     <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="disp in truffles">
+        <div class="title">{{disp.name}}</div>
+        <p>{{disp.email}}</p>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+         <button class="menu-btn" ng-click="validate(disp)">validate</button>
+      </div>
+    <!-- </div> -->
+    </div>
+    </div>
+     <div class="sheet__doctor" ng-switch-when="doctor">
+     <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="doc in docs">
+        <div class="title">{{doc.name}}</div>
+        <p>{{doc.name}}</p>
+        <p>{{doc.email}}</p>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+        <button class="menu-btn" ng-click="validate(doc)">validate</button>
+      </div>
+    <!-- </div> -->
+    </div>
+    </div>
+        <div class="sheet__unfeatured" ng-switch-when="featured">
+     <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="unfeat in shops">
+        <div class="title">{{unfeat.name}}</div>
+        <p>{{unfeat._id}}</p>
+        <p>{{unfeat.name}}</p>
+        <p>{{unfeat.email}}</p>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+        <form>
+        <button type="submit" class="menu-btn" ng-click="featureBusiness(unfeat._id)">feature</button>
+        </form>
+      </div>
+    <!-- </div> -->
+    </div>
+    </div>
   </div>
-</div>

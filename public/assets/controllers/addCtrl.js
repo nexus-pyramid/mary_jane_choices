@@ -299,6 +299,13 @@ $scope.dispensariesView = function(){
 $scope.admindashView = function(){
   check();
   getUnverified()
+  getDisp();
+  getDocs()
+  getDels();
+  unfeatured();
+  $scope.page = 'deliveries';
+  // getDeliveries();
+  // getDoctors();
 }
 ////////////////////////////////////////
 // doctors Constructor
@@ -386,6 +393,12 @@ function getUnverified(){
     $scope.unverified = data
   })
 }
+function unfeatured(){
+  deliveryFactory.unfeatured(function(data){
+    $scope.shops = data;
+    console.log($scope.shops)
+  })
+}
 // END Show Products
 ////////////////////////////////////////
 // function getBusiness(){
@@ -448,21 +461,27 @@ function getfeatured(){
       console.log(data)
       // Set the latitude and longitude equal to the HTML5 coordinates
       coords = [data.coords.longitude, data.coords.latitude];
-      console.log(coords)
       LocationService.lat = data.coords.latitude;
       LocationService.long = data.coords.longitude;
 
   deliveryFactory.getfeatured(coords, function(data){
-    console.log('these are the localized featured businesses');
-    console.log(data)
     respArray = [];
     for (var i = 0; i < data.length; i++){
         respArray.push(data[i].obj)    
     }          
-    console.log(respArray)
      $scope.featured = respArray;
   });
 })
+}
+function getDocs(){
+  deliveryFactory.getDocs(function(data){
+    $scope.docs = data;
+  })
+}
+function getDels(){
+  deliveryFactory.getDels(function(data){
+    $scope.dels = data;
+  })
 }
 // var getfeatured = function(){
 //   console.log('ayeee');
@@ -475,14 +494,18 @@ function getfeatured(){
 ////////////////////////////////////////
 // Get dispensaries
 ////////////////////////////////////////
-function getDispensaries(){
-  dispensaryFactory.getDispensaries(function(data){
-    $scope.dispensaries = data;
-  })
-}
+// function getDispensaries(){
+//   dispensaryFactory.getDispensaries(function(data){
+//     $scope.dispensaries = data;
+//   })
+// }
 // END Get dispensaries
 ////////////////////////////////////////
-
+function getDisp(){
+  deliveryFactory.getDisp(function(data){
+    $scope.truffles = data;
+  })
+}
 function check(){
   if(UserService.admin !== 'admin'){
       $location.url('/');
@@ -494,7 +517,7 @@ function check(){
 ////////////////////////////////////////
 function getDeliveries(){
   deliveryFactory.getDeliveries(function(data){
-    // $scope.deliveries = data;
+    $scope.deliveries = data;
     console.log('******************************')
     console.log(data)
   })
@@ -504,11 +527,11 @@ function getDeliveries(){
 ////////////////////////////////////////
 // Get Deliveries
 ////////////////////////////////////////
-function getDoctors(){
-  doctorFactory.getDoctors(function(data){
-    $scope.doctors = data;
-  })
-};
+// function getDoctors(){
+//   doctorFactory.getDoctors(function(data){
+//     $scope.doctors = data;
+//   })
+// };
 // END Get Deliveries
 ////////////////////////////////////////
 
@@ -886,6 +909,22 @@ $scope.addLocation = function(business, businessId){
 // Add Review
 //// for adding reviews
 ////////////////////////////////////////
+$scope.featureBusiness = function(businessId){
+  buss = {
+    _id: businessId
+  }
+  deliveryFactory.featureBusiness(buss, function(data){
+    console.log(data)
+   if(data['errors']){
+     $scope.errors.push(data['errors']);
+   } else {
+    $route.reload();
+    toastr.success('Successfully featured business', toastOpts);             
+     getReviews();
+   } 
+  })
+}
+
 $scope.addReview = function(newReview, deliveryId){
  deliveryFactory.addReview(newReview, deliveryId, function(data){
    if(data['errors']){

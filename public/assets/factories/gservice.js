@@ -97,7 +97,8 @@ angular.module('gservice', [])
 
                 // Perform an AJAX call to get all of the records in the db.
                 $http.post('/getDispensaries', coords).then(function(response, err){
-                  console.log('getting dispensaries gservice' + response)
+                    console.log('888888888888888888888888')
+                  console.log(response)
                     // Then convert the results into map points
 
                     if(typeof(callback) == 'function'){
@@ -227,7 +228,7 @@ angular.module('gservice', [])
                 console.log(locations)
                 }
                 catch(err){
-                    // console.log(err)
+                    console.log(err)
                     console.log("Couldn't convert point")
                 }
 

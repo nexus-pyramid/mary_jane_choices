@@ -19,7 +19,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		this.checkAdmin = function(admin, callback){
 			console.log('int the check admin function')
 			$http.post('/admin', admin).then(function(returned_data){
-				console.log(returned_data);
 				if(typeof(callback) == 'function');{
 					callback(returned_data.data);
 				}
@@ -27,7 +26,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.addLocation = function(info, callback){
 			$http.post('/addLocation', info).then(function(returned_data){
-				console.log(returned_data);
 				if(typeof(callback) == 'function');{
 					callback(returned_data.data);
 				}
@@ -35,7 +33,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.unverified = function(callback){
 			$http.get('/getUnverified').then(function(returned_data){
-				console.log(returned_data)
 				callback(returned_data.data);
 			})
 		}
@@ -45,7 +42,6 @@ app.factory('deliveryFactory', ['$http', function($http){
 			});
 		}
 		this.getfeatured = function(coords, callback){
-			console.log('coords are' + coords)
 			$http.post('/getfeatured', coords).then(function(returned_data){
 				callback(returned_data.data);
 			})
@@ -82,11 +78,40 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data)
 			})
 		}
-
+		this.unfeatured = function(callback){
+		$http.get('/unfeatured').then(function(returned_data){
+				callback(returned_data.data)
+			})	
+		}
+		this.getDisp = function(callback){
+			$http.get('/getDisp').then(function(returned_data){
+				if(typeof(callback) == 'function'){
+					callback(returned_data.data);
+				}
+			});
+		}
+		this.featureBusiness = function(buss, callback){
+			console.log(buss)
+			$http.post('/feature',buss).then(function(returned_data){
+				callback(returned_data.data);
+			});	
+		}
+		this.getDocs = function(callback){
+		$http.get('/getDocs').then(function(returned_data){
+		if(typeof(callback) == 'function'){
+					callback(returned_data.data);
+				}	
+		})
+		}
+		this.getDels = function(callback){
+		$http.get('/getDels').then(function(returned_data){
+			if(typeof(callback) == 'function'){
+						callback(returned_data.data);
+					}	
+			})
+		}
 		this.getDeliveries = function( callback){
 			$http.get('/getDeliveries').then(function(returned_data){
-				console.log(returned_data)
-				console.log(returned_data.data)
 				callback(returned_data);
 			});
 		}
@@ -102,9 +127,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.visit = function(deliveryId, callback){
 			$http.post('/visit/'+deliveryId).then(function(returned_data){
-				console.log('in the visit delivery');
 				callback(returned_data.data);
-			})
+			});
 		}
 		this.getFlowers = function(callback){
 			$http.get('/flowers').then(function(returned_data){

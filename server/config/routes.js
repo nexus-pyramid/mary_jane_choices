@@ -32,15 +32,20 @@ module.exports = function(app){
   app.post('/addLocation', businesses.addLocation);
   // app.post('/visit/:id', deliveries.show);
   app.get('/show/:id', businesses.show);
+  app.post('/feature', businesses.featureBuss);
   app.post('/admin', admin.login);
+  app.get('/getDocs', businesses.getDocs)
   app.get('/getUnverified', businesses.getUnverified);
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
   app.get('/getReviews',  deliveries.getReviews);
   app.post('/getfeatured', businesses.getfeatured);
+  app.get('/unfeatured', businesses.unfeatured);
+  app.get('/getDels', businesses.getDels)
   // app.get('/getDives', businesses.getDeliveries);
   app.post('/getDeliveries', businesses.getDeliveries);
+  app.get('/getDisp', businesses.getDisp);
   app.post('/getDispensaries', businesses.getDispensaries);
   app.post('/getDoctors', businesses.getDoctors);
   app.post('/validate', businesses.validate);

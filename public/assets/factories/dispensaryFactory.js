@@ -9,7 +9,7 @@ app.factory('dispensaryFactory', ['$http', function($http){
 				}
 			});
 		}
-		this.getDispensaries = function(callback){
+		this.getDisp = function(callback){
 			console.log('getting dispensaries');
 			$http.get('/getDispensaries').then(function(returned_data){
 				if(typeof(callback) == 'function'){

@@ -70,7 +70,7 @@ function businessesController(){
 		console.log('this is the location')
 		console.log(req.body);
 		console.log('************')
-		Business.geoNear(req.body, {maxDistance:0.017, query: {featured: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.03, query: {featured: true}}, function(err, data){
 			if (err){
 				console.log(err);
 				res.json(err);
@@ -357,7 +357,6 @@ function businessesController(){
 			else if(err){
 				res.json(err);
 			} else {
-				console.log(data)
 				// console.log(data[0]);
 				var resultData  = [];
 				for (var i = 0; i < data.length; i++){
@@ -379,8 +378,54 @@ function businessesController(){
 			}
 		});
 	}
+	this.getDocs = function(req, res){
+		Business.find({type: 'Doctor'}, function(err, data){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				console.log('these are the doctors')
+				res.json(data)
+			}
+		})
+	}
+	this.getDisp = function(req,res){
+		Business.find({type: 'Dispensary'}, function(err, data){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				res.json(data)
+			}
+		})
+	}
+	this.unfeatured = function(req,res){
+		Business.find({featured: false}, function(err, data){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				console.log('getting unFeatured')
+				var resultData  = [];
+				for (var i = 0; i < data.length; i++){
+						resultData.push(data[i]);
+				}
+				res.json(resultData);
+			}
+		})
+	}
+	this.getDels = function(req, res){
+		Business.find({type: 'Delivery'}, function(err, data){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				res.json(data)
+			}
+		})
+	}
 	this.getDispensaries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
@@ -399,7 +444,7 @@ function businessesController(){
 	}
 
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {
@@ -415,7 +460,6 @@ function businessesController(){
 						// console.log(deliveries)
 					   var resultData  = [];
 					   for (var i = 0; i < data.length; i++){
-					   	console.log(data[i].obj.type)
 					   		if (data[i].obj.type == "Delivery"){
 								resultData.push(data[i]);
 								// console.log(resultData)
@@ -424,6 +468,30 @@ function businessesController(){
 						res.json(resultData);
 					}
 				})
+			}
+		})
+	}
+	this.featureBuss = function(req, res){
+		console.log('this is the featured id')
+		console.log('********************');
+		console.log(req.body);
+		Business.findOne({_id: req.body._id}, function(err, buss){
+			if(!buss){
+				console.log(err)
+				res.json(err);
+			}
+			else if(err){
+				console.log(err)
+			} else {
+				buss.featured = true;
+				buss.save(function(err, result){
+	        				if(err){
+					         res.json(400);
+				            } else {
+				            	console.log(result);
+					              res.json(result);
+				            }
+	        	})
 			}
 		})
 	}
