@@ -81,6 +81,17 @@ function businessesController(){
 			}
 		})
 	}
+	this.deleteBusiness = function(req, res){
+		Business.remove({_id:req.params.id}, function(err){
+			if(err){
+				console.log(err)
+				res.json(err)
+			} else {
+				console.log('deleted product')
+				res.json({message: "deleted Business!"});
+			}
+		})
+	}
 	this.delete = function(req, res){
 		console.log('in the delete')
 		console.log(req.params)
@@ -527,6 +538,16 @@ function businessesController(){
 	        	})
 			}
 		})
+	}
+	this.getAll = function(req, res){
+		Business.find({}, function(err, data){
+			if(err){
+				console.log(err);
+				res.json(err);
+			}else {
+				res.json(data)
+			}
+		});
 	}
 	this.addFlower = function(req,res){
 		console.log('in the add Flower function');

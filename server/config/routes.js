@@ -39,6 +39,7 @@ module.exports = function(app){
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
+  app.get('/getAll', businesses.getAll)
   app.get('/getReviews',  deliveries.getReviews);
   app.post('/getfeatured', businesses.getfeatured);
   app.get('/unfeatured', businesses.unfeatured);
@@ -52,6 +53,7 @@ module.exports = function(app){
   app.post('/user/:id', users.addUser);
   app.get('/showProducts/:id', businesses.show);
   app.post('/delete/:id', businesses.delete);
+  app.post('/deleteBusiness/:id', businesses.deleteBusiness)
   app.post('/editBusiness', businesses.edit);
   app.post('/password', businesses.updatePass);
   // app.use(loginAuthentication);

@@ -302,6 +302,7 @@ $scope.admindashView = function(){
   getDisp();
   getDocs()
   getDels();
+  getAll();
   unfeatured();
   $scope.page = 'deliveries';
   // getDeliveries();
@@ -397,6 +398,11 @@ function unfeatured(){
   deliveryFactory.unfeatured(function(data){
     $scope.shops = data;
     console.log($scope.shops)
+  })
+}
+function getAll(){
+  deliveryFactory.getAll(function(data){
+    $scope.busses = data
   })
 }
 // END Show Products
@@ -1024,6 +1030,17 @@ $scope.searchLocation = function() {
         $scope.returned = data
       }
     })
+  })
+}
+$scope.deleteBusiness = function(businessId){
+  deliveryFactory.deleteBusiness(businessId, function(data){
+    if(data['errors']){
+      $scope.errors = data
+     } else {
+      console.log(data)
+      $route.reload()
+      toastr.success('Successfully deleted business', toastOpts);             
+     }
   })
 }
 $scope.deleteProduct = function(product_id) {

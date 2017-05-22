@@ -103,6 +103,16 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}	
 		})
 		}
+		this.deleteBusiness = function(businessId, callback){
+		$http.post('/deleteBusiness/'+businessId).then(function(returned_data){
+				callback(returned_data.data);
+			});	
+		}
+		this.getAll = function(callback){
+			$http.get('/getAll').then(function(returned_data){
+				callback(returned_data.data);
+			});
+		}
 		this.getDels = function(callback){
 		$http.get('/getDels').then(function(returned_data){
 			if(typeof(callback) == 'function'){

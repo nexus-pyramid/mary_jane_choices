@@ -6,7 +6,7 @@
       <li><a href="" ng-click="page='disp'">validate Dispensary</a></li>
       <li><a href="" ng-click="page='doctor'">validate Doctors</a></li>
       <li><a href="" ng-click="page='featured'">add Featured</a></li>
-      <li><a href="" ng-click="page='location'">locations</a></li>
+      <li><a href="" ng-click="page='delete'">delete</a></li>
     </ul>
   </section>
   </div>
@@ -80,7 +80,25 @@
         <!-- <p>{{delivery._id}}</p> -->
         <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
         <form>
-        <button type="submit" class="menu-btn" ng-click="featureBusiness(unfeat._id)">feature</button>
+        <button type="submit" class="menu-btn" ng-click="featureBusiness(unfeat._id)">Feature</button>
+        </form>
+      </div>
+    <!-- </div> -->
+    </div>
+    </div>
+        <div class="sheet__unfeatured" ng-switch-when="delete">
+     <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="unfeat in busses">
+        <div class="title">{{unfeat.name}}</div>
+        <p>{{unfeat.email}}</p>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+        <form>
+        <button type="submit" class="menu-btn" ng-click="deleteBusiness(unfeat._id)">Delete</button>
         </form>
       </div>
     <!-- </div> -->
