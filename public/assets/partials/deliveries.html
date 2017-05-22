@@ -5,19 +5,11 @@
   </div>
 
   <div class="sheet__delivery">
-    <!-- <div class=""> -->
-      <div class="card__delivery" ng-repeat="delivery in deliveries">
-        <div class="title">{{delivery.name}}</div>
-        <p>{{delivery._city.name}}</p>
-        <!-- <p>{{delivery.phone}}</p>
-        <p>{{delivery.bio}}</p>
-        <p>{{delivery.email}}</p> -->
-        <!-- <p>{{delivery._id}}</p> -->
-        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
-        <a href="#/business/{{delivery._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
+     <div class="delivery" ng-repeat="shop in deliveries">
+        <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
+        <h2> {{shop.name}} </h2>
+        <a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
       </div>
-    <!-- </div> -->
-
   </div>
   <div class="sheet__map">
 
