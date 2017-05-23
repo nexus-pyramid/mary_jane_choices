@@ -86,7 +86,6 @@
           <th>Image</th>
           <th>Name</th>
           <th>Price</th>
-          <th class="prod-price-mobile"></th>
         </tr>
         <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product" ng-click="openModal($index, product)">
           <td class="prod-img"> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
@@ -101,18 +100,13 @@
                --><div class="price-6"><p>1oz</p>{{product.ounce}}</div>
             </div>
             <div class="price ng-hide" ng-show="product.productType == 'Extract'">
-              <div class="price-3" ><p>1/2 Gram</p>{{product.half_gram}}</div><!-- 
-              --><div class="price-3" ><p>Gram</p>{{product.one_gram}}</div><!-- 
-               --><div class="price-3"><p>2 G</p>{{product.two_gram}}</div>
+              <div class="price-3" ><p>1/2 Gram</p>{{product.half_gram}}</div>
+              <div class="price-3" ><p>Gram</p>{{product.one_gram}}</div> 
+               <div class="price-3"><p>2 G</p>{{product.two_gram}}</div>
             </div>
             <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
               <div class="price-3" ><p>Price</p>{{product.price}}</div>
             </div>
-
-
-          </td>
-          <td class="prod-price-mobile">
-            
           </td>
         </tr>
       </table>

@@ -46,6 +46,11 @@
 	width:300px;
 	height:100px;
 	display:block;
+	 @include breakpoint(715) {
+  		width:30%;
+  		overflow:auto;
+    // background:darken(#262626,5%);
+  }
 }
 .price-1{}
 .price-3{

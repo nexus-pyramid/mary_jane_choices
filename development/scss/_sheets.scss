@@ -91,6 +91,13 @@
 	padding-top:0;
 	height:600px;
 	overflow: hidden;
+	 @include breakpoint(715) {
+	display:block;
+	padding-top:0;
+	// height:300px;
+	// width:50%;
+	overflow-x: scroll;
+  }
 }
 
 .sheet__products{

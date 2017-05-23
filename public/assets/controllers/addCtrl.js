@@ -635,6 +635,7 @@ $scope.addProduct = function(file){
                                    evt.loaded / evt.total));
       });
         if( status === 'Ok'){
+          $route.reload();
           toastr.success('Product Added', toastOpts);
       }
       else {
@@ -1024,8 +1025,6 @@ $scope.searchLocation = function() {
     console.log(coords)
 
       gservice.refresh(lat, long, function(data){
-            console.log(data);
-            console.log('i think it worked')
             $scope.deliveries = data;
           });
   });

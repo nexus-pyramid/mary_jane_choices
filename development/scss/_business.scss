@@ -95,9 +95,9 @@
 		.price{
 			margin:0 auto;
 		}
-		@include breakpoint(715){
-			display:none;
-		}
+		// @include breakpoint(715){
+		// 	display:none;
+		// }
 	}
 	.prod-desc{
 		text-align: center;
