@@ -19,12 +19,34 @@
 }
 .edit_business {
 	text-align:center;
-background-color:#F2F5F5;
+	background-color:#F2F5F5;
 	form {
 		text-align:center;
 		align-content: center;
 		display: inline-block;
 	}
+}
+.searchBar {
+	background-color:#424242;
+	width:20%;
+	border: none;
+	border-radius: 2px;
+	float: left;
+	margin-right: 30px;
+	margin-left: 40%;
+	height: 30px;
+}
+.searchbttn {
+	background-color:#424242;
+	border-radius: 2px;
+	border-color:#424242;
+	text-color: white;
+	float: left;
+    height: 30px;
+}
+.search_locations {
+	overflow: auto;
+	display: inline;
 }
 .product_nav{
 	text-align: center;

@@ -398,7 +398,7 @@ function unfeatured(){
   deliveryFactory.unfeatured(function(data){
     $scope.shops = data;
     console.log($scope.shops)
-  })
+  });
 }
 function getAll(){
   deliveryFactory.getAll(function(data){
@@ -1010,8 +1010,10 @@ $scope.addUser  = function(userData, cityId){
 }
 //END Add User
 ////////////////////////////////////////
+
 $scope.searchLocation = function() {
-  var address = $scope.search;
+  var address = $scope.search_dels;
+   var geocoder = new google.maps.Geocoder();
   geocoder.geocode({'address' : address}, function(results, status){
     console.log(results);
     console.log(status);
@@ -1019,18 +1021,52 @@ $scope.searchLocation = function() {
      var long = results[0].geometry.location.lng();
      var lat  = results[0].geometry.location.lat(); 
     var coords = [long, lat]
-      deliveryFactory.search(coords, function(data){
-        if(data['errors']) {
-          if(typeof(data['errors']) == 'object'){
-            for(var key in data['errors']){
-            $scope.errors.push(data['errors'][key].message.replace('Path ', ''));
-          } 
-        }
-      } else {
-        $scope.returned = data
-      }
-    })
-  })
+    console.log(coords)
+
+      gservice.refresh(lat, long, function(data){
+            console.log(data);
+            console.log('i think it worked')
+            $scope.deliveries = data;
+          });
+  });
+}
+$scope.searchdisps = function() {
+  var address = $scope.search_dels;
+   var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({'address' : address}, function(results, status){
+    console.log(results);
+    console.log(status);
+    $scope.loc = {};
+     var long = results[0].geometry.location.lng();
+     var lat  = results[0].geometry.location.lat(); 
+    var coords = [long, lat]
+    console.log(coords)
+
+      gservice.getDisp(lat, long, function(data){
+            console.log(data);
+            console.log('i think it worked')
+            $scope.dispensaries = data;
+          });
+  });
+}
+$scope.searchdocs = function() {
+  var address = $scope.search_dels;
+   var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({'address' : address}, function(results, status){
+    console.log(results);
+    console.log(status);
+    $scope.loc = {};
+     var long = results[0].geometry.location.lng();
+     var lat  = results[0].geometry.location.lat(); 
+    var coords = [long, lat]
+    console.log(coords)
+
+      gservice.getDocs(lat, long, function(data){
+            console.log(data);
+            console.log('i think it worked')
+            $scope.doctors = data;
+          });
+  });
 }
 $scope.deleteBusiness = function(businessId){
   deliveryFactory.deleteBusiness(businessId, function(data){

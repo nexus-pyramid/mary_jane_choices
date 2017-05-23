@@ -11,10 +11,12 @@
         <a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
       </div>
   </div>
+      <div class="search_locations">
+      <input ng-model="search_dels" class="searchBar" type="text" placeholder="Search By Area">
+      <input type="submit" value="Search" class="searchbttn" ng-click="searchLocation()">
+      </div>
   <div class="sheet__map">
-
       <div id="map" style="width:1000px; height:645px"></div>
-
   </div>
 
 </div>
