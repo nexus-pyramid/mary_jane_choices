@@ -32,9 +32,15 @@
 	border: none;
 	border-radius: 2px;
 	float: left;
-	margin-right: 30px;
-	margin-left: 40%;
+	 margin-right: 10px;
+	text-align: center;
+	// margin-left: 40%;
+	margin-bottom: 20px;
 	height: 30px;
+	  @include breakpoint(715) {
+	  	width: 300px;
+	  }
+
 }
 .searchbttn {
 	background-color:#424242;
@@ -43,10 +49,15 @@
 	text-color: white;
 	float: left;
     height: 30px;
+    margin:0 auto;
 }
 .search_locations {
+	// justify-content: center;
+	text-align: center;
 	overflow: auto;
-	display: inline;
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-around;
 }
 .product_nav{
 	text-align: center;

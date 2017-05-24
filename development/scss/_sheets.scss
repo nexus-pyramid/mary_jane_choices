@@ -39,9 +39,16 @@
 
 .sheet__featured{
 	text-align:center;
+	// display: inline;
 	display:flex;
 	flex-wrap:wrap;
 	justify-content:space-around;
+	overflow: scroll;
+	// display: inline-block;
+	// float: left;
+	overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
 }
 
 .sheet__sponsors{

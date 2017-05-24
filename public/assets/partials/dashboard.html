@@ -12,23 +12,13 @@
 	<h1>Shops Accepting MJ'S Coupons In your Area</h1>
 </div>
 <div class="featured" ng-repeat="shop in featured">
-    <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
- <h2> {{shop.name}} </h2>
- <a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
+		<div  class="feat_shop">
+    		<img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
+ 			<h2> {{shop.name}} </h2>
+ 			<a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a>
+ 		</div>
 </div>
-<!-- <div class="featured">
-<img class="feat_img" src="pics/top_shelf.jpg">
-<h2> Hollywoods top shelf</h2>
-<a href="#/show/590bbbedd444d26c8efb6743"><button class="menu-btn">Menu</button></a>
-</div>
-<div class="featured">
-<img class="feat_img" src="pics/xclusive.jpg">
-<h2> Exculsive</h2>
-</div>
-<div class="featured">
-<img class="feat_img" src="pics/weed_boys.jpg">
-<h2> Weed Boys</h2>
-</div> -->
+
 </div>
 <!-- <div class="sheet__sponsors">
 	<h1>Sponsors</h1>		
