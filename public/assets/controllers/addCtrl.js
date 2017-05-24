@@ -403,7 +403,9 @@ function unfeatured(){
 function getAll(){
   deliveryFactory.getAll(function(data){
     $scope.busses = data
-  })
+    console.log('these are all the shops')
+    console.log(data);
+      })
 }
 // END Show Products
 ////////////////////////////////////////
@@ -421,7 +423,6 @@ function getLogged(){
     UserService._id = data.data._id;
     UserService.name = data.data.name;
     UserService.type = data.data.type;
-    console.log("GOT USER")
   })
 }
 // END Get Logged User
@@ -439,7 +440,6 @@ function getLoggedPromise(){
     UserService.name = data.data.name;
     UserService.type = data.data.type;
     gotdata = data;
-    console.log("GOT USER")
   })
   deferred.resolve(gotdata);
 
@@ -464,7 +464,6 @@ function geocodeAddress(){
 ////////////////////////////////////////
 function getfeatured(){
     geolocation.getLocation().then(function(data){
-      console.log(data)
       // Set the latitude and longitude equal to the HTML5 coordinates
       coords = [data.coords.longitude, data.coords.latitude];
       LocationService.lat = data.coords.latitude;
