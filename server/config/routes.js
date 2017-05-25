@@ -34,7 +34,7 @@ module.exports = function(app){
   app.get('/show/:id', businesses.show);
   app.post('/feature', businesses.featureBuss);
   app.post('/admin', admin.login);
-  app.get('/getDocs', businesses.getDocs);
+  app.get('/alldocs', businesses.getDocs);
   app.get('/getUnverified', businesses.getUnverified);
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);

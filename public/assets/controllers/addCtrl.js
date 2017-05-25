@@ -300,7 +300,7 @@ $scope.admindashView = function(){
   check();
   getUnverified()
   getDisp();
-  getDocs()
+  getalldocs()
   getDels();
   getAll();
   unfeatured();
@@ -478,8 +478,8 @@ function getfeatured(){
   });
 })
 }
-function getDocs(){
-  deliveryFactory.getDocs(function(data){
+function alldocs(){
+  deliveryFactory.alldocs(function(data){
     console.log('these are the doctors')
     console.log(data)
     $scope.docs = data;

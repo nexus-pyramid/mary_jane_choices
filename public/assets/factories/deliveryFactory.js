@@ -96,8 +96,8 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			});	
 		}
-		this.getDocs = function(callback){
-		$http.get('/getDocs').then(function(returned_data){
+		this.alldocs = function(callback){
+		$http.get('/alldocs').then(function(returned_data){
 		if(typeof(callback) == 'function'){
 					callback(returned_data.data);
 				}	
