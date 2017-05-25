@@ -300,7 +300,7 @@ $scope.admindashView = function(){
   check();
   getUnverified()
   getDisp();
-  getalldocs()
+  alldocs()
   getDels();
   getAll();
   unfeatured();
