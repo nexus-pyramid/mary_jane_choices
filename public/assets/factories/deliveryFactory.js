@@ -113,6 +113,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			});
 		}
+		this.allthings = function(callback){
+			$http.get('/everything').then(function(returned_data){
+				console.log(returned_data)
+				callback(returned_data.data);
+			})
+		}
 		this.getDels = function(callback){
 		$http.get('/getDels').then(function(returned_data){
 			if(typeof(callback) == 'function'){

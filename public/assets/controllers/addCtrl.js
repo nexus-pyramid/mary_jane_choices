@@ -300,7 +300,8 @@ $scope.admindashView = function(){
   check();
   getUnverified()
   getDisp();
-  alldocs()
+  alldocs();
+  everything();
   getDels();
   getAll();
   unfeatured();
@@ -399,6 +400,13 @@ function unfeatured(){
     $scope.shops = data;
     console.log($scope.shops)
   });
+}
+function everything(){
+  deliveryFactory.allthings(function(data){
+    $scope.please = data;
+    console.log('this is everything');
+    console.log(data);
+  })
 }
 function getAll(){
   deliveryFactory.getAll(function(data){

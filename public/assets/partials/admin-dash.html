@@ -10,6 +10,24 @@
     </ul>
   </section>
   </div>
+  <div class="sheet__delivery">
+    <!-- <div class=""> -->
+      <div class="card__delivery" ng-repeat="wtf in please">
+        <div class="title">{{wtf.name}}</div>
+        <!-- <p>{{delivery.phone}}</p>
+        <p>{{delivery.bio}}</p>
+        <p>{{delivery.email}}</p> -->
+        <!-- <p>{{delivery._id}}</p> -->
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p> <!-- &#9734; -->
+        <button class="menu-btn" ng-click="validate(wtf)">validate</button>
+        <button type="submit" class="menu-btn" ng-click="deleteBusiness(wtf._id)">Delete</button>
+          <!-- <button class="menu-btn" ng-click="addLocation(delivery)">add location</button>
+          <form>
+                <input type="text" ng-model='business.street_address' placeholder="Street Address" required>
+                <button class="form-btn" ng-click="addLocation(business, delivery._id)">Submit additional location</button>
+          </form>
+        <button class="menu-btn" ng-click="delete(delivery._id)">delete</button --><!-- ng-click="show()" -->
+      </div>
   <div ng-switch on="page">
     <div class="sheet__product grid" ng-switch-when="delivery">
     <div class="sheet__delivery">
