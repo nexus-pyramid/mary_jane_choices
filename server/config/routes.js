@@ -34,16 +34,16 @@ module.exports = function(app){
   app.get('/show/:id', businesses.show);
   app.post('/feature', businesses.featureBuss);
   app.post('/admin', admin.login);
-  app.get('/getDocs', businesses.getDocs)
+  app.get('/getDocs', businesses.getDocs);
   app.get('/getUnverified', businesses.getUnverified);
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
   app.post('/user', users.login);
-  app.get('/getAll', businesses.getAll)
+  app.get('/getAll', businesses.getAll);
   app.get('/getReviews',  deliveries.getReviews);
   app.post('/getfeatured', businesses.getfeatured);
   app.get('/unfeatured', businesses.unfeatured);
-  app.get('/getDels', businesses.getDels)
+  app.get('/getDels', businesses.getDels);
   // app.get('/getDives', businesses.getDeliveries);
   app.post('/getDeliveries', businesses.getDeliveries);
   app.get('/getDisp', businesses.getDisp);

@@ -545,6 +545,7 @@ function businessesController(){
 				console.log(err);
 				res.json(err);
 			}else {
+				console.log('getting all')
 				res.json(data)
 			}
 		});

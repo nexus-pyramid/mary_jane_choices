@@ -480,12 +480,16 @@ function getfeatured(){
 }
 function getDocs(){
   deliveryFactory.getDocs(function(data){
+    console.log('these are the doctors')
+    console.log(data)
     $scope.docs = data;
   })
 }
 function getDels(){
   deliveryFactory.getDels(function(data){
     $scope.dels = data;
+    console.log('these are the Deliveries')
+        $scope.dels = data;
   })
 }
 // var getfeatured = function(){
