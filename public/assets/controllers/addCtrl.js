@@ -521,6 +521,7 @@ function getDels(){
 function getDisp(){
   deliveryFactory.getDisp(function(data){
     $scope.truffles = data;
+    console.log(data)
   })
 }
 function check(){
