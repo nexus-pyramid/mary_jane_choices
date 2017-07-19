@@ -11,12 +11,10 @@
 <div class="featured_text">
 	<h1>Shops Accepting MJ'S Coupons In your Area</h1>
 </div>
-<div class="featured" ng-repeat="shop in featured">
-		<div  class="feat_shop">
-    		<img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
- 			<h2> {{shop.name}} </h2>
- 			<a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a>
- 		</div>
+<div class="delivery" ng-repeat="shop in featured">
+        <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
+        <h2> {{shop.name}} </h2>
+        <a href="#/business/{{shop._id}}"><button class="menu-btn" >Menu</button></a> <!-- ng-click="show()" -->
 </div>
 
 </div>
