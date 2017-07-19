@@ -1,3 +1,4 @@
+
 @import 'reset';
 @import 'colors';
 @import 'buttons';
@@ -73,8 +74,9 @@ body{
 .feat_shop {
   // display: inline-block;
   // float: left;
-      display: inline-block;
-    vertical-align: middle;
+  
+  display: inline-block;
+  vertical-align: middle;
   margin: 20px;
 }
 .delivery {
