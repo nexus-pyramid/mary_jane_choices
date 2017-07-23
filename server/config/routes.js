@@ -45,7 +45,10 @@ module.exports = function(app){
   app.post('/getfeatured', businesses.getfeatured);
   app.get('/unfeatured', businesses.unfeatured);
   app.get('/getDels', businesses.getDels);
+  app.post('/deliveryCards', businesses.deliveryCards);
+  app.post('/dispensaryCards', businesses.dispensaryCards);
   // app.get('/getDives', businesses.getDeliveries);
+  app.get('/getBusinesses', businesses.getBusinesses);
   app.post('/getDeliveries', businesses.getDeliveries);
   app.get('/getDisp', businesses.getDisp);
   app.post('/getDispensaries', businesses.getDispensaries);

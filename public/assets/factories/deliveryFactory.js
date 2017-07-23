@@ -31,6 +31,19 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.dispensaryCards = function(coords, callback){
+			$http.post('/dispensaryCards', coords).then(function(returned_data){
+				console.log(returned_data.data);
+				callback(returned_data.data);
+			})
+		}
+		this.deliveryCards = function(coords, callback){
+			console.log('in the deliverycard method');
+			$http.post('/deliveryCards', coords).then(function(returned_data){
+				console.log(returned_data.data);
+				callback(returned_data.data);
+			})
+		}
 		this.unverified = function(callback){
 			$http.get('/getUnverified').then(function(returned_data){
 				callback(returned_data.data);

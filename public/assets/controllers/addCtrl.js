@@ -46,7 +46,7 @@ function getLocation() {
       // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
       // gservice.initialize(coords.lat, coords.long);
           gservice.refresh(LocationService.lat, LocationService.long, function(data){
-            $scope.deliveries = data;
+            // $scope.deliveries = data;
           });
       ////////////////////////////////////////
       // Geolocation
@@ -73,7 +73,7 @@ function getLocation() {
 
 
         gservice.refresh(LocationService.lat, LocationService.long,function(data){
-          $scope.deliveries = data;
+          // $scope.deliveries = data;
         });
 
       ////////////////////////////////////////
@@ -103,6 +103,7 @@ function getLocation() {
     // END Geolocation
     ////////////////////////////////////////
 };
+
 function get_doc() {
   if(LocationService.long == ''){
     geolocation.getLocation().then(function(data){
@@ -122,7 +123,7 @@ function get_doc() {
       console.log("THIS IS THE LOCATION SERVICE");
       console.log(LocationService);
 
-      gservice.getDocs(LocationService.lat, LocationService.long,function(data){
+      gservice.getDocs(LocationService.lat, LocationService.long, function(data){
           console.log("THIS IS DATA")
           console.log(data)
           $scope.doctors = data;
@@ -205,7 +206,7 @@ function get_disp() {
 
 
       gservice.getDisp(LocationService.lat, LocationService.long,function(data){
-          $scope.dispensaries = data;
+          // $scope.dispensaries = data;
         });
 
       ////////////////////////////////////////
@@ -233,7 +234,7 @@ function get_disp() {
       console.log(LocationService);
     geolocation.getLocation().then(function(data){
       gservice.getDisp(LocationService.lat, LocationService.long,function(data){
-          $scope.dispensaries = data;
+          // $scope.dispensaries = data;
         });
 
       ////////////////////////////////////////
@@ -275,6 +276,7 @@ function get_disp() {
 // Deliveries Constructor
 $scope.deliveriesView = function(){
   getLocation();
+  deliveryCards();
   // getDeliveries();
   getLogged();
   openModal();
@@ -290,6 +292,7 @@ $scope.deliveriesView = function(){
 $scope.dispensariesView = function(){
     console.log('whats up');
   get_disp();
+  dispensaryCards();
   // getDispensaries();
   getLogged();
 }
@@ -394,6 +397,34 @@ function getUnverified(){
   deliveryFactory.unverified(function(data){
     $scope.unverified = data
   })
+}
+function dispensaryCards(){
+ var coords = [LocationService.long, LocationService.lat]
+    console.log(coords);
+   deliveryFactory.dispensaryCards(coords, function(data){
+    console.log('this is the returned data deliverycards');
+respArray = []
+ for (var i = 0; i < data.length; i++){
+    respArray.push(data[i].obj);
+ }
+    console.log(data);
+    $scope.dispensaries = respArray;
+   })  
+}
+function deliveryCards(){
+  console.log('in the delivery card function')
+  console.log(LocationService);
+    var coords = [LocationService.long, LocationService.lat]
+    console.log(coords);
+   deliveryFactory.deliveryCards(coords, function(data){
+    console.log('this is the returned data deliverycards');
+respArray = []
+ for (var i = 0; i < data.length; i++){
+    respArray.push(data[i].obj);
+ }
+    console.log(data);
+    $scope.deliveries = respArray;
+   })
 }
 function unfeatured(){
   deliveryFactory.unfeatured(function(data){

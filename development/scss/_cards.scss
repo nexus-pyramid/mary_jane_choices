@@ -47,7 +47,7 @@
 	height:100px;
 	display:block;
 	 @include breakpoint(715) {
-  		width:30%;
+  		width:40%;
   		overflow:auto;
     // background:darken(#262626,5%);
   }
@@ -70,7 +70,8 @@
 	margin:0;
 	width:50px;
 	@include breakpoint(400) {
-	width:100%
+	width:100%;
+	// display:inline;
 	}
 	display:inline-block;
 	vertical-align:top;

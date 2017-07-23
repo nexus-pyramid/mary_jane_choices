@@ -360,7 +360,69 @@ function businessesController(){
 		    }
 	    })
 	}
-
+	this.dispensaryCards = function(req, res){
+		Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
+				 if(err){
+					res.json(err);
+				} else {
+					console.log('deliveries')
+					console.log(data)
+					Business.populate(data, {path: 'obj.products'} , function(err, deliveries){
+						if(err){
+							console.log(err)
+							res.json(err)
+						} else {
+							console.log('populating products for business')
+							// console.log(deliveries);
+							// console.log(deliveries)
+						   var resultData  = [];
+						   for (var i = 0; i < data.length; i++){
+						   		if (data[i].obj.type == "Dispensary"){
+									resultData.push(data[i]);
+									// console.log(resultData)
+						   		}
+							}
+							res.json(resultData);
+						}
+					})
+				}
+		})		
+	}
+	this.deliveryCards = function(req, res){
+		console.log('in the delivery card method');
+	Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
+			 if(err){
+				res.json(err);
+			} else {
+				console.log('deliveries')
+				console.log(data)
+				Business.populate(data, {path: 'obj.products'} , function(err, deliveries){
+					if(err){
+						console.log(err)
+						res.json(err)
+					} else {
+						console.log('populating products for business')
+						// console.log(deliveries);
+						// console.log(deliveries)
+					   var resultData  = [];
+					   for (var i = 0; i < data.length; i++){
+					   		if (data[i].obj.type == "Delivery"){
+								resultData.push(data[i]);
+								// console.log(resultData)
+					   		}
+						}
+						res.json(resultData);
+					}
+				})
+			}
+		})
+	}
+	this.getBusinesses = function(req, res){
+		Business.geoNear(req.body, {maxDistance:0.018, query: {valid: true}}, function(err, data){
+			console.log(data);
+			res.json(data);	
+		})
+	}
 	this.getDoctors = function(req,res){
 		Business.geoNear(req.body, {maxDistance:0.017, query: {valid: true}}, function(err, data){
 			if(!Business){
@@ -436,7 +498,7 @@ function businessesController(){
 		})
 	}
 	this.getDispensaries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.5, query: {valid: true}}, function(err, data){
 			if(!Business){
 			}
 			else if(err){
@@ -455,7 +517,7 @@ function businessesController(){
 	}
 
 	this.getDeliveries = function(req,res){
-		Business.geoNear(req.body, {maxDistance:0.03, query: {valid: true}}, function(err, data){
+		Business.geoNear(req.body, {maxDistance:0.5, query: {valid: true}}, function(err, data){
 			 if(err){
 				res.json(err);
 			} else {
