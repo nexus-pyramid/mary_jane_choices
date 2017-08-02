@@ -18,6 +18,16 @@
 </div>
 
 </div>
+<div class="sheet__featuredBrands">
+<div class="featured_text">
+	<h1>Featured Brands In your Area</h1>
+</div>
+<div class="brand" ng-repeat="brand in Brands">
+        <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{brand.image}}">
+        <h2> {{brand.name}} </h2>
+       <!-- ng-click="show()" -->
+</div>
+</div>
 <!-- <div class="sheet__sponsors">
 	<h1>Sponsors</h1>		
 </div> -->

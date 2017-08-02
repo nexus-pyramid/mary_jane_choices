@@ -1,0 +1,28 @@
+<div ng-init="brandView()">
+<div class="brands__sheet">
+	<form>
+		   <input type="text" name="name" ng-model='name'  placeholder="Name" required="" />
+			<select ng-model="type" required>
+		        <option class="default-option" value="" selected data-default>Type</option>
+		        <option value="Flower" >Flower</option>
+		        <option value="Conentrate" >Conentrates</option>
+		        <option value="Pen" >vape Pens</option>
+		        <option value="Edibile">Edibles</option>
+		        <option value="Medical">Medical</option>
+      		</select>		
+      <input type="text" ng-model='street_address' placeholder="Street Address" required>
+      		<div class ><img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'"></div>
+          <div ng-switch on="file">
+            <div ng-switch-when="file.length < 1000">
+              <img class="upload-product-image ng-hide" ngf-thumbnail="file">
+            </div>
+            <div ng-switch-default>
+              <img class="upload-product-image ng-hide" data-ng-src="data:image/JPEG;base64,{{file}}">
+            </div>
+          </div>
+          <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
+			 <input type="text" name="about" ng-model="bio" placeholder="About">	
+      <button class="form-btn" ng-click='addBrand(file)'>REGISTER</button>						      		   
+	</form>
+</div>
+</div>

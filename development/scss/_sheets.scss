@@ -38,17 +38,19 @@
 }
 
 .sheet__featured{
-	text-align:center;
-	// display: inline;
-	display:flex;
-	flex-wrap:wrap;
-	justify-content:space-around;
-	overflow: scroll;
-	// display: inline-block;
-	// float: left;
+	// text-align: center;
+	max-height: 500px;
 	overflow-x: scroll;
     overflow-y: hidden;
     white-space: nowrap;
+}
+.sheet__featuredBrands{
+	display: inline-block;
+	max-height: 500px;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+
 }
 
 .sheet__sponsors{

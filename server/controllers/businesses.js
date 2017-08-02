@@ -4,6 +4,7 @@ var Applicant = mongoose.model('Applicant');
 var Review = mongoose.model('Review');
 var bcrypt = require('bcrypt');
 var Product = mongoose.model('Product');
+var Brand = mongoose.model('Brand');
 var auth = require('basic-auth');
 var fs = require('fs')
 function businessesController(){
@@ -31,6 +32,38 @@ function businessesController(){
 								res.json(err);
 						} else {
 							// console.log(result);
+							res.json(result)
+						}
+					})
+				});
+			}
+		})
+	}
+	this.addBrand = function(req, res){
+		console.log('adding a new brand');
+			console.log(req.body);
+			var newBrand = new Brand(req.body);
+			var file = req.files.file;
+			console.log(newBrand);
+			fs.readFile(file.path, function (err, original_data){
+				if (err){
+					res.json(400);
+				} else {
+					var bs = original_data.toString('base64');
+					newBrand.image = bs;
+					fs.unlink(file.path, function(err){
+						if (err){
+							console.log('failed to delete' + file.path);
+						} else {
+							console.log('successfully' + file.path);
+						}
+						newBrand.save(function(err, result){
+							if(err){
+								res.json(err);
+								console.log(err);
+						} else {
+							 console.log(result);
+							console.log('added brand')
 							res.json(result)
 						}
 					})
@@ -81,6 +114,23 @@ function businessesController(){
 			}
 		})
 	}
+
+	this.featBrands = function(req, res){
+		console.log('this is the location')
+		console.log(req.body);
+		console.log('************')
+		Brand.geoNear(req.body, {maxDistance:0.03}, function(err, data){
+			if (err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('theses are the featured businesses');
+				console.log(data);
+				res.json(data);
+			}
+		})
+	}
+
 	this.deleteBusiness = function(req, res){
 		Business.remove({_id:req.params.id}, function(err){
 			if(err){

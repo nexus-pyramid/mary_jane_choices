@@ -22,6 +22,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
    templateUrl: 'assets/partials/doctors.html',
    controller: 'addCtrl'
   })
+  .when('/brands',{
+   templateUrl: 'assets/partials/brands.html',
+   controller: 'addCtrl'
+  })
   .when('/login',{
    templateUrl: 'assets/partials/login.html',
    controller: 'addCtrl'

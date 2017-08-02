@@ -47,6 +47,8 @@ module.exports = function(app){
   app.get('/getDels', businesses.getDels);
   app.post('/deliveryCards', businesses.deliveryCards);
   app.post('/dispensaryCards', businesses.dispensaryCards);
+  app.post('/createBrand', businesses.addBrand);
+  app.post('/featBrands', businesses.featBrands);
   // app.get('/getDives', businesses.getDeliveries);
   app.get('/getBusinesses', businesses.getBusinesses);
   app.post('/getDeliveries', businesses.getDeliveries);
