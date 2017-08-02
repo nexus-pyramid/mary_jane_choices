@@ -14,16 +14,27 @@ addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope,
 
 // END Global Variables
 ////////////////////////////////////////
-
-// $scope.openModal = function (index, item){
-//   if(index>-1 || index<$scope.delivery.products.length){
-//     $scope.activeItem=item;
-//     $scope.modalVisible=true;
-//     $scope.modalIndex=index;
-//     console.log(index);
-//   }
-  
-// }
+  $scope.modal = function(item){
+    console.log(item)
+    console.log(vex);
+    vex.dialog.open({
+      message: item.name,
+      // content: item.name,
+      input: [
+        item.description
+      ]
+    })
+  }
+ // $scope.openModal = function (index, item){
+ //  console.log('this is the item');
+ //  console.log(item);
+ //   if(index>-1 || index<$scope.delivery.products.length){
+ //   $scope.activeItem=item;
+ //    $scope.modalVisible=true;
+ //    $scope.modalIndex=index;
+ //    console.log(index);   
+ //  } 
+ // }
 ////////////////////////////////////////
 // Google Maps API
 ////////////////////////////////////////
@@ -298,7 +309,9 @@ $scope.dispensariesView = function(){
 }
 // END Deliveries Constructor
 ////////////////////////////////////////
+$scope.brandView = function(){
 
+}
 $scope.admindashView = function(){
   check();
   getUnverified()
@@ -323,6 +336,7 @@ $scope.doctorsView = function(){
 ////////////////////////////////////////
 $scope.dashView = function(){
   getfeatured();
+  getFeatBrands();
 }
 ////////////////////////////////////////
 // Admin Constructor
@@ -517,6 +531,27 @@ function getfeatured(){
   });
 })
 }
+
+function getFeatBrands(){
+ geolocation.getLocation().then(function(data){
+      // Set the latitude and longitude equal to the HTML5 coordinates
+      coords = [data.coords.longitude, data.coords.latitude];
+      LocationService.lat = data.coords.latitude;
+      LocationService.long = data.coords.longitude;
+
+  deliveryFactory.getFeatBrands(coords, function(data){
+    console.log(' these are the featured Brands')
+    console.log(data);
+    respArray = [];
+    for (var i = 0; i < data.length; i++){
+        respArray.push(data[i].obj)    
+    }          
+     $scope.Brands = respArray;
+  });
+ })  
+}
+
+
 function alldocs(){
   deliveryFactory.alldocs(function(data){
     console.log('these are the doctors')
@@ -644,7 +679,60 @@ $scope.editBusiness = function(){
   console.log('in the edit business');
   console.log($scope.edit);
 }
+$scope.addBrand = function(file){
+ function geocodeAddress(){
+    var geocoder = new google.maps.Geocoder();
+    var address = $scope.street_address;
+    var loc = [];
+    geocoder.geocode({'address': address}, function(results, status){
+      $scope.loc = {};
+      $scope.loc.lng = results[0].geometry.location.lng();
+      $scope.loc.lat = results[0].geometry.location.lat();
+      console.log($scope.loc);
+      // if($scope.password.length > 8){
+      //   console.log("passwd to short")
+      //   return;
+      // } name="input"
+      file.upload = Upload.upload({
+        url:'/createBrand',
+        data: {
+        file: file,
+        name: $scope.name,
+        type: $scope.type,
+        bio: $scope.bio,
+        street_address: $scope.street_address,
+        location: [$scope.loc.lng, $scope.loc.lat]
+      }
+    });
+      console.log(file)
+    file.upload.then(function (response) {
+      console.log(response)
+        $timeout(function () {
+            file.result = response.data;
+        });
 
+      if( response.status == 200){
+        console.log('status ok');
+          $route.reload();
+          toastr.success('Product Added', toastOpts);
+      }
+      else { 
+        console.log(response);
+        if(response['err']){
+        $scope.errors.push(response['err']);
+        } 
+     }
+    }, function (response) {
+        if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+        // We can use this to show progress and thumbnail
+        file.progress = Math.min(100, parseInt(100.0 *
+                                 evt.loaded / evt.total));
+    });
+   });
+ }geocodeAddress();
+}
 $scope.addProduct = function(file){
     if (file) {
       file.upload = Upload.upload({

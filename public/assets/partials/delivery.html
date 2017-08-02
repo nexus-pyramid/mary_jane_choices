@@ -1,5 +1,7 @@
-<div class="wrapper" ng-init="deliveryView()" >
 
+<div class="wrapper" ng-init="deliveryView()" >
+<script>
+</script>
  <div class="modal ng-hide" ng-show="modalVisible" >
    <div class="mobile-overlay" ng-click="modalVisible=false;"></div>
    <div class="modal-container">
@@ -87,7 +89,7 @@
           <th>Name</th>
           <th>Price</th>
         </tr>
-        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product" ng-click="openModal($index, product)">
+        <tr ng-repeat="product in delivery.products | typeFilter:searchType | filter:searchText" class="product" ng-click="modal(product)">
           <td class="prod-img"> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
           <td class="prod-name"><h3>{{product.name | uppercase}}</h3></td>
           <td class="prod-price">

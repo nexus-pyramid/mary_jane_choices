@@ -37,6 +37,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			})
 		}
+		this.getFeatBrands = function(coords, callback){
+			$http.post('/featBrands', coords).then(function(returned_data){
+				callback(returned_data.data);
+			})
+		}
 		this.deliveryCards = function(coords, callback){
 			console.log('in the deliverycard method');
 			$http.post('/deliveryCards', coords).then(function(returned_data){
