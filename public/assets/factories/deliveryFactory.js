@@ -16,6 +16,14 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.deleteBrand = function(brandId, callback){
+			console.log(brandId);
+			$http.post(brandId+'/deleteBrand').then(function(returned_data){
+				if(typeof(callback) == 'function');{
+					callback(returned_data.data);
+				}
+			})
+		}
 		this.getBrands = function(callback){
 			$http.get('/getBrands').then(function(returned_data){
 				callback(returned_data.data);

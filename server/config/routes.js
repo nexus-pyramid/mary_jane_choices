@@ -61,7 +61,8 @@ module.exports = function(app){
   app.post('/user/:id', users.addUser);
   app.get('/showProducts/:id', businesses.show);
   app.post('/delete/:id', businesses.delete);
-  app.post('/deleteBusiness/:id', businesses.deleteBusiness)
+  app.post('/:id/deleteBrand', businesses.deleteBrand);
+  app.post('/deleteBusiness/:id', businesses.deleteBusiness);
   app.post('/editBusiness', businesses.edit);
   app.post('/password', businesses.updatePass);
   // app.use(loginAuthentication);

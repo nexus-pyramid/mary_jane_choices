@@ -48,7 +48,8 @@
             </div>
           </div>
           <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
-        <button class="form-btn" ng-click='addbrandProduct(Brand, file, brand._id)'>Add Product</button>
+          <button class="form-btn" ng-click='addbrandProduct(Brand, file, brand._id)'>Add Product</button>
+            <button class="delete-btn" ng-click="deleteBrand(brand._id)">Delete Brand</button>
         </form>                                         
 	</div>
 </div>

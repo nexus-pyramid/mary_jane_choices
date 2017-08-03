@@ -142,6 +142,24 @@ function businessesController(){
 			}
 		})
 	}
+	this.deleteBrand = function(req, res){
+		console.log('in the delete Brand function');
+		console.log(req.params.id);
+		// console.log('**************************************************************************')
+		// console.log('in the deleteBrand function')
+		// console.log('this is the params id');
+		// console.log(req.params.id);
+		// console.log(req.params);
+		Brand.remove({_id:req.params.id}, function(err){
+			if(err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('deleted brand :(');
+				res.json({message: "deleted Brand"});
+			}
+		})
+	}
 	this.delete = function(req, res){
 		console.log('in the delete')
 		console.log(req.params)

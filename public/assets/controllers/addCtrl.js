@@ -1270,6 +1270,19 @@ $scope.deleteBusiness = function(businessId){
      }
   })
 }
+$scope.deleteBrand = function(brandId){
+  console.log('this is thebrand id');
+  console.log(brandId);
+  deliveryFactory.deleteBrand(brandId, function(data){
+    if(data['errors']){
+        $scope.errors = data;
+    } else {
+      console.log(data);
+      $route.reload();
+      toastr.success('Successfully deleted brand', toastOpts);
+    }
+  })
+}
 $scope.deleteProduct = function(product_id) {
   console.log(product_id)
   deliveryFactory.delete(product_id, function(data){
