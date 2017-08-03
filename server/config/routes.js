@@ -32,6 +32,7 @@ module.exports = function(app){
   app.post('/addLocation', businesses.addLocation);
   // app.post('/visit/:id', deliveries.show);
   app.get('/show/:id', businesses.show);
+  app.get('/brand/:id', businesses.showBrand);
   app.post('/feature', businesses.featureBuss);
   app.post('/admin', admin.login);
   app.get('/alldocs', businesses.getDocs);
@@ -49,6 +50,7 @@ module.exports = function(app){
   app.post('/dispensaryCards', businesses.dispensaryCards);
   app.post('/createBrand', businesses.addBrand);
   app.post('/featBrands', businesses.featBrands);
+  app.get('/getBrands', businesses.getBrands);
   // app.get('/getDives', businesses.getDeliveries);
   app.get('/getBusinesses', businesses.getBusinesses);
   app.post('/getDeliveries', businesses.getDeliveries);
@@ -65,6 +67,7 @@ module.exports = function(app){
   // app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);
+  app.post('/brandproductUpload', businesses.addbrandProduct)
   app.post('/productUpload', multipartyMiddleware, businesses.addProduct);
   app.post('/review/:id', businesses.addReview);
 };

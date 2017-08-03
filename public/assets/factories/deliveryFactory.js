@@ -16,6 +16,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				}
 			})
 		}
+		this.getBrands = function(callback){
+			$http.get('/getBrands').then(function(returned_data){
+				callback(returned_data.data);
+			});
+		}
 		this.checkAdmin = function(admin, callback){
 			console.log('int the check admin function')
 			$http.post('/admin', admin).then(function(returned_data){
@@ -153,6 +158,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 			$http.get('/getCities').then(function(returned_data){
 				callback(returned_data.data);
 			});
+		}
+		this.showBrand  = function(brandId, callback){
+			console.log(brandId)
+			$http.get('/brand/'+brandId).then(function(returned_data){
+				callback(returned_data.data);
+			})
 		}
 		this.show = function(deliveryId, callback){
 			$http.get('/show/'+deliveryId).then(function(returned_data){

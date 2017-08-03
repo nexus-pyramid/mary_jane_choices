@@ -1,0 +1,101 @@
+<div ng-init="brandView()">
+  <div class="sheet__head">
+    <div class="sheet__contact">
+      <!-- <div class="contact__container"> -->
+        <div class="icon__profile">
+          <img data-ng-src="data:image/JPEG;base64,{{brand.image}}">
+        </div>
+        <div class="business_info">
+          <h1>{{brand.name | uppercase}}</h1>
+        </div>
+        
+      <!-- </div> -->
+      
+    </div>
+  </div>
+  <a class="mobile_nav" href="">&#9776;</a>
+  <div class="wrapper">
+  <section class="business_nav">
+    <ul class="bus">
+      <li><a href="" ng-click="page='menu'">Menu</a></li>
+      <li><a href="" ng-click="page='reviews'">Reviews</a></li>
+      <li><a href="" ng-click="page='deals'">Deals</a></li>
+      <li><a href="" ng-click="page='bio'">Bio</a></li>
+    </ul>
+  </section>
+  </div>
+  <div ng-switch on="page">
+    <div class="sheet__product grid" ng-switch-when="menu">
+           <div class="product_nav">
+               <a href="" ng-click="searchType=''">ALL CATEGORIES</a>
+               <a href="" ng-click="searchType='Flower'">FLOWER</a>
+               <a href="" ng-click="searchType='Indica'">INDICA</a>
+               <a href="" ng-click="searchType='Sativa'">SATIVA</a>
+               <a href="" ng-click="searchType='Hybrid'">HYBRID</a>
+               <a href="" ng-click="searchType='Extract'">EXTRACT</a>
+               <a href="" ng-click="searchType='Edible'">EDIBLE</a>
+               <a href="" ng-click="searchType='Topical'">TOPICALS</a>
+               <a href="" ng-click="searchType='Grow'">GROW</a>
+               <a href="" ng-click="searchType='Gear'">GEAR</a>
+               <a href="" ng-click="searchType='Preroll'">PREROLL</a>
+               <input type="text" placeholder="Search..." ng-model="searchText">
+           </div>
+            <div class="product_container">
+              <table class="products">
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                </tr>
+                <tr ng-repeat="product in brand.products | typeFilter:searchType | filter:searchText" class="product" ng-click="modal(product)">
+                  <td class="prod-img"> <img class="flower-img" data-ng-src="data:image/JPEG;base64,{{product.image}}"></td>
+                  <td class="prod-name"><h3>{{product.name | uppercase}}</h3></td>
+                  <td class="prod-price">
+                    <div class="price ng-hide" ng-show="product.productType == 'Flower'">
+                          <div class="price-6" ><p>1G</p>{{product.one_gram}}</div><!-- 
+                       --><div class="price-6"><p>2G</p>{{product.two_gram}}</div><!-- 
+                       --><div class="price-6"><p>1/8</p>{{product.eigth}}</div><!-- 
+                       --><div class="price-6"><p>1/4</p>{{product.quarter}}</div><!-- 
+                       --><div class="price-6"><p>1/2</p>{{product.half}}</div><!-- 
+                       --><div class="price-6"><p>1oz</p>{{product.ounce}}</div>
+                    </div>
+                    <div class="price ng-hide" ng-show="product.productType == 'Extract'">
+                      <div class="price-3" ><p>1/2 Gram</p>{{product.half_gram}}</div>
+                      <div class="price-3" ><p>Gram</p>{{product.one_gram}}</div> 
+                       <div class="price-3"><p>2 G</p>{{product.two_gram}}</div>
+                    </div>
+                    <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
+                      <div class="price-3" ><p>Price</p>{{product.price}}</div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div> 
+    </div>
+    <div class="sheet__reviews" ng-switch-when="reviews">
+      <div class="add-review">
+          <h4>{{UserService.name}}</h4>
+                              <a href="">{{UserService.name | uppercase}}</a>
+
+        <form>
+         <label>Add review:<textarea ng-model="newReview.review"></textarea></label>
+          <button class="form-btn" ng-click="addReview(newReview, delivery._id)">Submit</button>
+        </form>
+
+      </div>
+        <div ng-repeat="review in brand.reviews" class="review">
+          <label>Reviews</label>
+          <h3>Review:</h3> <p>{{review.review}}</p>
+          <h3>User:</h3><p>{{review._user.name}}</p>
+        </div>
+    </div>
+  <div class="sheet__deals" ng-switch-when="deals">
+    
+    <h3>Deals</h3>
+
+  </div>
+  <div class="sheet__menu" ng-switch-when="bio">
+      <p>{{brand.bio}}</p>
+  </div>
+</div>
+</div>

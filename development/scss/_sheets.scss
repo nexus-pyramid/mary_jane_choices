@@ -53,6 +53,24 @@
 
 }
 
+.brandbannersheet {
+	width: 100%;
+	background-color: #F2F5F5;
+	 img {
+	 	height: 300px;
+	 	width: 100%;
+	 }
+
+}
+.brandbanner {
+	height:300px;
+	width: 100vw;
+	 img {
+	 	height: 100%;
+	 	width: 100%;
+	 }
+}
+
 .sheet__sponsors{
 	display:flex;
 	flex-wrap:wrap;

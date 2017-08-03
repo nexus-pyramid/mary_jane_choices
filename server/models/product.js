@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 	Schema = mongoose.Schema;
 var ProductSchema = new Schema({
-    _business:{type: Schema.Types.ObjectId, ref:'Business', required:true},
+	_brand: {type: Schema.Types.ObjectId, ref: 'Brand'},
+    _business:{type: Schema.Types.ObjectId, ref:'Business'},
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now},
 	image: {type: String},

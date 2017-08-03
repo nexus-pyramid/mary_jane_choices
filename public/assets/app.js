@@ -26,6 +26,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
    templateUrl: 'assets/partials/brands.html',
    controller: 'addCtrl'
   })
+  .when('/allbrands', {
+    templateUrl: 'assets/partials/allbrands.html',
+    controller: 'addCtrl'
+  })
   .when('/login',{
    templateUrl: 'assets/partials/login.html',
    controller: 'addCtrl'
@@ -41,6 +45,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
   .when('/admin-dash',{
    templateUrl: 'assets/partials/admin-dash.html',
    controller: 'addCtrl'
+  })
+  .when('/brand/:id', {
+    templateUrl: '/assets/partials/brand.html',
+    controller: 'addCtrl'
   })
   .when('/user/:id', {
     templateUrl: 'assets/partials/user-page.html',

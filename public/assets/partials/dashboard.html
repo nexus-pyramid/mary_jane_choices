@@ -23,7 +23,9 @@
 	<h1>Featured Brands In your Area</h1>
 </div>
 <div class="brand" ng-repeat="brand in Brands">
+	<a href="#/brand/{{brand._id}}">
         <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{brand.image}}">
+    </a>
         <h2> {{brand.name}} </h2>
        <!-- ng-click="show()" -->
 </div>

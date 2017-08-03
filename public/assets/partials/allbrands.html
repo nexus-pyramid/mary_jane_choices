@@ -1,0 +1,54 @@
+<div ng-init="brandView()">
+	<div class="brand" ng-repeat="brand in cakes">
+		<a href="#/brand/{{brand._id}}">
+        <img class="feat_img" data-ng-src="data:image/JPEG;base64,{{brand.image}}">
+        </a>
+        <h2> {{brand.name}} </h2>
+       <!--   <button class="form-btn"><a href="#/brands">add brands</a></button> -->
+         <form class="form-container" id="form">
+      <h2>Add Product</h2>
+        <input type="text" ng-model='Brand.name' placeholder="Name">
+        <textarea ng-model='Brand.description' placeholder="Description"></textarea>
+        <select ng-model="Brand.productType">
+          <option class="default-option" value="" selected data-default>Type</option>
+          <option value="Flower">Flower</option>
+          <option value="Edible">Edible</option>
+          <option value="Extract">Extract</option>
+          <option value="Topical">Topical</option>
+          <option value="Grow">Grow</option>
+          <option value="Gear">Gear</option>
+        </select>
+        <select ng-model="Brand.type" ng-show="Brand.productType == 'Flower' || Brand.productType == 'Extract'" class="ng-hide">
+          <option class="default-option" value="" selected data-default>Type</option>
+          <option value="Indica">Indica</option>
+          <option value="Sativa">Sativa</option>
+          <option value="Hybrid">Hybrid</option>
+        </select>
+        <input type="number" ng-model='Brand.thc' placeholder="THC" min="1" max="100" ng-show="Brand.productType == 'Flower' || Brand.productType == 'Extract' || Brand.productType == 'Edible' || Brand.productType == 'Topical'" class="ng-hide">
+        <br>
+        <h4 ng-show="Brand.productType" class="ng-hide">Price:</h4>
+
+          <input type="text" ng-model='Brand.half_gram' placeholder="Half Gram" ng-show="Brand.productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='Brand.one_gram' placeholder="One Gram" ng-show="Brand.productType == 'Flower' || productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='Brand.two_gram' placeholder="Two Grams" ng-show="Brand.productType == 'Flower' || productType == 'Extract'" class="ng-hide">
+          <input type="text" ng-model='Brand.eigth' placeholder="Eigth" ng-show="Brand.productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='Brand.quarter' placeholder="Quarter" ng-show="Brand.productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='Brand.half' placeholder="Half" ng-show="Brand.productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='Brand.ounce' placeholder="Ounce" ng-show="Brand.productType == 'Flower'" class="ng-hide">
+          <input type="text" ng-model='Brand.price' placeholder="$" ng-show="Brand.productType == 'Grow' || Brand.productType == 'Edible' || Brand.productType == 'Topical' || Brand.productType == 'Gear'" class="ng-hide">
+
+          <div class="ng-hide"><img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'"></div>
+
+          <div ng-switch on="file">
+            <div ng-switch-when="file.length < 1000">
+              <img class="upload-product-image ng-hide" ngf-thumbnail="file">
+            </div>
+            <div ng-switch-default>
+              <img class="upload-product-image ng-hide" data-ng-src="data:image/JPEG;base64,{{file}}">
+            </div>
+          </div>
+          <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
+        <button class="form-btn" ng-click='addbrandProduct(Brand, file, brand._id)'>Add Product</button>
+        </form>                                         
+	</div>
+</div>

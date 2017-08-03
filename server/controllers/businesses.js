@@ -361,6 +361,62 @@ function businessesController(){
 	        	}
 	   		})
 	}
+
+	this.addbrandProduct = function(req,res){
+		console.log('this is req.body')
+		console.log(req.body);
+		console.log('this is the id')
+		console.log(req.body.id)
+		var file = req.files.file;
+		var newProduct = new Product(req.body);
+		console.log('thiss is te new roduct')
+		console.log(newProduct)
+		newProduct._brand = req.body.id;
+
+	    fs.readFile(file.path, function (err, original_data){
+	      if (err){
+	        res.json(400);
+	      } else {
+	        var bs = original_data.toString('base64');
+	        fs.unlink(file.path, function(err){
+	          if (err){
+	            console.log(err);
+	            console.log('failed to delete' + file.path);
+	          } else {
+	            console.log('successfully' + file.path);
+	          }
+	        });
+	        newProduct.image = bs;
+			    newProduct.save(function(err, result){
+				       if(err){
+				       		console.log(err)
+					         res.json(err);
+				            } else {
+	                        // var newstrain = new Strain(newFlower.name)
+	                        // if () {}
+					                Brand.findOne({_id: req.body.id }).exec(function(err, business){
+						              console.log("brand we're adding flowers too")
+						              console.log(business);
+						              if(err){
+							               console.log(err);
+							              res.sendStatus(400);
+						              } else{
+							              business.products.push(newProduct._id);
+							              business.save(function(err, result){
+								                if(err){
+									               res.json(err);
+								                } else {
+									                console.log('adding flower');
+									                res.json(result);
+								              }
+							             })
+						            }
+					            })
+				         }
+			     })
+		    }
+	    })
+	}
 	this.addProduct = function(req,res){
     	var file = req.files.file;
 		var newProduct = new Product(req.body);
@@ -508,6 +564,32 @@ function businessesController(){
 				res.json(err);
 			} else {
 				console.log('these are the doctors')
+				res.json(data)
+			}
+		})
+	}
+	this.showBrand = function(req, res){
+		Brand.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+			if(!Business){
+				console.log(err);
+			} else if(err) {
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('this is the brand');
+				// console.log(data)
+				res.json(data);
+			}
+		})
+	}
+	this.getBrands = function(req, res){
+		console.log('getting brands');
+			Brand.find({}, function(err, data){
+			if(err){
+				console.log(err)
+				res.json(err);
+			} else {
+				// console.log(data)
 				res.json(data)
 			}
 		})

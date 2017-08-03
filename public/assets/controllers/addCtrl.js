@@ -23,8 +23,9 @@ addCtrl.controller('addCtrl', function($scope, $anchorScroll, $http, $rootScope,
       input: [
         item.description
       ]
-    })
+    });
   }
+
  // $scope.openModal = function (index, item){
  //  console.log('this is the item');
  //  console.log(item);
@@ -128,9 +129,6 @@ function get_doc() {
       // // Display message confirming that the coordinates verified.
       // $scope.formData.htmlverified = "Yep (Thanks for giving us real data!)";
       // gservice.initialize(coords.lat, coords.long);
-
-
-
       console.log("THIS IS THE LOCATION SERVICE");
       console.log(LocationService);
 
@@ -310,7 +308,8 @@ $scope.dispensariesView = function(){
 // END Deliveries Constructor
 ////////////////////////////////////////
 $scope.brandView = function(){
-
+  getBrands();
+  getBrand();
 }
 $scope.admindashView = function(){
   check();
@@ -409,7 +408,13 @@ console.log('showing products')
 }
 function getUnverified(){
   deliveryFactory.unverified(function(data){
-    $scope.unverified = data
+    $scope.unverified = data;
+  })
+}
+function getBrands(){
+  deliveryFactory.getBrands(function(data){
+    console.log(data)
+    $scope.cakes = data;
   })
 }
 function dispensaryCards(){
@@ -734,6 +739,8 @@ $scope.addBrand = function(file){
  }geocodeAddress();
 }
 $scope.addProduct = function(file){
+  console.log('this is the name ')
+  console.log($scope.name);
     if (file) {
       file.upload = Upload.upload({
           url: '/productUpload',
@@ -776,7 +783,52 @@ $scope.addProduct = function(file){
 }
 // END Add Product
 ////////////////////////////////////////
+$scope.addbrandProduct = function(brand, file, id){
+    console.log('this is the id of the brand');
+    console.log(id);
+    console.log(file)
+    if (file) {
+      file.upload = Upload.upload({
+          url: '/brandproductUpload',
+          data: {
+              file: file,
+              name: brand.name,
+              type: brand.type,
+              productType: brand.productType,
+              thc: brand.thc,
+              description: brand.description,
+              one_gram: brand.one_gram,
+              two_gram: brand.two_gram,
+              eigth: brand.eigth,
+              quarter: brand.quarter,
+              half: brand.half,
+              ounce: brand.ounce,
+              price: brand.price,
+              half_gram: brand.half_gram,
+              id: id
 
+           }
+      });
+      file.upload.then(function (response) {
+          $timeout(function () {
+              file.result = response.data;
+          });
+      }, function (response) {
+          if (response.status > 0)
+              $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 *
+                                   evt.loaded / evt.total));
+      });
+        if( status === 'Ok'){
+          $route.reload();
+          toastr.success('Product Added', toastOpts);
+      }
+      else {
+          toastr.success('Product Added', toastOpts);
+     }
+  }
+}
 
 ////////////////////////////////////////
 // Change to Edit View
@@ -922,11 +974,20 @@ $scope.deleteView = function(product){
 ////////////////////////////////////////
 function getbusiness(){
   deliveryFactory.show($routeParams.id, function(data){
+    console.log($routeParams.id)
     console.log(data);
     $scope.delivery = data;
     $scope.business = data;
   });
 };
+function getBrand(){
+  deliveryFactory.showBrand($routeParams.id, function(data){
+    console.log($routeParams.id);
+    console.log('this is the brand');
+    console.log(data);
+    $scope.brand = data;
+  })
+}
 // END Get Delivery
 ////////////////////////////////////////
 // Show
