@@ -257,7 +257,13 @@ angular.module('gservice', [])
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 12,
                     center: myLatLng,
-                    minZoom:12
+                    minZoom:12,
+                    styles: [
+                        {
+                            featureType: 'poi',
+                            stylers: [{visibility: 'off'}]
+                        }
+                    ]
                 });
             }
 
