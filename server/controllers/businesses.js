@@ -114,7 +114,21 @@ function businessesController(){
 			}
 		})
 	}
-
+this.getUnFeatured = function(req, res){
+		console.log('this is the location')
+		console.log(req.body);
+		console.log('************')
+		Business.geoNear(req.body, {maxDistance:0.03, query: {featured: false}}, function(err, data){
+			if (err){
+				console.log(err);
+				res.json(err);
+			} else {
+				console.log('theses are the featured businesses');
+				console.log(data);
+				res.json(data);
+			}
+		})
+	}
 	this.featBrands = function(req, res){
 		console.log('this is the location')
 		console.log(req.body);

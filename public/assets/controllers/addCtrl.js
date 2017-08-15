@@ -320,6 +320,7 @@ $scope.admindashView = function(){
   getDels();
   getAll();
   unfeatured();
+  // searchUnFeatured();
   $scope.page = 'deliveries';
   // getDeliveries();
   // getDoctors();
@@ -1219,6 +1220,28 @@ $scope.searchLocation = function() {
       gservice.refresh(lat, long, function(data){
             $scope.deliveries = data;
           });
+  });
+}
+$scope.searchUnFeatured = function(area) {
+  console.log(area)
+  // var area = $scope.area;
+  console.log(area)
+   var geocoder = new google.maps.Geocoder();
+  geocoder.geocode({'address' : area}, function(results, status){
+    console.log(results);
+    console.log(status);
+    $scope.loc = {};
+     var long = results[0].geometry.location.lng();
+     var lat  = results[0].geometry.location.lat(); 
+    var coords = [long, lat]
+    console.log(coords)
+  deliveryFactory.getUnFeatured(coords, function(data){
+    respArray = [];
+    for (var i = 0; i < data.length; i++){
+        respArray.push(data[i].obj)    
+    }          
+     $scope.shops = respArray;
+  });
   });
 }
 $scope.searchdisps = function() {

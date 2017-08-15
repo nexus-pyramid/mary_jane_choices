@@ -44,6 +44,7 @@ module.exports = function(app){
   app.get('/getAll', businesses.getAll);
   app.get('/getReviews',  deliveries.getReviews);
   app.post('/getfeatured', businesses.getfeatured);
+  app.post('/getUnFeatured', businesses.getUnFeatured);
   app.get('/unfeatured', businesses.unfeatured);
   app.get('/getDels', businesses.getDels);
   app.post('/deliveryCards', businesses.deliveryCards);

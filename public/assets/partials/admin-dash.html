@@ -88,6 +88,10 @@
         <div class="sheet__unfeatured" ng-switch-when="featured">
      <div class="sheet__delivery">
     <!-- <div class=""> -->
+        <form>
+     <input ng-model="area" class="admin_search" type="text" placeholder="Search By Area">
+      <input type="submit" value="Search" class="searchbttn" ng-click="searchUnFeatured(area)">
+      </form>
       <div class="card__delivery" ng-repeat="unfeat in shops">
         <div class="title">{{unfeat.name}}</div>
         <p>{{unfeat._id}}</p>
@@ -103,6 +107,7 @@
         <button type="submit" class="menu-btn" ng-click="featureBusiness(unfeat._id)">Feature</button>
         </form>
       </div>
+
     <!-- </div> -->
     </div>
     </div>

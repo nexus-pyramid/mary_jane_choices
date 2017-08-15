@@ -42,6 +42,22 @@
 	  }
 
 }
+.admin_search {
+	background-color:#424242;
+	width: 300px;
+	border: none;
+	border-radius: 2px;
+	float: left;
+	 margin-right: 10px;
+	text-align: center;
+	// margin-left: 40%;
+	margin-bottom: 20px;
+	height: 30px;
+	  @include breakpoint(715) {
+	  	width: 300px;
+	  }
+
+}
 .searchbttn {
 	background-color:#424242;
 	border-radius: 2px;

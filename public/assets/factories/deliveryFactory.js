@@ -77,6 +77,16 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			})
 		}
+		this.getUnFeatured = function(coords, callback){
+			$http.post('/getUnFeatured', coords).then(function(returned_data){
+				callback(returned_data.data);
+			})
+		}
+		this.getfeatured = function(coords, callback){
+			$http.post('/getfeatured', coords).then(function(returned_data){
+				callback(returned_data.data);
+			})
+		}
 		this.apply = function(apply, callback){
 			$http.post('/apply', apply).then(function(returned_data){
 				if(typeof(callback) == 'function');{
