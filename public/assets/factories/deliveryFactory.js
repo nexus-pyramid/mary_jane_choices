@@ -109,6 +109,11 @@ app.factory('deliveryFactory', ['$http', function($http){
 				callback(returned_data.data);
 			})
 		}
+		this.showBusinessProducts = function(id, callback){
+			$http.get('/showBusinessProducts/'+id).then(function(returned_data){
+				callback(returned_data.data)
+			})
+		}
 		this.showProducts = function(id,callback){
 			$http.get('/showProducts/'+id).then(function(returned_data){
 				callback(returned_data.data)
@@ -217,6 +222,12 @@ app.factory('deliveryFactory', ['$http', function($http){
 		}
 		this.search = function(coords, callback){
 			$http.post('/search', coords).then(function(returned_data){
+				console.log(returned_data);
+				callback(returned_data.data);
+			})
+		}
+		this.loggedVisit = function(id, callback){
+			$http.post('/loggedVisit', id).then(function(returned_data){
 				console.log(returned_data);
 				callback(returned_data.data);
 			})

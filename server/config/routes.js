@@ -40,6 +40,7 @@ module.exports = function(app){
   app.get('/everything', businesses.getAll);
   // app.get('/sendCoords', businesses.sendCoords)
   app.post('/addBusiness', multipartyMiddleware, businesses.addBusiness);
+  app.post('/addShop', businesses.addShop);
   app.post('/user', users.login);
   app.get('/getAll', businesses.getAll);
   app.get('/getReviews',  deliveries.getReviews);
@@ -60,12 +61,15 @@ module.exports = function(app){
   app.post('/getDoctors', businesses.getDoctors);
   app.post('/validate', businesses.validate);
   app.post('/user/:id', users.addUser);
+  app.get('/showBusinessProducts/:id', businesses.showProducts);
   app.get('/showProducts/:id', businesses.show);
+  // app.get('/products/:id', businesses.showShop);
   app.post('/delete/:id', businesses.delete);
   app.post('/:id/deleteBrand', businesses.deleteBrand);
   app.post('/deleteBusiness/:id', businesses.deleteBusiness);
   app.post('/editBusiness', businesses.edit);
   app.post('/password', businesses.updatePass);
+  app.post('/loggedVisit', businesses.visitShop);
   // app.use(loginAuthentication);
   app.get('/logout', businesses.logout);
   app.post('/editProduct', multipartyMiddleware, businesses.editProduct);

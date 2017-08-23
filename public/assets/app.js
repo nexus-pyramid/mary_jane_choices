@@ -42,6 +42,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
    templateUrl: 'assets/partials/check-admin.html',
    controller: 'addCtrl'
   })
+   .when('/visitShop',{
+   templateUrl: 'assets/partials/visitAdmin.html',
+   controller: 'addCtrl'
+  })
   .when('/admin-dash',{
    templateUrl: 'assets/partials/admin-dash.html',
    controller: 'addCtrl'
@@ -68,6 +72,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
   })
   .when('/apply', {
     templateUrl: 'assets/partials/mary.html',
+    controller:  'addCtrl'
+  })
+  .when('/addshop', {
+    templateUrl: 'assets/partials/addshop.html',
     controller:  'addCtrl'
   })
   .when('/register/user', {

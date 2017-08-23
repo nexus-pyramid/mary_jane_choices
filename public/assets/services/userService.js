@@ -3,6 +3,7 @@ app.factory('UserService', function(){
     	_id: '',
     	name: '',
     	type: '',
+    	_shop: '',
     	admin: ''
     };
 });

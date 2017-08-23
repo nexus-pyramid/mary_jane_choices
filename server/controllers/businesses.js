@@ -3,11 +3,127 @@ var Business = mongoose.model('Business');
 var Applicant = mongoose.model('Applicant');
 var Review = mongoose.model('Review');
 var bcrypt = require('bcrypt');
+var Shop = mongoose.model('Shop');
 var Product = mongoose.model('Product');
 var Brand = mongoose.model('Brand');
 var auth = require('basic-auth');
 var fs = require('fs')
 function businessesController(){
+
+	this.addShop = function(req, res){
+			// console.log(req.body);
+			// console.log(req.body.location);
+			var newBusiness = new Business(req.body);
+			var file = req.files.file;
+			// console.log(newBusiness);
+			fs.readFile(file.path, function (err, original_data){
+				if (err){
+					res.json(400);
+				} else {
+					var bs = original_data.toString('base64');
+					newBusiness.image = bs;
+					fs.unlink(file.path, function(err){
+						if (err){
+							console.log('failed to delete' + file.path);
+						} else {
+							console.log('successfully' + file.path);
+						}
+						newBusiness.save(function(err, result){
+							if(err){
+								res.json(err);
+						} else {
+							// console.log(result);
+							res.json(result)
+						}
+					})
+				});
+			}
+		});
+		 Business.findOne({_id: req.session.Logged._id}).exec(function(err, business){
+				if(business._shop){
+					// res.sendStatus(400);
+					newBusiness._shop = business._shop;
+					console.log(newBusiness._shop);
+					newBusiness.save(function(err, results){
+						if(err){
+							res.json(err);
+						} else{
+							console.log('it lit');
+							console.log('this is the business with shop');
+							console.log(results);
+							// res.json(results);
+						}
+					});
+					Shop.findOne({_id: business._shop}).exec(function(err, shop){
+						if(err){
+							console.log(err);
+						} else {
+							shop.businesses.push(newBusiness._id);
+							shop.save(function(err, result){
+								if (err) {
+									console.log(err);
+								} else {
+									console.log('this is the shop we saved the business to');
+									console.log(shop);
+									console.log('success');
+								}
+							})
+							// shop.businesses.push(req.session.logged._id);
+						}
+					});
+
+				}
+				else{
+					console.log('this business doesnt have a shop')
+					var newShop = new Shop(req.body);
+					console.log('this is the shop');
+					// console.log(newShop);
+					newShop.businesses.push(newBusiness._id);
+					newShop.businesses.push(req.session.Logged._id);
+					newShop.save(function(err, result){
+						if (err) {
+							console.log(err)
+						} else {
+							// res.json(result);
+							// console.log(result);
+							console.log('this is the shop');
+							// console.log(newShop);
+						}
+					})
+				   Business.findOne({_id: req.session.Logged._id}).exec(function(err, business){
+								if(err){
+									res.sendStatus(400);
+								}
+								else{
+									business._shop = newShop._id;
+									newBusiness._shop = newShop._id;
+									newBusiness.save(function(err, results){
+										if(err){
+											res.json(err);
+										} else{
+
+											console.log('it lit');
+											console.log('this is the mewbusiness with shop');
+											console.log(results);
+											// res.json(results);
+										}
+									});
+									business.save(function(err, results){
+										if(err){
+											res.json(err);
+										} else{
+
+											console.log('it lit');
+											console.log('this is the business with shop');
+											console.log(results);
+											// res.json(results);
+										}
+									});
+							}
+					});
+				}
+			});
+	}
 
 	this.addBusiness = function(req,res){
 		console.log(req.body);
@@ -187,21 +303,77 @@ this.getUnFeatured = function(req, res){
 			}
 		})
 	}
-	this.show = function(req, res){
-		console.log('in the show function')
-		console.log('req.params.id')
-		//I changed this because it would only show logged in busness' products
-		// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
-		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+	this.visitShop = function(req, res){
+			console.log(req.body);
+			console.log('in the visitShop function');
+			Business.findOne({_id: req.body._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, business){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
 				console.log(err);
 				res.json(err);
 			} else {
-				console.log('this is the business')
-				// console.log(data)
-				res.json(data);
+				console.log('got businesse');
+				console.log(business);
+				res.json(business);					
+			}
+		})
+	}
+	this.show = function(req, res){
+		console.log('in the show function');
+		//I changed this because it would only show logged in busness' products
+		// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, business){
+			if(!Business){
+				console.log(err);
+			} else if(err) {
+				console.log(err);
+				res.json(err);
+			} else {
+					if(business._shop) {
+							console.log('this business has a mothership');
+							Shop.findOne({_id: business._shop}).populate('businesses').populate({path:'products', populate:{path:'_business'}}).exec(function(err, shop){
+								if(err){
+									console.log(err);
+								} else {
+								console.log('this is the mother');
+								console.log(shop);
+								res.json(shop);
+								}
+							})
+						}
+					else {
+						res.json(business);
+					}
+			}
+		})
+	}
+	this.showProducts = function(req, res){
+		console.log('in the show function');
+		//I changed this because it would only show logged in busness' products
+		// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, business){
+			if(!Business){
+				console.log(err);
+			} else if(err) {
+				console.log(err);
+				res.json(err);
+			} else {
+					if(business._shop) {
+							console.log('this business has a mothership');
+							Business.findOne({_id: req.params.id}).populate('products').populate('_shop').exec(function(err, shop){
+								if(err){
+									console.log(err);
+								} else {
+								console.log('this is the mother');
+								 console.log(shop);
+								res.json(shop);
+								}
+							})
+						}
+					else {
+						res.json(business);
+					}
 			}
 		})
 	}
@@ -808,12 +980,12 @@ this.getUnFeatured = function(req, res){
 		})
 	}
 	this.login = function(req, res){
-		 console.log(req.body)
+		 // console.log(req.body)
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");
 		Business.findOne({email: req.body.email}, function(err, business){
-			console.log(business);
+			// console.log(business);
 			if(!business){
 				res.json(errors)
 			} else { bcrypt.compare( req.body.password, business.password, function(err, doesMatch) {
@@ -823,8 +995,29 @@ this.getUnFeatured = function(req, res){
 							name: business.name,
 							type: business.type
 						}
-						res.json(req.session.Logged)
-					} else {
+						if(business._shop) {
+							console.log('this business has a mothership');
+							Shop.findOne({_id: business._shop}).populate('businesses').exec(function(err, shop){
+								if(err){
+									console.log(err);
+								} else {
+								console.log('this is the mother');
+								 // console.log(shop);
+								 req.session.Logged = {
+									_id: business._id,
+									name: business.name,
+									type: business.type,
+									_shop: shop
+								}
+								console.log(req.session.Logged);
+								res.json(req.session.Logged);
+								}
+							})
+						} else {
+							res.json(req.session.Logged)
+						}
+					} 
+					else {
 						console.log('bad password')
 						res.json(errors);						
 					}

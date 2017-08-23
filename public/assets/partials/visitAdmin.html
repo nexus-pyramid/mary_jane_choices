@@ -1,5 +1,4 @@
-
-<div class="sheet__register" ng-init="adminView()">
+<div class="sheet__register" ng-init="visitShopView()">
   <div class="shop_info">
     <h3> Welcome, {{business.name}} </h3>
     <img class="bio" data-ng-src="data:image/JPEG;base64,{{business.image}}">
@@ -7,7 +6,7 @@
 <div class="sheet__shops">
   <ul>
     <li ng-repeat="shop in shops">
-      <a href="#/visitShop" ng-click="visitBusiness(shop._id)">{{shop.name}}</a>
+      <a href="#/visitShop" ng-click="visitShop(shop._id)">{{shop.name}}</a>
     </li>
   </ul>
 </div>

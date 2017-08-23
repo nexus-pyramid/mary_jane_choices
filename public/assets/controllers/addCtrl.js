@@ -338,6 +338,9 @@ $scope.dashView = function(){
   getfeatured();
   getFeatBrands();
 }
+$scope.visitShopView = function() {
+  showingShopProducts();
+}
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
@@ -403,6 +406,18 @@ console.log('showing products')
   deliveryFactory.showProducts(UserService._id, function(data){
     $scope.products = data.products;
     $scope.business = data;
+    $scope.shops = data.businesses;
+    console.log(data);
+    // UserService._id = data.data._id;
+    
+  })
+}
+function showingShopProducts() {
+   deliveryFactory.showBusinessProducts(UserService._id, function(data){
+    $scope.products = data.products;
+    $scope.business = data;
+    $scope.shops = data.businesses;
+    console.log(data);
     // UserService._id = data.data._id;
     
   })
@@ -1037,7 +1052,10 @@ $scope.login = function(){
     UserService._id = data._id;
     UserService.name = data.name;
     UserService.type = data.type;
-    console.log(UserService.type);
+      if(data._shop) {
+      UserService._shop = data._shop;
+      }
+    console.log(UserService);
     $rootScope.$broadcast('loggedin')
     $location.url('/success');
     $scope.mode = "add";
@@ -1049,7 +1067,23 @@ $scope.login = function(){
 }
 // END Log in
 ////////////////////////////////////////
-
+$scope.visitBusiness = function(id){
+  var shopId = {
+    _id: id
+  }
+  console.log(shopId);
+  deliveryFactory.loggedVisit(shopId, function(data){
+    $scope.products = data.products;
+    $scope.business = data;
+    console.log('in the visit shop');
+    console.log($scope.business);
+  })
+  UserService._id = id;
+  UserService.name = data.name;
+  $rootScope.$broadcast('loggedin');
+  console.log(UserService._id)
+}
+// function visitShop = function
 ////////////////////////////////////////
 // Log in
 //// only for logging in users
@@ -1379,6 +1413,76 @@ $scope.deleteProduct = function(product_id) {
 ////////////////////////////////////////
 // Create Business
 ////////////////////////////////////////
+$scope.addBusinessShop = function(file) {
+  console.log('in the create Business');
+  function geocodeAddress(){
+    var geocoder = new google.maps.Geocoder();
+    var address = $scope.street_address;
+    var loc = [];
+    geocoder.geocode({'address': address}, function(results, status){
+      $scope.loc = {};
+      $scope.loc.lng = results[0].geometry.location.lng();
+      $scope.loc.lat = results[0].geometry.location.lat();
+      console.log($scope.loc);
+      // if($scope.password.length > 8){
+      //   console.log("passwd to short")
+      //   return;
+      // } name="input"
+      file.upload = Upload.upload({
+        url:'/addShop',
+        data: {
+        file: file,
+        name: $scope.name,
+        type: $scope.type,
+        city: $scope.city,
+        hours: {
+          monday: {open: $scope.hours.monday.open, close: $scope.hours.monday.close},
+          tuesday: {open: $scope.hours.tuesday.open, close: $scope.hours.tuesday.close},
+          wednesday: {open: $scope.hours.wednesday.open, close: $scope.hours.wednesday.close},
+          thursday: {open: $scope.hours.thursday.open, close: $scope.hours.thursday.close},
+          friday: {open: $scope.hours.friday.open, close: $scope.hours.friday.close},
+          saturday: {open: $scope.hours.saturday.open, close: $scope.hours.saturday.close},
+          sunday: {open: $scope.hours.sunday.open, close: $scope.hours.sunday.close}
+        },
+        zip_code: $scope.zip_code,
+        state: $scope.state,
+        phone: $scope.phone,
+        bio: $scope.bio,
+        email: $scope.email,
+        password: $scope.password,
+        address: $scope.street_address,
+        location: [$scope.loc.lng, $scope.loc.lat]
+      }
+    });
+      console.log(file)
+    file.upload.then(function (response) {
+      console.log(response)
+        $timeout(function () {
+            file.result = response.data;
+        });
+
+      if( response.status == 200){
+        console.log('status ok');
+             $location.url('/login');
+
+      }
+      else { 
+        console.log(response);
+        if(response['err']){
+        $scope.errors.push(response['err']);
+        } 
+     }
+    }, function (response) {
+        if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+    }, function (evt) {
+        // We can use this to show progress and thumbnail
+        file.progress = Math.min(100, parseInt(100.0 *
+                                 evt.loaded / evt.total));
+    });
+   });
+ }geocodeAddress();
+}
 $scope.createBusiness = function(file) {
   console.log('in the create Business');
   function geocodeAddress(){

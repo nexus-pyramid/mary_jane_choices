@@ -1,28 +1,28 @@
-
-<div class="sheet__register" ng-init="adminView()">
-  <div class="shop_info">
-    <h3> Welcome, {{business.name}} </h3>
-    <img class="bio" data-ng-src="data:image/JPEG;base64,{{business.image}}">
-</div> 
-<div class="sheet__shops">
-  <ul>
-    <li ng-repeat="shop in shops">
-      <a href="#/visitShop" ng-click="visitBusiness(shop._id)">{{shop.name}}</a>
-    </li>
-  </ul>
-</div>
-<button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
-  <h3> Edit Information </h3>
-  <div class="edit_business ng-hide" ng-show="show == 'edit'">
-    <form>
-      <input type="text" ng-model="name" placeholder="{{business.name}}">
-      <input type="text" ng-model="email" placeholder="{{business.email}}">
-      <input type="text" ng-model="phone" placeholder="{{business.phone}}">
-      <textarea ng-model="bio" placeholder="{{business.bio}}"></textarea>
+<div class="sheet__edit" id="edit" ng-init="shopView()">
+ <h1>Add shop </h1>
+<div id="register-delivery">
+    <form name="form" novalidate class="form-container" ng-model-options="{ updateOn: 'blur' }">
+      <h2>Register Business</h2>
+      <ul ng-if='errors.length > 0'>
+        <li ng-repeat='error in errors'>{{error}}</li>
+      </ul>
+      <input type="text" name="name" ng-model='name'  placeholder="Name" required="" />
+      <!-- NAME VALIDATION -->
+      <div ng-show="form.$submitted || form.name.$touched">
+        <div ng-show="form.name.$error.required">Name is required.</div>
+      </div>
+      <select ng-model="type" required>
+        <option class="default-option" value="" selected data-default>Type</option>
+        <option value="Dispensary" >Dispensary</option>
+        <option value="Delivery" >Delivery</option>
+        <option value="Doctor" >Doctor</option>
+      </select>
+      <p> open hours monday </p>
+      <h3>Hours of Operation</h3>
       <div class="dayOfTheWeek">
-       <label for="monday" class="dayOfTheWeek"><input type="checkbox" id="tuesday" ng-model="hours.monday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Mon</label>
+        <label for="monday" class="dayOfTheWeek"><input type="checkbox" id="monday" ng-model="hours.monday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Mon</label>
         <p>from</p>
-        <select ng-model="monop" placeholder="{{business.hours.monday.open}}">
+        <select ng-model="hours.monday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -47,7 +47,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="monco" placeholder="{{business.hours.monday.close}}">
+        <select ng-model="hours.monday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -75,7 +75,7 @@
       <div class="dayOfTheWeek">
         <label for="tuesday" class="dayOfTheWeek"><input type="checkbox" id="tuesday" ng-model="hours.tuesday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Tue</label>
         <p>from</p>
-        <select ng-model="tuop" placeholder="{{business.hours.tuesday.open}}">
+        <select ng-model="hours.tuesday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -100,7 +100,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="tuco" placeholder="{{business.hours.tuesday.close}}">
+        <select ng-model="hours.tuesday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -128,7 +128,7 @@
       <div class="dayOfTheWeek">
         <label for="wednesday" class="dayOfTheWeek"><input type="checkbox" id="wednesday" ng-model="hours.wednesday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Wed</label>
         <p>from</p>
-        <select ng-model="weop" placeholder="{{business.hours.wednesday.open}}">
+        <select ng-model="hours.wednesday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -153,7 +153,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="weco" placeholder="{{business.hours.wednesday.close}}">
+        <select ng-model="hours.wednesday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -181,7 +181,7 @@
       <div class="dayOfTheWeek">
         <label for="thursday" class="dayOfTheWeek"><input type="checkbox" id="thursday" ng-model="hours.thursday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Thu</label>
         <p>from</p>
-        <select ng-model="thop" placeholder="{{business.hours.thursday.open}}">
+        <select ng-model="hours.thursday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -206,7 +206,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="thco" placeholder="{{business.hours.thursday.close}}">
+        <select ng-model="hours.thursday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -234,7 +234,7 @@
       <div class="dayOfTheWeek">
         <label for="friday" class="dayOfTheWeek"><input type="checkbox" id="friday" ng-model="hours.friday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Fri</label>
         <p>from</p>
-        <select ng-model="friop" placeholder="{{business.hours.friday.open}}">
+        <select ng-model="hours.friday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -259,7 +259,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="frico" placeholder="{{business.hours.friday.close}}">
+        <select ng-model="hours.friday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -287,7 +287,7 @@
       <div class="dayOfTheWeek">
         <label for="saturday" class="dayOfTheWeek"><input type="checkbox" id="saturday" ng-model="hours.saturday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Sat</label>
         <p>from</p>
-        <select ng-model="satop" placeholder="{{business.hours.saturday.open}}">
+        <select ng-model="hours.saturday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -312,7 +312,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="satco" placeholder="{{business.hours.saturday.close}}">
+        <select ng-model="hours.saturday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -340,7 +340,7 @@
       <div class="dayOfTheWeek">
         <label for="sunday" class="dayOfTheWeek"><input type="checkbox" id="sunday" ng-model="hours.sunday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Sun</label>
         <p>from</p>
-        <select ng-model="sunop" placeholder="{{business.hours.sunday.open}}">
+        <select ng-model="hours.sunday.open">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -365,7 +365,7 @@
           <option value="4:00AM">4:00AM</option>
         </select>
         <p>to</p>
-        <select ng-model="sunco" placeholder="{{business.hours.sunday.close}}">
+        <select ng-model="hours.sunday.close">
           <option value="7:00AM">7:00AM</option>
           <option value="8:00AM">8:00AM</option>
           <option value="9:00AM">9:00AM</option>
@@ -390,116 +390,80 @@
           <option value="4:00AM">4:00AM</option>
         </select>
       </div>
-      <img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'">
-          <div ng-switch on="file">
-            <div ng-switch-when="file.length < 1000">
-              <img class="upload-product-image"  ngf-thumbnail="file">
-            </div>
-            <div ng-switch-default>
-              <img class="upload-product-image" data-ng-src="data:image/JPEG;base64,{{business.image}}">
-            </div>
-          </div> 
-         <input type="file" ngf-select ng-model="file" name="file" placeholder="icon image">
-          <button class="edit-btn" ng-click="editBusiness(file)">submit edited Information </button>
+
+      <input type="text" id="phone" ng-model='phone' placeholder="Phone" required><br>
+      <textarea ng-model='bio' placeholder="Bio" required></textarea>
+    
+
+      <input type="text" ng-model='street_address' placeholder="Street Address" required>
+      <input type="text" ng-model='city' placeholder="City" required>
+      <select ng-model="state" required>
+        <option class="default-option" value="" selected data-default>State</option>
+        <option value="AL">ALABAMA</option>
+        <option value="AK">ALASKA</option>
+        <option value="AZ">ARIZONA</option>
+        <option value="AR">ARKANSAS</option>
+        <option value="CA">CALIFORNIA</option>
+        <option value="CO">COLORADO</option>
+        <option value="CT">CONNECTICUT</option>
+        <option value="DE">DELAWARE</option>
+        <option value="FL">FLORIDA</option>
+        <option value="GA">GEORGIA</option>
+        <option value="HI">HAWAII</option>
+        <option value="ID">IDAHO</option>
+        <option value="IL">ILLINOIS </option>
+        <option value="IN">INDIANA</option>
+        <option value="IA">IOWA</option>
+        <option value="KS">KANSAS</option>
+        <option value="KY">KENTUCKY</option>
+        <option value="LA">LOUISIANA</option>
+        <option value="ME">MAINE</option>
+        <option value="MD">MARYLAND</option>
+        <option value="MA">MASSACHUSETTS</option>
+        <option value="MI">MICHIGAN</option>
+        <option value="MN">MINNESOTA</option>
+        <option value="MS">MISSISSIPPI</option>
+        <option value="MO">MISSOURI</option>
+        <option value="MT">MONTANA</option>
+        <option value="NE">NEBRASKA</option>
+        <option value="NV">NEVADA</option>
+        <option value="NH">NEW HAMPSHIRE</option>
+        <option value="NJ">NEW JERSEY</option>
+        <option value="NM">NEW MEXICO</option>
+        <option value="NY">NEW YORK</option>
+        <option value="NC">NORTH CAROLINA</option>
+        <option value="ND">NORTH DAKOTA</option>
+        <option value="OH">OHIO</option>
+        <option value="OK">OKLAHOMA</option>
+        <option value="OR">OREGON</option>
+        <option value="PA">PENNSYLVANIA</option>
+        <option value="RI">RHODE ISLAND</option>
+        <option value="SC">SOUTH CAROLINA</option>
+        <option value="SD">SOUTH DAKOTA</option>
+        <option value="TN">TENNESSEE</option>
+        <option value="TX">TEXAS</option>
+        <option value="UT">UTAH</option>
+        <option value="VT">VERMONT</option>
+        <option value="VA">VIRGINIA</option>
+        <option value="WA">WASHINGTON</option>
+        <option value="WV">WEST VIRGINIA</option>
+        <option value="WI">WISCONSIN</option>
+        <option value="WY">WYOMING</option>
+      </select> 
+      <input type="text" ng-model='zip_code' placeholder="Zip Code" required>
+      <!-- EMAIL FORM -->
+      <input type="email" name="email" ng-model='email' placeholder="Email" required="">
+      <!-- EMAIL VALIDATION -->
+      <div ng-show="form.$submitted || form.email.$touched">
+        <span ng-show="form.email.$error.required">Email is required.</span>
+        <span ng-show="form.email.$error.email">This is not a valid email.</span>
+      </div>
+
+
+      <input type="password" ng-model='password' placeholder="Password" required>
+      <input type="password" ng-model='confirm' placeholder="Confirm Password" required>
+      <input type="file" ngf-select ng-model="file" name="file" accept="image/*" placeholder="icon image">
+      <button class="form-btn" ng-click='addBusinessShop(file)'>REGISTER</button>
     </form>
-   <a href="#/edit_pass"> Change password </a>
-  </div>
-  <div class="register-delivery" class="ng-hide" ng-show="mode !== 'Doctor'">
-      <ul ng-if='errors.length > 0'>
-        <li ng-repeat='error in errors'>{{error}}</li>
-      </ul>
-      <form class="form-container" id="form">
-      <h2 class="ng-hide" ng-show="mode == 'add'">Add Product</h2>
-      <h2 class="ng-hide" ng-show="mode == 'edit'">Edit Product</h2>
-        <input type="text" ng-model='name' placeholder="Name">
-        <textarea ng-model='description' placeholder="Description"></textarea>
-        <select ng-model="productType">
-          <option class="default-option" value="" selected data-default>Type</option>
-          <option value="Flower">Flower</option>
-          <option value="Edible">Edible</option>
-          <option value="Extract">Extract</option>
-          <option value="Topical">Topical</option>
-          <option value="Grow">Grow</option>
-          <option value="Gear">Gear</option>
-        </select>
-        <select ng-model="type" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
-          <option class="default-option" value="" selected data-default>Type</option>
-          <option value="Indica">Indica</option>
-          <option value="Sativa">Sativa</option>
-          <option value="Hybrid">Hybrid</option>
-        </select>
-        <input type="number" ng-model='thc' placeholder="THC" min="1" max="100" ng-show="productType == 'Flower' || productType == 'Extract' || productType == 'Edible' || productType == 'Topical'" class="ng-hide">
-        <br>
-        <h4 ng-show="productType" class="ng-hide">Price:</h4>
-
-          <input type="text" ng-model='half_gram' placeholder="Half Gram" ng-show="productType == 'Extract'" class="ng-hide">
-          <input type="text" ng-model='one_gram' placeholder="One Gram" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
-          <input type="text" ng-model='two_gram' placeholder="Two Grams" ng-show="productType == 'Flower' || productType == 'Extract'" class="ng-hide">
-          <input type="text" ng-model='eigth' placeholder="Eigth" ng-show="productType == 'Flower'" class="ng-hide">
-          <input type="text" ng-model='quarter' placeholder="Quarter" ng-show="productType == 'Flower'" class="ng-hide">
-          <input type="text" ng-model='half' placeholder="Half" ng-show="productType == 'Flower'" class="ng-hide">
-          <input type="text" ng-model='ounce' placeholder="Ounce" ng-show="productType == 'Flower'" class="ng-hide">
-          <input type="text" ng-model='price' placeholder="$" ng-show="productType == 'Grow' || productType == 'Edible' || productType == 'Topical' || productType == 'Gear'" class="ng-hide">
-
-          <div class="ng-hide" ng-show="mode=='add'"><img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'"></div>
-
-          <div ng-switch on="file">
-            <div ng-switch-when="file.length < 1000">
-              <img class="upload-product-image ng-hide" ngf-thumbnail="file">
-            </div>
-            <div ng-switch-default>
-              <img class="upload-product-image ng-hide" data-ng-src="data:image/JPEG;base64,{{file}}">
-            </div>
-          </div>
-          <input type="file" ngf-select ng-model="file" name="file" accept="image/*">
-        <button class="form-btn ng-hide" ng-click='addProduct(file)' ng-show="mode == 'add'">Add Product</button>
-        <button class="form-btn ng-hide" ng-click='editProduct(file)' ng-show="mode == 'edit'">Edit Product</button>
-      </form><br>
-    <!-- <div class="sheet__deliveries">
-      <div class="card__delivery" ng-repeat="delivery in deliveries">
-      <div class="title">{{delivery.name}}</div>
-          <span id="validation"><h3> Validate? </h3>
-        <input type="checkbox"> ng-model="validate()"> -->
-    <!--  </div>
-    </div> -->
-  </div>
 </div>
-<div class="sheet__products" id="products">
-
-    <div class="card__strain" ng-repeat="product in products | orderBy: '-created_at'">
-    <div class="title">{{product.name}}</div>
-    <img class="card-product-image" data-ng-src="data:image/JPEG;base64,{{product.image}}">
-    <p>{{product.productType}}</p>
-    <p>{{product.type}}</p>
-    <p>{{product.thc}}</p>
-    <div class="price ng-hide" ng-show="product.productType == 'Flower'">
-      <div class="price-6" ><p>Gram</p>{{product.one_gram}}</div><!-- 
-       --><div class="price-6"><p>2 G</p>{{product.two_gram}}</div><!-- 
-       --><div class="price-6"><p>1/8</p>{{product.eigth}}</div><!-- 
-       --><div class="price-6"><p>1/4</p>{{product.quarter}}</div><!-- 
-       --><div class="price-6"><p>1/2</p>{{product.half}}</div><!-- 
-       --><div class="price-6"><p>1oz</p>{{product.ounce}}</div>
-    </div>
-    <div class="price ng-hide" ng-show="product.productType == 'Extract'">
-      <div class="price-3" ><p>1/2 Gram</p>{{product.half_gram}}</div><!-- 
-      --><div class="price-3" ><p>Gram</p>{{product.one_gram}}</div><!-- 
-       --><div class="price-3"><p>2 G</p>{{product.two_gram}}</div>
-    </div>
-    <div class="price ng-hide" ng-show="product.productType == 'Grow' || product.productType == 'Edible' || product.productType == 'Topical' || product.productType == 'Gear'">
-      <div class="price-3" ><p>Price</p>{{product.price}}</div>
-    </div>
-   <button class="edit-btn" ng-click="editView(product)" ng-model="edit" ng-init="edit=true">Edit</button>
-    <button class="delete-btn" ng-click="deleteProduct(product._id)">Delete</button>
-  </div>
-
-</div>
-<div class="sheet__edit" id="edit">
-    <a href="#/addshop"><button class="delete-btn">Add shop</button></a>
-</div>
-<div class="s3">
-add image to s3
-<form>
-<input type="file" ngf-select ng-model="file" name="file">
-<button class="form-btn" ng-click='uploadS3(file)'>Add Image</button>
-</form>
 </div>
