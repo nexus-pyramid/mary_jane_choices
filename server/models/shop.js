@@ -5,11 +5,17 @@ var mongoose = require('mongoose');
 	console.log('yo');
 	
 var ShopSchema = new Schema({
+	products: [{type: Schema.Types.ObjectId, ref: 'Product'}],
 	businesses: [{type: Schema.Types.ObjectId, ref: 'Business'}],
 	created_at: {type: Date, default: Date.now},
 	updated_at: {type: Date, default: Date.now},
-	image: {type: String},
+    type: String,
+	image: {
+		type: String,
+		default:''
+	},
 	name: {type: String},
+	email: {type:String},
 	password: {
 		type:String,
 		reuired: true,

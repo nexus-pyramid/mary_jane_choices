@@ -37,12 +37,11 @@ function businessesController(){
 						}
 					})
 				});
-			}
-		});
-		 Business.findOne({_id: req.session.Logged._id}).exec(function(err, business){
-				if(business._shop){
+			  }
+		    });
+		 Shop.findOne({_id: req.session.Logged._id}).exec(function(err, shop){
 					// res.sendStatus(400);
-					newBusiness._shop = business._shop;
+					newBusiness._shop = shop;
 					console.log(newBusiness._shop);
 					newBusiness.save(function(err, results){
 						if(err){
@@ -53,75 +52,17 @@ function businessesController(){
 							console.log(results);
 							// res.json(results);
 						}
-					});
-					Shop.findOne({_id: business._shop}).exec(function(err, shop){
-						if(err){
+					});		
+					shop.businesses.push(newBusiness._id);
+					shop.save(function(err, result){
+						if (err) {
 							console.log(err);
 						} else {
-							shop.businesses.push(newBusiness._id);
-							shop.save(function(err, result){
-								if (err) {
-									console.log(err);
-								} else {
-									console.log('this is the shop we saved the business to');
-									console.log(shop);
-									console.log('success');
-								}
-							})
-							// shop.businesses.push(req.session.logged._id);
+							console.log('this is the shop we saved the business to');
+							console.log(shop);
+							console.log('success');
 						}
-					});
-
-				}
-				else{
-					console.log('this business doesnt have a shop')
-					var newShop = new Shop(req.body);
-					console.log('this is the shop');
-					// console.log(newShop);
-					newShop.businesses.push(newBusiness._id);
-					newShop.businesses.push(req.session.Logged._id);
-					newShop.save(function(err, result){
-						if (err) {
-							console.log(err)
-						} else {
-							// res.json(result);
-							// console.log(result);
-							console.log('this is the shop');
-							// console.log(newShop);
-						}
-					})
-				   Business.findOne({_id: req.session.Logged._id}).exec(function(err, business){
-								if(err){
-									res.sendStatus(400);
-								}
-								else{
-									business._shop = newShop._id;
-									newBusiness._shop = newShop._id;
-									newBusiness.save(function(err, results){
-										if(err){
-											res.json(err);
-										} else{
-
-											console.log('it lit');
-											console.log('this is the mewbusiness with shop');
-											console.log(results);
-											// res.json(results);
-										}
-									});
-									business.save(function(err, results){
-										if(err){
-											res.json(err);
-										} else{
-
-											console.log('it lit');
-											console.log('this is the business with shop');
-											console.log(results);
-											// res.json(results);
-										}
-									});
-							}
-					});
-				}
+					})					
 			});
 	}
 
@@ -147,13 +88,63 @@ function businessesController(){
 							if(err){
 								res.json(err);
 						} else {
-							// console.log(result);
-							res.json(result)
+							console.log('aye');
+							// res.json(result)
 						}
 					})
 				});
 			}
 		})
+	    var newShop = new Shop(req.body);
+		console.log('this is the shop');
+		// console.log(newShop);
+		newShop.businesses.push(newBusiness._id);
+		fs.readFile(file.path, function (err, original_data){
+				if (err){
+					res.json(400);
+				} else {
+					var bs = original_data.toString('base64');
+					newShop.image = bs;
+					fs.unlink(file.path, function(err){
+						if (err){
+							console.log('failed to delete' + file.path);
+						} else {
+							console.log('successfully' + file.path);
+						}
+						newShop.save(function(err, result){
+							if(err){
+								res.json(err);
+						} else {
+							console.log('aye');
+							// res.json(result)
+						}
+					})
+				});
+			}
+		})		
+		newShop.save(function(err, result){
+			if (err) {
+				console.log(err);
+			} else {
+				// res.json(result);
+				// console.log(result);
+				console.log('this is the shop');
+				// console.log(newShop);
+			}
+		 })
+		newBusiness._shop = newShop._id;
+		newBusiness.save(function(err, results){
+			if(err){
+				res.json(err);
+			} else{
+
+				console.log('it lit');
+				console.log('this is the business with shop');
+				console.log(results);
+				res.json(results);
+				console.log('frfr');
+			}
+		});
 	}
 	this.addBrand = function(req, res){
 		console.log('adding a new brand');
@@ -319,32 +310,47 @@ this.getUnFeatured = function(req, res){
 			}
 		})
 	}
+	// this.show = function(req, res){
+	// 	console.log('in the show function');
+	// 	//I changed this because it would only show logged in busness' products
+	// 	// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
+	// 	Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, business){
+	// 		if(!Business){
+	// 			console.log(err);
+	// 		} else if(err) {
+	// 			console.log(err);
+	// 			res.json(err);
+	// 		} else {
+	// 				if(business._shop) {
+	// 						console.log('this business has a mothership');
+	// 						Shop.findOne({_id: business._shop}).populate('businesses').populate({path:'products', populate:{path:'_business'}}).exec(function(err, shop){
+	// 							if(err){
+	// 								console.log(err);
+	// 							} else {
+	// 							console.log('this is the mother');
+	// 							console.log(shop);
+	// 							res.json(shop);
+	// 							}
+	// 						})
+	// 					}
+	// 				else {
+	// 					res.json(business);
+	// 				}
+	// 		}
+	// 	})
+	// }
 	this.show = function(req, res){
-		console.log('in the show function');
+		console.log('in the show function yoooooo');
 		//I changed this because it would only show logged in busness' products
 		// Business.findOne({_id: req.session.Logged._id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, data){
-		Business.findOne({_id: req.params.id}).populate('products').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, business){
+		Shop.findOne({_id: req.params.id}).populate('products').populate('businesses').exec(function(err, business){
 			if(!Business){
 				console.log(err);
 			} else if(err) {
 				console.log(err);
 				res.json(err);
-			} else {
-					if(business._shop) {
-							console.log('this business has a mothership');
-							Shop.findOne({_id: business._shop}).populate('businesses').populate({path:'products', populate:{path:'_business'}}).exec(function(err, shop){
-								if(err){
-									console.log(err);
-								} else {
-								console.log('this is the mother');
-								console.log(shop);
-								res.json(shop);
-								}
-							})
-						}
-					else {
-						res.json(business);
-					}
+			} else {	
+				res.json(business);
 			}
 		})
 	}
@@ -361,7 +367,7 @@ this.getUnFeatured = function(req, res){
 			} else {
 					if(business._shop) {
 							console.log('this business has a mothership');
-							Business.findOne({_id: req.params.id}).populate('products').populate('_shop').exec(function(err, shop){
+							Business.findOne({_id: req.params.id}).populate('products').populate('_shop').populate({path:'reviews', populate:{path:'_user'}}).exec(function(err, shop){
 								if(err){
 									console.log(err);
 								} else {
@@ -621,10 +627,59 @@ this.getUnFeatured = function(req, res){
 		    }
 	    })
 	}
+	// this.addProduct = function(req,res){
+ //    	var file = req.files.file;
+	// 	var newProduct = new Product(req.body);
+	// 	newProduct._business = req.session.Logged;
+
+	//     fs.readFile(file.path, function (err, original_data){
+	//       if (err){
+	//         res.json(400);
+	//       } else {
+	//         var bs = original_data.toString('base64');
+	//         fs.unlink(file.path, function(err){
+	//           if (err){
+	//             console.log(err);
+	//             console.log('failed to delete' + file.path);
+	//           } else {
+	//             console.log('successfully' + file.path);
+	//           }
+	//         });
+	//         newProduct.image = bs;
+	// 		    newProduct.save(function(err, result){
+	// 			       if(err){
+	// 				         res.sendStatus(400);
+	// 			            } else {
+	//                         // var newstrain = new Strain(newFlower.name)
+	//                         // if () {}
+	//                         	console.log(req.session.Logged);
+	// 				                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
+	// 					              console.log("company we're adding flowers too")
+	// 					              console.log(business);
+	// 					              if(err){
+	// 						               console.log(err);
+	// 						              res.sendStatus(400);
+	// 					              } else{
+	// 						              business.products.push(newProduct._id);
+	// 						              business.save(function(err, result){
+	// 							                if(err){
+	// 								               res.json(err);
+	// 							                } else {
+	// 								                console.log('adding flower');
+	// 								                res.json(result);
+	// 							              }
+	// 						             })
+	// 					            }
+	// 				            })
+	// 			         }
+	// 		     })
+	// 	    }
+	//     })
+	// }
 	this.addProduct = function(req,res){
     	var file = req.files.file;
 		var newProduct = new Product(req.body);
-		newProduct._business = req.session.Logged;
+		newProduct._shop = req.session.Logged;
 
 	    fs.readFile(file.path, function (err, original_data){
 	      if (err){
@@ -647,15 +702,15 @@ this.getUnFeatured = function(req, res){
 	                        // var newstrain = new Strain(newFlower.name)
 	                        // if () {}
 	                        	console.log(req.session.Logged);
-					                Business.findOne({_id: req.session.Logged._id }).exec(function(err, business){
+					                Shop.findOne({_id: req.session.Logged._id }).exec(function(err, shop){
 						              console.log("company we're adding flowers too")
-						              console.log(business);
+						              console.log(shop);
 						              if(err){
 							               console.log(err);
 							              res.sendStatus(400);
 						              } else{
-							              business.products.push(newProduct._id);
-							              business.save(function(err, result){
+							              shop.products.push(newProduct._id);
+							              shop.save(function(err, result){
 								                if(err){
 									               res.json(err);
 								                } else {
@@ -663,6 +718,16 @@ this.getUnFeatured = function(req, res){
 									                res.json(result);
 								              }
 							             })
+							              Business.update({_shop: shop._id}, {$set:{products: shop.products}}, {multi: true}, function(err, val){
+							              	console.log('updating businesses')
+							              		if(err){
+							              			console.log(err);
+							              		} else {
+							              			console.log('we made it');
+							              			console.log(val);
+							              			console.log('businesses updated')	
+							              		}
+							              })
 						            }
 					            })
 				         }
@@ -984,38 +1049,37 @@ this.getUnFeatured = function(req, res){
 		var errors = {errors:{
 			general: 'Invalid login information'}}
 			console.log("in the login in method");
-		Business.findOne({email: req.body.email}, function(err, business){
+		Shop.findOne({email: req.body.email}, function(err, shop){
 			// console.log(business);
-			if(!business){
+			if(!shop){
 				res.json(errors)
-			} else { bcrypt.compare( req.body.password, business.password, function(err, doesMatch) {
+			} else { bcrypt.compare( req.body.password, shop.password, function(err, doesMatch) {
 					if (doesMatch){
 						req.session.Logged = {
-							_id: business._id,
-							name: business.name,
-							type: business.type
+							_id: shop._id,
+							name: shop.name,
+							type: shop.type
 						}
-						if(business._shop) {
-							console.log('this business has a mothership');
-							Shop.findOne({_id: business._shop}).populate('businesses').exec(function(err, shop){
-								if(err){
-									console.log(err);
-								} else {
-								console.log('this is the mother');
-								 // console.log(shop);
-								 req.session.Logged = {
-									_id: business._id,
-									name: business.name,
-									type: business.type,
-									_shop: shop
-								}
-								console.log(req.session.Logged);
-								res.json(req.session.Logged);
-								}
-							})
-						} else {
-							res.json(req.session.Logged)
-						}
+						// if(business._shop) {
+						// 	console.log('this business has a mothership');
+						// 	Shop.findOne({_id: business._shop}).populate('businesses').exec(function(err, shop){
+						// 		if(err){
+						// 			console.log(err);
+						// 		} else {
+						// 		console.log('this is the mother');
+						// 		 // console.log(shop);
+						// 		 req.session.Logged = {
+						// 			_id: business._id,
+						// 			name: business.name,
+						// 			type: business.type,
+						// 			_shop: shop
+						// 		}
+						// 		console.log(req.session.Logged);
+						// 		res.json(req.session.Logged);
+						// 		}
+						// 	})
+						// }
+						res.json(req.session.Logged);
 					} 
 					else {
 						console.log('bad password')

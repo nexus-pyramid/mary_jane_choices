@@ -31,7 +31,7 @@ module.exports = function(app){
   app.post('/delivery/:id', deliveries.addDelivery);
   app.post('/addLocation', businesses.addLocation);
   // app.post('/visit/:id', deliveries.show);
-  app.get('/show/:id', businesses.show);
+  app.get('/show/:id', businesses.showProducts);
   app.get('/brand/:id', businesses.showBrand);
   app.post('/feature', businesses.featureBuss);
   app.post('/admin', admin.login);

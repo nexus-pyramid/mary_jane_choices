@@ -5,11 +5,27 @@
     <img class="bio" data-ng-src="data:image/JPEG;base64,{{business.image}}">
 </div> 
 <div class="sheet__shops">
-  <ul>
+ <!--  <ul>
     <li ng-repeat="shop in shops">
+      <img class="bio" data-ng-src="data:image/JPEG;base64,{{shop.image}}">
       <a href="#/visitShop" ng-click="visitBusiness(shop._id)">{{shop.name}}</a>
+      <p>{{shop.city}}</p>
     </li>
-  </ul>
+  </ul> -->
+   <table class="admin_panel">
+        <tr>
+          <th>image</th>
+          <th>Name</th>
+          <th>city</th>
+          <th>actions</th>
+        </tr>
+        <tr ng-repeat="shop in shops">
+          <td class="prod-img"><img class="flower-img" data-ng-src="data:image/JPEG;base64,{{shop.image}}"></td>
+          <td class="prod-name"><h4>{{shop.name | uppercase}}</h4></td>
+          <td>{{shop.city}}</td>
+          <td><button type="submit" class="menu-btn" ng-click="deleteBusiness(shop._id)">Delete</button></td>
+        </tr>
+      </table>
 </div>
 <button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
   <h3> Edit Information </h3>

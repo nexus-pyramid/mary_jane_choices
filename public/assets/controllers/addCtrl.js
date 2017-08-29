@@ -793,6 +793,7 @@ $scope.addProduct = function(file){
           toastr.success('Product Added', toastOpts);
       }
       else {
+                  $route.reload();
           toastr.success('Product Added', toastOpts);
      }
   }
