@@ -11,7 +11,7 @@ var BusinessSchema = new Schema({
 	},
 	age: Number,
 	rating: Number,
-	name: {type: String, unique: true},
+	name: {type: String},
 	type: String,
     phone: Number,
     bio: String,
@@ -26,6 +26,10 @@ var BusinessSchema = new Schema({
 			saturday:{ open: String, close: String},
 			sunday:{ open: String, close: String}
 		},
+	disclaimer: {type: String},
+	info: [{title: String,
+			content: String
+	}],
     email: {type:String},
     _shop: {type: Schema.Types.ObjectId, ref:'Shop'},
 	valid:{type:Boolean, default: false},

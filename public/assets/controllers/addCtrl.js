@@ -387,7 +387,7 @@ $scope.doctorView = function(){
   console.log('hey')
   getbusiness();
   getLogged();
-  $scope.page = 'menu';
+  $scope.page = 'details';
   $scope.searchText = '';
   $scope.searchType = '';
   $scope.modalVisible=false;
@@ -995,7 +995,11 @@ function getbusiness(){
     console.log(data);
     $scope.delivery = data;
     $scope.business = data;
+    if (data.type == "Doctor") {
+      $scope.mode = "Doctor";
+    } 
   });
+    
 };
 function getBrand(){
   deliveryFactory.showBrand($routeParams.id, function(data){
@@ -1436,6 +1440,7 @@ $scope.addBusinessShop = function(file) {
         name: $scope.name,
         type: $scope.type,
         city: $scope.city,
+        street_address: $scope.street_address,
         hours: {
           monday: {open: $scope.hours.monday.open, close: $scope.hours.monday.close},
           tuesday: {open: $scope.hours.tuesday.open, close: $scope.hours.tuesday.close},
@@ -1521,7 +1526,7 @@ $scope.createBusiness = function(file) {
         bio: $scope.bio,
         email: $scope.email,
         password: $scope.password,
-        address: $scope.street_address,
+        street_address: $scope.street_address,
         location: [$scope.loc.lng, $scope.loc.lat]
       }
     });
