@@ -341,6 +341,10 @@ $scope.dashView = function(){
 $scope.visitShopView = function() {
   showingShopProducts();
 }
+$scope.yoView = function() {
+     getbusiness();
+     console.log('aye')
+}
 ////////////////////////////////////////
 // Admin Constructor
 $scope.adminView = function(){
@@ -993,6 +997,7 @@ function getbusiness(){
   deliveryFactory.show($routeParams.id, function(data){
     console.log($routeParams.id)
     console.log(data);
+    console.log('getting business')
     $scope.delivery = data;
     $scope.business = data;
     if (data.type == "Doctor") {

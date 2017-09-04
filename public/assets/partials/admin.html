@@ -21,13 +21,22 @@
         </tr>
         <tr ng-repeat="shop in shops">
           <td class="prod-img"><img class="flower-img" data-ng-src="data:image/JPEG;base64,{{shop.image}}"></td>
-          <td class="prod-name"><h4>{{shop.name | uppercase}}</h4></td>
+          <td class="prod-name"><h4>{{shop.name}}</h4></td>
           <td>{{shop.city}}</td>
-          <td><button type="submit" class="menu-btn" ng-click="deleteBusiness(shop._id)">Delete</button></td>
+          <td><button type="submit" class="menu-btn" ng-click="deleteBusiness(shop._id)">Delete</button>
+          <a href="#/edit/{{shop._id}}"><button type="submit" class="menu-btn">Edit</button>
+          </td>
         </tr>
       </table>
 </div>
-<button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
+ <div class="ng-hide" ng-show="mode == 'Doctor'">
+  <h4>Add Disclamier</h4>
+  <form>
+    <textarea ng-model="business.disclaimer" placeholder="disclaimer"></textarea>
+    <button class="form-btn" ng-click='addDisclaimer(business, )'>Register</button>
+  </form>
+  </div>
+<a href="#/"><button class="edit-btn" ng-click="editbusinessView()">Edit Information</button>
   <h3> Edit Information </h3>
   <div class="edit_business ng-hide" ng-show="show == 'edit'">
     <form>
@@ -420,6 +429,7 @@
     </form>
    <a href="#/edit_pass"> Change password </a>
   </div>
+
   <div class="register-delivery" class="ng-hide" ng-show="mode !== 'Doctor'">
       <ul ng-if='errors.length > 0'>
         <li ng-repeat='error in errors'>{{error}}</li>

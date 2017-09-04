@@ -1,2 +1,476 @@
-<p>{{product.name}}</p>
-<p>{{product.description}}</p>
+<div ng-init="yoView()">
+<div class="sheet__edit">
+	<div class="business_info">
+	<img class="edit_img" data-ng-src="data:image/JPEG;base64,{{business.image}}">
+	<h3>{{business.name}}</h3>
+	</div>
+	<div>
+	 <h2> Edit information </h2>
+	</div>
+	<div>
+		<form>
+			<div>
+			      <input type="text" ng-model="name" placeholder="{{business.name}}">
+			</div>
+			<div>
+				  <input type="text" ng-model="email" placeholder="{{business.email}}">
+			</div>
+			<div>
+				  <input type="text" ng-model="phone" placeholder="{{business.phone}}">
+
+			</div>
+			<div>
+				<input type="text" ng-model='street_address' placeholder="{{business.street_address}}">
+			</div>
+			<div>
+				<input type="text" ng-model='city' placeholder="{{business.city}}">
+			</div>
+			<div>
+				 <select ng-model="state" required>
+        <option class="default-option" value="" selected data-default>State</option>
+        <option value="AL">ALABAMA</option>
+        <option value="AK">ALASKA</option>
+        <option value="AZ">ARIZONA</option>
+        <option value="AR">ARKANSAS</option>
+        <option value="CA">CALIFORNIA</option>
+        <option value="CO">COLORADO</option>
+        <option value="CT">CONNECTICUT</option>
+        <option value="DE">DELAWARE</option>
+        <option value="FL">FLORIDA</option>
+        <option value="GA">GEORGIA</option>
+        <option value="HI">HAWAII</option>
+        <option value="ID">IDAHO</option>
+        <option value="IL">ILLINOIS </option>
+        <option value="IN">INDIANA</option>
+        <option value="IA">IOWA</option>
+        <option value="KS">KANSAS</option>
+        <option value="KY">KENTUCKY</option>
+        <option value="LA">LOUISIANA</option>
+        <option value="ME">MAINE</option>
+        <option value="MD">MARYLAND</option>
+        <option value="MA">MASSACHUSETTS</option>
+        <option value="MI">MICHIGAN</option>
+        <option value="MN">MINNESOTA</option>
+        <option value="MS">MISSISSIPPI</option>
+        <option value="MO">MISSOURI</option>
+        <option value="MT">MONTANA</option>
+        <option value="NE">NEBRASKA</option>
+        <option value="NV">NEVADA</option>
+        <option value="NH">NEW HAMPSHIRE</option>
+        <option value="NJ">NEW JERSEY</option>
+        <option value="NM">NEW MEXICO</option>
+        <option value="NY">NEW YORK</option>
+        <option value="NC">NORTH CAROLINA</option>
+        <option value="ND">NORTH DAKOTA</option>
+        <option value="OH">OHIO</option>
+        <option value="OK">OKLAHOMA</option>
+        <option value="OR">OREGON</option>
+        <option value="PA">PENNSYLVANIA</option>
+        <option value="RI">RHODE ISLAND</option>
+        <option value="SC">SOUTH CAROLINA</option>
+        <option value="SD">SOUTH DAKOTA</option>
+        <option value="TN">TENNESSEE</option>
+        <option value="TX">TEXAS</option>
+        <option value="UT">UTAH</option>
+        <option value="VT">VERMONT</option>
+        <option value="VA">VIRGINIA</option>
+        <option value="WA">WASHINGTON</option>
+        <option value="WV">WEST VIRGINIA</option>
+        <option value="WI">WISCONSIN</option>
+        <option value="WY">WYOMING</option>
+      </select> 
+	</div>
+	<div>
+	  <input type="text" ng-model='zip_code' placeholder="{{business.zip_code}}">
+	</div>
+			<div class="dayOfTheWeek">
+       <label for="monday" class="dayOfTheWeek"><input type="checkbox" id="tuesday" ng-model="hours.monday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Mon</label>
+        <p>from</p>
+        <select ng-model="monop" placeholder="{{business.hours.monday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="monco" placeholder="{{business.hours.monday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="tuesday" class="dayOfTheWeek"><input type="checkbox" id="tuesday" ng-model="hours.tuesday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Tue</label>
+        <p>from</p>
+        <select ng-model="tuop" placeholder="{{business.hours.tuesday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="tuco" placeholder="{{business.hours.tuesday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="wednesday" class="dayOfTheWeek"><input type="checkbox" id="wednesday" ng-model="hours.wednesday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Wed</label>
+        <p>from</p>
+        <select ng-model="weop" placeholder="{{business.hours.wednesday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="weco" placeholder="{{business.hours.wednesday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="thursday" class="dayOfTheWeek"><input type="checkbox" id="thursday" ng-model="hours.thursday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Thu</label>
+        <p>from</p>
+        <select ng-model="thop" placeholder="{{business.hours.thursday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="thco" placeholder="{{business.hours.thursday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="friday" class="dayOfTheWeek"><input type="checkbox" id="friday" ng-model="hours.friday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Fri</label>
+        <p>from</p>
+        <select ng-model="friop" placeholder="{{business.hours.friday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="frico" placeholder="{{business.hours.friday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="saturday" class="dayOfTheWeek"><input type="checkbox" id="saturday" ng-model="hours.saturday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Sat</label>
+        <p>from</p>
+        <select ng-model="satop" placeholder="{{business.hours.saturday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="satco" placeholder="{{business.hours.saturday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class="dayOfTheWeek">
+        <label for="sunday" class="dayOfTheWeek"><input type="checkbox" id="sunday" ng-model="hours.sunday" ng-true-value="{'open':'open'}" ng-false-value="{'open':'closed'}">Sun</label>
+        <p>from</p>
+        <select ng-model="sunop" placeholder="{{business.hours.sunday.open}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+        <p>to</p>
+        <select ng-model="sunco" placeholder="{{business.hours.sunday.close}}">
+          <option value="7:00AM">7:00AM</option>
+          <option value="8:00AM">8:00AM</option>
+          <option value="9:00AM">9:00AM</option>
+          <option value="10:00AM">10:00AM</option>
+          <option value="11:00AM">11:00AM</option>
+          <option value="12:00PM">12:00PM</option>
+          <option value="1:00PM">1:00PM</option>
+          <option value="2:00PM">2:00PM</option>
+          <option value="3:00PM">3:00PM</option>
+          <option value="4:00PM">4:00PM</option>
+          <option value="5:00PM">5:00PM</option>
+          <option value="6:00PM">6:00PM</option>
+          <option value="7:00PM">7:00PM</option>
+          <option value="8:00PM">8:00PM</option>
+          <option value="9:00PM">9:00PM</option>
+          <option value="10:00PM">10:00PM</option>
+          <option value="11:00PM">11:00PM</option>
+          <option value="12:00AM">12:00AM</option>
+          <option value="1:00AM">1:00AM</option>
+          <option value="2:00AM">2:00AM</option>
+          <option value="3:00AM">3:00AM</option>
+          <option value="4:00AM">4:00AM</option>
+        </select>
+      </div>
+      <div class=image-info>
+      <img class="upload-product-image" ngf-thumbnail="file || 'pics/placeholder.png'">
+          <div ng-switch on="file">
+            <div ng-switch-when="file.length < 1000">
+              <img class="upload-product-image"  ngf-thumbnail="file">
+            </div>
+            <div ng-switch-default>
+              <img class="upload-product-image" data-ng-src="data:image/JPEG;base64,{{business.image}}">
+            </div>
+          </div> 
+         <input type="file" ngf-select ng-model="file" name="file" placeholder="icon image">
+      </div>
+       <div class="">
+       <textarea ng-model='bio' placeholder="Bio" required></textarea>
+       </div>
+          <button class="edit-btn" ng-click="editBusiness(file)">submit edited Information </button>
+		</form>
+	</div>
+</div>
+</div>

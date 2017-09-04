@@ -54,6 +54,10 @@ app.config( function ($routeProvider, $locationProvider, $httpProvider) {
     templateUrl: '/assets/partials/brand.html',
     controller: 'addCtrl'
   })
+  .when('/edit/:id', {
+    templateUrl: '/assets/partials/edit.html',
+    controller: 'addCtrl'
+  })
   .when('/user/:id', {
     templateUrl: 'assets/partials/user-page.html',
     controller: 'addCtrl'

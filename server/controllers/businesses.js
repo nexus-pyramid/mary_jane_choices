@@ -30,7 +30,8 @@ function businessesController(){
 						}
 						newBusiness.save(function(err, result){
 							if(err){
-								res.json(err);
+								// res.json(err);
+								console.log(err);
 						} else {
 							// console.log(result);
 							res.json(result)
